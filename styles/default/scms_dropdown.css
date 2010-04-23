@@ -1,0 +1,231 @@
+/* Newobject link */
+
+a.scms_new_object {
+	padding: 0 0 0 16px !important;
+	margin: 0 10px 0 0 !important;
+	text-decoration: none !important;
+	border: none !important;
+	background: url(gfx/general/scms_new_object.png) no-repeat 0px 0px !important;
+	outline: 0 !important; /* no border when clicked in FF */
+	line-height: 100% !important;
+	font: normal normal normal 11px Tahoma, Verdana, Arial, Helvetica, sans-serif !important;
+}
+
+a.scms_new_object:hover {
+	background: url(gfx/general/scms_new_object_hover.png) no-repeat 0px 0px !important;
+}
+
+
+/* And now, some special treatment for IE6 */
+
+* html .scms_arrow_visible {
+	background: url(gfx/icons/16x16/actions/editbutton_visible_ie6.png) no-repeat 0px 0px !important;
+}
+* html .scms_arrow_hidden {
+	background-image: url(gfx/icons/16x16/actions/editbutton_hidden_ie6.png) !important;
+}
+
+* html .scms_arrow_hiddenvisible {
+	background-image: url(gfx/icons/16x16/actions/editbutton_hiddenvisible_ie6.png) !important;
+}
+* html a.scms_new_object,
+* html a.scms_new_object:hover {
+	background-image: url(gfx/general/scms_new_object_ie6.png) !important;
+}
+
+/* the anchor */
+img.scms_context_button_anchor {
+	border: none !important;
+	vertical-align: middle !important;
+	display: inline !important;
+}
+
+/* anchor images */
+img.scms_arrow_visible {
+	background-image: url(gfx/icons/16x16/actions/editbutton_visible.png) !important;
+}
+
+img.scms_arrow_hidden {
+	background-image: url(gfx/icons/16x16/actions/editbutton_hidden.png) !important;
+}
+
+img.scms_arrow_hiddenvisible {
+	background-image: url(gfx/icons/16x16/actions/editbutton_hiddenvisible.png) !important;
+}
+
+.scms_arrow_visible img:hover,
+.scms_arrow_hidden img:hover,
+.scms_arrow_hiddenvisible img:hover {
+	background-image: url(gfx/icons/16x16/actions/editbutton_hover.png) !important;
+}
+
+/* the drop down */
+ul.context_plugin_dropdown {
+	display: none;
+	border: 1px solid #637fb1 !important;
+	background-color: #fff !important;
+	background-image: none !important;
+	position: absolute !important;
+	z-index: 2147483642 !important;
+	margin: 0 !important;
+	padding: 2px !important;
+	list-style: none !important;
+	text-align: left !important;
+	font-size: 11px !important;
+	font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif !important;
+}
+
+ul.context_plugin_dropdown li.context_plugin_item {
+	margin: 0 !important;
+	padding: 0 !important;
+	background-color: #fff !important;
+	text-align: left !important;
+	background-image: url(gfx/general/context_button_icon_bg.gif) !important;
+	background-repeat: no-repeat !important;
+	background-position: top left !important;
+	border: none !important;
+	font-size: 11px !important;
+	font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif !important;
+}
+
+ul.context_plugin_dropdown li.context_plugin_item a:link, ul.context_plugin_dropdown li.context_plugin_item a:visited, ul.context_plugin_dropdown li.context_plugin_item a:active {
+	vertical-align: middle !important;
+	line-height: normal !important;
+	color: #5a5c61 !important;
+	display: block !important;
+	margin: 0 !important;
+	padding: 4px 14px 4px 30px !important;
+	background-color: transparent !important;
+	background-image: none !important;
+	background-repeat: no-repeat !important;
+	background-position: 4px 3px !important;
+	font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif !important;
+	outline: 0 !important; /* no border when clicked in FF */
+	font-size: 11px !important;
+	text-decoration: none !important;
+	font-weight: normal !important;
+	height: auto !important;
+	width: auto !important;
+	white-space: nowrap !important;
+	border: none !important;
+}
+
+ul.context_plugin_dropdown li.context_plugin_item a:hover {
+	background-color: #d2dffa !important;
+	background-image: none !important;
+}
+
+/* actions */
+
+/* New */
+ul.context_plugin_dropdown li.context_plugin_item a.scms_new_object,
+ul.context_plugin_dropdown li.context_plugin_item a.scms_new_section_object,
+ul.context_plugin_dropdown li.context_plugin_item a.scms_new_article_object,
+ul.context_plugin_dropdown li.context_plugin_item a.scms_new_link_object,
+ul.context_plugin_dropdown li.context_plugin_item a.scms_new_poll_object,
+ul.context_plugin_dropdown li.context_plugin_item a.scms_new_document_object,
+ul.context_plugin_dropdown li.context_plugin_item a.scms_new_image_object,
+ul.context_plugin_dropdown li.context_plugin_item a.scms_new_comment_object,
+ul.context_plugin_dropdown li.context_plugin_item a.scms_new_topic_object,
+ul.context_plugin_dropdown li.context_plugin_item a.scms_new_album_object,
+ul.context_plugin_dropdown li.context_plugin_item a.scms_new_file_object {
+	background-image: url(gfx/icons/16x16/actions/filenew.png) !important;
+}
+
+/* Edit */
+ul.context_plugin_dropdown li.context_plugin_item a.scms_edit_object {
+	background-image: url(gfx/icons/16x16/actions/edit.png) !important;
+}
+
+/* Move up */
+ul.context_plugin_dropdown li.context_plugin_item a.scms_move_up_object {
+	background-image: url(gfx/icons/16x16/actions/up_arrow.png) !important;
+}
+
+/* Move down */
+ul.context_plugin_dropdown li.context_plugin_item a.scms_move_down_object {
+	background-image: url(gfx/icons/16x16/actions/down_arrow.png) !important;
+}
+
+/* Delete */
+ul.context_plugin_dropdown li.context_plugin_item a.scms_delete_object {
+	background-image: url(gfx/icons/16x16/actions/delete.png) !important;
+}
+
+
+/* old styles required for profiles page only ... grrr */
+/* Saurus CMS toolbar dropdowns */
+
+.scms_dropdown {
+	margin-left: 0px;
+	background: #fff url(gfx/menu/dropdown_background.gif) repeat-y;
+	border: 1px solid #637FB1;
+	border-top: none;
+	overflow: hidden;
+}
+
+table.scms_dropdown {
+	margin: 0px;
+}
+
+.scms_dropdown_top {
+	border-top: 1px solid #637FB1;
+}
+
+.scms_dropdown_item  {
+	display: block;
+	line-height: 20px;
+	padding: 1px;
+	list-style-image: none;
+	text-decoration: none;
+}
+
+.scms_dropdown_item a:link, 
+.scms_dropdown_item a:visited, 
+.scms_dropdown_item a:active {
+	font: normal normal normal 11px Tahoma, Verdana, Arial, Helvetica, sans-serif;
+	color: #000;
+	text-decoration: none;
+	display: block;
+	line-height: 20px;
+	height: 100%;
+	width: 100%;
+	padding: 0px 22px 0px 32px;
+	border: none;
+	white-space: nowrap;
+}
+
+.scms_dropdown_item a:hover {
+	color: #5A5C61;
+	line-height: 18px;
+	padding-left: 31px;
+	padding-top: -2px;
+	padding-right: 21px;
+	margin-right: 0px;
+	width: 100%;
+	background-color: #D2DFFA;
+	border: 1px solid #637FB1;
+	text-decoration: none;
+}
+
+.scms_dropdown_divider {
+	background-color: #F4F4F4;
+	margin: 0px;
+	padding: 0px;
+	height: 1px;
+	background-image: url(gfx/menu/dropdown_divider.gif);
+	background-repeat: repeat-y;
+}
+
+/* dropdown div */
+
+.scms_dropdown_div {
+	width: 150px;
+	position: absolute;
+	padding-left: 9px;
+	padding-top: 0px;
+	z-index: 9999;
+	visibility: hidden;
+}
+
+/* //dropdown div */

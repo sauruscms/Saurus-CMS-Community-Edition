@@ -1,0 +1,199 @@
+{**
+ * Simple threaded forum, message detail view, object template
+ * Date: 31.03.07
+ *
+ * @package saurus4
+ * 
+ * @author Saurus <saurus@saurus.info>
+ *
+ *}
+
+{* load configuration *}
+{custom_conf_load id=$id name="tpl_conf"}
+
+<div id="ForumMessageContainer">
+
+{* for FAQ mode notice *}
+{if $tpl_conf && $smarty.get.lisa_alert == 1}
+<script type="text/javascript">
+	alert('{sysword word="Forum alert: Your question has been sent" type="editor"}');
+	window.location.href = '?id={$id}';
+</script>
+{/if}
+{* /for FAQ mode notice *}
+
+{* for CAPTCHA failure notice *}
+{if $smarty.get.lisa_alert == 2}
+<script type="text/javascript">
+	alert('{sysword word="CAPTCHA failed" type="saurus4"}');
+	var href = window.location.href + '#add_message';
+	window.location.href = href.replace('&lisa_alert=2', '');
+</script>
+{/if}
+{* /for CAPTCHA failure notice *}
+
+{* the message *}
+{init_message name="message"}
+<h1>
+	<a href="#add_message" class="JumpLink float">{sysword word="reply" type="saurus4"}</a>
+	{$message->parent_section_title}: {$message->parent_subject_title}
+</h1>
+
+<table cellpadding="0" cellspacing="0" class="DataTable">
+	<col>
+	<col width="100%">
+	<tr>
+		<td>
+			{if ($message->author_email	and $message->hide_email != '1')}<a href="mailto:{$message->author_email}">{/if}{$message->author}{if $message->author_email && !$message->hide_email}</a>{/if}
+			<br>
+			<span class="Date">{$message->date}</span>
+		</td>
+		<td>
+			<table cellpadding="0" cellspacing="0" class="DataTable">
+				<tr>
+					<td class="dark DataTableWrap">
+						<a href="#add_message" class="float">{sysword word="reply" type="saurus4"}</a>
+						{$message->buttons}{$message->title}
+					</td>
+				</tr>
+				<tr>
+					<td class="light DataTableWrap">
+						{$message->body|parse_emoticons|parse_html}
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	{* message replies *}
+	{init_messages name="replies" parent=$message->id order="objekt_id asc"}
+	{foreach from=$replies item="reply" key="key"}
+	<tr class="{cycle values="dark, light"}">
+		<td>
+			{if ($reply->author_email	and $reply->hide_email != '1')}<a href="mailto:{$reply->author_email}">{/if}{$reply->author}{if $reply->author_email && !$reply->hide_email}</a>{/if}
+			<br>
+			<span class="Date">{$reply->date}</span>
+		</td>
+		<td>
+			<table cellpadding="0" cellspacing="0" class="DataTable">
+				<tr>
+					<td class="dark DataTableWrap">
+						{if $reply->all.on_alampuu}
+							<span class="float">
+								<a href="?id={$reply->id}">{sysword word="replies" type="saurus4"}</a>
+								({$reply->all.on_alampuu})
+								|
+								<a href="?id={$reply->id}#add_message">{sysword word="add" type="saurus4"}</a>
+							</span>
+						{else}
+							<a href="?id={$reply->id}#add_message" class="float">{sysword word="reply" type="saurus4"}</a>
+						{/if}
+						{$reply->buttons}{$reply->title}
+					</td>
+				</tr>
+					<td class="light DataTableWrap">
+						{$reply->body|parse_emoticons|parse_html}
+					</td>
+			</table>
+		</td>
+	</tr>
+	{/foreach}
+	{* /message replies *}
+</table>
+
+{* new reply form *}
+{literal}
+<script type="text/javascript">
+function checkForumFields(form_id)
+{
+	var submit_form = document.getElementById(form_id);
+	var len = 2;
+	
+	if(submit_form)
+	{
+		if (submit_form.nimi.value.length < len){
+			alert('{/literal}{sysword word="please fill in" type="saurus4"}{literal}: '+document.getElementById('for_'+submit_form.nimi.id).innerHTML);
+			submit_form.nimi.focus();
+			return false;
+		}
+		if (submit_form.pealkiri.value.length < len){
+			alert('{/literal}{sysword word="please fill in" type="saurus4"}{literal}: '+document.getElementById('for_'+submit_form.pealkiri.id).innerHTML);
+			submit_form.pealkiri.focus();
+			return false;
+		}
+		if (submit_form.text.value.length < len){
+			alert('{/literal}{sysword word="please fill in" type="saurus4"}{literal}: '+document.getElementById('for_'+submit_form.text.id).innerHTML);
+			submit_form.text.focus();
+			return false;
+		}
+		
+		{/literal}{if $conf.check_for_captcha}{literal}
+		
+		if (submit_form.captcha_default.value.length < len){
+			alert('{/literal}{sysword word="please fill in" type="saurus4"}{literal}: '+document.getElementById('for_'+submit_form.captcha_default.id).innerHTML);
+			submit_form.captcha_default.focus();
+			return false;
+		}
+		
+		{/literal}{/if}{literal}
+		
+		submit_form.submit();
+	}
+}
+</script>
+{/literal}
+
+<a name="add_message"></a>
+<form action="add_comment.php" method="POST" name="forumPostForm" id="forumPostForm">
+	<p class="separator">{sysword word="new message" type="saurus4"}</p>
+	
+	<table cellpadding="0" cellspacing="0" class="FormTable">
+		<col class="FormTableLabels">
+		<tr> 
+			<td><label for="nimi" id="for_nimi">{sysword word="name" type="saurus4"}</label></td>
+			<td><input type="text" name="nimi" id="nimi" value="{if $smarty.session.scms_last_comment.nimi}{$smarty.session.scms_last_comment.nimi|xss_clean}{else}{$userdata->name}{/if}" class="FormText">*</td>
+		</tr>
+		<tr> 
+			<td><label for="email" id="for_email">{sysword word="e-mail" type="saurus4"}</label></td>
+			<td><input type="text" name="email" id="email" value="{if $smarty.session.scms_last_comment.email}{$smarty.session.scms_last_comment.email|xss_clean}{else}{$userdata->all.email}{/if}" class="FormText"></td>
+		</tr>
+		<tr> 
+			<td><label for="pealkiri" id="for_pealkiri">{sysword word="title" type="saurus4"}</label></td>
+			<td><input type="text" name="pealkiri" id="pealkiri" value="{if $smarty.session.scms_last_comment.pealkiri}{$smarty.session.scms_last_comment.pealkiri|xss_clean}{else}Re: {$message->title}{/if}" class="FormText">*</td>
+		</tr>
+		<tr> 
+			<td><label for="text" id="for_text">{sysword word="comment" type="saurus4"}</label></td>
+			<td><textarea name="text" id="text" class="FormTextArea">{if $smarty.session.scms_last_comment.text}{$smarty.session.scms_last_comment.text|xss_clean}{/if}</textarea></td>
+		</tr>
+		<tr> 
+			<td></td>
+			<td><input type="checkbox" name="on_peida_email" id="on_peida_email" value="1"{if $smarty.session.scms_last_comment.on_peida_email} checked="checked"{/if}> <label for="on_peida_email" id="for_on_peida_email">{sysword word="hide e-mail" type="saurus4"}</label></td>
+		</tr>
+		<tr> 
+			<td></td>
+			<td><input type="checkbox" name="on_saada_email" id="on_saada_email" value="1"{if $smarty.session.scms_last_comment.on_saada_email} checked="checked"{/if}> <label for="on_saada_email" id="for_on_saada_email">{sysword word="send replies" type="saurus4"}</label></td>
+		</tr>
+		{*** CAPTCHA ***}
+		{if $conf.check_for_captcha}
+		<tr> 
+			<td></td>
+			<td><img src="{$wwwroot}/extensions/saurus4/captcha_image.php?name=default" width="{$saurus4.captchas.default.image_width}" height="{$saurus4.captchas.default.image_height}" alt="" title=""></td>
+		</tr>
+		<tr> 
+			<td><label for="captcha_default" id="for_captcha_default">{sysword word="enter the text on the image" type="saurus4"}</label></td>
+			<td><input type="text" name="captcha_default" id="captcha_default" class="FormText"></td>
+		</tr>
+		{/if}
+		{*** / CAPTCHA ***}
+		<tr> 
+			<td></td>
+			<td><input type="button" onclick="checkForumFields('forumPostForm');" value="{sysword word="send" type="saurus4"}"></td>
+		</tr>
+	</table>
+
+	<input type="hidden" name="id" value="{$id}">
+</form>
+{* /new reply form *}
+
+{if !$smarty.get.lisa_alert && session_unregister('scms_last_comment')}{/if}
+
+</div><!-- / ForumMessageContainer -->

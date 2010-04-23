@@ -1,0 +1,74 @@
+{**
+ * Article archive, content template
+ * Date: 17.06.08
+ *
+ * @package saurus4
+ * 
+ * @author Saurus <saurus@saurus.info>
+ *
+ *}
+
+{* year and month to display *}
+{if $smarty.get.year}
+	{assign var="year" value=$smarty.get.year|@intval}
+{else}
+	{assign var="year" value=$smarty.now|date_format:"%Y"}
+{/if}
+
+{if $smarty.get.month}
+	{assign var="month" value=$smarty.get.month|@intval}
+{else}
+	{assign var="month" value=$smarty.now|date_format:"%m"|regex_replace:"/^0/":""}
+{/if}
+{* / year and month to display *}
+
+<div id="NewsArchiveContainer">
+
+{* list of years, only the ones containing articles *}
+{init_objects name="years" select="year(aeg) as y" where="year(aeg) BETWEEN 1 AND 2998" order="y" group="y" classes="article"}
+
+{assign var="act_years" value="0"}
+{foreach from=$years item="obj" name="years" key="year_key"}
+	{$act_years|@array_push:$obj->all.y}
+{/foreach}
+
+{if !in_array($year, $act_years)}{assign var="year" value=$act_years[$year_key]}{/if}
+<p>
+{foreach from=$years item="obj" name="years"}
+	{if $obj->all.y != $year}<a href="?id={$id}&amp;op=archive&amp;year={$obj->all.y}&amp;month={$month}">{else}<strong>{/if}{$obj->all.y}{if $obj->all.y != $year}</a>{else}</strong>{/if}
+{/foreach}
+</p>
+{* /list of years, only the ones contaning articles *}
+
+{* create array of month numbers containing articles *}
+{init_objects name="months" select="year(aeg) as y, month(aeg) as m" where="year(aeg) = `$year`" order="m" group="m" classes="article"}
+
+{assign var="act_months" value="0"}
+{foreach from=$months item="obj" key="month_key"}
+	{$act_months|@array_push:$obj->all.m}
+{/foreach}
+{if !in_array($month, $act_months)}{assign var="month" value=$act_months[$month_key]}{/if}
+
+{* /create array of month numbers containing articles *}
+
+{* all the months in a year *}
+<p>
+{section name="all_months" loop="13" start="1"}
+	{if in_array($smarty.section.all_months.iteration, $act_months) && $smarty.section.all_months.iteration != $month}<a href="?id={$id}&amp;op=archive&amp;year={$year}&amp;month={$smarty.section.all_months.iteration}">{else}{/if}{if $smarty.section.all_months.iteration == $month}<strong>{/if}{$smarty.section.all_months.iteration}{if $smarty.section.all_months.iteration == $month}</strong>{/if}{if in_array($smarty.section.all_months.iteration, $act_months) && $smarty.section.all_months.iteration != $month}</a>{/if}
+{/section}
+</p>
+{* /all the months in a year *}
+
+{* the article list *}
+{init_articles name="articles" where="year(aeg) = `$year` and month(aeg) = `$month`" order="date desc" buttons="new,edit,hide,delete"}
+{foreach from=$articles item="article"}
+	<p>
+		<span class="Date">{$article->date}</span>
+		{$article->buttons}
+		<a href="{$article->href}">{$article->title}</a>
+		{if $article->comment_count}({$article->comment_count}){/if}
+	</p>
+{/foreach}
+{* /the article list *}
+
+</div><!-- / NewsArchiveContainer -->

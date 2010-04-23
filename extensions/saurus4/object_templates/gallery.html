@@ -1,0 +1,53 @@
+{**
+ * Gallery detail view, object template
+ * Date: 30.06.08
+ *
+ * @package saurus4
+ * 
+ * @author Saurus <saurus@saurus.info>
+ *}
+
+<link rel="stylesheet" type="text/css" media="screen" href="{$wwwroot}/extensions/saurus4/css/lightbox.css">
+<script type="text/javascript" src="{$wwwroot}/js/jquery.js"></script>
+<script type="text/javascript">	jQuery.noConflict(); wwwroot = '{$wwwroot}'; </script>
+<script type="text/javascript" src="{$wwwroot}/extensions/saurus4/js/lightbox.init.js"></script>
+<script type="text/javascript" src="{$wwwroot}/extensions/saurus4/js/lightbox.js"></script>
+
+<div id="GalleryContainer">
+
+{* get the gallery details *}
+{init_object name="gallery" id=$id buttons="edit,hide,delete"}
+
+<h1>{$gallery->buttons}{$gallery->title}</h1>
+{if $gallery->description}<p>{$gallery->description}</p>{/if}
+
+<style type="text/css">
+div.GalleryThumbnail {ldelim}
+	width: {$gallery->thumbnail_size}px;
+{rdelim}
+div.GalleryThumbnail table {ldelim}
+	height: {$gallery->thumbnail_size}px;
+	width: {$gallery->thumbnail_size}px;
+{rdelim}
+</style>
+
+{* get the images *}
+{init_images name="images"}
+{$images_newbutton}
+
+{foreach from=$images item="image" name="thumb_loop"}
+<div class="GalleryThumbnail">
+	<table cellpadding="0" cellspacing="0">
+		<tr>
+			<td><a href="{$image->image_path}" title="{if $image->description}{$image->description}{else}{$image->title}{/if}" class="thumbnail"><img src="{$image->thumb_path}" title="{if $image->description}{$image->description}{else}{$image->title}{/if}" alt="{if $image->description}{$image->description}{else}{$image->title}{/if}" width="{$image->thumb_width}" height="{$image->thumb_height}"></a></td>
+		</tr>
+	</table>
+	<div class="Description">
+		{$image->buttons}{$image->title}
+	</div>
+</div>
+{foreachelse}
+	{$images_newbutton}
+{/foreach}
+
+</div><!-- / GalleryContainer -->

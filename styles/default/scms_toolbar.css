@@ -1,0 +1,41 @@
+/* Styles used in Saurus CMS toolbars */
+
+/* Import dropdown menu css */
+	@import url("scms_dropdown.css");
+
+.scms_toolbar {
+	background-color: #f4f4f4;
+	background-image: url(gfx/header/toolbar_bg.gif);
+	height: 31;
+	padding-left: 7;
+
+}
+
+
+.scms_toolbar a, table.scms_zebra_table a.button {
+	display: block;
+	height: 21;
+	line-height: 18px;
+	padding-left: 3px;
+	padding-right: 3px;
+	border: 1px solid #f4f4f4;
+
+}
+
+.scms_toolbar img#pt, table.scms_zebra_table a.button img#pt {
+	vertical-align: middle;
+}
+
+.scms_toolbar img#po {
+	/* My best wishes for Mozilla */
+	padding-top: 3px;
+	/* My best wishes for IE */
+	vertical-align: middle;
+}
+
+.scms_toolbar a:hover, table.scms_zebra_table a.button:hover {
+	background-color: #D2DFFA;
+	border: 1px solid #637FB1;
+	text-decoration: none;
+}
+

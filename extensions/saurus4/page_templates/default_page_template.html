@@ -1,0 +1,198 @@
+{**
+ * The page frame, page template
+ *
+ * Date: 30.06.08
+ *
+ * @package saurus4
+ *
+ *}{if ! $in_editor}<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">{/if}
+<html lang="{$locale|substr:0:2}">
+<head>
+	<title>{$title}</title>
+
+	<meta name="keywords" content="{$meta_keywords}">
+	<meta name="description" content="{$meta_description}">
+	<meta name="generator" content="Saurus CMS">
+
+	<meta http-equiv="Content-Language" content="{$locale|substr:0:2}">
+	<meta http-equiv="Content-Type" content="text/html; charset={$encoding}">
+	<meta http-equiv="Cache-Control" content="no-cache">
+	<meta http-equiv="ImageResize" content="no"> 
+	<meta http-equiv="ImageToolbar" content="no"> 
+
+	<meta name="robots" content="index,all">
+	<meta name="MSSmartTagsPreventParsing" content="true">
+	
+	<link rel="shortcut icon" type="image/x-icon" href="{$wwwroot}/extensions/saurus4/images/favicon.ico">
+	<link rel="stylesheet" type="text/css" media="screen" href="{$wwwroot}/styles.php">
+	<link rel="stylesheet" type="text/css" media="screen" href="{$wwwroot}/extensions/saurus4/css/main.css">
+	{if $current_class == 'section' || $current_class == 'article'}<link href="{$wwwroot}/?id={$id}&amp;op=rss" rel="alternate" type="application/rss+xml" title="{$title}">{/if}
+
+	<script type="text/javascript" src="{$wwwroot}/js/yld.js"></script>
+</head>
+
+<body>
+
+	<!-- // Main layout -->
+	<div id="MainContainer">
+
+		<!-- //Location -->
+		<div id="LocationBar">
+			{init_trail name="parents"}
+			{foreach from=$parents item="nav_item"}
+					<a href="{$nav_item->href}">{$nav_item->title}</a>
+			{/foreach}
+		</div>
+		
+		<div id="PageContainer">
+			<!-- //Header -->
+			<div id="HeaderContainer">
+				<div id="TitleContainer">
+					<h1><a href="index.php">{$site_name}</a></h1>
+					<h2>{$site_slogan}</h2>
+				</div>
+				<a href="index.php"><img src="{$wwwroot}/extensions/saurus4/images/logo.gif" id="logolink" border="0" alt="Saurus"></a>
+				<div id="LanguageSelector">
+					{init_sites name="langs"}
+					{if sizeof($langs) > 1}{foreach from=$langs item="language" name="lang_loop"}
+						<a href="{$language->href}"{if $site_extension == $language->extension} class="Current"{/if}>{$language->name}</a>{if !$smarty.foreach.lang_loop.last} | {/if}
+					{/foreach}{/if}
+				</div>
+			</div>
+						
+			<div id="ContentContainer">
+				<!-- // Navigation -->
+				<div id="NavigationContainer">
+					<ul id="SectionTree">
+						{strip}
+						{********** Site menu **********}
+						{init_sections name="sections_1" level="1"}
+						{foreach from=$sections_1 item="section_1"}
+							<li><a href="{$section_1->href}"{if $section_1->is_selected} class="Current"{/if}>{$section_1->buttons}{$section_1->title}</a></li>
+				
+							{if $section_1->is_selected}
+
+								{assign var="current_section_1" value=$section_1->id}
+								
+								{init_sections name="sections_2" parent=$section_1->id}
+								{if $sections_2_count > 0}
+									<ul>
+									{foreach from=$sections_2 item="section_2"}									
+										<li><a href="{$section_2->href}"{if $section_2->is_selected} class="selected"{/if}>{$section_2->buttons}{$section_2->title}</a>{$key}</li>
+									{/foreach}
+									</ul>
+								{elseif $in_editor}
+									<ul>
+										<li><a>{$sections_2_newbutton}</a></li>
+									</ul>
+								{/if}
+							{/if}
+
+						{foreachelse}
+							<li>{$sections_1_newbutton}</li>
+						{/foreach}
+						{********** /Site menu **********}
+						{/strip}
+					</ul>
+					
+					<div id="SearchBox">
+						<form action="{$self}" method="GET">
+							<input type="hidden" name="op" value="search">
+							<input name="query" value="{sysword word="search" type="saurus4"}:" onfocus="if(this.value=='{sysword word="search" type="saurus4"}:')this.value=''" onblur="if(this.value=='')this.value='{sysword word="search" type="saurus4"}:'" class="SearchField"><input type="image" src="{$wwwroot}/extensions/saurus4/images/submit_arrow.gif">
+						</form>
+						<a href="?op=sitemap">{sysword word="sitemap" type="saurus4"}</a> | <a href="?op=advsearch">{sysword word="advanced search" type="saurus4"}</a>
+					</div>
+
+					<div id="AddOnBoxes">
+						{********** A list of links **********}
+						{init_objects name="links" parent=$saurus4.constants.sticky_links.$site_extension classes="link"}
+						{if $links|@count or $in_editor}<h3>{sysword word="see also" type="saurus4"}</h3>{/if}
+						<div id="boxcontent">
+							<div class="linkbox">
+								{foreach from=$links item="link"}
+									<a href="{$link->href}">{$link->buttons}{$link->title}</a><br>
+								{foreachelse}
+									{$links_newbutton}
+								{/foreach}
+							</div>
+						</div>
+						{********** /A list of links **********}
+						
+						<br>
+						
+						{* Polls *}
+						{init_objects name="polls" classes="poll" parent=$saurus4.constants.sticky_links.$site_extension}
+						
+						{*********** loop over polls **********}
+						{foreach from=$polls item=poll}
+						
+						{init_object name="object" id=$poll->id}
+						
+						<h3>{$object->buttons}{$poll->title}</h3>
+						
+						{********* VOTING *********}
+						{**** 1. RESULTS: if user is already VOTED or poll is EXPIRED or in editor-area *}
+						{if $object->is_voted || $object->is_expired || $in_editor}
+						<h4>{sysword word="poll_results" type="Visual design"}:</h4>
+						
+						<ol>
+							{foreach from=$object->answers item=answer}
+							<li>{$answer->title} - <strong>{$answer->count}</strong></li>
+							{/foreach}
+						</ol>
+						
+						{**** 2. VOTE FORM: if user is NOT VOTED and poll is NOT EXPIRED *}
+						{else}
+
+
+						<form action="{$self}" method="GET">
+							<input type="hidden" name="uri" value="{$url}">
+							<input type="hidden" name="gallup_id" value="{$object->id}">
+							<input type="hidden" name="op" value="vote">
+							<ul>
+								{foreach from=$object->answers item=answer}
+								<li>
+									<input type="radio" id="vastus_{$answer->id}" name="vastus" value= "{$answer->id}">
+									<label for="vastus_{$answer->id}">{$answer->title}</label>
+								</li>
+								{/foreach}
+							</ul>
+							<input type="submit" name="haaleta" value="{sysword word="haaleta" type="Visual design"}">
+						</form>
+
+						{/if} {*user is voted or not*}
+						
+						{********* SHOW VOTERS INFO if not anonymous poll *********}
+						
+						{if !$object->is_anonymous}
+						<h2>{sysword word="poll_voters" type="Visual design"}</h2>:
+						<ol>
+							{foreach from=$object->voters item=voter}
+							<li>{$voter->user_firstname} {$voter->user_lastname} ({$voter->time})</li>
+							{/foreach}
+						</ol>
+						{/if}
+						
+						{foreachelse}
+							{$polls_newbutton}
+						{/foreach}
+						{***********  loop over polls **********}						
+					</div>
+
+				</div>
+				
+				<!-- //Content articles -->
+				<div id="PrintContentContainer">
+					{********** 'include' the content  **********}
+						{print_content}
+					{********** /'include' the content  **********}
+ 				</div><!-- //PrintContentContainer -->
+
+				<!-- //Cleaner -->
+				<div class="Clear"></div>
+			</div>
+		</div>
+	</div>
+ 
+</body>
+</html>

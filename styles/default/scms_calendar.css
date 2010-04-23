@@ -1,0 +1,87 @@
+/* 
+
+This stylesheet defines Saurus CMS Calendar styles.
+The styles are used in various templates and applications.
+
+*/
+
+/* Import tracker CSS */
+	@import url("scms_calendar_tracker.css");
+
+/* Import resources CSS */
+	@import url("scms_calendar_resources.css");
+
+/* Navigation */
+	
+	.scms_cal_navi{
+		background-image: url(gfx/calendar/calendar_header_bg_mini.gif); 
+		background-repeat: no-repeat;
+		background-position: top 0px;
+		width: 190;
+		min-width: 200;
+		height: 100%;
+		max-height: 494px;
+		background-color: white;
+		padding-left: 8px;
+		border-left: 1px solid #E8EDF6;
+	}
+
+	.scms_cal_header {
+		height: 37px;
+		padding-top: 4px;
+	}
+
+	.scms_cal_header a:link, .scms_cal_header a:visited, .scms_cal_header a:hover, .scms_cal_header a:active {
+		display: block;
+		color: #597CBF;
+		text-decoration: none;
+	}
+	
+	.scms_cal_header div#date {
+		width: 130px;
+		float: right;
+		text-align: left;
+		
+	}
+
+	.scms_cal_header td#date {
+		font-family: Arial, Tahoma, sans-serif;
+		line-height: 13px;
+		color: #597CBF;
+		font-weight: bold;
+	}
+
+	.scms_cal_header div#date span#day_number {
+		float: right;
+		font-size: 32px;
+		line-height: 32px;
+		text-align: right;
+		padding-right: 4px;
+	}
+
+	.scms_cal_groupheader {
+		padding-left: 3px;
+		margin-left: 3px;
+		padding-right: 3px;
+		height: 18px;
+		font-size: 11px;
+		font-weight: bold;
+		color: #597CBF;
+		vertical-align: middle;
+		border-bottom: 1px solid #E8EDF6;
+	}
+
+	.scms_cal_navicell {
+		padding: 4px;
+	}
+
+
+/* Calendar area */
+	.scms_calendararea {
+		border: 1px solid #E8EDF6;
+		border-left: 1px solid #E8EDF6;
+		border-bottom: 1px solid #E8EDF6;
+	}
+
+/* //Calendar area */
+

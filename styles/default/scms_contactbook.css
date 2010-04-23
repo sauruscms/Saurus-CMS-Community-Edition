@@ -1,0 +1,101 @@
+/* This stylesheet defines Saurus CMS contactendar styles */
+
+
+
+/* contactarea */
+	
+	.scms_contactsarea {
+		border: 1px solid #E8EDF6;
+		border-left: 1px solid #E8EDF6;
+		border-bottom: 1px solid #E8EDF6;
+	}
+
+	.scms_contactsearch {
+		background: #F5F5F4;
+	}
+
+		.scms_contacts {
+			background-color: #FFFFFF;
+		}
+		
+		.scms_contacts th {
+			font-family: Arial, Helvetica, sans-serif;
+			font-size: 24px;
+			color: #597CBF;
+			height: 32px;
+			vertical-align: top;
+			line-height: 32px;
+			width: 24px;
+			padding-left: 8px;
+			padding-right: 8px;
+			border-top: 1px solid #E8EDF6;
+		}
+
+		.scms_contacts td#arow {
+			padding-left: 8px;
+			padding-right: 8px;
+			border-top: 1px solid #E8EDF6;
+		}
+
+
+		
+		.scms_contacts td a,.scms_contacts td a:hover{
+			width: 100%;
+			height: 100%;
+			text-decoration: none;
+		}
+
+/* //contactarea */
+
+/* Navigation */
+	
+	.scms_contact_navi{
+		background-image: url(gfx/contactbook/contactbook_bg.gif); 
+		background-repeat: no-repeat;
+		background-position: right 0px;
+		width: 190;
+		min-width: 200;
+		height: 100%;
+		max-height: 430;
+		background-color: white;
+		padding-left: 8px;
+		border-left: 1px solid #E8EDF6;
+	}
+
+	.scms_contact_header {
+		height: 65px;
+		padding-top: 10px;
+		padding-left: 4px;
+		padding-bottom: 10px;
+	}
+
+	.scms_contact_header table#alphabet {
+		background: #AABCDF;
+		border-right: 1px solid #597CBF;
+		border-bottom: 1px solid #597CBF;
+	}
+	.scms_contact_header table#alphabet td {
+		background: #AABCDF;
+		border-left: 1px solid #597CBF;
+		border-top: 1px solid #597CBF;
+		width: 22;
+		height: 16;
+		line-height: 16px;
+		font-weight: bold;
+		text-align: center;
+	}
+	
+	.scms_contact_header table#alphabet a:link, .scms_contact_header table#alphabet a:visited, .scms_contact_header table#alphabet a:active {
+		display: block;
+		color: white;
+		text-decoration: none;
+	}
+
+	.scms_contact_header table#alphabet a:hover  {
+		display: block;
+		height: 100%;
+		line-height: 16px;
+		background: #597CBF;
+		color: white;
+		text-decoration: none;
+	}

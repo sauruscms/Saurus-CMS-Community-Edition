@@ -1,0 +1,181 @@
+{**
+ * Registration and users profile form, content template
+ * Date: 30.10.08
+ *
+ * @package saurus4
+ * 
+ * @author Saurus <saurus@saurus.info>
+ *
+ *}
+
+<div id="RegisterContainer">
+
+{************ Check if site visitors are allowed to register? (site configuration) ********}
+
+{* if user is not logged in and registering is not allowed then show error message for editors *}
+{if !$user && !$conf.users_can_register}
+	<h1>Site visitors are not allowed to register by site's configuration.</h1>
+{else}
+
+	{assign var="show_form" value=1}
+	
+	{if $smarty.post.save == 1}
+		
+		{if $userdata->user_id}
+			{*************** UPDATE USER DATA ************}
+			
+			{save_profile name="user_id" profile_id=$userdata->profile_id id=$userdata->user_id fields=$smarty.post username=$userdata->all.username password=$smarty.post.password confirm_password=$smarty.post.confirm_password}
+			
+			{if $user_id}
+				
+				{save_sso user=$user_id fields=$smarty.post.sso}
+				{save_mailinglist user=$user_id fields=$smarty.post.mailinglist_sections}
+				
+				{assign var="show_form" value=0}
+				
+				{init_article name="art" system_message="art_kasutaja_uuendatud_id"}
+				
+				{if $art->show_headline}
+					<h1>{$art->buttons}{$art->title}</h1>
+				{/if}
+				
+				<div>
+					{$art->lead} {$art->body}
+				</div>
+			{/if}
+		{else}
+			{*************** SAVE NEW USER DATA ************}
+			{save_profile name="user_id" profile="contact" fields=$smarty.post password=$smarty.post.password confirm_password=$smarty.post.confirm_password}
+			
+			{if $user_id}
+				{save_sso user=$user_id fields=$smarty.post.sso}
+				{save_mailinglist user=$user_id fields=$smarty.post.mailinglist_sections}
+				
+				{assign var="show_form" value=0}
+				
+				{init_article name="art" system_message="art_kasutaja_registreeritud_id"}
+				
+				{if $art->show_headline}
+					<h1>{$art->buttons}{$art->title}</h1>
+				{/if}
+				
+				<div>
+					{$art->lead} {$art->body}
+				</div>
+			{/if}
+		{/if}
+		
+	{/if}
+	
+	{*************** THE USER FORM ************}
+	{if $show_form}
+		{if $userdata->user_id}
+			{init_profile name="register" profile_id=$userdata->profile_id id=$userdata->user_id readonly_fields="username"}
+			<h1>{sysword word="profile" type="saurus4"}</h1>
+		{else}
+			{init_profile name="register" profile="contact"}
+			
+			<h1>{sysword word="register" type="saurus4"}</h1>
+		{/if}
+		
+		<form method="POST" name="frmEdit">
+		
+		{************ if password is expired *************}
+		{if $userdata->user_id && $userdata->all.pass_expired}
+			<h2>{sysword word="Password expired message" type="users"}</h2>
+			<br>
+			{foreach from=$register->data item="profile_field"}
+				<input type="hidden" name="{$profile_field->name}" value="{$profile_field->value}">
+			{/foreach}
+			<table>
+				<tr>
+					<td>{sysword word="username" type="admin"}</td>
+					<td>{$userdata->username}</td>
+				</tr>
+				<tr>
+					<td>{sysword word="password" type="users"} *</td>
+					<td><input type="password" name="password">{if $smarty.post.form_error.password}<br><font color="red"><b>{$smarty.post.form_error.password}</b></font>{/if}</td>
+				</tr>
+				<tr>
+					<td>{sysword word="password confirmation" type="users"} *</td>
+					<td><input type="password" name="confirm_password"></td>
+				</tr>
+			</table>
+			
+		{************ user profile form *************}
+		{else}
+		
+			<table>
+				{foreach from=$register->data item="profile_field"}
+				<tr>
+					<td>{$profile_field->label}{if $profile_field->is_required} *{/if}</td>
+					<td>{$profile_field->html}</td>
+				</tr>
+				{* special fields after username for password and confirm password *}
+				{if $profile_field->name == 'username'}
+				<tr>
+					<td>{sysword word="password" type="users"} *</td>
+					<td><input type="password" name="password">{if $smarty.post.form_error.password}<br><font color="red"><b>{$smarty.post.form_error.password}</b></font>{/if}</td>
+				</tr>
+				<tr>
+					<td>{sysword word="password confirmation" type="users"} *</td>
+					<td><input type="password" name="confirm_password"></td>
+				</tr>
+				{/if}
+				{/foreach}
+			</table>
+			
+			{*************** SSO APPLICATIONS ************}
+			{init_sso name="sso_apps"}
+			{if $sso_apps > 0}
+			{********** TITLE **********}
+			<p class="separator">{sysword word="applications login info" type="saurus4"}</p>
+			
+			<table>
+				<tr>
+					<td>{sysword word="application name" type="saurus4"}</td>
+					<td>{sysword word="username" type="saurus4"}</td>
+					<td>{sysword word="password" type="editor"}</td>
+				</tr>
+				{********** PRINT SSO NAMES **********}
+				{foreach from=$sso_apps item=sso}
+				<tr>
+					<td><input type="checkbox" name="sso[{$sso->id}][id]" value="{$sso->id}" {if $sso->user_registered == 1} checked="checked"{/if}>{$sso->app_name}</td>
+					<td><input type="text" name="sso[{$sso->id}][user_value]" value="{$sso->user_value}"  class="FormText"></td>
+					<td><input type="password" name="sso[{$sso->id}][pwd_value]" value="{if $sso->pwd_value}******{/if}" class="FormText"></td>
+				</tr>
+				{/foreach}
+			</table>
+			{/if} {* SSO *}
+			
+			{*************** MAILINGLISTS ************}
+			{init_mailinglist name="list"}
+			{if $list_count > 0}
+			{********** TITLE **********}
+			<p class="separator">{sysword word="mailinglists" type="saurus4"}</p>
+			<table>
+				{********** PRINT CHECKBOXES AND SECTION NAMES **********}
+				{foreach from=$list item=section}
+					<tr>
+						<td>
+							<input type="checkbox" name="mailinglist_sections[]" value="{$section->id}" {if $section->user_subscribed == 1} checked="checked"{/if}>
+							<a href="?id={$section->id}" target="_blank">{$section->title}</a>
+						</td>
+					</tr>
+				{/foreach}
+				</table>
+			{/if}
+
+		{/if}
+			
+		<input type="hidden" name="id" value="{$id}">
+		<input type="hidden" name="save" value="1">
+		<input type="hidden" name="op" value="{$op}">
+		<input type="submit" value="{sysword word="send" type="saurus4"}">
+			
+		</form>
+	{/if}
+
+{/if}
+
+</div><!-- / RegisterContainer -->

@@ -1,0 +1,73 @@
+/* Styles used by Saurus installation script install.php */
+
+* {
+	font-family: Arial;
+	font-size: 12px;
+}
+
+body {
+	background: #fff;
+	overflow: auto !important; 
+}
+
+td form  a {
+	color: #255aa6 !important;
+}
+
+a {
+	text-decoration: underline !important;
+	color: #255aa6 !important;
+}
+
+#installheader {
+	width: 750px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	padding-bottom: 15px;
+	border-bottom: 1px solid #dae3fa;
+}
+
+#installheader h1 {
+	color: #000000;
+	font-size: 16px;
+	font-weight: bold;
+	margin: 0px;
+	padding: 0px;
+}
+
+#installheader img.logo {}
+
+h2 {
+	color: #255aa6;
+	font-size: 16px;
+	font-weight: bold;
+	padding-top: 0px;
+	margin-top: 0px;
+}
+
+body, .txt, input, form, td, .scms_flex_input {	
+	font-size: 12px !important;
+	font-family: Arial;
+}
+
+.redbutton {
+	font-weight: bold;
+	height: 23px;
+	width: 80px;
+	
+}
+
+#installfooter {
+	text-align: left;
+	width: 750px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	padding-top: 5px;
+	border-top: 1px solid #dae3fa;
+}
+
+#listing {
+	height: 500px;
+	width: 750px;
+	text-align: left;
+}

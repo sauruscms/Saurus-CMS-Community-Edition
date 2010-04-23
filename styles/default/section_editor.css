@@ -1,0 +1,216 @@
+html, body {
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	background-color: #F5F5F4;
+	border: none;
+    overflow: hidden;
+}
+
+form {
+	margin: 0px;
+	padding: 0px;
+}
+
+a img {
+	border: none;
+}
+
+body, td {
+	color: #333;
+}
+
+body, td, input, select, textarea {
+	font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+}
+
+input.text_inline, input.text, input.text_date, input.text_position, select, textarea {
+	border: 1px solid #7F9DB9;
+	margin: 0px;
+	color: #000;
+}
+
+select {
+	height: 18px;
+}
+
+input.text, input.text_date, input.text_position {
+	height: 14px;
+	padding: 2px 2px;
+}
+
+input.text_inline {
+	padding: 0px 2px;
+}
+
+input.text_date {
+	text-align: right;
+	width: 88px;
+}
+
+input.text_position {
+	text-align: right;
+	width: 32px;
+}
+
+a {
+	color: #5A5C61;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #000000;
+	text-decoration: underline; 
+}
+
+a#alias_link {
+	color: #316AC5;
+	text-decoration: underline; 
+}
+
+div#size_wrapper {
+	background-color: #fff;
+}
+
+div#main_container {
+	background: url(gfx/general/block_hd.gif) repeat-x;
+	padding: 5px 10px 10px 10px;
+}
+
+div.section_editor {
+	width: 512px;
+}
+
+div#tab_container {
+	margin-bottom: 30px;
+}
+
+div#tab_container a {
+	font-weight: bold;
+	padding: 2px 10px;
+	display: block;
+	float: left;
+	border-top: 1px solid #f2f1f0;
+}
+
+div#tab_container a.selected {
+	background-color: #fff;
+	color: #000;
+	border-top: 1px solid #597CBF;
+	border-left: 1px solid #e1e0df;
+	border-right: 1px solid #e1e0df;
+}
+
+div#tab_container a:hover {
+	text-decoration: none;
+}
+
+div#button_container {
+	text-align: right;
+	margin-top: 10px;
+	padding: 10px;
+	background-color: #F5F5F4;
+}
+
+div.panel_toggler {
+	background: url(gfx/general/light_gray_pixel.gif) repeat-x;
+	background-position: 0px 7px;
+	margin: 0px 7px 10px 3px;
+	cursor: pointer;
+}
+
+div.panel_toggler a {
+	color: #316AC5;
+	background-color: #fff;
+	padding: 0px 5px 0px 0px;
+}
+
+div.panel {
+	display: none;
+}
+
+table.form_row td {
+	padding: 3px;
+	font-weight: normal;
+}
+
+table.form_row td.label {
+	text-align: left;
+	width: 100px;
+}
+
+table.form_row td.input {
+	text-align: left;
+	width: 380px;
+}
+
+table.form_row td.end {
+	width: 100%;
+}
+
+table.form_row tr.large, table.form_row tr.large td {
+	font-size: 16px;
+	font-weight: bold;
+}
+
+table.form_row td.input input.text {
+	width: 372px; /* -4px for padding, don't ask why */
+}
+
+table.form_row td.input select.select {
+	width: 376px;
+}
+
+table.form_row tr.large input.text {
+	font-size: 16px;
+	font-weight: bold;
+}
+
+table.cf_container {
+	border: 1px solid #7F9DB9;
+	background-color: #fff;
+	text-align: left;
+	vertical-align: top;
+	width: 376px;
+}
+
+table.cf_container th, table.cf_container td {
+	vertical-align: middle;
+	font-weight: normal;
+	padding: 0px;
+	height: 18px;
+}
+
+table.cf_container th {
+	padding: 0px 3px;
+	width: 100%;
+}
+
+table.cf_container th a {
+	display: block;
+	border: none;
+	padding: 2px 2px;
+	margin: 0px;
+	color: #000;
+}
+
+table.cf_container td a {
+	display: block;
+	background-color: #f4f4f4;
+	border: none;
+	border-left: 1px solid #fff;
+	padding: 2px 6px;
+	margin: 0px;
+	text-decoration: none !important;
+	color: #000;
+}
+
+table.cf_container th span {
+	font-size: 11px;
+	float: none;
+	margin: none;
+	padding: 0px;
+	overflow: hidden;
+	height: 14px;
+}

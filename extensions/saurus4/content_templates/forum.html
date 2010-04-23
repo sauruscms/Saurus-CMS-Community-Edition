@@ -1,0 +1,112 @@
+{**
+ * Simple threaded forum, content template
+ * Contains forums, topics and messages
+ * Date: 10.10.08
+ *
+ * @package saurus4
+ * 
+ * @author Saurus <saurus@saurus.info>
+ *}
+
+<div id="ForumContainer">
+
+{* load configuration *}
+{custom_conf_load id=$id name="tpl_conf"}
+
+{* set configuration values or default values *}
+{assign var="faq_mode" value=$tpl_conf.faq_mode|default:0}
+
+{* articles before forum list *}
+{init_articles name="articles" position=0}
+
+{* forums list *}
+{init_subjects name="topics"}
+
+{$articles_newbutton}{$topics_newbutton}
+
+{foreach from=$articles item="article" name="articles_loop"}
+			
+	<h1>{$article->buttons}{if $article->show_headline}{$article->title}{/if}</h1>
+	
+	{init_article name="art" id=$article->id}
+	
+	{if $art->lead && $art->body}
+		{$art->lead}
+		{* Read More link from Glossary *}
+		<a href="{$art->href}">{sysword word="More" type="Visual Design"}</a>
+	{else}
+		{$art->lead} {$art->body}
+		{if $art->forum_allowed}
+			{if $art->comment_count}
+				<a href="{$art->href}#comments">{sysword word="comments" type="saurus4"}</a>
+				({$art->comment_count})
+				|
+				<a href="{$art->href}#add_message">{sysword word="add" type="saurus4"}</a>
+			{else}
+				<a href="{$art->href}#add_message">{sysword word="add comment" type="saurus4"}</a>
+			{/if}
+		{/if}
+	{/if}
+
+{/foreach}
+{* /articles before forum list *}
+
+{* forums list *}
+<table cellspacing="0" cellpadding="0" class="DataTable">
+    <thead>
+    	<col width="100%">
+    	<tr>
+		    <td>{sysword word="forums" type="saurus4"}</td> {* @todo syswords into english *}
+		    <td>{sysword word="topics" type="saurus4"}</td>
+		    {if !$faq_mode}
+		    <td>{sysword word="last reply" type="saurus4"}</td>
+		    {/if}
+    	</tr>
+    </thead>
+    <tbody>
+		{foreach from=$topics item="topic"}
+		<tr class="{cycle values="dark, light"}">
+			<td class="DataTableWrap">{$topic->buttons}<a href="?id={$topic->id}">{$topic->title}</a></td>
+			<td>{$topic->message_count}</td>
+		    {if !$faq_mode}
+			<td><span class="Date">{$topic->last_message}</span></td>	
+		    {/if}
+		</tr>
+		{/foreach}	 
+	</tbody>      
+</table>
+{* /forums list *}
+
+{* articles after forum list *}
+{init_articles name="articles" position=6}
+
+{$articles_newbutton}
+
+{foreach from=$articles item="article" name="articles_loop"}
+			
+	<h1>{$article->buttons}{if $article->show_headline}{$article->title}{/if}</h1>
+	
+	{init_article name="art" id=$article->id}
+	
+	{if $art->lead && $art->body}
+		{$art->lead}
+		{* Read More link from Glossary *}
+		<a href="{$art->href}">{sysword word="More" type="Visual Design"}</a>
+	{else}
+		{$art->lead} {$art->body}
+		{if $art->forum_allowed}
+			{if $art->comment_count}
+				<a href="{$art->href}#comments">{sysword word="comments" type="saurus4"}</a>
+				({$art->comment_count})
+				|
+				<a href="{$art->href}#add_message">{sysword word="add" type="saurus4"}</a>
+			{else}
+				<a href="{$art->href}#add_message">{sysword word="add comment" type="saurus4"}</a>
+			{/if}
+		{/if}
+	{/if}
+
+{/foreach}
+{* /articles after forum list *}
+
+</div><!-- / ForumContainer -->

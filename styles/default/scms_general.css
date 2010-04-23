@@ -1,0 +1,413 @@
+/*
+Saurus CMS stylesheet 
+Created: 07.03.2004
+Version: header
+Compatibility: IE 6.0, Moz 1.5/1.6 
+Recommended resolution: 1024x768
+*/
+
+/* Import header CSS */
+/* Import toolbar CSS */
+	@import url("scms_toolbar.css");
+/* Import tree menu CSS */
+	@import url("scms_treemenu.css");
+/* Import content area layout css */
+	@import url("scms_contentarea.css");
+/* Import popup CSS */
+	@import url("scms_popup.css");
+/* Import statistics CSS */
+	@import url("scms_stats.css");
+/* Import Calendar CSS */
+	@import url("scms_calendar.css");
+/* Import Intranet CSS */
+	@import url("scms_intra.css");
+/* Import version 3 CSS */
+/*	@import url("scms_cms3.css"); */
+
+
+/* General */
+html {
+	height:100%
+}
+
+body {
+	font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #333333;
+	background-color: #F5F5F4;
+	margin: 0px;
+	padding: 0px;
+	BORDER-RIGHT: 0px; 
+	BORDER-TOP: 0px; 
+	BORDER-LEFT: 0px; 
+	BORDER-BOTTOM: 0px
+}
+
+td {
+	font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #333333;
+}
+
+
+
+a:link, a:visited, a:active {
+	color: #5A5C61;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #000000;
+	text-decoration: underline;
+}
+
+/* //General */
+
+/* Blank table and div styles for general layout purposes */
+.scms_plaintable {
+	padding: 0px;
+	margin: 0px;
+	border: none;
+}
+
+.scms_flextable {
+	padding: 0px;
+	margin: 0px;
+	border: none;
+	width: 100%;
+	height:100%;
+}
+
+
+
+/* Form-elements */
+
+select {
+	height: 18px;
+	font-size: 11px;
+	font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+}
+
+
+input {
+	font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	height:22px;
+	vertical-align: middle;
+}
+
+.scms_flex_input {
+	color: #666666; 
+	padding-left:3px; 
+	background-color: #FFFFFF;
+	height: 18px;
+	width: 98%;
+	border: 1px solid #7F9DB9;
+	font-size: 11px;
+	font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+	vertical-align: middle;
+	font-weight: normal;
+}
+
+.scms_flex_input_date {
+	color: #666666; 
+	padding-left:3px; 
+	background-color: #FFFFFF;
+	height: 18px;
+	width: 98%;
+	border: 1px solid #7F9DB9;
+	font-size: 11px;
+	font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+	vertical-align: middle;
+	font-weight: normal;
+}
+
+
+.scms_checkbox {
+	width: 16;
+	height: 14;
+	margin: 0;
+}
+
+label {
+	cursor: pointer;
+}
+
+/* //Form-elements */
+
+/* About box */
+
+	div#aboutbox {
+		width: 450;
+		height: 304;
+		background: white;
+		border: 1px solid #D4D4D4;
+	}
+
+	.scms_ab_header {
+		height: 61;
+		padding-left: 12;
+		background-image: url(gfx/about/about_header.jpg);
+		background-position: center;
+		color: white;
+		vertical-align: middle;
+	}
+
+	.scms_ab_main {
+		padding: 12;
+		height: 60;
+	}
+
+	.scms_ab_lic {
+		padding-left: 12;
+		padding-right: 12;
+	}
+	.scms_ab_buttons {
+		text-align: right;
+		padding: 8;
+		padding-top: 12;
+		padding-right: 16;
+	}
+/* //About box */
+
+/* Flash detection */
+	div#alert_container {
+		display: block; 
+		margin-top: 25%;
+		margin-left:34%;
+		width: 310px;
+		vertical-align: middle;
+	}
+
+/* generic form container */
+div.scms_form_container {
+	border: 1px solid #D4D4D4;
+	margin: 20px;
+	padding: 10px;
+	background: #F5F5F4;
+}
+div.scms_form_container table.100_per_cent {
+    width: 100%;
+}
+
+* html div.scms_form_container table.100_per_cent {
+    width: 95%;
+}
+
+/* generic zebra table */
+table.scms_zebra_table {
+    background: #FFF;
+    border: 1px solid #D4D4D4;
+    border-top: 0px;
+}
+table.scms_zebra_table caption {
+    background: #ECEBE9;
+    border: 1px solid #D4D4D4;
+    border-bottom: 0px;
+    font-size: 11px;
+    font-weight: bold;
+    text-align: left;
+    padding: 5px;
+}
+table.scms_zebra_table thead {
+	background: #F5F5F4;
+}
+table.scms_zebra_table thead td {
+	background: #F5F5F4;
+    padding: 5px;
+    font-weight: bold;
+}
+table.scms_zebra_table tbody {
+}
+table.scms_zebra_table tbody td {
+    padding: 1px 5px;
+}
+table.scms_zebra_table tbody tr.zebra_1 {
+    background: #FFF;
+}
+table.scms_zebra_table tbody tr.zebra_2 {
+	background: #FAFAFA;
+}
+table.scms_zebra_table tbody tr.selected {
+	background: #D2DFFA;
+}
+table.scms_zebra_table tbody tr.group {
+	background: #F5F5F4;
+    font-weight: bold;
+}
+table.scms_zebra_table tbody tr.group td {
+	padding: 5px;
+}
+table.scms_zebra_table tfoot {
+    background: #ECEBE9;
+}
+table.scms_zebra_table tfoot td {
+    padding: 5px;
+}
+ul.scms_tabbing_row {
+	margin: 4px 7px 0px 7px;
+	padding: 0px;
+	list-style: none;
+}
+ul.scms_tabbing_row li {
+	margin: 0px;
+	padding: 0px;
+	display: inline;
+}
+ul.scms_tabbing_row li a {
+	display: block;
+	float: left;
+	margin: 0px 0px 0px -1px;
+	padding: 6px 6px 6px 6px;
+	text-decoration: none !important;
+	border: 1px solid #F4F4F4;
+	border-bottom: 0px;
+}
+ul.scms_tabbing_row li.active a {
+	background: #F4F4F4;
+	font-weight: bold;
+}
+
+ul.scms_button_row {
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+ul.scms_button_row li {
+	margin: 0px;
+	padding: 0px;
+	display: inline;
+}
+ul.scms_button_row li a {
+	display: block;
+	float: left;
+	margin: 0px 0px 0px 0px;
+	padding: 5px 3px 6px 3px;
+	text-decoration: none !important;
+	border: 1px solid #F4F4F4;
+	height: 13px;
+}
+ul.scms_button_row li a:hover {
+	border: 1px solid #637FB1;
+	background-color: #D2DFFA !important;
+}
+ul.scms_button_row li a.button_new {
+	background: url(gfx/icons/16x16/actions/filenew.png) no-repeat 3px 3px;
+	padding-left: 22px;
+}
+ul.scms_button_row li a.button_save {
+	background: url(gfx/icons/16x16/actions/filesave.png) no-repeat 3px 3px;
+	padding-left: 22px;
+}
+ul.scms_button_row li a.button_edit {
+	background: url(gfx/icons/16x16/actions/edit.png) no-repeat 3px 3px;
+	padding-left: 22px;
+}
+ul.scms_button_row li a.button_delete {
+	background: url(gfx/icons/16x16/actions/delete.png) no-repeat 3px 3px;
+	padding-left: 20px;
+}
+ul.scms_button_row li a.button_download {
+	background: url(gfx/icons/16x16/actions/down.png) no-repeat 3px 3px;
+	padding-left: 20px;
+}
+ul.scms_button_row li a.button_subtree {
+	background: url(gfx/icons/16x16/actions/view_tree.png) no-repeat 3px 5px;
+	padding-left: 20px;
+}
+ul.scms_button_row li a.button_page_next {
+	background: url(gfx/icons/16x16/actions/right.png) no-repeat 3px 3px;
+	padding-left: 12px;
+}
+ul.scms_button_row li a.button_page_back {
+	background: url(gfx/icons/16x16/actions/left.png) no-repeat 3px 3px;
+	padding-left: 12px;
+}
+ul.scms_button_row li a.button_tie {
+	background: url(gfx/icons/16x16/actions/filenewchild.png) no-repeat 3px 3px;
+	padding-left: 22px;
+}
+ul.scms_button_row li a.button_search {
+	background: url(gfx/menu/search.gif) no-repeat 3px 3px;
+	padding-left: 22px;
+}
+ul.scms_button_row li a.button_refresh {
+	background: url(gfx/icons/16x16/actions/refresh.png) no-repeat 3px 3px;
+	padding-left: 22px;
+}
+div.scms_toolbar_container {
+	background: #F4F4F4;
+	padding: 4px 7px;
+	height: 25px;
+}
+div.scms_toolbar_container table.scms_toolbar_form td {
+	padding: 0px 2px;	
+}
+div.hr_groove {
+	border-top: 1px solid #D4D4D4;
+	border-bottom: 1px solid #FFF;
+}
+table.scms_tabs_container {
+	background: #ECEBE9;
+}
+input.scms_text {
+	color: #666666; 
+	padding-left:3px; 
+	padding-right:3px; 
+	background-color: #FFFFFF;
+	height: 18px;
+	border: 1px solid #7F9DB9;
+	font-size: 11px;
+	font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+	vertical-align: middle;
+	font-weight: normal;
+}
+
+/* MacOS/FireFox height problem */
+input[type="radio"],
+input[type="checkbox"] {
+    height: auto;
+}
+
+/* //Calendar area */
+
+table.cf_container {
+	border: 1px solid #7F9DB9;
+	background-color: #fff;
+	text-align: left;
+	width:98%;
+
+}
+
+table.cf_container th {
+	font-weight: normal;
+	padding-left:4px;
+	padding-bottom:2px;
+	_padding-bottom:5px;
+}
+table.cf_container td a {
+	display: block;
+	background-color: #f4f4f4;
+	border: none;
+	border-left: 1px solid #fff;
+	padding: 1px 5px 4px 5px;
+	margin: 0px;
+	text-decoration: none !important;
+	height: 14px;
+	width: auto;
+	text-align: center;
+}
+table.cf_container td {
+	margin: 0px;
+	padding: 0px;
+	width:25px;
+}
+table.cf_container th span {
+	font-size: 11px;
+	float: none;
+	margin: none;
+	padding: 1px 3px 0px 2px;
+	overflow: hidden;
+	height: 14px;
+	padding: 0px !important;
+}

@@ -1,0 +1,127 @@
+{**
+ * Displays search results, used for both quick and advanced search, content template
+ * Date: 19.11.09
+ *
+ * @package saurus4
+ * 
+ * @author Saurus <saurus@saurus.info>
+ *
+ *}
+
+{assign var="limit" value="20"}
+ 
+{if $smarty.request.page}
+	{assign var="current_page" value=$smarty.request.page|intval}
+{else}
+	{assign var="current_page" value=0}
+{/if}
+
+{init_search_results name="search" start=$current_page*$limit limit=$limit use_fulltext=1 query=$smarty.get.query exclude=$smarty.get.exclude search_type=$smarty.get.bool section=$smarty.get.section last_changed=$smarty.get.time order=$smarty.get.order}
+{* if fulltext searching is not working for your language omit the parameter from the tag or set it to 0, in this case LIKE search will be performed *}
+
+{if $smarty.request.label}
+	{assign var="current_label" value=$smarty.request.label}
+{else}
+	{assign var="current_label" value=$search[0]->name}
+{/if}
+
+{*** backwards comaptibility with 'otsi' ***}
+{if $smarty.request.query}
+	{assign var="query" value=$smarty.request.query|xss_clean|htmlspecialchars}
+{elseif $smarty.request.otsi}
+	{assign var="query" value=$smarty.request.otsi|xss_clean|htmlspecialchars}
+{else}
+	{assign var="query" value=""}
+{/if}
+{*** /backwards comaptibility with 'otsi' ***}
+
+<div id="SearchResultsContainer">
+
+{********* Search header **********}
+<h1>{sysword word="Keyword" type="Search"}: <span class="anti_highlight">{$query}</span></h1>
+
+<div id="SearchTypeSelector">
+	<span id="SearchResultsLabel">{sysword word="Results" type="Search"} <span id="SearchCount">({$search_counttotal})</span></span>
+	
+	{foreach from=$search item="label"}
+		{if $label->name == $current_label}
+			<span id="FoundResults">{$label->title} ({$label->counttotal})</span>
+			{assign var="current_count" value=$label->counttotal}
+			{assign var="total_pages" value=$current_count/$limit|ceil}
+		{else}
+			<a href="?{if $smarty.request.label}{$smarty.server.QUERY_STRING|replace:"label=`$current_label`":"label=`$label->name`"|replace:"&amp;page=`$current_page`":""}{else}{$smarty.server.QUERY_STRING|replace:"&amp;page=`$current_page`":""|cat:"&amp;label=`$label->name`"}{/if}">{$label->title} ({$label->counttotal})</a>
+		{/if}
+	{/foreach}
+</div>
+
+{********* // Search header **********}
+
+{********* Search results **********}
+{if $search_counttotal}
+<div id="SearchResults">
+
+	{foreach from=$search item="label"}
+		{if $label->name == $current_label}
+			{foreach from=$label->results item="object"}
+					<div class="ResultTitle">
+						<a href="{$object->href}&amp;highlight={$query|replace:" ":","}">{$object->title}</a>
+					</div>
+					<div class="ResultDescription">
+						{$object->excerpt}
+					</div>
+			{/foreach}
+		{/if}
+	{/foreach}
+
+</div>
+
+{else}
+	{********* No results article **********}
+	
+	{init_article name="art" system_message="no_search_results"}
+	
+	{if strlen($query) < 4}
+	<div class="ResultTitle">
+		{sysword word="keyword_too_short" type="saurus4"}
+	</div>
+	{/if}
+	
+	{if $art->show_headline}
+	<div class="ResultTitle">
+		<h1>{$art->buttons}{$art->title}</h1>
+	</div>
+	{/if}
+	
+	<div class="ResultDescription">
+		{$art->lead} {$art->body}
+	</div>
+{/if}
+{********* // Search results **********}
+
+{if $current_count}
+{********* Paging **********}
+<div id="SearchPaging">
+	{if $current_page-1 >= 0}<a href="?{if isset($smarty.request.page)}{$smarty.server.QUERY_STRING|replace:"page=`$current_page`":"page=0"}{else}{$smarty.server.QUERY_STRING|cat:"&amp;page=0"}{/if}">&laquo;</a> <a href="?{if isset($smarty.request.page)}{$smarty.server.QUERY_STRING|replace:"page=`$current_page`":"page=`$current_page-1`"}{else}{$smarty.server.QUERY_STRING|cat:"&amp;page=`$current_page-1`"}{/if}">&lt;</a>{/if}
+	
+	{if $total_pages <= 5}
+		{assign var="pages_loop" value=$total_pages}
+		{assign var="pages_loop_start" value="0"}
+	{else}
+		{assign var="pages_loop_start" value=$current_page-2}
+		{if $pages_loop_start < 0}{assign var="pages_loop_start" value=0}{/if}
+		{assign var="pages_loop" value=$pages_loop_start+5}
+		{if $pages_loop > $total_pages}
+			{assign var="pages_loop_start" value=$total_pages-5}
+			{assign var="pages_loop" value=$total_pages}
+		{/if}
+	{/if}
+	{section name="pages" loop=$pages_loop start=$pages_loop_start}
+	{if $smarty.section.pages.index != $current_page}<a href="?{if isset($smarty.request.page)}{$smarty.server.QUERY_STRING|replace:"page=`$current_page`":"page=`$smarty.section.pages.index`"}{else}{$smarty.server.QUERY_STRING|cat:"&amp;page=`$smarty.section.pages.index`"}{/if}">{/if}{$smarty.section.pages.index+1}{if $smarty.section.pages.index != $current_page}</a>{/if}
+	{/section}
+	
+	{if $current_page+1 != $total_pages}<a href="?{if isset($smarty.request.page)}{$smarty.server.QUERY_STRING|replace:"page=`$current_page`":"page=`$current_page+1`"}{else}{$smarty.server.QUERY_STRING|cat:"&amp;page=`$current_page+1`"}{/if}">&gt;</a> <a href="?{if isset($smarty.request.page)}{$smarty.server.QUERY_STRING|replace:"page=`$current_page`":"page=`$total_pages-1`"}{else}{$smarty.server.QUERY_STRING|cat:"&amp;page=`$total_pages-1`"}{/if}">&raquo;</a>{/if}
+</div>
+{********* //Paging **********}
+{/if}
+
+</div><!-- / SearchResultsContainer -->

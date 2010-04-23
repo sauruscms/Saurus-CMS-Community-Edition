@@ -1,0 +1,81 @@
+/* Styles used in Saurus CMS tree-menus */
+
+		.scms_tree_menu {
+			list-style-position: outside;
+			margin-left: 0px;
+			margin-top: 2;
+			margin-bottom: 2px;
+			padding: 0px;
+		}
+
+		.scms_tree_menu ul {
+			margin-left: 16px;
+		}
+
+		.scms_tree_menu a {
+			display: block;
+			margin-left: 0;
+			padding-left: 18;
+			height: 17px;
+			line-height: 16px;
+			white-space: nowrap;
+		}
+
+		.scms_selected {
+			display: block;
+			padding-left: 4;
+			line-height: 18px;
+			background-color: #D2DFFA;
+		}
+	
+	/* Specials */
+		.scms_checkselect {
+			width:16px;
+			height: 17px;
+			max-height: 12px;
+
+		}
+
+	/* Folder icons */
+
+		.scms_plus {		
+			background-image:  url(gfx/menu/plus.gif);
+			background-repeat: no-repeat;
+			list-style-type: none;
+			list-style-image: none;
+		}
+
+		.scms_minus {
+			background-image:  url(gfx/menu/minus.gif);
+			background-repeat: no-repeat;
+			list-style-type: none;
+			list-style-image: none;
+		}
+
+		.scms_plain {		
+			background-image:  url(gfx/menu/plain.gif);
+			background-repeat: no-repeat;
+			list-style-type: none;
+			list-style-image: none;
+		}
+		
+		.scms_group_plus {		
+			background-image:  url(gfx/menu/group_plus.gif);
+			background-repeat: no-repeat;
+			list-style-type: none;
+			list-style-image: none;
+		}
+
+		.scms_group_minus {
+			background-image:  url(gfx/menu/group_minus.gif);
+			background-repeat: no-repeat;
+			list-style-type: none;
+			list-style-image: none;
+		}
+
+		.scms_group_plain {		
+			background-image:  url(gfx/menu/group_plain.gif);
+			background-repeat: no-repeat;
+			list-style-type: none;
+			list-style-image: none;
+		}

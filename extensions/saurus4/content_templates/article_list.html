@@ -1,0 +1,24 @@
+{**
+ * Simple list of articles , content template
+ * Date: 10.10.08
+ *
+ * @package saurus4
+ * 
+ * @author Saurus <saurus@saurus.info>
+ *
+ *}
+
+<div id="ArticleListContainer">
+ 
+{init_articles name="articles" position=0}
+{$articles_newbutton}
+
+<ul class="ArticleList">
+{foreach from=$articles item="article" name="articles_loop"}
+	<li>
+		<a href="{$article->href}">{$article->buttons}{$article->title}</a>
+	</li>
+{/foreach}
+</ul>
+
+</div><!-- / ArticleListContainer -->

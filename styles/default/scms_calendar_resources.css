@@ -1,0 +1,52 @@
+/* Styles for resources window in event popup */
+
+/* Horizontal calendar view */	
+.scms_hor_cal th {
+	background: #FAFAFA;
+	text-align: center;
+	height: 23px;
+	width: 14px;
+	font-size: 11px;
+	font-weight: normal;
+	color: #597CBF;
+	border-left: 1px solid #F2F5FA;
+}
+
+.scms_hor_cal th#newday {
+	border-left: 1px solid #7390C9;
+}
+
+.scms_hor_cal td {
+	font-size: 11px;
+	font-weight: normal;
+	width: 14px;
+	color: #597CBF;
+	border-right: 1px solid #F2F5FA;
+	background-image: url(gfx/calendar/hor_cal_td_bg.gif); 
+	background-repeat: repeat;
+	border-left: 1px solid #7390C9;
+}
+
+.scms_hor_cal_title {
+	background: #7390C9;
+	color: white;
+	height: 23;
+	padding-left: 8px;
+}
+
+.scms_hor_cal_event_item{
+	position: absolute;
+	height: 10px;
+	margin-top: 6px;
+	background: #99AED8;
+}
+
+div.scms_hor_cal_event_item#div2{
+	background: #99AED8;
+}
+
+.scms_hor_cal_label td {
+	border-bottom: 1px solid #E9EEF7;
+}
+
+/* Horizontal calendar view */	

@@ -1,0 +1,49 @@
+<h1>Extension: Saurus 4</h1>
+By <strong>Saurus</strong> <a href="http://www.saurus.info" target="_blank">www.saurus.info</a>
+
+<h2>About</h2>
+
+<p>This is read me file of "Saurus 4" extension which ships with Saurus CMS installation package. This extension contains various Saurus API based content templates, also one sample page template.</p>
+
+<p>The extension is overwritten by Saurus CMS version upgrades. If you wish to modify the templates, make a copy of extension to create a custom version.</p>
+
+<h2>Installation</h2>
+
+<ol>
+<li>Copy the folder "saurus4" to extensions/ directory in your site root.</li>
+<li>Go to your site: Admin > Extensions > Extensions and click Refresh to synchronise. The templates will now be visible in section editor.</li>
+<li>Add the following line to your site CSS or to Admin > Visual Design > CSS Styles:
+<pre>@import url(extensions/saurus4/css/content.css);</pre>
+Please not that @import statement should always be the first row(s) in the CSS file.</li>
+<li>The extension sync registers the following unused ?op (e.g. www.sitename.com/?op=sitemap) parameters:
+	<ul>
+	<li>"sitemap" - Sitemap</li>
+	<li>"advsearch" - Advanced search form</li>
+	<li>"archive" - Chronological archive of articles</li>
+	<li>"register" - User registration form</li>
+	</ul>
+	If any of these parameters were used by existing templates, these settings are not overwritten. To do so, and therefore use the templates, manually make appropriate changes in Admin > Templates > Content Templates.
+</li>
+</ol>
+
+<h2>Version history</h2>
+<h3>Version 1.0 / 21.04.2006</h3>
+Initial release, shipped with Saurus CMS 4.1.0
+<h3>Version 1.1 / 11.08.2006</h3>
+Minor fixes, shipped with Saurus CMS 4.2.3 update
+<h3>Version 1.2 / 01.11.2006</h3>
+Smarty filter for highlighting text
+<h3>Version 1.3 / 04.04.2008</h3>
+Gallery content template now uses jQuery Lightbox plugin for displaying bigger sized images.<br>
+Article and forum commenting have now CAPTCHA verification.
+Added site slogan "Saurus CMS out-of-the-box experience" and site title "ShowTime"
+<h3>Version 1.4 / 05.06.2008</h3>
+Language change links are now dynamic
+<h3>Version 1.5 / 04.07.2008</h3>
+RSS feed from active section articles.<br>
+Blog template.<br>
+<h3>Version 1.6 / 21.04.2009</h3>
+The default page template is now new "Modern page template", which allows different layouts with just changes in the CSS<br>
+Added the E-mail Obfuscator.<br>
+<h3>Version 1.7 / 02.07.2009</h3>
+E-mail Obfuscator did not handle correctly UTF-8 multibyte characters<br>

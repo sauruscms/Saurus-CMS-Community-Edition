@@ -1,0 +1,101 @@
+{**
+ * Sitemap, creates tree of CMS objects, content template
+ * Date: 30.06.08
+ *
+ * @package saurus4
+ * 
+ * @param show comma separated list of class names to exclusively show in the tree, defaults to "section"
+ * @param parent ID of an object from where to start the site tree, defaults to level 1 sections
+ * 
+ * @author Saurus <saurus@saurus.info>
+ *
+ *}
+ 
+<div id="SitemapContainer">
+
+<h1>{sysword word="sitemap" type="saurus4"}</h1>
+
+{if $smarty.request.parent}
+	{init_objects name="roots" parent=$smarty.request.parent|@intval classes=$smarty.request.show|default:"section"}
+{else}
+	{init_objects name="roots" parent_system_alias="home" classes=$smarty.request.show|default:"section"}
+{/if}
+
+{assign var="tree" value=$roots|@array_reverse}
+
+{foreach from=$tree item="tree_item"}
+	{$tree_levels|@array_push:0}
+{/foreach}
+
+{assign var="loop_control" value=true}
+
+{if sizeof($tree)}
+{strip}
+{* start the list *}
+<ul>
+{while var="loop_control"}
+
+	{* get current node from tree and erase it from the tree marking it travelled *}
+	{assign var="node" value=$tree|@array_pop}
+	{* get current node level *}
+	{assign var="node_level" value=$tree_levels|@array_pop}
+	
+	{* get next node array key *}
+	{assign var="next_key" value=$tree|@sizeof}
+	{assign var="next_key" value=$next_key-1}
+	
+	{* get next node from the tree *}
+	{assign var="next" value=$tree.$next_key}
+	
+	{* start the node print out *}
+	<li>
+		<a href="{$node->href}">{$node->buttons}{$node->title}</a>
+		
+		{* get the nodes children *}
+		{init_objects name="children" parent=$node->id classes=$smarty.request.show|default:"section"}
+		{assign var="children" value=$children|@array_reverse}	
+		
+		{* if there are any children create the list start *}
+		{if sizeof($children)}
+			<ul>
+		{/if}
+		
+		{* close the children list, if there isn't anymore children and there is a next node and current level is greater than than the next nodes level *}
+		{if !sizeof($children) && $next && $tree_levels.$next_key < $node_level}
+			{section name="pages" loop=$node_level-$tree_levels.$next_key name="closing_loop"}
+				{* close the node print out if this is the first close *}
+				{if $smarty.section.closing_loop.first}</li>{/if}
+				</ul>
+			{/section}
+		{* else if this is the last node close the tree up to 0 level *}
+		{elseif !sizeof($children) && !$next}
+			{section name="pages" loop=$node_level name="closing_loop"}
+				{* close the node print out if this is the first close *}
+				{if $smarty.section.closing_loop.first}</li>{/if}
+				</ul>
+			{/section}
+		{/if}
+
+	{* close the node print out if there is no children for this node *}
+	{if !sizeof($children)}
+	</li>
+	{/if}
+	
+	{* put the children into the tree for travelling + their level *}
+	{foreach from=$children item="child"}
+		{$tree|@array_push:$child}
+		{$tree_levels|@array_push:$node_level+1}
+	{/foreach}
+
+	{* close the while loop if there is no more nodes to travel *}
+	{if sizeof($tree) == 0}
+		{assign var="loop_control" value=false}
+	{/if}
+	
+{/while}
+{* close the list *}
+</ul>
+{/strip}
+{/if}{* sizeof($tree) *}
+
+</div><!-- / SitemapContainer -->

@@ -1,0 +1,88 @@
+/* 
+
+Mini-calendar styles. These styles are used in date-selector
+calendar in various applications
+
+*/
+
+/* Mini calendar */
+	.scms_minical {
+		width: 100%;
+		background: white;
+	}
+	
+	.scms_minical_month {
+		background: #7390C9;
+		height: 16px;
+		line-height: 14px;
+		color: white;
+		font-weight: bold;
+		padding-left: 4px;
+	}
+
+	.scms_minical thead td{
+		font-weight: normal;
+		color: #597CBF;
+		border-bottom: 1px solid #E8EDF6;
+	}
+
+	.scms_minical td{
+		text-align: center;
+		line-height: 16px;
+	}
+	.scms_minical a{
+		display: block;
+		height: 100%;
+		margin: 0;
+	}
+
+	.scms_minical tbody th{
+		font-size: 9px;
+		font-weight: normal;
+		line-height: 16px;
+		padding-left: 3px;
+		border-right: 1px solid #E8EDF6;
+	}
+
+	.scms_minical tbody th a:link, .scms_minical tbody th a:visited, .scms_minical tbody th a:hover, .scms_minical tbody th a:active, {
+		color: #597CBF;
+	}
+
+	.scms_minical tbody td {
+		padding: 1px;
+		
+	}
+	
+	.scms_minical tbody td a {
+		padding: 1px;
+		padding-top: 0px;
+		line-height: 16px;
+		vertical-align: middle;
+	}
+
+	a.scms_minical_event:link, a.scms_minical_event:visited, a.scms_minical_event:active {
+		font-weight: bold;
+		color: #597CBF;
+	}
+
+	a.scms_minical_event:hover {
+		font-weight: bold;
+		color: #597CBF;
+	}
+
+	.scms_selected_day {
+		text-align: center;
+		background: #D2DFFA;
+	}
+
+	.scms_minical_years a:link, .scms_minical_years a:visited, .scms_minical_years a:hover,.scms_minical_years a:active {
+		color: #597CBF;
+		font-weight: normal;
+		font-size: 11px;
+	}
+
+	.scms_minical_years {
+		border-top: 1px solid #E8EDF6;
+		width: 100%;
+		font-weight: normal;
+	}

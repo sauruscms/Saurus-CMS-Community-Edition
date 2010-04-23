@@ -1,0 +1,424 @@
+/* ----------------------------------- */
+/* ---------->>> GLOBAL <<<----------- */
+/* ----------------------------------- */
+
+/* remove browser default margin and padding */
+BODY, 
+DIV#scms_ColumnElements * ,
+DIV#scms_LocationBar * ,
+DIV#scms_LanguageSelector * {
+    margin: 0px;
+    padding: 0px;
+}
+
+BODY {
+    background-image: url(../images/bg_cont.gif);
+    background-color: #FFF;
+    border: none;
+}
+.clear {
+    clear: both;
+}
+
+/* ----------------------------------- */
+/* ------>>> COLORS & FONTS <<<------- */
+/* ----------------------------------- */
+
+/* Font colors: TITLES, H1, H2, H3 */
+DIV#scms_Title H1 A,
+LI.scms_LanguageSeparator,
+UL#scms_SectionTree A,
+DIV#scms_ColumnAddon H3 {
+    color: #0DB609;
+}
+
+/* Font colors: Location bar, Section tree, Footer */
+DIV#scms_LocationBar UL LI A,
+UL#scms_SectionTree UL A,
+DIV#scms_LocationBar,
+DIV#scms_Footer P {
+    color: #495B76;
+}
+
+/* Font Style: Slogan, Location bar, Section tree, Addon, Footer */
+DIV#scms_Slogan H2,
+DIV#scms_LocationBar,
+UL#scms_SectionTree,
+DIV#scms_ColumnAddon A,
+DIV#scms_Footer P {
+    font-family: Verdana, sans-serif;
+}
+
+/* Site Title */
+DIV#scms_Title H1 A {
+    font-size: 46px;
+    font-weight: bold;
+    font-family: Trebuchet MS, Helvetica, sans-serif;
+    text-decoration: none;
+}
+
+/* Slogan */
+DIV#scms_Slogan H2 { 
+    color: #7296ea;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* Location Bar */
+DIV#scms_LocationBar {
+    font-size: 9px;
+    text-transform: uppercase;
+}
+DIV#scms_LocationBar UL li a {
+    text-decoration: none;
+}
+DIV#scms_LocationBar UL li a: hover {
+    text-decoration: underline;
+}
+
+/* Language Selector */
+DIV#scms_LanguageSelector UL LI A {
+    font-size: 10px;
+}
+DIV#scms_LanguageSelector UL LI A.active {
+    color: #00CC00;
+}
+LI.scms_LanguageSeparator {
+    font-size: 11px;
+}
+
+/* MENU */
+UL#scms_SectionTree {
+    font-size: 11px;
+}
+UL#scms_SectionTree A.active {
+    background-color: #0DB609;
+    color: #FFF;
+}
+
+/* Addon */
+DIV#scms_ColumnAddon H3 {
+    font-size: 14px;
+    font-weight: bold;
+}
+DIV#scms_ColumnAddon H4 {
+    font-size: 12px;
+}
+DIV#scms_ColumnAddon A {
+    font-size: 11px;
+}
+
+/* Searchbox */
+
+INPUT#scms_ColumnSearchInput {
+    background-color: #A3BBF3;
+    border: 1px solid #A3BBF3;
+    color: #FFFFFF;
+    font-size: 9px;
+}
+
+/* Searchbox Links */
+P#scms_ColumnSearchLinks A {
+    text-decoration: none;
+}
+FORM#scms_ColumnSearchForm {
+    font-size: 9px;
+    color: #A3BBF3;
+    border-top: 1px solid #DAE3FA;
+    border-bottom: 1px solid #DAE3FA;
+}
+INPUT#scms_ColumnSearchInput {
+    border: 1px solid #A3BBF3;
+    background-color: #A3BBF3;
+}
+
+/* Header Background */
+DIV#scms_Header {
+    background-color: #FFFFFF;
+}
+
+/* CONTENT */
+DIV#scms_Content {
+    background-color: #FFFFFF;
+}
+
+/* FOOTER */
+DIV#scms_Footer P {
+    font-size: 10px;
+}
+
+
+/* ----------------------------------- */
+/* ----->>> BACKGROUND IMAGES <<<----- */
+/* ----------------------------------- */
+
+/* Site background */
+DIV#scms_Background {
+    background-image: url(../images/body_bg.gif);
+    background-repeat: repeat-x;
+}
+
+/* Container background */
+DIV#scms_pageContainer {
+    background-image: url(../images/pagecontainer_bg.gif);
+    background-repeat: no-repeat;
+    background-position: right top;
+}
+
+/* Header Background */
+DIV#scms_Header {
+    background-image: url(../images/headercontainer_bg.jpg);
+    background-repeat: no-repeat;
+}
+
+/* Logo Background */
+DIV#scms_Logo A#scms_LogoLink {
+    background-image: url(../images/logo.gif);
+    background-repeat: no-repeat;
+}
+
+/* Locationbar background */
+DIV#scms_LocationBar UL LI A {
+    background-image: url(../images/locationbar_arrow.gif);
+    background-repeat: no-repeat;
+    background-position: left 4px;
+}
+
+/* Menu background */
+UL#scms_SectionTree UL A {
+    background-image: url(../images/secondlevel_li.gif);
+    background-repeat: no-repeat;
+    background-position: 2px 6px;
+}
+
+/* ----------------------------------- */
+/* -------->>> STRUCTURE <<<---------- */
+/* ----------------------------------- */
+
+DIV#scms_Background {
+    min-height: 700px;
+    padding: 0 0 0 34px;
+}
+
+/* Site container */
+DIV#scms_Container {}
+
+/* Page container */
+DIV#scms_pageContainer {
+    width: 746px; /* Page width */
+    padding-right: 11px;
+}
+
+/* Clear main blocks */
+DIV#scms_Header,
+DIV#scms_Navigation,
+DIV#scms_Content,
+DIV#scms_Footer {
+    clear: both;
+}
+
+/* HEADER */
+DIV#scms_Header * {
+    list-style-type: none;
+    text-decoration: none;
+}
+DIV#scms_Header {
+    height: 108px;
+    position: relative;
+}
+DIV#scms_headerArticle {
+    margin: 12px 14px 0 0;
+    padding: 0;
+    float: right;
+}
+
+/* logo */
+DIV#scms_Logo {}
+DIV#scms_Logo A#scms_LogoLink {
+    position: absolute;
+    right: 27px;
+    top: 24px;
+    display: block;
+    height: 25px;
+    width: 131px;
+}
+
+/* title and slogan container */
+DIV#scms_TitleSlogan {
+    padding: 5px 0 0 25px;
+}
+DIV#scms_Title H1 A {}
+DIV#scms_Slogan H2 {
+    margin: 0px;
+    padding: 0px;
+}
+
+/* language selector */
+DIV#scms_LanguageSelector {
+    position: absolute;
+    right: 31px;
+    top: 57px;
+}
+DIV#scms_LanguageSelector UL LI {
+    float: left;
+}
+DIV#scms_LanguageSelector UL LI A {
+    padding: 0px 4px;
+}
+DIV#scms_LanguageSelector UL LI A.active {}
+LI.scms_LanguageSeparator {}
+
+/* location bar */
+DIV#scms_LocationBar {
+    padding: 11px 0 11px 8px;
+    white-space: nowrap;
+}
+DIV#scms_LocationBar UL {
+    list-style-type: none;
+    margin: 0px;
+}
+DIV#scms_LocationBar UL LI {
+    display: inline;
+}
+DIV#scms_LocationBar UL LI A {
+    padding: 0px 4px 0px 8px;
+    text-decoration: none;
+}
+
+/* header searchbox */
+DIV#scms_HeaderSearchBox {
+    display: none;
+}
+DIV.scms_AdvancedSearch {}
+
+/* Menu (Horizontal) */
+DIV#scms_Navigation {
+	display: none;
+}
+
+/* Menu */
+DIV#scms_ColumnMenu {}
+UL#scms_SectionTree {
+    list-style: none;
+}
+UL#scms_SectionTree li {
+    padding: 1px 0px 0px 6px;
+}
+UL#scms_SectionTree A {
+    text-decoration: none;
+    display: block;
+    padding: 5px 0px 5px 6px;
+}
+UL#scms_SectionTree A: hover {
+    text-decoration: underline;
+}
+UL#scms_SectionTree a.active {
+    display: block;
+}
+UL#scms_SectionTree UL {
+    margin: 0 0 0 2px;
+    list-style: none;
+    background-color: white !important;
+}
+UL#scms_SectionTree UL LI {
+    padding: 0 0 0 6px;
+}
+UL#scms_SectionTree UL A {
+    display: block;
+    width: 130px;
+    line-height: 170%;
+    padding: 1px 0 2px 10px;
+}
+UL#scms_SectionTree UL A.active_2Level {
+    font-weight: bold;
+}
+
+/* Menu 2Level */
+DIV#scms_ColumnMenu_2Level {
+    display: none;
+}
+
+/* Addon */
+DIV#scms_ColumnAddon UL LI {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+DIV#scms_ColumnAddon {
+    /*float: right;
+    width: 162px;*/
+    clear: right;
+    padding: 9px 0;
+    font-size: 11px;
+}
+/* Addon Fonts And Colors */
+DIV#scms_ColumnAddon H3 {
+    margin: 0px 0px 6px 0px;
+    padding: 0px;
+}
+DIV#scms_ColumnAddon A {
+    line-height: 170%;
+}
+/* Link List */
+DIV#scms_ListOfLinks {
+    padding: 5px 8px;
+}
+DIV#scms_ListOfLinks P {
+    margin: 0px;
+    padding: 0px;
+}
+
+/* Poll */
+DIV#scms_Poll {
+    padding: 5px 8px;
+}
+DIV#scms_Poll UL LI {
+    padding: 2px 0;
+}
+DIV#scms_Poll UL LI LABEL {}
+
+/* Search */
+DIV#scms_ColumnSearch {
+    clear: right;
+}
+FORM#scms_ColumnSearchForm {
+    margin: 16px 0px 0px 0px;
+    padding: 10px 8px;
+}
+INPUT#scms_ColumnSearchInput {
+    padding: 2px;
+    width: 105px;
+}
+INPUT#scms_ColumnSearchSubmit {
+    margin-bottom: -5px;
+}
+P#scms_ColumnSearchLinks {
+    margin-top: 3px;
+}
+
+/* Content */
+* HTML DIV#scms_Content {
+    height: 400px; /* IE min-height */
+}
+DIV#scms_Content {
+    min-height: 400px;
+    padding-bottom: 10px;
+}
+DIV#scms_ColumnElements {
+    float: right;
+    width: 162px;
+    padding: 0 1px 0 0;
+}
+DIV#scms_ColumnContent {
+    margin: 0 27px;
+    width: 540px;
+}
+
+/* Footer */
+DIV#scms_Footer {
+    padding: 10px 0 0 5px;
+}
+DIV#scms_Footer P {
+    padding: 0;
+    margin: 0 0 10px 0;
+}

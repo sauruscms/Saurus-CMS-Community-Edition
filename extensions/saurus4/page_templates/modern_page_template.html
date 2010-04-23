@@ -1,0 +1,299 @@
+{**
+ * Modern page template, allows for different layouts with just stylesheets
+ *
+ * @package saurus4
+ *
+ *}<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="{$locale|substr:0:2}"><head>
+        <title>{$title}</title>
+
+        <meta name="keywords" content="{$meta_keywords}">
+        <meta name="description" content="{$meta_description}">
+        <meta name="generator" content="Saurus CMS">
+
+        <meta http-equiv="Content-Language" content="{$locale|substr:0:2}">
+        <meta http-equiv="Content-Type" content="text/html; charset={$encoding}">
+        <meta http-equiv="Cache-Control" content="no-cache">
+        <meta http-equiv="ImageResize" content="no">
+        <meta http-equiv="ImageToolbar" content="no">
+
+        <meta name="robots" content="index,all">
+        <meta name="MSSmartTagsPreventParsing" content="true">
+
+        <link rel="shortcut icon" type="image/x-icon" href="{$wwwroot}/extensions/saurus4/images/favicon.ico">
+        <link rel="stylesheet" type="text/css" media="screen" href="{$wwwroot}/styles.php">
+		<link rel="stylesheet" type="text/css" media="screen" href="{$wwwroot}/extensions/saurus4/css/modern_main.css">
+        {if $current_class == 'section' || $current_class == 'article'}
+        <link href="{$wwwroot}/?id={$id}&amp;op=rss" rel="alternate" type="application/rss+xml" title="{$title}">
+        {/if}
+
+        <script type="text/javascript" src="{$wwwroot}/js/yld.js"></script>
+    </head>
+
+    <body>
+
+        <div id="scms_Background">
+
+            <div id="scms_Container">
+
+                <div id="scms_LocationBar">
+                    {init_trail name="parents"}
+                    <ul>
+                        {foreach from=$parents item="nav_item"}
+                        <li><a href="{$nav_item->href}">{$nav_item->title}</a></li>
+                        {/foreach}
+                    </ul>
+                </div><!-- #scms_LocationBar -->
+
+                <div id="scms_pageContainer">
+
+                    <div id="scms_Header">
+
+                        <div id="scms_Logo">
+                            <div id="scms_headerArticle">
+                                {init_article name="header" system_message="headlogo" buttons="edit,hide"}{if $header->id}{$header->buttons}{$header->lead}{$header->body}{else}{$header_newbutton}{/if}
+                            </div>
+                        </div>
+
+                        <div id="scms_LanguageSelector">
+                            {init_sites name="langs"}
+
+                            {if sizeof($langs) > 1}
+                            <ul>
+                                {foreach from=$langs item="language" name="lang_loop"}
+                                <li><a href="{$language->href}"{if $lang == $language->extension} class="active"{/if}>{$language->name}</a></li>
+                                {if !$smarty.foreach.lang_loop.last}<li class="scms_LanguageSeparator">|</li>{/if}
+                                {/foreach}
+                            </ul>
+                            {/if}
+                        </div><!-- #scms_LanguageSelector -->
+
+                        <div id="scms_TitleSlogan">
+
+                            <div id="scms_Title">
+                                <h1><a href="{$wwwroot}/index.php">{$site_name}</a></h1>
+                            </div><!-- #scms_Title -->
+
+                            <div id="scms_Slogan">
+                                <h2>{$site_slogan}</h2>
+                            </div><!-- #scms_Slogan -->
+
+                        </div><!-- #scms_TitleSlogan -->
+
+                        <div id="scms_HeaderSearchBox">
+
+                            <form action="{$self}" method="GET">
+                                <input type="hidden" name="op" value="search">
+                                <input name="query" value="{sysword word='search' type='saurus4'}:" onFocus="if(this.value=='{sysword word='search' type='saurus4'}:')this.value=''" onBlur="if(this.value=='')this.value='{sysword word='search' type='saurus4'}:'" class="input">
+                                <input type="submit" name="search" value="{sysword word='search' type='saurus4'}" class="button">
+                                <p id="scms_HeaderColumnSearchLinks">
+                                    <a href="{$wwwroot}/?op=sitemap">{sysword word="sitemap" type="saurus4"}</a> | <a href="{$wwwroot}/?op=advsearch">{sysword word="advanced search" type="saurus4"}</a>
+                                </p>
+                            </form>
+
+                        </div><!-- #scms_HeaderSearchBox -->
+
+                    </div><!-- #scms_scms_Header -->
+
+                    <div id="scms_Navigation">
+                        <ul>
+                            {strip}
+                            {********** Site menu **********}
+                            {init_sections name="sections_1" level="1" classes="section,link"}
+                            {foreach from=$sections_1 item="section_1"}
+                            <li><a href="{$section_1->href}"{if $section_1->is_selected} class="active"{/if}>{$section_1->buttons}{$section_1->title}</a></li>
+                            {if $section_1->is_selected}
+                            {assign var="current_section_1" value=$section_1->id}
+                            {assign var="current_section_1_title" value=$section_1->title}
+                            {/if}
+                            {foreachelse}
+                            <li>{$sections_1_newbutton}</li>
+                            {/foreach}
+                            {********** /Site menu **********}
+                            {/strip}
+                        </ul>
+                        <div class="clear"></div>
+
+                    </div><!-- #scms_NavigationContainer -->
+
+                    <div id="scms_Content">
+
+                        <div id="scms_ColumnElements">
+
+                            <div id="scms_ColumnMenu" class="box">
+                                <ul id="scms_SectionTree">
+                                    {strip}
+                                    {********** Site menu **********}
+                                    {init_sections name="sections_1" level="1" classes="section,link"}
+                                    {foreach from=$sections_1 item="section_1"}
+                                    <li><a href="{$section_1->href}"{if $section_1->is_selected} class="active"{/if}>{$section_1->buttons}{$section_1->title}</a>
+
+                                        {if $section_1->is_selected}
+
+                                        {assign var="current_section_1" value=$section_1->id}
+
+                                        {init_sections name="sections_2" parent=$section_1->id}
+                                        {if $sections_2_count > 0}
+                                        <ul>
+                                            {foreach from=$sections_2 item="section_2"}
+                                            <li><a href="{$section_2->href}"{if $section_2->is_selected} class="active_2Level"{/if}>{$section_2->buttons}{$section_2->title}</a>{$key}</li>
+                                            {/foreach}
+                                        </ul>
+                                        {elseif $in_editor}
+                                        <ul>
+                                            <li><a>{$sections_2_newbutton}</a></li>
+                                        </ul>
+                                        {/if}
+                                        {/if}
+
+                                    </li>
+
+                                    {foreachelse}
+                                    <li>{$sections_1_newbutton}</li>
+                                    {/foreach}
+                                    {********** /Site menu **********}
+                                    {/strip}
+                                </ul>
+
+                            </div><!-- #scms_ColumnMenu -->
+
+                            <div id="scms_ColumnMenu_2Level" class="box">
+                                {if $section_1->is_selected}
+                                {assign var="current_section_1" value=$section_1->id}
+                                {init_sections name="sections_2" parent=$section_1->id}
+                                {if $sections_2_count > 0}
+                                <ul id="scms_SectionTree2Level">
+                                    {foreach from=$sections_2 item="section_2"}
+                                    <li><a href="{$section_2->href}"{if $section_2->is_selected} class="active_2Level"{/if}>{$section_2->buttons}{$section_2->title}</a>{$key}</li>
+                                    {/foreach}
+                                </ul>
+                                {elseif $in_editor}
+                                <ul>
+                                    <li><a>{$sections_2_newbutton}</a></li>
+                                </ul>
+                                {/if}
+                                {/if}
+                            </div>
+
+                            <div id="scms_ColumnSearch">
+
+                                <form action="{$self}" method="GET" id="scms_ColumnSearchForm">
+                                    <input type="hidden" name="op" value="search">
+                                    <input name="query" value="{sysword word='search' type='saurus4'}:" onFocus="if(this.value=='{sysword word='search' type='saurus4'}:')this.value=''" onBlur="if(this.value=='')this.value='{sysword word='search' type='saurus4'}:'" id="scms_ColumnSearchInput">
+                                    <input type="image" src="{$wwwroot}/extensions/saurus4/images/submit_arrow.gif" id="scms_ColumnSearchSubmit">
+                                    <p id="scms_ColumnSearchLinks">
+                                        <a href="{$wwwroot}/?op=sitemap">{sysword word="sitemap" type="saurus4"}</a> | <a href="{$wwwroot}/?op=advsearch">{sysword word="advanced search" type="saurus4"}</a>
+                                    </p>
+                                </form>
+
+                            </div><!-- #scms_ColumnSearch -->
+
+                            <div id="scms_ColumnAddon">
+
+                                <div id="scms_ListOfLinks">
+
+                                    {********** A list of links **********}
+                                    {init_objects name="links" parent=$saurus4.constants.sticky_links.$site_extension classes="link"}
+                                    {if $links|@count or $in_editor}<h3>{sysword word="see also" type="saurus4"}</h3>{/if}
+
+                                    {foreach from=$links item="link"}
+                                    <p><a href="{$link->href}">{$link->buttons}{$link->title}</a></p>
+                                    {foreachelse}
+                                    <p>{$links_newbutton}</p>
+                                    {/foreach}
+
+                                    {********** /A list of links **********}
+
+                                </div><!-- #scms_ListOfLinks -->
+
+                                <div id="scms_Poll">
+
+                                    {********** Polls **********}
+                                    {init_objects name="polls" classes="poll" parent=$saurus4.constants.sticky_links.$site_extension}
+
+                                    {*********** loop over polls **********}
+                                    {foreach from=$polls item=poll}
+
+                                    {init_object name="object" id=$poll->id}
+
+                                    <h3>{$object->buttons}{$poll->title}</h3>
+
+                                    {********* VOTING *********}
+                                    {**** 1. RESULTS: if user is already VOTED or poll is EXPIRED or in editor-area *}
+                                    {if $object->is_voted || $object->is_expired || $in_editor}
+                                    <h4>{sysword word="poll_results" type="Visual design"}:</h4>
+
+                                    <ol>
+                                        {foreach from=$object->answers item=answer}
+                                        <li>{$answer->title} - <strong>{$answer->count}</strong></li>
+                                        {/foreach}
+                                    </ol>
+
+                                    {**** 2. VOTE FORM: if user is NOT VOTED and poll is NOT EXPIRED *}
+                                    {else}
+
+
+                                    <form action="{$self}" method="GET">
+                                        <input type="hidden" name="uri" value="{$url}">
+                                        <input type="hidden" name="gallup_id" value="{$object->id}">
+                                        <input type="hidden" name="op" value="vote">
+                                        <ul>
+                                            {foreach from=$object->answers item=answer}
+                                            <li>
+                                                <input type="radio" id="vastus_{$answer->id}" name="vastus" value= "{$answer->id}">
+                                                <label for="vastus_{$answer->id}">{$answer->title}</label>
+                                            </li>
+                                            {/foreach}
+                                        </ul>
+                                        <input type="submit" name="haaleta" value="{sysword word="haaleta" type="Visual design"}">
+									</form>
+
+                                    {/if} {*user is voted or not*}
+
+                                    {********* SHOW VOTERS INFO if not anonymous poll *********}
+
+                                    {if !$object->is_anonymous}
+                                    <h2>{sysword word="poll_voters" type="Visual design"}</h2>:
+                                    <ol>
+                                        {foreach from=$object->voters item=voter}
+                                        <li>{$voter->user_firstname} {$voter->user_lastname} ({$voter->time})</li>
+                                        {/foreach}
+                                    </ol>
+                                    {/if}
+
+                                    {foreachelse}
+                                    {$polls_newbutton}
+                                    {/foreach}
+                                    {***********  loop over polls **********}
+
+                                </div><!-- #scms_Poll -->
+
+                            </div><!-- #scms_ColumnAddon -->
+
+                        </div><!-- #scms_ColumnElements -->
+
+                        <div id="scms_ColumnContent">
+
+                            {********** 'include' the content  **********}
+                            {print_content}
+                            {********** /'include' the content  **********}
+
+                        </div><!-- #scms_ColumnContent -->
+
+                        <div class="clear"></div>
+
+                    </div><!-- #scms_contentContainer -->
+
+                </div><!-- #scms_pageContainer -->
+
+                <div id="scms_Footer">
+                    <div class="scms_FooterContent">{init_article name="footer" system_message="footer" buttons="edit,hide"}{if $footer->id}{$footer->buttons}{$footer->lead}{$footer->body}{else}{$footer_newbutton}{/if}</div>
+                </div><!-- #scms_footerContainer -->
+
+            </div><!-- #scms_masterContainer -->
+
+        </div><!-- #scms_Background -->
+
+    </body>
+</html>

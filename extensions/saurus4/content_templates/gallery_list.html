@@ -1,0 +1,99 @@
+{**
+ * Galleries list, content template
+ * Date: 10.10.08
+ *
+ * @package saurus4
+ * 
+ * @author Saurus <saurus@saurus.info>
+ *}
+
+<div id="GalleryListContainer">
+
+{init_articles name="articles" position=0}
+{init_albums name="albums" thumbnail_type="first"}
+
+{$articles_newbutton}
+
+{* articles before gallery list *}
+{foreach from=$articles item="article" name="articles_loop"}
+			
+	<h1>{$article->buttons}{if $article->show_headline}{$article->title}{/if}</h1>
+	
+	{init_article name="art" id=$article->id}
+	
+	{if $art->lead && $art->body}
+		{$art->lead}
+		{* Read More link from Glossary *}
+		<a href="{$art->href}">{sysword word="More" type="Visual Design"}</a>
+	{else}
+		{$art->lead} {$art->body}
+		{if $art->forum_allowed}
+			{if $art->comment_count}
+				<a href="{$art->href}#comments">{sysword word="comments" type="saurus4"}</a>
+				({$art->comment_count})
+				|
+				<a href="{$art->href}#add_message">{sysword word="add" type="saurus4"}</a>
+			{else}
+				<a href="{$art->href}#add_message">{sysword word="add comment" type="saurus4"}</a>
+			{/if}
+		{/if}
+	{/if}
+
+{/foreach}
+{* /articles before gallery list *}
+
+<div id="GalleryList">
+
+{$albums_newbutton}
+
+{foreach from=$albums item="album"}
+<div class="gallery">
+    <div class="GalleryThumbnail" style="height: {$album->thumbnail_size}px; width: {$album->thumbnail_size}px;"><a href="?id={$album->id}"><img src="{$album->thumbnail}" alt="{if $album->description}{$album->description}{else}{$album->title}{/if}" title="{if $album->description}{$album->description}{else}{$album->title}{/if}"></a></div>
+
+    <h1>{$album->buttons}<a href="?id={$album->id}">{$album->title}</a></h1>
+    {$album->description}
+</div>
+{/foreach}
+
+</div><!-- / GalleryList -->
+
+{* articles after gallery list *}
+<div class="ArticlesAfter">
+{init_articles name="articles" position=6}
+
+{$articles_newbutton}
+
+{foreach from=$articles item="article" name="articles_loop"}
+			
+	<h1>{$article->buttons}{if $article->show_headline}{$article->title}{/if}</h1>
+	
+	{init_article name="art" id=$article->id}
+	
+	{if $art->lead && $art->body}
+		<p>
+			{$art->lead}
+			<br>
+			{* Read More link from Glossary *}
+			<a href="{$art->href}">{sysword word="More" type="Visual Design"}</a>
+		</p>
+	{else}
+		<p>
+			{$art->lead}{$art->body}
+		</p>
+		{if $art->forum_allowed}
+			{if $art->comment_count}
+				<a href="{$art->href}#comments">{sysword word="comments" type="saurus4"}</a>
+				({$art->comment_count})
+				|
+				<a href="{$art->href}#add_message">{sysword word="add" type="saurus4"}</a>
+			{else}
+				<a href="{$art->href}#add_message">{sysword word="add comment" type="saurus4"}</a>
+			{/if}
+		{/if}
+	{/if}
+
+{/foreach}
+</div><!-- / ArticlesAfter -->
+{* /articles after gallery list *}
+
+</div><!-- / GalleryListContainer -->

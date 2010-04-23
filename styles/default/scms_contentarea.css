@@ -1,0 +1,347 @@
+/* Content area layout CSS */
+
+.scms_content_area {
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+	background-color: #f5f5f5; 
+	background-image: url(gfx/header/content_bg.gif); 
+	background-repeat: repeat-y; 
+	background-position: center;
+}
+
+/* Left column */	
+	.scms_left {
+		vertical-align: top;
+		width: 200px;
+		padding-top: 10;
+		padding-left: 10;
+		padding-right: 10;
+	}
+
+	.scms_left td#search {
+		background: white;
+		height: 28px;
+	}
+
+	.scms_left div#navigation {
+		width: 200px;
+		height: 100%;
+		background: white;
+		overflow: auto;
+	}
+
+	.scms_search {
+		background: white;
+		width: 180;
+		padding: 4;
+	}
+
+	/* Styles then search box is added to the page */
+	.scms_left_div{
+		width: 200;
+		height: 100%;
+		min-height: 390;
+		max-height: 390;
+		padding: 8;
+		background-color: white;
+		overflow: auto;
+	}
+
+	.scms_groupheader {
+		padding-left: 3px;
+		margin-left: 3px;
+		height: 24px;
+		font-size: 11px;
+		font-weight: bold;
+		vertical-align: middle;
+		border-top: 1px solid #F4F4F4;
+	}
+
+	/* Styles then there is no search box on a page */
+	.scms_left_div_nr1{
+		width: 180;
+		min-width: 180;
+		height: 100%;
+		max-height: 444;
+		padding: 4;
+		background-color: white;
+		overflow: auto;
+	}
+
+	.scms_groupheader_nr1 {
+		padding-left: 3px;
+		margin-left: 3px;
+		height: 24px;
+		font-size: 11px;
+		font-weight: bold;
+		vertical-align: middle;
+	}
+
+
+/* Middle column */
+	.scms_middle{
+		vertical-align: top;
+		width: 100%;
+		padding-top: 10;
+	}
+	
+	.scms_middle_div{
+		width: 100%;
+		max-width: 100%;
+		height: 100%;
+		max-height: 367px;
+		min-height: 367px;
+		background: white;
+		overflow: auto;
+		padding-right: 6px;
+		padding-left: 2px;
+		overflow-y: scroll;
+	}
+
+	/* for adding scollbars to the table cell content */
+	.scms_scroll_div{
+		width: 100%;
+		height: 100%;
+		overflow: auto;
+	}
+
+	div.scms_middle_div#admin_area{
+		background: none;
+	}
+	
+	/* Special styles for special middle column layouts */
+
+	.scms_middle_dialogwindow{
+		vertical-align: top;
+		width: 100%;
+		max-width: 800;
+		height: 100%;
+		padding-top: 10;
+		padding-right: 10;
+	}
+
+	.scms_middle_div_dialogwindow{
+		width: 100%;
+		max-width: 802;
+		height: 100%;
+		max-height: 394;
+		background: white;
+		overflow: auto;
+		padding-right: 4px;
+		padding-left: 2px;
+		overflow-y: scroll;
+	}
+
+
+	.scms_middle_div_thumbnails {
+		width: 100%;
+		height: 100%;
+		max-height: 394;
+		background: white;
+		overflow: auto;
+	}
+
+	.scms_middle_div_config {
+		width: 100%;
+		height: 100%;
+		max-height: 412;
+		padding-top: 4;
+		overflow: auto;
+	}
+	
+		/* Styles for permissions table */
+		.scms_permissions_table td {
+		}
+
+		.scms_permissions_table td#section {
+			padding-right: 10px;
+		}
+		
+		.scms_permissions_table tr#even {
+			background: #F1F5FE;
+		}
+
+		.scms_permissions_table tr input{
+			border: 1px solid white;
+		}
+		.scms_permissions_table tr#even input{
+			border: 1px solid #F1F5FE;
+		}
+
+		div#pm_hd1 {
+			float: left; 
+			background: #f4f4f4; 
+			width: 23px;
+			height: 25px;
+			text-align: center; 
+			font-weight: bold
+		}
+		
+		div#pm_hd {
+			float: left; 
+			width: 23px; 
+			padding-top: 6px;
+			vertical-align: middle;
+			text-align: center; 
+			font-weight: bold;
+		}
+
+		div#add_row_div {
+			background: #f4f4f4; 
+			width: 23px; 
+			float: left;
+			text-align: center;
+			height:100%
+		}
+
+		/* //Styles for permissions table */
+
+	/* Middle column header */
+	.scms_pane_header td{
+		padding-left: 3px;
+		margin-left: 3px;
+		height: 24px;
+		background-color: #ECEBE9;
+		font-size: 11px;
+		font-weight: bold;
+		vertical-align: middle;
+	}
+	
+	div.scms_pane_header  {
+		padding-left: 3px;
+		margin-left: 3px;
+		height: 24px;
+		line-height: 24px;
+		background-color: #ECEBE9;
+		font-size: 11px;
+		font-weight: bold;
+		vertical-align: middle;
+	}
+
+	.scms_pane_header input{
+		margin-top: 1px;
+		height: 18px;
+		font-size: 11px;
+		line-height: 13px;
+	}
+
+	/* Middle column table styles */
+		.scms_tableheader {
+			background-color: white;
+			height: 18px;
+			
+		}
+		
+		.scms_tableheader td {
+			margin: 0;
+			padding-left: 5;
+			line-height: 18px;
+			font-weight: bold;
+		}
+
+		.scms_tableheader_active {
+			border-bottom: 1px solid #8AA2D2;
+		}
+
+		
+
+		.scms_tableheader a {
+			display: block;
+			width: 100%;
+			height: 100%;
+		}	
+
+		
+		.scms_table {
+			padding-left: 3;			
+		}
+		
+		.scms_table td {
+			padding-left: 5;
+
+		}
+		
+
+		.scms_table a {
+			display: block;
+			width: 100%;
+			padding-top: 3;
+			padding-bottom: 1;
+		}
+
+		.scms_activerow {
+			background-color: #D2DFFA;
+
+		}	
+	
+
+
+/* Right column */
+
+	.scms_right {
+		vertical-align: top;
+		width: 250px;
+		min-width: 250px;
+		height: 100%;
+		padding-top: 10;
+		padding-left: 10;
+		padding-right: 10;
+	}
+
+	.scms_right div#preview {
+		height: 100%;
+		background: white;
+		overflow: auto;
+	}
+
+	.scms_right_div{
+		width: 250;
+		height: 100%;
+		max-height: 429;
+		padding: 4;
+		background: white;
+		overflow: auto;
+	}
+
+
+		/* Document styles in right pane */
+
+		.scms_document_header {
+			background: white;
+			padding: 6;
+		}
+
+		.scms_document_title {
+			font-family: Arial, Helvetica, sans-serif;
+			font-size: 18px;
+			font-weight: normal;
+			color: #637FB1;
+			vertical-align: top;
+			display:block;
+		}
+		
+		.scms_label {
+			vertical-align: top
+		}
+
+		.scms_value {
+			font-weight: bold
+		}
+
+		.scms_thumbnail_large {
+			width: 95;
+			height: 95;
+			vertical-align: middle;
+			border: 1px solid #F5F5F5;
+		}
+
+		.scms_thumbnail_small {
+			width: 64;
+			height: 64;
+			float: left;
+			vertical-align: middle;
+
+		}

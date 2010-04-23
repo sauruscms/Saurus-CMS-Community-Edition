@@ -1,0 +1,1430 @@
+[CHECKSUM=2:18:868]
+[DATE=2007-06-28 16:57:22]
+[ENCODING=UTF-8]
+
+#
+#  Language file: Russian
+#  Supplier: www.saurus.info 
+#  
+#  Total sys strings: 868
+#  Total descriptions: 868
+#  Status descriptions: OK
+#  Total translations: 396
+#  Status translations: BAD
+#
+#  Need to be translate:
+#    SYSTEM: add_cart
+#    SYSTEM: save_cart
+#    SYSTEM: trash
+#    SYSTEM: tyyp_asset
+#    SYSTEM: tyyp_file
+#    SYSTEM: tyyp_folder
+#    SYSTEM: tyyp_link
+#    SYSTEM: tyyp_product_category
+#    SYSTEM: tyyp_resource
+#    EDITOR: Address
+#    EDITOR: Aeg
+#    EDITOR: Alampuu
+#    EDITOR: Alates
+#    EDITOR: albumis on
+#    EDITOR: Algatatud
+#    EDITOR: Anonymous
+#    EDITOR: Apply
+#    EDITOR: asset
+#    EDITOR: avaldamine
+#    EDITOR: Choose
+#    EDITOR: Close
+#    EDITOR: Copy permissions to subtree
+#    EDITOR: Create
+#    EDITOR: delete_object_alert
+#    EDITOR: delete_section_alert
+#    EDITOR: delete_table
+#    EDITOR: Encoding
+#    EDITOR: End date is sooner than start date
+#    EDITOR: Expires
+#    EDITOR: fieldname
+#    EDITOR: folder
+#    EDITOR: Forbidden
+#    EDITOR: Hyperlink
+#    EDITOR: Image files directory
+#    EDITOR: Image size
+#    EDITOR: Leiti
+#    EDITOR: Mall muudetav
+#    EDITOR: Metadata
+#    EDITOR: Metainfo
+#    EDITOR: New
+#    EDITOR: New child
+#    EDITOR: No
+#    EDITOR: object_changed
+#    EDITOR: object_created
+#    EDITOR: Objekt
+#    EDITOR: On noutud
+#    EDITOR: On select
+#    EDITOR: Open in new window
+#    EDITOR: Parent category
+#    EDITOR: Permission denied
+#    EDITOR: Permissions
+#    EDITOR: Permissions copied to subtree
+#    EDITOR: Permissions not defined
+#    EDITOR: Please use format dd.mm.yyyy
+#    EDITOR: product_profile
+#    EDITOR: product_profiles
+#    EDITOR: profile
+#    EDITOR: Publishing
+#    EDITOR: Resource
+#    EDITOR: save parameters
+#    EDITOR: Start date is later than end date
+#    EDITOR: Thumbnail size
+#    EDITOR: value exists
+#    EDITOR: Yes
+#    DOKUMENDID: sub_documents
+#    KALENDER: Daily
+#    KALENDER: Date
+#    KALENDER: Day
+#    KALENDER: Hour
+#    KALENDER: Hourly
+#    KALENDER: Month
+#    KALENDER: Monthly
+#    KALENDER: week
+#    KALENDER: weekday1_long
+#    KALENDER: weekday2_long
+#    KALENDER: weekday3_long
+#    KALENDER: weekday4_long
+#    KALENDER: weekday5_long
+#    KALENDER: weekday6_long
+#    KALENDER: weekday7_long
+#    KALENDER: Weekly
+#    KALENDER: whole month
+#    KALENDER: whole_day
+#    KALENDER: Year
+#    KALENDER: yearly
+#    OTSING: Lipik Album
+#    OTSING: Lipik Asset
+#    OTSING: Lipik Link
+#    OTSING: Lipik product_category
+#    OTSING: Lipik Valine link
+#    OTSING: Search subtree
+#    OTSING: search_unused_files
+#    KUJUNDUS: Add
+#    KUJUNDUS: Login
+#    KUJUNDUS: Logout
+#    KUJUNDUS: or
+#    KUJUNDUS: Pildil_on
+#    KUJUNDUS: poll_results
+#    KUJUNDUS: poll_voters
+#    KUJUNDUS: previous
+#    KUJUNDUS: Print
+#    KUJUNDUS: Profile
+#    KUJUNDUS: Registreerimisvorm
+#    KUJUNDUS: SSO turned off
+#    KUJUNDUS: Tagasi
+#    KUJUNDUS: Tagasi artikli juurde
+#    KUJUNDUS: Taitke nimi
+#    KUJUNDUS: Taitke tekst
+#    KUJUNDUS: Tappisotsing
+#    KUJUNDUS: Unustatud parooli saatmine
+#    KUJUNDUS: Vaata lisaks
+#    KUJUNDUS: Vasta
+#    KUJUNDUS: vastajaid
+#    KUJUNDUS: Viga
+#    KASUTAJA: Account
+#    KASUTAJA: Additional info
+#    KASUTAJA: auth_type
+#    KASUTAJA: City
+#    KASUTAJA: Contactperson
+#    KASUTAJA: Contact_phone
+#    KASUTAJA: Country
+#    KASUTAJA: Delivery_address
+#    KASUTAJA: Delivery_city
+#    KASUTAJA: Delivery_country
+#    KASUTAJA: Delivery_zip
+#    KASUTAJA: Email
+#    KASUTAJA: fullname
+#    KASUTAJA: Group
+#    KASUTAJA: Groups
+#    KASUTAJA: Lock
+#    KASUTAJA: Main info
+#    KASUTAJA: new_user_registered
+#    KASUTAJA: only for reg users
+#    KASUTAJA: Parent group
+#    KASUTAJA: Password expires
+#    KASUTAJA: postalcode
+#    KASUTAJA: Role
+#    KASUTAJA: Roles
+#    KASUTAJA: Superuser
+#    KASUTAJA: Unlock
+#    KASUTAJA: User
+#    KASUTAJA: user_details
+#    KASUTAJA: user_registered
+#    ADMIN: about
+#    ADMIN: Actions
+#    ADMIN: Active Directory
+#    ADMIN: admin_manual
+#    ADMIN: ADR settings
+#    ADMIN: aliases
+#    ADMIN: Are you sure?
+#    ADMIN: auto-jump
+#    ADMIN: Banner manager
+#    ADMIN: Children count
+#    ADMIN: class
+#    ADMIN: Content Aging
+#    ADMIN: counter
+#    ADMIN: Custom assets
+#    ADMIN: data_type
+#    ADMIN: Default
+#    ADMIN: default_value
+#    ADMIN: Delete old data
+#    ADMIN: Directories
+#    ADMIN: Dokumendid
+#    ADMIN: E-Commerce
+#    ADMIN: editor_manual
+#    ADMIN: Element_name
+#    ADMIN: Element_path
+#    ADMIN: Email
+#    ADMIN: Empty
+#    ADMIN: Error log
+#    ADMIN: ERROR: File upload error
+#    ADMIN: ERROR: Language-file corrupted
+#    ADMIN: ERROR: There is invalid language in lang-file
+#    ADMIN: explorer
+#    ADMIN: Export
+#    ADMIN: Extensions
+#    ADMIN: external tables
+#    ADMIN: favorites
+#    ADMIN: feedbackforms_properties
+#    ADMIN: feedback_forms
+#    ADMIN: Fields
+#    ADMIN: file manager
+#    ADMIN: files
+#    ADMIN: folders
+#    ADMIN: Form
+#    ADMIN: forums_and_comments
+#    ADMIN: found
+#    ADMIN: Get values from
+#    ADMIN: Glossary export
+#    ADMIN: Glossary import
+#    ADMIN: help
+#    ADMIN: Hidden
+#    ADMIN: Image manipulation
+#    ADMIN: image_resizing
+#    ADMIN: Import
+#    ADMIN: input_type
+#    ADMIN: License
+#    ADMIN: Link verifier
+#    ADMIN: List
+#    ADMIN: map_to
+#    ADMIN: Maximum logins error
+#    ADMIN: missing
+#    ADMIN: move_files
+#    ADMIN: NTLM
+#    ADMIN: object_templates
+#    ADMIN: Orders
+#    ADMIN: Organization
+#    ADMIN: overview
+#    ADMIN: Overwrite custom translations
+#    ADMIN: overwrite_file
+#    ADMIN: People
+#    ADMIN: Permissions
+#    ADMIN: please_fill_in_the_title!
+#    ADMIN: product_profiles
+#    ADMIN: profile definition
+#    ADMIN: Profiles
+#    ADMIN: profile_data
+#    ADMIN: Recievers
+#    ADMIN: Recycle Bin is empty
+#    ADMIN: recycle_bin
+#    ADMIN: Refresh
+#    ADMIN: reset
+#    ADMIN: Resources
+#    ADMIN: Sample adminpage
+#    ADMIN: Site CSS styles
+#    ADMIN: Site_properties
+#    ADMIN: Static Content Export
+#    ADMIN: Status
+#    ADMIN: system info
+#    ADMIN: Tagasisidevormid
+#    ADMIN: Target site actions
+#    ADMIN: Test it
+#    ADMIN: tools
+#    ADMIN: total items
+#    ADMIN: view
+#    ADMIN: Visible in section editor
+#    ADMIN: when
+#    ADMIN: who
+#    ADMIN: WYSIWYG Fonts
+#    ADMIN: WYSIWYG General
+#    ADMIN: XML
+#    E_COMMERCE: amount
+#    E_COMMERCE: cart
+#    E_COMMERCE: cart delete confirmation
+#    E_COMMERCE: cart_data
+#    E_COMMERCE: cart_id
+#    E_COMMERCE: order
+#    E_COMMERCE: Order nr
+#    E_COMMERCE: orders
+#    E_COMMERCE: order_date
+#    E_COMMERCE: payment_status
+#    E_COMMERCE: payment_type
+#    E_COMMERCE: status
+#    E_COMMERCE: total
+#    E_COMMERCE: transport
+#    E_COMMERCE: user_data
+#    E_COMMERCE: VAT
+#    XML: Delete old data using WHERE SQL
+#    XML: Export_email
+#    XML: PHP script for data mappings
+#    XML: Preserve old data
+#    XML: Run with Cron
+#    XML: Run with pageload
+#    XML: Select data source for Import
+#    XML: Source (XML) encoding
+#    XML: Target (site) encoding
+#    XML: Update records by unique field
+#    XML: using CMS
+#    XML: using PHP script
+#    POWERTOOLS: any case
+#    POWERTOOLS: Are you sure?
+#    POWERTOOLS: Article
+#    POWERTOOLS: Available
+#    POWERTOOLS: button: find
+#    POWERTOOLS: button: Replace
+#    POWERTOOLS: Changed
+#    POWERTOOLS: compare
+#    POWERTOOLS: Database
+#    POWERTOOLS: Database optimized
+#    POWERTOOLS: Download CSV file
+#    POWERTOOLS: everythere
+#    POWERTOOLS: Files
+#    POWERTOOLS: From
+#    POWERTOOLS: location
+#    POWERTOOLS: Modified
+#    POWERTOOLS: Modified date
+#    POWERTOOLS: NOT FOUND
+#    POWERTOOLS: optimize database
+#    POWERTOOLS: Quota for database
+#    POWERTOOLS: Quota for files
+#    POWERTOOLS: Replace string
+#    POWERTOOLS: Results
+#    POWERTOOLS: Search in sections
+#    POWERTOOLS: Search string
+#    POWERTOOLS: Search type
+#    POWERTOOLS: Select all
+#    POWERTOOLS: Show only broken links
+#    POWERTOOLS: Show only published objects
+#    POWERTOOLS: To
+#    POWERTOOLS: Total quota
+#    POWERTOOLS: Totally [XXX]([YYY] unique) links or images will be checked
+#    POWERTOOLS: whole word
+#    STATISTICS: activities
+#    STATISTICS: Agent Information
+#    STATISTICS: another pages
+#    STATISTICS: Average
+#    STATISTICS: Average pages per day
+#    STATISTICS: Average pages per month
+#    STATISTICS: Average visitors per day
+#    STATISTICS: Average visitors per month
+#    STATISTICS: Average visits per day
+#    STATISTICS: Average visits per month
+#    STATISTICS: Browsers
+#    STATISTICS: Daily stats
+#    STATISTICS: deleted
+#    STATISTICS: Detailed stats available since
+#    STATISTICS: Domains
+#    STATISTICS: downloads
+#    STATISTICS: entry time
+#    STATISTICS: First hit
+#    STATISTICS: first page
+#    STATISTICS: found page
+#    STATISTICS: Full referrers
+#    STATISTICS: host_ip
+#    STATISTICS: Last hit
+#    STATISTICS: last reload
+#    STATISTICS: Legend
+#    STATISTICS: link
+#    STATISTICS: minutes
+#    STATISTICS: most_downloaded_files
+#    STATISTICS: no_files_found
+#    STATISTICS: One-time visitors
+#    STATISTICS: online
+#    STATISTICS: Online visitors
+#    STATISTICS: Page
+#    STATISTICS: Page views
+#    STATISTICS: Pages
+#    STATISTICS: page_back
+#    STATISTICS: page_browsers
+#    STATISTICS: page_clock
+#    STATISTICS: page_config
+#    STATISTICS: page_files
+#    STATISTICS: page_pages
+#    STATISTICS: page_referrers
+#    STATISTICS: page_searches
+#    STATISTICS: page_summary
+#    STATISTICS: page_users
+#    STATISTICS: page_visitors
+#    STATISTICS: percent
+#    STATISTICS: proxy
+#    STATISTICS: Recent visitors
+#    STATISTICS: refered page
+#    STATISTICS: REFERRED
+#    STATISTICS: referrer
+#    STATISTICS: Refresh
+#    STATISTICS: Reg.user
+#    STATISTICS: Search engine
+#    STATISTICS: searches
+#    STATISTICS: search_for_files
+#    STATISTICS: Server time now is
+#    STATISTICS: Show visitors for the last
+#    STATISTICS: Site tree
+#    STATISTICS: Statistics for
+#    STATISTICS: Stats
+#    STATISTICS: Stats available since
+#    STATISTICS: Stats for section
+#    STATISTICS: stats not available
+#    STATISTICS: stats_for_file
+#    STATISTICS: Sum
+#    STATISTICS: Systems
+#    STATISTICS: TOP 20 visited pages
+#    STATISTICS: TOP 50 Search keywords
+#    STATISTICS: Totals
+#    STATISTICS: unique
+#    STATISTICS: user
+#    STATISTICS: users
+#    STATISTICS: Visitors
+#    STATISTICS: visits
+#    EVENT: Assign to
+#    EVENT: completed
+#    EVENT: Conflicts found!
+#    EVENT: daily
+#    EVENT: day
+#    EVENT: end
+#    EVENT: ends_after
+#    EVENT: Events
+#    EVENT: every
+#    EVENT: hours
+#    EVENT: Location
+#    EVENT: month
+#    EVENT: Never ends
+#    EVENT: occurs
+#    EVENT: once
+#    EVENT: participants
+#    EVENT: Please fill in the end date!
+#    EVENT: private
+#    EVENT: progress
+#    EVENT: Recurrence
+#    EVENT: recurrent
+#    EVENT: start
+#    EVENT: started
+#    EVENT: task_event
+#    EVENT: The date has to be in format: dd.mm.yyyy!
+#    EVENT: time
+#    EVENT: Total time
+#    EVENT: tracking
+#    EVENT: workday
+#    FILES: cant_delete_folder
+#    FILES: filename
+#    FILES: lastmodified
+#    FILES: last_changed
+#    FILES: mimetype
+#    FILES: Path
+#    FILES: pealkiri
+#    FILES: size
+#    FILES: upload
+#    EXTENSIONS: Extension
+#    EXTENSIONS: icon_path
+#    EXTENSIONS: min_saurus_modules
+#    EXTENSIONS: min_saurus_version
+#    EXTENSIONS: Official
+#    EXTENSIONS: Version
+#    WORKFLOW: Definitions
+#    WORKFLOW: Processes
+#    SAURUS4: add
+#    SAURUS4: add comment
+#    SAURUS4: advanced search
+#    SAURUS4: all the words
+#    SAURUS4: application name
+#    SAURUS4: applications login info
+#    SAURUS4: archive
+#    SAURUS4: author
+#    SAURUS4: by title
+#    SAURUS4: changed last
+#    SAURUS4: comment
+#    SAURUS4: comments
+#    SAURUS4: does not include
+#    SAURUS4: e-mail
+#    SAURUS4: exact phrase
+#    SAURUS4: forums
+#    SAURUS4: from section
+#    SAURUS4: hide e-mail
+#    SAURUS4: last 3 months
+#    SAURUS4: last 6 months
+#    SAURUS4: last month
+#    SAURUS4: last reply
+#    SAURUS4: last week
+#    SAURUS4: last year
+#    SAURUS4: mailinglists
+#    SAURUS4: name
+#    SAURUS4: new comment
+#    SAURUS4: new message
+#    SAURUS4: new topic
+#    SAURUS4: newest first
+#    SAURUS4: one of the words
+#    SAURUS4: password
+#    SAURUS4: password expired message
+#    SAURUS4: please fill in
+#    SAURUS4: profile
+#    SAURUS4: register
+#    SAURUS4: replies
+#    SAURUS4: reply
+#    SAURUS4: search
+#    SAURUS4: see also
+#    SAURUS4: send
+#    SAURUS4: send_replies
+#    SAURUS4: sitemap
+#    SAURUS4: title
+#    SAURUS4: topics
+#    SAURUS4: username
+#    SAURUS4: whenever
+#    SAURUS4: yesterday
+
+
+# SYSTEM STRING; DESCRIPTION; TRANSLATION;
+
+
+
+[system:1:System]
+404error;Error 404 - page not found;Ошибка 404 - страница не найдена;
+add_cart;The item has been added to the cart;;
+Album;Album;Альбом;
+Artiklid;1 Column Layout;Статьи. 1 колонка;
+Artiklid 2 veerus;2 Column Layout;Статьи. 2 колонки;
+Artiklite pealkirjad;Article headlines;Заголовки статей;
+default;Default;Default;
+Dokumendid;Documents;Документы;
+error_page;Error message page;Страница с сообщением об ошибке (при отправлении формы);
+Event calendar;Event calendar;Календарь событий;
+External application;External application;Внешнее приложение;
+Foorum;Forum;Форум;
+gallup_arhiiv;Poll's archive;Архив опросов;
+gallup_ip_olemas;Error message for repeating IP (Poll);Сообщение об ошибке при повторяющихся IP (голосование);
+gallup_ok;Poll results OK;Благодарность за голосование;
+home;Homepage;Главная (Home)-рубрика;
+kasutaja_locked;User blocked;Пользователь заблокирован;
+kasutaja_registreeritud;User already registered;Пользователь уже зарегистрирован;
+kasutaja_uuendatud;User updated;Пользователь обновлен;
+login_incorrect;Login incorrect;Вход не удался;
+Metadata;Metadata;Metadata;
+ok_page;OK page;Сообщение об успешной отправке формы;
+Registreerimisvorm;Registration form;Регистрац. форма;
+save_cart;The cart has been saved;;
+system;System;Системная рубрика;
+Tappisotsing;Advanced search;Расширенный поиск;
+trash;Recycle Bin;;
+tyhiotsing;Empty search result message;Сообщение: по Вашему запросу ничего не найдено (поиск);
+tyyp_Album;Album;Альбом;
+tyyp_Artikkel;Article;Статья;
+tyyp_asset;Custom asset;;
+tyyp_Dokument;Document;Документ;
+tyyp_Event;Event;Событие;
+tyyp_file;File;;
+tyyp_folder;Folder;;
+tyyp_Gallup;Poll;Опрос;
+tyyp_Iframe-kast;Iframe-box;iframe-окно;
+tyyp_Kommentaar;Comment;Комментарий;
+tyyp_Lingikast;Link list;Список ссылок;
+tyyp_link;link;;
+tyyp_Login-kast;Login-box;Login-окно;
+tyyp_Pilt;Picture;Картинка;
+tyyp_product_category;Product catalog;;
+tyyp_resource;Resource;;
+tyyp_Rubriik;Section;Рубрика;
+tyyp_Teema;Topic;Тема;
+tyyp_Uudistekogu;Article's list;Сборник новостей;
+tyyp_Valine link;Link;Ссылка;
+unustatud_parool_saadetud;Forgotten password sent;Пароль отправлен;
+Uudised;News with Archiveing;Новости с архивом;
+your_IP_disabled;User IP blocked;IP пользователя заблокирован;
+
+
+
+[editor:3:Editor]
+access denied;Access denied;Доступ закрыт;
+Address;Aadress;;
+Aeg;Time;;
+Alampuu;Sub-tree;;
+Alates;Since;;
+albumis on;This album contains;;
+Algatatud;Started;;
+Anonymous;Anonymous;;
+Another editor is editing this document right now;Another editor is editing this document right now;Этот документ на данный момент редактирует другой администратор;
+Apply;Apply;;
+artikkel;Article;Статья;
+Artiklite arv;Number of articles;Количество статей;
+asset;Custom asset;;
+asub veel kohtades;Is located on following places;находится еще в;
+Autor;Author;Автор;
+avaldamine;Publishing;;
+Avaldatud;Publish;Публиковать с;
+Avatud;Opened;Открыт;
+Avatud artiklid;Open articles;Открытые статьи;
+big_file;File size exceeds allowed limits!;Файл превышает максимально допустимый размер!;
+Choose;Choose;;
+Close;Close;;
+Content template;Content template;Контент шаблон;
+Copy permissions to subtree;Copy permissions to subtree;;
+Create;Create;;
+delete_object_alert;NB! This object is located in other sections also. The object will be deleted from all sections!;;
+delete_section_alert;NB! This section includes objects which are published also in other sections. <br>These objects are deleted only from this section.;;
+delete_table;Delete Table;;
+dokument;Document;Документ;
+E-mail;E-mail;E-mail;
+Eelmine pilt;Previous;Предыдущая;
+Encoding;Encoding;;
+End date is sooner than start date;End date is sooner than start date;;
+eraldaja;Divider;Разделитель;
+Event;Event;Событие;
+Expires;Expires;;
+Fail;File;Файл;
+Faili nimi juba kinni;Filename already in use;Имя файла уже используется;
+Faili salvestamisel tekkis viga;Error in saving file;Ошибка при сохранении файла;
+fieldname;fieldname;;
+Filename;Filename;Имя файла;
+folder;Folder;;
+Foorum lubatud;Allow comments;Разрешить комментарии;
+Forbidden;Forbidden;;
+Forum alert: Your question has been sent;Your question has been sent.;Ваш вопрос отправлен!;
+Forum link: Show all questions;Show all questions;Показать все вопросы;
+Forum link: Show only new questions;Show only new questions;Показать только новые вопросы;
+Friendly_URL;Alias;Алиас;
+gallup;Poll;Голосование;
+Hide in menu;Hide in navigation menu;Спрятать в навигац. меню;
+Hyperlink;Hyperlink;;
+Image files directory;Image files directory;;
+Image size;Image size;;
+Is FAQ;Is FAQ;Тип - частые вопросы;
+Jargmine pilt;Next;Следующая;
+Jrk.nr;Nr.;Нр.;
+kas tahate keele kustutada;Do you want to delete the language?;Хотите удалить язык?;
+Kasutajad;Users;Пользователи;
+Kasutajanimi;Username;Логин;
+Katkesta;Cancel;Отмена;
+Keel;Language;Язык;
+Kirjad;Messages;Сообщения;
+Kirjeldus;Description;Описание;
+Kirju;Messages;сообщений;
+kogumik;Article list;Сборник новостей;
+kohustuslik;required;обязательное;
+koik;All;все;
+Kommentaar;Comment;Комментарий;
+Kujundusmall;Design template;Шаблон;
+Kuni;Until;до;
+Kustuta;Delete;Удалить;
+Laius;Width;Ширина;
+Leiti;Found;;
+Link;Hyperlink;Ссылка;
+Lisa;Add;Добавить;
+Lisa pilte;Add picture(s);Добавить картинки;
+loginkast;Login module;Login-окно;
+Luhend;Abbreviation;Сокращение;
+Lukus;Locked;Заблокирован;
+maaratud pealkiri;Headline can't be empty!;Заголовок не может быть пустым!;
+Mall muudetav;Changeable template;;
+Mall tyhi;Empty template;Шаблон пустой;
+Metadata;Metadata;;
+Metainfo;Metainfo;;
+Muuda;Change;Изменить;
+Naita alamartiklid;Show subarticles;Показывать подстатьи;
+Naita kuupaev;Show dates;Показывать дату;
+Naita prindi ikoon;Show tools icons;Показать иконку принтера;
+New;New;;
+New child;New child;;
+Nimetus;Name;Название;
+Nimi;Name;Имя;
+No;No;;
+Objects;Objects;Объекты;
+object_changed;Changed;;
+object_created;Created;;
+Objekt;Object;;
+OK;OK;ОК;
+On kuupaev;Use date;Использовать, как дату;
+On meilinglist;Add mailinglist;Список рассылки;
+On noutud;On noutud;;
+On select;On select;;
+Open in new window;Open in new window;;
+original picture;Original picture;Оригинал;
+Otsi;Search;Поиск;
+Page template;Page template;Шаблон страницы;
+Pages;Pages;Страницы;
+Parent category;Parent category;;
+Parool;Password;Пароль;
+Parool uuesti;Confirm password;Пароль заново;
+Pealkiri;Headline;Заголовок;
+Pealkiri on nahtav;Show headline;Показывать заголовок;
+Peida meiliaadress;Hide my e-mail address;Не показывать мой e-mail;
+Permission denied;Permission denied;;
+Permissions;Permissions;;
+Permissions copied to subtree;Permissions copied to subtree;;
+Permissions not defined;Permissions not defined;;
+Pilt;Picture;картинка;
+Pilti;pictures;картинок;
+Please use format dd.mm.yyyy;Please use format dd.mm.yyyy;;
+Pohitext;Main text;Основной текст;
+Pohivarv;Main color;Основной цвет;
+Position;Position;Местоположение;
+product_profile;Product profile;;
+product_profiles;Product profiles;;
+profile;Profile;;
+Publish;Publish;Публиковать;
+Publishing;Publishing;;
+Registreeritud;Registered;Зарегистрирован;
+Reset;Reset;Сбросить;
+Resource;Resource;;
+Ridade arv;Number of rows;Количество рядов;
+Rubriigid;Save to this section;Поместить в группу(ы);
+rubriik;Section;Рубрика;
+Saada meilile;Send responses to my e-mail;Присылать ответы на мой e-mail;
+Saidi tiitel;Web site title;Название сайта (тэг - < title>);
+Salvesta;Save;Сохранить;
+Salvestatud;Saved;Сохранено;
+save parameters;Save parameters;;
+Sellised stiilid ilmuvad artikli editoris;Those styles appear in the article editor;Эти стили появятся при редактировании статьи;
+Send;Send;Послать;
+Sisestas;Inserted by;Добавил;
+Sissejuhatus;Lead;Вступление;
+Sisu;Body text;Содержание;
+Start date is later than end date;Start date is later than end date;;
+Suurus;Size;Размер;
+sys alias;System alias;Системный алиас;
+sys sona;System string;Системное слово;
+Systeemi sona;System string;Системное слово;
+System;System Articles;Системные статьи;
+Tabel;Table;Таблица;
+Tagasi;Back;Назад;
+Teemad;Subjects;Темы;
+Tekst;Text;Текст;
+Thumbnail size;Thumbnail size;;
+Tuhista;Cancel;Очистить;
+Tyyp;Type;Тип;
+Uhik;Unit;Единица;
+Update;Update;Обновить;
+URL;URL;URL;
+Uudised;News;Новости;
+Uudiste rubriigid;News sections;Новостные рубрики;
+Uudistekogu;Articles' list;Сборник новостей;
+Vaikimisi_editoris;Default administration language;По умолчанию в разделе администратора;
+Vaikimisi_veebis;Default language in web site;По умолчанию на сайте;
+Vali;Data Field;Данные;
+value exists;The value already exists;;
+Vastus;Answer;Ответ;
+Vastused;Answers;Ответы;
+Vastuseid;Replies;Ответов;
+Veergude arv;Number of columns;Кол-во столбцов;
+Viimane kiri;Last message;Последнее сообщение;
+Viimati muutis;Last changed by;Последние изменения делал;
+Yes;Yes;;
+
+
+
+[dokumendid:4:Documents]
+Aeg;Time;Дата;
+Autor;Author;Автор;
+fail;File;Файл;
+Kirjeldus;Description;Описание;
+Pealkiri;Headline;Заголовок;
+sub_documents;Sub-documents;;
+Suurus;Size;Размер;
+type;Type;Тип;
+
+
+
+[kalender:5:Calendar]
+Daily;Daily;;
+Date;Date;;
+Day;Day;;
+Hour;Hour;;
+Hourly;Hourly;;
+Month;Month;;
+month1;January;Январь;
+month10;October;Октябрь;
+month11;November;Ноябрь;
+month12;December;Декабрь;
+month2;February;Февраль;
+month3;March;Март;
+month4;April;Апрель;
+month5;May;Май;
+month6;June;Июнь;
+month7;July;Июль;
+month8;August;Август;
+month9;September;Сентябрь;
+Monthly;Monthly;;
+today;today;Сегодня;
+week;week;;
+weekday1;Mon;Пнд;
+weekday1_long;Monday;;
+weekday2;Tue;Вт;
+weekday2_long;Tuesday;;
+weekday3;Wed;Чт;
+weekday3_long;Wednesday;;
+weekday4;Thu;Ср;
+weekday4_long;Thursday;;
+weekday5;Fri;Пт;
+weekday5_long;Friday;;
+weekday6;Sat;Сб;
+weekday6_long;Saturday;;
+weekday7;Sun;Вскр;
+weekday7_long;Sunday;;
+Weekly;Weekly;;
+whole month;whole month;;
+whole_day;Whole day;;
+Year;Year;;
+yearly;Yearly;;
+
+
+
+[otsing:7:Search]
+Ei sisalda sonu;Doesn't include words;Исключить слова;
+Eile;Yesterday;Вчера;
+Koiki sonu;All words;Все слова;
+Lipik Album;Albums;;
+Lipik Artikkel;Articles;Статьи;
+Lipik Asset;Other;;
+Lipik Dokument;Documents;Документы;
+Lipik Event;Events;События;
+Lipik Kommentaar;Comments;Комментарии;
+Lipik Link;Links;;
+Lipik Pilt;Images;Картинки;
+Lipik product_category;Products;;
+Lipik Rubriik;Sections;Рубрики;
+Lipik Valine link;Links;;
+Millal iganes;Whenever;любое время;
+Otsi;Search;Искать;
+Otsingutulemused;Search results;Результаты поиска;
+Otsi_rubriigist;Search section;Искать в рубрике;
+Pealkirja jargi;By subject;По заголовкам;
+Search subtree;Search subtree;;
+Search_category;Search category;Категория поиска;
+search_unused_files;Files not linked from articles;;
+Sorteeri;Sort;Сортировать;
+Tappisotsing;Advanced search;Расширенный поиск;
+Tapset fraasi;Exact phrase;Точную фразу;
+Tulemusi;Results;Результаты;
+Uuemad enne;Newest first;По дате (новые вначале);
+Viimane 1 kuu;Last month;Последний месяц;
+Viimane aasta;Last year;Последний год;
+Viimane nadal;Last week;Последняя неделя;
+Viimased 3 kuud;Last 3 months;Последние 3 месяца;
+Viimased 6 kuud;Last 6 months;Последние 6 месяцев;
+Viimati muudetud;Last changes;Были изменены;
+Votmesona;Keyword;Ключевое слово;
+yhte sonadest;One of the words;Любое из слов;
+
+
+
+[kujundus:9:Visual design]
+Add;Add;;
+Arhiiv;Archive;Архив;
+Artiklil on;This article has;У этой статьи;
+Comments: Login required;You must login before adding comments;Комментарии могут добавлять только зарегистрированные пользователи;
+Forum alert: Enter your name!;Forum alert: Enter your name!;Введите ваше имя!;
+Forum alert: Please fill in the message body!;Forum alert: Please fill in the message body!;Введите текст сообщения!;
+Forum alert: Please fill in the subject!;Forum alert: Please fill in the subject!;Введите заголовок сообщения!;
+Gallup;Poll;Опрос;
+Gallup Arhiiv;Poll's archive;Архив;
+haaleta;Vote;Голосую;
+Kaart;Sitemap;Карта сайта;
+Kommentaarid;Comments;Комментарии;
+Lehekulg;Page;Страница;
+Loe edasi;More;далее;
+Login;Login;;
+Logout;Logout;;
+navbar;Location;Вы здесь:;
+next;Next;Следущий;
+or;or;;
+Otsing;Search;Поиск;
+Pildil_on;This picture has;;
+poll_results;Results;;
+poll_voters;Voters list;;
+previous;Previous;;
+Print;Print;;
+Profile;Profile;;
+Registreerimisvorm;Register;;
+SSO turned off;The SSO module is turned off.;;
+Tagasi;Back;;
+Tagasi artikli juurde;Back to the article;;
+Taitke nimi;Enter your name!;;
+Taitke tekst;Enter text!;;
+Tappisotsing;Advanced search;;
+Unustatud parooli saatmine;Forgot password?;;
+Vaata lisaks;See also;;
+Vasta;Reply;;
+vastajaid;Responses;;
+Viga;Error;;
+
+
+
+[kasutaja:11:Users]
+Account;Account;;
+Account_nr;Account number;Номер счета;
+Additional info;Additional info;;
+Aeg;Time;Время;
+Allow autologin from IP;Allow autologin from IP;Разрешить автологин с IP;
+Applications login info;Applications login information;Логин-информация приложения;
+auth_type;Authentication;;
+Autologin_ip;Autologin_ip;Автологин IP;
+City;City;;
+Contactperson;Contactperson;;
+Contact_phone;Contact Phone;;
+Country;Country;;
+Delivery_address;Delivery Address;;
+Delivery_city;Delivery City;;
+Delivery_country;Delivery Country;;
+Delivery_zip;Delivery Zip;;
+Eesnimi;Name;Имя;
+Email;Email;;
+Email already exists;e-mail already exists;e-mail уже существует;
+email not found;E-mail not found;E-mail не найден;
+field required;Field required;Обязательное поле;
+fullname;Name;;
+Group;Group;;
+Groups;Groups;;
+isikukood;ID-code;Личный код;
+Kasutaja_id;User ID;ID пользователя;
+Last_access_time;Last access time;Время последнего посещения;
+Last_ip;Last_ip;Последний IP;
+Lock;Lock;;
+Logi valja;Log out;Выход (Logout);
+Login;Log in;Логин;
+mailinglists;Subscribe to mailinglists;Подписаться на списки рассылки;
+Mailinglists: e-mail subject;News from [Website name];Рассылка новостей;
+Main info;Main info;;
+Muuda oma andmeid;Change your profile;Мои данные;
+new_user_registered;New user registered on website!;;
+nupp login;Login;Вход;
+only for reg users;Only for registered users.;;
+On_lukus;Is locked;заблокирован;
+Parent group;Parent group;;
+Password;Password;Пароль;
+password confirmation;Confirm password;Подтверждение пароля;
+Password expired message;Your password is expired, enter new password.;Срок действия Вашего пароля истек. Введите новый пароль.;
+Password expires;Password expires;;
+Pass_expires;Pass_expires;Пароль работает до:;
+Perekonnanimi;Surname;Фамилия;
+postalcode;Post code;;
+postiaadress;Address;Адрес;
+Profile;Profile;Профайл;
+Reference_nr;Reference number;Номер ссылки;
+Registeeru;Register;Регистрация;
+Role;Role;;
+Roles;Roles;;
+Saada;Send;Отправить;
+Session_id;Session ID;ID сессии;
+Superuser;Superuser;;
+telefon;Phone;Телефон;
+tere;Hello!;Здравствуйте,;
+This IP is already in use for user: [user];This IP is already in use for user: [user];Ошибка! Данный IP адрес для автологина уже использует: [user];
+Tyhista;Cancel;Отмена;
+Unlock;Unlock;;
+Unustasid parooli;Forgot your password?;Забыли пароль?;
+unustatud parool: subject;Subject;Тема;
+User;User;;
+user exists;Username already exists;Такой пользователь уже существует;
+user_details;User details;;
+user_registered;User [user] has registered on your website;;
+wrong confirmation;Error in confirmation;Ошибка в подтверждении пароля;
+wrong email format;Incorrect e-mail format;Неверный e-mail;
+
+
+
+[admin:12:Admin]
+about;About;;
+Actions;Actions;;
+Active;Active;Активный;
+Active Directory;Active Directory;;
+Additional fields;Additional fields;Дополнительные поля;
+Admin login;Administrators login;Вход администратора;
+admin_manual;Administrator manual;;
+ADR settings;ADR settings;;
+aliases;Aliases;;
+Application name;Application name;Название приложения;
+Are you sure?;Are you sure?;;
+attachment;attachment;Прикрепить файл;
+auto-jump;Auto-jump;;
+Banner manager;Banner manager;;
+Based on cookies;Based on cookies;Основан на кукисах;
+Based on IP address;Based on IP address;Основан на IP адресах;
+Based on User id;Based on User id;Основан на ID рег. пользователей;
+Built-in templates;Built-in templates;Стандартные шаблоны;
+cache;Cache;Кэш;
+Change password;Force to change password on next login;Требовать смену пароля при след. входе;
+Children count;Children count;;
+class;Class;;
+Configuration;Configuration;Настройки;
+Content Aging;Content Aging;;
+Content templates;Content templates;Контент-шаблоны;
+counter;Counter;;
+Custom;Custom;Конфигурируемый;
+Custom assets;Custom assets;;
+Custom Style Sheet;CSS styles;CSS стили;
+data_type;Data type;;
+Default;Default;;
+default_value;Default value;;
+Delete old data;Delete old data;;
+Design;Visual Design;Оформление;
+Directories;Directories;;
+Dokumendid;Documents;;
+E-Commerce;E-Commerce;;
+editor_manual;Editor manual;;
+Element_name;Element_name;;
+Element_path;Element_path;;
+Email;Email;;
+Empty;Empty;;
+Error log;Error Log;;
+ERROR: File upload error;File upload error!!!;;
+ERROR: Language-file corrupted;Language-file corrupted!;;
+ERROR: There is invalid language in lang-file;ERROR: There is invalid language in lang-file!;;
+explorer;Site Explorer;;
+Export;Export;;
+Extensions;Extensions;;
+external tables;External tables;;
+favorites;Favorites;;
+feedbackforms_properties;Feedback forms;;
+feedback_forms;Feedback forms;;
+Fields;Fields;;
+file manager;File manager;;
+files;Files;;
+file_dir;File/Dir;Файл/Каталог;
+folders;Folders;;
+Form;Form;;
+form_messages;Feedback form messages;Сообщения для e-mail формы;
+forums_and_comments;Forums and comments;;
+found;Found;;
+from_email;from email;E-mail отправителя;
+gallery;Gallery;Галерея;
+Gallup;Gallup;Голосование;
+Get values from;Get values from;;
+Glossary export;Glossary export;;
+Glossary import;Glossary import;;
+help;Help;;
+Hidden;Hidden;;
+html_format;html format;HTML формат;
+Image manipulation;Image manipulation;;
+image_resizing;Image resizing;;
+Import;Import;;
+input_type;Input type;;
+Integration;Integration;Интеграция;
+IP filter;IP filter;IP фильтр;
+IP Filter: Kasutusel avalikus veebis;Enable for public site;Включить фильтр на сайте;
+IP filter: Kasutusel toimetaja keskkonnas;Enable for content creation;Включить в разделе администратора;
+IP Filter: Keela koik, valja arvatud;Deny all, except;Запретить все IP-адреса, кроме;
+IP Filter: Luba autoriseeritud kasutajaid;Allow authorized users;Разрешить вход на сайт зарегистр. пользователям;
+IP Filter: Luba koik, valja arvatud;Allow all, except;Разрешить все IP-адреса, кроме;
+Lang-file import finished successfully;Lang-file import finished successfully!;Импорт файла с переводом завершен успешно!;
+Language;Language;Язык;
+Language file;Language file;Файл перевода;
+Languages;Languages;Языки;
+LDAP;LDAP;LDAP;
+LDAP_Andmeseosed;LDAP_Andmeseosed;Связи данных;
+LDAP_elements;LDAP_elements;элементы;
+LDAP_Server_config;LDAP_Server_config;Конфигурация сервера;
+License;License;;
+Link verifier;Link verifier;;
+List;List;;
+Log;Log;Лог;
+Login;Login;Вход;
+Login URL;Login URL;Login URL;
+mailing_list;Mailing list;Список рассылки;
+mails_has_been_sent;mails_has_been_sent;Сообщения отправлены;
+mail_has_been_sent;mail_has_been_sent;Сообщение отправлено;
+main_sections;Main sections;Главные рубрики;
+Mapped sections;Mapped sections;Связь рубрик;
+Mapping;Data mapping;Разметка;
+map_to;Field in CMS database;;
+Master_templates;Master templates;Главные шаблоны;
+Maximum logins error;You have exceeded the maximum number of login attempts. You will have to wait for [minutes] minutes before you can attempt to login again.;;
+meta-info;Meta-info;Meta-тэги;
+missing;missing;;
+move_files;Move;;
+msg: Language file uploaded;msg: Language file uploaded;Файл перевода загружен;
+name;Name;Имя;
+NTLM;NTLM;;
+Nupp: Edasi;Button: Continue;Продолжить;
+Nupp: Request downloading from supplier;Button: Request downloading from supplier;Скачать с сервера производителя;
+object_templates;Object templates;;
+oi_format;Output/Input format;Формат ввода/вывода;
+Orders;Orders;;
+Organization;Organization;;
+Original string;Original system string;Изначальный перевод;
+overview;Overview;;
+Overwrite custom translations;Overwrite custom translations;;
+overwrite_file;Are you sure you want to overwrite existing file?;;
+Page templates;Page templates;Шаблоны страниц;
+Passwd fieldname;Password fieldname;Название поля password;
+Password;Password;Пароль;
+People;People;;
+Permissions;Permissions;;
+plain_text;plain text;Текстовый формат;
+please_fill_in_the_title!;Please fill in the title!;;
+Privileegid;Privileges;Привилегии;
+products;Products;Товары;
+product_category;Product category;Категория;
+product_manufacturer;Product manufacturer;Производитель;
+product_profiles;Product profiles;;
+profile definition;Profile Definition;;
+Profiles;Profiles;;
+profile_data;Data;;
+Properties;Properties;Свойства;
+Recievers;Recievers;;
+Recycle Bin is empty;Recycle Bin is empty;;
+recycle_bin;Recycle Bin;;
+Refresh;Refresh;;
+replication;Replication;Репликация;
+Request method;Request method;Метод запроса;
+reset;Reset;;
+Resources;Resources;;
+Return_fields;Return_fields;Возвращаемые поля;
+Rubriigi alampuu;Subtree of section;Поддерево рубрики;
+Salasonad ei ole uhesugused;Passwords do not match;Пароли не совпадают;
+Sample adminpage;Sample adminpage;;
+scope;Scope;Диапазон;
+search & replace;Search & Replace;Найти и заменить;
+Site CSS styles;Site CSS styles;;
+Site_properties;Site Properties;;
+Site_styles;Site Styles;Вид сайта;
+Spam;Spam;Спам;
+sso_applications;SSO applications;SSO приложения;
+Static Content Export;Static Content Export;;
+Statistics;Statistics;Статистика;
+Status;Status;;
+Styles;Styles;Стили;
+subject_line;subject line;Тема;
+System;System;Система;
+system info;System info;;
+System_articles;System Articles;Системные статьи;
+system_messages;System messages;Системные статьи (сообщения);
+Tagasisidevormid;Tagasisidevormid;;
+Target site actions;Target site actions;;
+Templates;Templates;Шаблоны;
+Test it;Test it;;
+Text_styles;Text Styles;Стили текста;
+time_interval;Time interval;Временной интервал;
+Toimetaja keskond IP filter valja lulitatud;You can not disable your own IP-address! Filtering disabled.;Вы не можете запретить свой IP адресс! Фильтр отключен.;
+Tolkimine;Translations;Перевод;
+tools;Tools;;
+total items;Total;;
+Translations;Glossary;Словарь;
+Type;Type;Тип;
+Unauthorized access;Unauthorized access;Доступ закрыт;
+Upload new file;Upload new file;Загрузить новый файл;
+User fieldname;Username fieldname;Название поля username;
+Username;Username;Логин;
+Users;Users;Пользователи;
+user_defined_messages;User defined messages;Прочие статьи, определенные пользователем;
+Vali;Vali;Выбери;
+view;View;;
+Visible in section editor;Visible in section editor;;
+website_properties;Website properties;Свойства сайта;
+when;When;;
+who;Who;;
+WYSIWYG Fonts;Styles in article editor dropdown;;
+WYSIWYG General;Styles used only by article editor;;
+XML;XML;;
+
+
+
+[e_commerce:17:E-Commerce]
+amount;Amount;;
+cart;Cart;;
+cart delete confirmation;Delete this shoppingcart?;;
+cart_data;Cart content;;
+cart_id;Cart ID;;
+category;Category;Категория;
+code;Code;Код;
+description;Description;Описание;
+image;Image;Фото;
+manufacturer;Manufacturer;Производитель;
+order;Order;;
+Order nr;Order nr;;
+orders;Orders;;
+order_date;Date;;
+payment_status;Payment status;;
+payment_type;Payment type;;
+price;Price;Цена;
+Product;Product;Товар;
+status;Status;;
+thubmnail;Thubmnail;Иконка;
+total;Total;;
+transport;Transport;;
+user_data;Client info;;
+VAT;VAT;;
+
+
+
+[sapi:19:Saurus API]
+Clear cache;Clear cache;Очистить кэш;
+
+
+
+[xml:20:XML]
+add date and time info to filename;add date and time info to filename;добавлять дату к имени файла;
+CMS objects from Sections;CMS objects from Sections;Объекты из рубрик;
+Custom SQL;Custom SQL;SQL-запрос;
+Data from DB-table;Data from DB-table;Данные из таблицы БД;
+DB field;Database field;Поле БД;
+DB table;Database table;Таблица БД;
+Delete file after import?;Delete file after import?;Удалить файл после импорта?;
+Delete old data;Delete old data;Удалить старые данные из БД;
+Delete old data using WHERE SQL;Delete old data using WHERE SQL;;
+Directory;XML files directory;Каталог XML файлов;
+Error: Broken source data;Error: Broken source data;Ошибка! Исходные данные неверные.;
+Export_email;E-mail, where exportfile will be sent;;
+Mapping name;Data mapping name;Название разметки;
+PHP script for data mappings;PHP script for setting your own data mappings;;
+Preserve old data;Preserve old data;;
+Reverse data;Reverse data;Развернуть данные в обр. порядке;
+Run with Cron;Run with Cron;;
+Run with pageload;Run with pageload;;
+Select data source for Export;Select data source for Export;Выберите источник данных для экспорта;
+Select data source for Import;Select how you define data mappings for import;;
+Source (XML) encoding;Source (XML) encoding;;
+Special dataprocessing;Special dataprocessing;Спец. обработка данных;
+Starting element;Start from element;Начать с элемента;
+Target (site) encoding;Target (site) encoding;;
+Update records by unique field;Update records by unique field;;
+using CMS;using CMS (default);;
+using PHP script;using my own PHP script;;
+With special processing;With special processing (old);Со спец. обработкой данных (старая версия);
+XML element;XML element;XML элемент;
+XML name;Name;Название;
+XML Result tagname;XML Result tagname;Тэг для данных (XML Result tagname);
+XML Root Begin;XML Root Begin;Открывающий тэг корня XML (XML Root);
+XML Root End;XML Root End;Закрывающий тэг корня XML (XML Root);
+
+
+
+[powertools:21:Power Tools]
+any case;any case;;
+Are you sure?;Are you sure?;;
+Article;Article;;
+Available;Available;;
+button: find;Find!;;
+button: Replace;Replace!;;
+Changed;Changed!;;
+compare;compare;;
+Database;Database;;
+Database optimized;Database optimized;;
+Download CSV file;Download CSV file;;
+everythere;Everythere;;
+Files;Files;;
+From;From;;
+location;location;;
+Modified;Modified;;
+Modified date;Modified date;;
+NOT FOUND;NOT FOUND;;
+optimize database;Optimize database;;
+Quota for database;Quota for database;;
+Quota for files;Quota for files;;
+Replace string;Replace string;;
+Results;Results;;
+Search in sections;Search in sections;;
+Search string;Search string;;
+Search type;Search type;;
+Select all;Select all;;
+Show only broken links;Show only broken links;;
+Show only published objects;Show only published objects;;
+To;To;;
+Total quota;Total quota;;
+Totally [XXX]([YYY] unique) links or images will be checked;Totally [XXX]([YYY] unique) links or images will be checked;;
+whole word;whole word;;
+
+
+
+[statistics:25:Statistics]
+activities;Activities;;
+Agent Information;Agent Information;;
+another pages;another pages;;
+Average;Average;;
+Average pages per day;Average pages per day;;
+Average pages per month;Average pages per month;;
+Average visitors per day;Average visitors per day;;
+Average visitors per month;Average visitors per month;;
+Average visits per day;Average visits per day;;
+Average visits per month;Average visits per month;;
+Browsers;Browsers;;
+Daily stats;Daily stats;;
+deleted;Deleted;;
+Detailed stats available since;Detailed stats available since;;
+Domains;Domains;;
+downloads;Downloads;;
+entry time;entry time;;
+First hit;First hit;;
+first page;first page;;
+found page;found page;;
+Full referrers;Full referrers;;
+host_ip;Host / IP;;
+Last hit;Last hit;;
+last reload;last reload;;
+Legend;Legend;;
+link;link;;
+minutes;minutes;;
+most_downloaded_files;TOP 20 downloaded files;;
+no_files_found;No files found;;
+One-time visitors;One-time visitors;;
+online;online;;
+Online visitors;Online visitors;;
+Page;Page;;
+Page views;Page views;;
+Pages;Pages;;
+page_back;Back;;
+page_browsers;Browsers;;
+page_clock;Clock;;
+page_config;Config;;
+page_files;Files;;
+page_pages;Pages;;
+page_referrers;Referrers;;
+page_searches;Searches;;
+page_summary;Summary;;
+page_users;Users;;
+page_visitors;Visitors;;
+percent;percent;;
+proxy;proxy;;
+Recent visitors;Recent 15 visitors;;
+refered page;refered page;;
+REFERRED;REFERRED!;;
+referrer;referrer;;
+Refresh;Refresh;;
+Reg.user;Reg.user;;
+Search engine;Search engine;;
+searches;searches;;
+search_for_files;Search for files;;
+Server time now is;Server time now is;;
+Show visitors for the last;Show visitors for the last;;
+Site tree;Site tree;;
+Statistics for;Statistics for;;
+Stats;Stats;;
+Stats available since;Stats available since;;
+Stats for section;Stats for section;;
+stats not available;Stats are not available for selected period.;;
+stats_for_file;Stats for file;;
+Sum;Sum;;
+Systems;Systems;;
+TOP 20 visited pages;TOP 20 visited pages;;
+TOP 50 Search keywords;TOP 50 Search keywords;;
+Totals;Totals;;
+unique;Unique;;
+user;User;;
+users;Users;;
+Visitors;Visitors;;
+visits;visits;;
+
+
+
+[event:26:Event]
+Assign to;Assign to;;
+completed;Completed;;
+Conflicts found!;Conflicts found!;;
+daily;Daily;;
+day;day;;
+end;End;;
+ends_after;Ends after;;
+Events;Events;;
+every;Every;;
+hours;Hours;;
+Location;Location;;
+month;month;;
+Never ends;Never ends;;
+occurs;Occurs;;
+once;Once;;
+participants;Participants;;
+Please fill in the end date!;Please fill in the end date!;;
+private;Private;;
+progress;Progress;;
+Recurrence;Recurrence;;
+recurrent;Recurrent;;
+start;Start;;
+started;Started;;
+task_event;Sündmus/Töö;;
+The date has to be in format: dd.mm.yyyy!;The date has to be in format: dd.mm.yyyy!;;
+time;Time;;
+Total time;Total time;;
+tracking;Tracking;;
+workday;Workday;;
+
+
+
+[files:27:Files]
+cant_delete_folder;Can't delete - folder is not empty!;;
+filename;Filename;;
+lastmodified;Last modified;;
+last_changed;Last Edit Date;;
+mimetype;MIME type;;
+Path;Path;;
+pealkiri;Name;;
+size;Size;;
+upload;Upload;;
+
+
+
+[extensions:28:Extensions]
+Extension;Extension;;
+icon_path;Icon path;;
+min_saurus_modules;Minimum Saurus modules required;;
+min_saurus_version;Minimum Saurus version required;;
+Official;Official;;
+Version;Version;;
+
+
+
+[workflow:29:Workflow Manager]
+Definitions;Definitions;;
+Processes;Processes;;
+
+
+
+[saurus4:101:Saurus 4]
+add;Add;;
+add comment;Add comment;;
+advanced search;Advanced search;;
+all the words;All the words;;
+application name;Application;;
+applications login info;Applications;;
+archive;Archive;;
+author;Author;;
+by title;By title;;
+changed last;Changed last;;
+comment;Comment;;
+comments;Comments;;
+does not include;Does not include;;
+e-mail;E-mail;;
+exact phrase;Exact phrase;;
+forums;Forums;;
+from section;From section;;
+hide e-mail;Don't show e-mail;;
+last 3 months;Last 3 months;;
+last 6 months;Last 6 months;;
+last month;Last month;;
+last reply;Last reply;;
+last week;Last week;;
+last year;Last year;;
+mailinglists;Subscribe to mailinglists;;
+name;Name;;
+new comment;New comment;;
+new message;New message;;
+new topic;New topic;;
+newest first;Newest first;;
+one of the words;One of the words;;
+password;Password;;
+password expired message;Your password is expired, enter new password;;
+please fill in;Please fill in;;
+profile;Profile;;
+register;Register;;
+replies;Replies;;
+reply;Reply;;
+search;Search;;
+see also;See also;;
+send;Send;;
+send_replies;Send replies to e-mail;;
+sitemap;Sitemap;;
+title;Title;;
+topics;Topics;;
+username;Username;;
+whenever;Whenever;;
+yesterday;Yesterday;;

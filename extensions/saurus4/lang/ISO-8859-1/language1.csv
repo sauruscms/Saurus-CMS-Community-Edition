@@ -1,0 +1,74 @@
+[CHECKSUM=1:1:54]
+[DATE=2008-06-27 14:16:16]
+[ENCODING=ISO-8859-1]
+
+#
+#  Language file: English
+#  Supplier: www.saurus.info 
+#  
+#  Total sys strings: 54
+#  Total descriptions: 54
+#  Status descriptions: OK
+#  Total translations: 54
+#  Status translations: OK
+
+
+# SYSTEM STRING; DESCRIPTION; TRANSLATION;
+
+
+
+[saurus4:33:Saurus 4]
+add;Add;Add;
+add comment;Add comment;Add comment;
+advanced search;Advanced search;Advanced search;
+all the words;All the words;All the words;
+application name;Application;Application;
+applications login info;Applications;Applications;
+archive;Archive;Archive;
+author;Author;Author;
+by title;By title;By title;
+CAPTCHA failed;Entered text did not match text on the image;Entered text did not match text on the image;
+changed last;Changed last;Changed last;
+comment;Comment;Comment;
+comments;Comments;Comments;
+does not include;Does not include;Does not include;
+e-mail;E-mail;E-mail;
+enter_the_text_on_the_image;Enter the text on the image;Enter the text on the image;
+exact phrase;Exact phrase;Exact phrase;
+forums;Forums;Forums;
+from section;From section;From section;
+hide e-mail;Don't show e-mail;Don't show my e-mail;
+keyword_too_short;Keyword is too short;Please enter keyword at least 4 characters long;
+last 3 months;Last 3 months;Last 3 months;
+last 6 months;Last 6 months;Last 6 months;
+last month;Last month;Last month;
+last reply;Last reply;Last reply;
+last week;Last week;Last week;
+last year;Last year;Last year;
+latest posts;Latest posts;Latest posts;
+mailinglists;Subscribe to mailinglists;mailinglists;
+name;Name;Name;
+new comment;New comment;New comment;
+new message;New message;New message;
+new topic;New topic;New topic;
+newest first;Newest first;Newest first;
+one of the words;One of the words;One of the words;
+password;Password;Password;
+password expired message;Your password is expired, enter new password;Your password is expired, enter new password;
+please fill in;Please fill in;Please fill in;
+profile;Profile;Profile;
+register;Register;Register;
+replies;Replies;Replies;
+reply;Reply;Reply;
+rss entries;Entries;Entries;
+search;Search;Search;
+search_order_relevance;By relevance;By relevance;
+see also;See also;See also;
+send;Send;Send;
+send_replies;Send replies to e-mail;Send replies to my e-mail;
+sitemap;Sitemap;Sitemap;
+title;Title;Title;
+topics;Topics;Topics;
+username;Username;Username;
+whenever;Whenever;Whenever;
+yesterday;Yesterday;Yesterday;

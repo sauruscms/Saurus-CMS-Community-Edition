@@ -1,0 +1,48 @@
+{insert name=header content="Content-Type: text/xml"}{literal}<?xml version="1.0" {/literal}encoding="{$encoding}"{literal}?>{/literal}
+<rss version="2.0">
+	{* section properties *}
+	{init_object id=$id name="section"}
+	{if $section->class != 'section'}
+		{init_object id=$section->parent_id name="section"}
+	{/if}
+
+	{****************** RSS Articlelist ******************}
+	{init_objects name="rss_objects" parent=$section->id order="date desc" start="0" limit="10" classes="article,album"}
+	<channel>
+		<title><![CDATA[{if $site_name}{$site_name}: {/if}{$section->title}]]></title>
+		<link>{$protocol}{$hostname}{$section->href}</link>
+		<description><![CDATA[{$meta_description}]]></description>
+		<language>{$site_extension}</language>
+		
+		{foreach from=$rss_objects item="rss_object"}
+			{assign var="lastBuildDate" value=$rss_object->fdate}
+			{if strtotime($rss_object->fdate) > strtotime($lastBuildDate)}
+				{assign var="lastBuildDate" value=$rss_object->fdate}
+			{/if}
+		{/foreach}
+		
+		<lastBuildDate>{$lastBuildDate|mysql_date_to_rfc822}</lastBuildDate>
+		
+		{******** Article list ************}
+		{foreach from=$rss_objects item=obj}
+		{if $obj->class == 'article'}
+			{init_article name="rss_object" id=$obj->id}
+		{else}
+			{init_object name="rss_object" id=$obj->id}
+		{/if}
+		<item>
+			<title><![CDATA[{$rss_object->title}]]></title>
+			
+			<link>{$protocol}{$hostname}{$rss_object->href}</link>
+			
+			{if $obj->class == 'article'}<description><![CDATA[{if $rss_object->lead}{$rss_object->lead} <a href="{$rss_object->href}">{sysword word="More" type="Visual Design"}</a>{else}{$rss_object->body}{/if}]]></description>{/if}
+			{if $obj->class == 'album'}<description><![CDATA[{$rss_object->description}]]></description>{/if}
+			<guid>{$protocol}{$hostname}{$wwwroot}/?id={$rss_object->id}</guid> 
+			<pubDate>{$rss_object->fdate|mysql_date_to_rfc822}</pubDate>
+		</item>
+	{/foreach}
+	{******** // Article list *********}
+	
+	</channel>
+</rss>
+{****************** // RSS Articlelist ******************}

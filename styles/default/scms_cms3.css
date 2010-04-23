@@ -1,0 +1,113 @@
+/* passiivse menyyboxi link */
+A.box_off:link {text-decoration: none; color: #4040A9; font-family: Tahoma, Verdana, Arial, Helvetica; font-size: 11px;}
+A.box_off:active {text-decoration: none; color: #4040A9; font-family: Tahoma, Verdana, Arial, Helvetica; font-size: 11px;}
+A.box_off:visited {text-decoration: none; color: #4040A9; font-family: Tahoma, Verdana, Arial, Helvetica; font-size: 11px;}
+A.box_off:hover {text-decoration: underline; color: #4040A9; font-family: Tahoma, Verdana, Arial, Helvetica; font-size: 11px;}
+
+/* aktiivse menyyboxi link */
+A.box_on:link {text-decoration: none; color: #91BF09; font-family: Tahoma, Verdana, Arial, Helvetica; font-size: 11px;}
+A.box_on:active {text-decoration: none; color: #91BF09; font-family: Tahoma, Verdana, Arial, Helvetica; font-size: 11px;}
+A.box_on:visited {text-decoration: none; color: #91BF09; font-family: Tahoma, Verdana, Arial, Helvetica; font-size: 11px;}
+A.box_on:hover {text-decoration: underline; color: #91BF09; font-family: Tahoma, Verdana, Arial, Helvetica; font-size: 11px;}
+
+/* aktiivse alamtabi link */
+A.sub_tab_on:link {text-decoration: none; color: #000099;}
+A.sub_tab_on:active {text-decoration: none; color: #000099;}
+A.sub_tab_on:visited {text-decoration: none; color: #000099;}
+A.sub_tab_on:hover {text-decoration: none; color: #000099;}
+
+/* passiivse alamtabi link */
+A.sub_tab_off:link {text-decoration: none; color: #737373;}
+A.sub_tab_off:active {text-decoration: none; color: #737373;}
+A.sub_tab_off:visited {text-decoration: none; color: #737373;}
+A.sub_tab_off:hover {text-decoration: none; color: #737373;}
+
+/* tavaline tekst */
+.txt { font-family: Tahoma, Verdana, Arial, Helvetica; font-size: 11px; color: #333333; line-height: 14px}
+.admin_txt { font-family: Tahoma, Verdana, Arial, Helvetica; font-size: 11px; color: #333333; line-height: 14px}
+.inactive { color: #aaaaaa }
+.roheline { font-family: Tahoma, Verdana, Arial, Helvetica; font-size: 14px; color: #96C801; line-height: 16pt; font-weight: bold}
+.white { font-family: Tahoma, Verdana, Arial, Helvetica; font-size: 11px; color: #FFFFFF; line-height: 16pt;}
+.plk { font-family: Tahoma, Verdana, Arial, Helvetica; font-size: 14px; color: #333333; line-height: 16pt; font-weight: bold}
+
+/* Formide stiilid */
+.drop { 
+	font-family: Tahoma, Verdana, Arial, Helvetica; 
+	font-size: 11px; 
+	color: #333333; 
+	line-height: 10px; 
+	margin-top:1px;
+	width: 250px;
+	max-width: 250px;
+}
+.frm { height: 20px; font-family: Tahoma, Verdana, Arial, Helvetica; font-size: 11px; color: #333333; line-height: 10px; padding-right: 3px; padding-left: 3px; padding-top: 3px; padding-bottom: 3px; }
+.frm_admin { height: 20px; font-family: Tahoma, Verdana, Arial, Helvetica; font-size: 11px; color: #333333; line-height: 10px; padding-right: 3px; padding-left: 3px; padding-top: 3px; padding-bottom: 3px; }
+.tarea { font-family: Tahoma, Verdana, Arial, Helvetica; font-size: 11px; color: #333333; line-height: 10px; padding-right: 3px; padding-left: 3px; padding-top: 3px; padding-bottom: 3px; }
+.btn { font-family: Tahoma, Verdana, Arial, Helvetica; font-size: 11px; color: #FFFFFF; background-color: #FF3300; height: 21px; font-weight: bold; line-height: 10px; margin-top: 2px}
+.btn2 { font-family: Tahoma, Verdana, Arial, Helvetica; font-size: 11px; color: #FFFFFF; background-color: #FF3300; height: 20px; font-weight: bold; line-height: 9px; margin-top:-1px}
+.abinupp { font-family: Tahoma, Verdana, Arial, Helvetica; font-size: 11px; color: #FFFFFF; background-color: #96C801; height: 20px; font-weight: bold; line-height: 9px; margin-top:-1px}
+.bluebtn { font-family: Tahoma, Verdana, Arial, Helvetica; font-size: 11px; color: #FFFFFF; background-color: #4040A9; height: 21px; font-weight: bold; line-height: 10px; margin-top: 1px; margin-left: 2px}
+.colorbutton { width: 18px; height: 18px; margin-left: 1px; margin-top:1px; font-face: Tahoma, Verdana, Arial, Helvetica; size: 9px; line-height: 9px }
+
+/* Tabelindus */
+.bluehead { font-family: Tahoma, Verdana, Helvetica; font-size: 13px; color: #FFFFFF; background-color: #4040A9; font-weight: bold; padding-right: 5px; padding-left: 8px; height: 30px}
+.grayhead { font-family: Tahoma, Verdana, Helvetica; font-size: 11px; color: #333333; background-color: #CCCCCC; font-weight: bold; padding-right: 5px; padding-left: 6px; height: 22px }
+.r1 { height: 22px; font-family: Tahoma, Verdana, Helvetica; font-size: 11px; color: #333333; background-color: #FFFFFF; padding-right: 5px; padding-left: 6px; line-height: 16px; vertical-align: top}
+.r2 { height: 22px; font-family: Tahoma, Verdana, Helvetica; font-size: 11px; color: #333333; background-color: #F0F0F0; padding-right: 5px; padding-left: 6px; line-height: 16px; vertical-align: top }
+.r3 { height: 22px; font-family: Tahoma, Verdana, Helvetica; font-size: 11px; color: #333333; padding-right: 5px; padding-left: 6px; line-height: 16px; vertical-align: top }
+
+
+/* Kalender */
+.cal_off { font-family: Verdana, Arial, Helvetica; font-size: 11px; width: 13%; align: right; color: #BEC3B6; padding-bottom:1px; padding-right:2px; }
+.cal { font-family: Verdana, Arial, Helvetica; font-size: 11px; width: 13%; align: right; color: #BEC3B6; cursor: hand; padding-bottom:1px; padding-right:2px;}
+.cal_actual { font-family:  Verdana, Tahoma, Arial, Helvetica; line-height: 12px; height: 18px; font-size: 12px; width: padding-bottom:8px; padding-right:7px; align: right; color: #ffff00; cursor: hand; background-color: #FF3300}
+.cal_nottoday { font-family:  Verdana, Tahoma, Arial, Helvetica; line-height: 12px; height: 18px; font-size: 12px; width: padding-bottom:8px; padding-right:7px; align: right; color: #ffffff; cursor: hand; background-color: #DDDDDD}
+.today_nolink { font-family: Verdana, Arial, Helvetica; font-size: 11px; width: 13%; align: right; color: #FFFFFF; padding-bottom:1px; padding-right:2px; }
+.caltext { color: #4040A9; padding-bottom:1px; padding-right:2px; padding-left:3px; font-family: Arial, Helvetica, sans-serif; font-size:11px; line-height: 11pt;}
+.cal_maintable{border-style:solid; border-color:#999999; border-width:1px;}
+.cal_selectbox_tr{background-color: #DDDDDD;}
+.cal_weekday_tr{background-color: #F6F6F6;}
+.cal_spacer_tr{background-color: #DDDDDD;}
+
+A.day:link {text-decoration: none; color:#757575; padding-bottom:1px; padding-right:2px; }
+A.day:visited {text-decoration: none; color:#757575; padding-bottom:1px; padding-right:2px; }
+A.day:active {text-decoration: none; color:#757575; padding-bottom:1px; padding-right:2px; }
+A.day:hover {text-decoration: underline; color:#FF3300; padding-bottom:1px; padding-right:2px; }
+
+A.day_bd:link {text-decoration: none; color:#000000; font-weight:bold;}
+A.day_bd:visited {text-decoration: none; color:#000000; font-weight:bold;}
+A.day_bd:active {text-decoration: none; color:#000000; font-weight:bold;}
+A.day_bd:hover {text-decoration: underline; color:#FF3300; font-weight:bold;}
+
+A.week:link {text-decoration: none; color:#4040A9; }
+A.week:visited {text-decoration: none; color:#4040A9; }
+A.week:active {text-decoration: none; color:#4040A9; }
+A.week:hover {text-decoration: underline; color:#FF3300;}
+
+A.today:link {text-decoration: none; color:#FFFFFF; padding-bottom:1px; padding-right:2px; }
+A.today:visited {text-decoration: none; color:#FFFFFF; padding-bottom:1px; padding-right:2px; }
+A.today:active {text-decoration: none; color:#FFFFFF; padding-bottom:1px; padding-right:2px; }
+A.today:hover {text-decoration: none; color:#FFFFFF; padding-bottom:1px; padding-right:2px; }
+
+A.today_bd:link {text-decoration: none; color:#FFFFFF; padding-bottom:0px; padding-right:0px; font-weight:bold;}
+A.today_bd:visited {text-decoration: none; color:#FFFFFF; padding-bottom:0px; padding-right:0px; font-weight:bold;}
+A.today_bd:active {text-decoration: none; color:#FFFFFF; padding-bottom:0px; padding-right:0px; font-weight:bold;}
+A.today_bd:hover {text-decoration: none; color:#FFFFFF; padding-bottom:0px; padding-right:0px; font-weight:bold;}
+
+.pagehead { color: #333333; padding:3px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size:11px; line-height: 11pt;; background-color: #EFEFEF; border-color: black black #B1B1B1; border-style: solid; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 1px; border-left-width: 0px}
+.txt { color: #333333; padding:3px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size:11px; line-height: 14px;}
+
+.drd {font-family: Verdana, Arial, Helvetica; font-size: 11px; color: #333333 ;}
+.frm {font-family: Verdana, Arial, Helvetica; font-size: 11px; color: #333333 ;}
+.btn {font-family: Verdana, Arial, Helvetica; font-size: 11px; color: #FFFFFF ; background-color: #FF3300; font-weight: bold;}
+.bluebtn {font-family: Verdana, Arial, Helvetica; font-size: 11px; color: #FFFFFF ; background-color: #4040A9; font-weight: bold;}
+.chk {margin-top: -3px; margin-bottom: -2px; margin-left:-5px; margin-right:0px}
+
+
+/* menyyboxi read */
+.boxhead { background-color: #96C801; padding-left: 8px; padding-right: 3px; font-weight: bold; font-family: Tahoma, Verdana, Arial, Helvetica; font-size: 13px; color: #FFFFFF; height: 26px; cursor: hand; voice-family: "\"}\""; voice-family:inherit; cursor: pointer;}
+.row { padding-left: 4px; padding-right: 4px; padding-top:3px; padding-bottom: 3px; font-weight: bold}
+.row_on { padding-left: 4px; padding-right: 4px; padding-top:3px; padding-bottom: 3px; background-color: #F0F0F0; font-weight: bold}
+.row_on_nb { padding-left: 4px; padding-right: 4px; padding-top:3px; padding-bottom: 3px; background-color: #F0F0F0; }
+
+.toplink {font-family: Verdana,Helvetica; font-size: 11px; letter-spacing: 0.03em; font-weight: bold; line-height: 19px; color:#FFFFFF;}

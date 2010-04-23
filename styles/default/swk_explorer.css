@@ -1,0 +1,65 @@
+
+a.node_unfold_button img {
+	border: none;
+}
+
+a.node_fold_button img {
+	border: none;
+}
+
+table.tree td, table.tree th {
+	vertical-align: middle;
+	text-align: left;
+	font-weight: normal;
+	padding: 2px;
+}
+
+table.tree th input {
+	width: 100%;
+}
+
+table.tree tbody tr.selected {
+	background-color: #D2DFFA;
+}
+
+table.tree tbody tr.searched {
+	background-color: yellow;
+}
+
+table.tree tbody tr.loading {
+	background-color: #f4f4f4;
+}
+
+table.choose_buttons td {
+	padding: 5px 15px;
+}
+
+span.title_text {
+	cursor: pointer;
+}
+
+table.tree thead td {
+	font-weight: bold;
+}
+
+table.tree thead th {
+	border-bottom: 1px solid #8aa2d2;
+}
+
+table.tree thead th.objekt_id,
+table.tree thead th.ttyyp_id,
+table.tree thead th.page_ttyyp_id,
+table.tree thead th.kesk {
+	width: 40px;
+}
+
+table.tree tbody td.objekt_id,
+table.tree tbody td.ttyyp_id,
+table.tree tbody td.page_ttyyp_id,
+table.tree tbody td.kesk {
+	text-align: right;
+}
+
+table.tree thead th.on_avaldatud {
+	width: 20px;
+}

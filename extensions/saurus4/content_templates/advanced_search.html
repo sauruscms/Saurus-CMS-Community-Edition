@@ -1,0 +1,95 @@
+{**
+ * Advence search form, content template
+ * Date: 01.11.06
+ *
+ * @package saurus4
+ * 
+ * @author Saurus <saurus@saurus.info>
+ *
+ *}
+
+<div id="AdvancedSearchContainer">
+ 
+<script type="text/javascript">
+<!--
+	function check_form(form) {ldelim}
+		if(check_string (form.query, '{sysword word="please fill in" type="saurus4"}: ' + document.getElementById('for_'+form.query.id).innerHTML)) form.submit();
+	{rdelim}
+//-->
+</script>
+
+<h1>{sysword word="Tappisotsing" type="otsing"}</h1>
+
+<form name="SearchForm" action="{$self}" method="GET" onkeypress="if(event.keyCode==13) check_form(this);">
+
+	<input type="hidden" name="op" value="search">
+	
+	<table cellpadding="0" cellspacing="0" class="FormTable">
+		<col class="FormTableLabels">
+		<tr>
+			<td><label for="query" id="for_query">{sysword word="search" type="saurus4"}</label>:</td>
+			<td><input type="text" id="query" name="query" class="FormText"></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<input type="radio" id="bool_1" name="bool" value="or" checked="checked">
+				<label for="bool_1">{sysword word="one of the words" type="saurus4"}</label>
+				<br>
+				<input type="radio" id="bool_2" name="bool" value="and">
+				<label for="bool_2">{sysword word="all the words" type="saurus4"}</label>
+				<br>
+				<input type="radio" id="bool_3" name="bool" value="phrase">
+				<label for="bool_3">{sysword word="exact phrase" type="saurus4"}</label>
+			</td>
+		</tr>
+		<tr>
+			<td>{sysword word="does not include" type="saurus4"}:</td>
+			<td><input type="text" name="exclude" class="FormText"></td>
+		</tr>
+		<tr>
+			<td>{sysword word="from section" type="saurus4"}:</td>
+			<td>
+				<select name="section" class="FormSelect">
+					<option value=""></option>
+					{init_section name="main_sections" level=1}
+					{foreach from=$main_sections item="section"}
+					<option value="{$section->id}">{$section->title}</option>
+					{/foreach}
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>{sysword word="changed last" type="saurus4"}:</td>
+			<td>
+				<select name="time" class="FormSelect">
+					<option value="0" selected="selected">{sysword word="whenever" type="saurus4"}</option>
+					<option value="1">{sysword word="yesterday" type="saurus4"}</option>
+					<option value="2">{sysword word="last week" type="saurus4"}</option>
+					<option value="3">{sysword word="last month" type="saurus4"}</option>
+					<option value="4">{sysword word="last 3 months" type="saurus4"}</option>
+					<option value="5">{sysword word="last 6 months" type="saurus4"}</option>
+					<option value="6">{sysword word="last year" type="saurus4"}</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>		
+				<input type="radio" id="order_1" name="order" value="relevance" checked="checked">
+				<label for="order_1">{sysword word="search_order_relevance" type="saurus4"}</label>
+				<br>
+				<input type="radio" id="order_2" name="order" value="date">
+				<label for="order_2">{sysword word="newest first" type="saurus4"}</label>
+				<br>
+				<input type="radio" id="order_3" name="order" value="title">
+				<label for="order_3"> {sysword word="by title" type="saurus4"}</label>
+			</td>
+		</tr>
+	</table>
+	
+	<input type="button" onclick="check_form(document.SearchForm);" value="{sysword word="search" type="saurus4"}">
+
+</form>
+
+</div><!-- / AdvancedSearchContainer -->

@@ -1,0 +1,173 @@
+{**
+ * Displays list of files from site's filesystem, content template
+ * Date: 10.10.08
+ *
+ * @package saurus4
+ * 
+ * @author Saurus <saurus@saurus.info>
+ *
+ *}
+
+<div id="DocumentsContainer">
+ 
+{* show configuration area for editor *}
+{if $in_editor}
+
+{* save configuration *}
+{if $smarty.get.save}
+	{custom_conf_save id=$id sort_dir=$smarty.get.sort_dir folder=$smarty.get.folder sort_by=$smarty.get.sort_by}
+{/if}
+{* /save configuration *}
+
+{* load configuration *}
+{custom_conf_load id=$id name="tpl_conf"}
+
+{* set configuration values or default values *}
+{assign var="sort_by" value=$tpl_conf.sort_by|default:"objekt.aeg"}
+{assign var="sort_dir" value=$tpl_conf.sort_dir|default:"desc"}
+{assign var="folder" value=$tpl_conf.folder|default:"0"}
+
+<form name="custom_conf_vars" action="{$self}" method="GET">
+	<fieldset>
+		<legend>Settings</legend>
+
+		<table cellpadding="2" cellspacing="2">
+			<tr>
+				<td>Display files from folder:</td>
+				<td colspan="2">
+				{init_folders parent_dir="public" name="folders"}
+					<select name="folder">
+						<option></option>
+						{foreach from=$folders item="fldr"}
+						<option value="{$fldr->title}"{if $fldr->id == $folder || $fldr->title == $folder} selected="selected"{/if}>{$fldr->title}</option>
+						{/foreach}
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>Sort by:</td>
+				<td>
+					<select name="sort_by">
+						<option value="notes"{if $sort_by == 'notes'} selected="selected"{/if}>Date</option>
+						<option value="pealkiri"{if $sort_by == 'pealkiri'} selected="selected"{/if}>Title</option>
+					</select>
+				</td>
+				<td>
+					<input type="radio" name="sort_dir" id="sort_dir_desc" value="desc"{if $sort_dir == 'desc'} checked="checked"{/if}><label for="sort_dir_desc">Desc</label>
+					<input type="radio" name="sort_dir" id="sort_dir_asc" value="asc"{if $sort_dir == 'asc'} checked="checked"{/if}><label for="sort_dir_asc">Asc</label>
+				</td>
+			</tr>
+		</table>
+		
+		<input type="hidden" name="save" value="1">
+		<input type="hidden" name="id" value="{$id}">
+		
+		<input type="submit" value="Save">
+		
+	</fieldset>
+</form>
+{* /show configuration area for editor *}
+{else}
+	{* load configuration *}
+	{custom_conf_load id=$id name="tpl_conf"}
+{/if}
+
+{* set configuration values or default values *}
+{assign var="sort_by" value=$tpl_conf.sort_by|default:"objekt.aeg"}
+{assign var="sort_dir" value=$tpl_conf.sort_dir|default:"desc"}
+{assign var="folder" value=$tpl_conf.folder|default:0}
+
+{* articles before document list *}
+{init_articles name="articles" position=0}
+
+{if is_numeric($folder)}
+	{init_files parent=$folder name="files" order="`$sort_by` `$sort_dir`"|@addslashes icons="extensions/saurus4/images/file_icons/"}
+{else}
+	{init_files parent_dir=$folder name="files" order="`$sort_by` `$sort_dir`"|@addslashes icons="extensions/saurus4/images/file_icons/"}
+{/if}
+{$articles_newbutton}{$files_newbutton}
+
+{foreach from=$articles item="article" name="articles_loop"}
+			
+	<h1>{$article->buttons}{if $article->show_headline}{$article->title}{/if}</h1>
+	
+	{init_article name="art" id=$article->id}
+	
+	{if $art->lead && $art->body}
+		{$art->lead}
+		{* Read More link from Glossary *}
+		<a href="{$art->href}">{sysword word="More" type="Visual Design"}</a>
+	{else}
+		{$art->lead} {$art->body}
+		{if $art->forum_allowed}
+			{if $art->comment_count}
+				<a href="{$art->href}#comments">{sysword word="comments" type="saurus4"}</a>
+				({$art->comment_count})
+				|
+				<a href="{$art->href}#add_message">{sysword word="add" type="saurus4"}</a>
+			{else}
+				<a href="{$art->href}#add_message">{sysword word="add comment" type="saurus4"}</a>
+			{/if}
+		{/if}
+	{/if}
+
+{/foreach}
+{* /articles before document list *}
+
+{* document list *}
+<div class="DocumentsContainer">
+
+{foreach from=$files item="file"}
+	<div class="Document">
+	
+		{if $file->icon}<a href="{$file->href}" target="_blank" class="DocumentIcon"><img src="{$file->icon}" alt=""></a>{/if}
+		
+		<h1 class="DocumentTitle">{$file->buttons}<a href="{$file->href}" target="_blank">{$file->title}</a></h1>
+		
+		{if $file->notes}<p class="DocumentDesc">{$file->notes}</p>{/if}
+		
+		<p class="DocumentData">
+			<span class="Date">{$file->date}
+			{$file->size}
+			.<span class="ucase">{$file->extension}</span></span>
+		</p>
+		
+	</div>
+
+{/foreach}
+{* /document list *}
+
+</div>
+
+{* articles after document list *}
+{init_articles name="articles" position=6}
+{$articles_newbutton}
+
+{foreach from=$articles item="article" name="articles_loop"}
+			
+	<h1>{$article->buttons}{if $article->show_headline}{$article->title}{/if}</h1>
+	
+	{init_article name="art" id=$article->id}
+	
+	{if $art->lead && $art->body}
+			{$art->lead}
+			{* Read More link from Glossary *}
+			<a href="{$art->href}">{sysword word="More" type="Visual Design"}</a>
+	{else}
+		{$art->lead} {$art->body}
+		{if $art->forum_allowed}
+			{if $art->comment_count}
+				<a href="{$art->href}#comments">{sysword word="comments" type="saurus4"}</a>
+				({$art->comment_count})
+				|
+				<a href="{$art->href}#add_message">{sysword word="add" type="saurus4"}</a>
+			{else}
+				<a href="{$art->href}#add_message">{sysword word="add comment" type="saurus4"}</a>
+			{/if}
+		{/if}
+	{/if}
+
+{/foreach}
+{* /articles after document list *}
+
+</div><!-- / DocumentsContainer -->

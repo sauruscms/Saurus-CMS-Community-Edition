@@ -1,0 +1,228 @@
+html, body {
+	height: 100%;
+	border: 0;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+div#header_content {
+	height: 63px;
+	background: url(gfx/general/tools_head_bg.jpg) repeat-x;
+	border-bottom: 1px solid #fff;
+}
+
+div#header_content h1 {
+    font-family: "Trebuchet MS";
+    font-size: 24px;
+    font-weight: normal;
+    float: left;
+    color: #333;
+    margin: 17px 0 0 30px;
+	text-shadow: 1px 1px 0 rgba(255, 255, 255, 1);
+}
+
+div#header_content div#header_logo_ce {
+	float: right;
+	width: 136px;
+	height: 34px;
+	margin: 17px 26px 0 0;
+	background: url(gfx/general/admin_head_logo_ce.gif) no-repeat;
+}
+
+div#header_content div#header_logo_ee {
+	float: right;
+	width: 169px;
+	height: 34px;
+	margin: 17px 26px 0 0;
+	background: url(gfx/general/admin_head_logo.gif) no-repeat;
+}
+
+iframe#admin_page_container {
+	border: 0;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
+/* toolbar styles */
+div#scms_editor_toolbar {
+	margin: 0px;
+	padding: 0px;
+	height: 28px;
+	width: 100%;
+	font-family: Tahoma, Verdana, sans-serif;
+	font-size: 12px;
+	line-height: 14px;
+	color: #333;
+	background: url(gfx/general/toolbar_admin_bg.jpg) repeat-x left bottom;
+}
+
+ul#scms_toolbar_menu {
+	margin: 0px 0px 0px 38px;
+	padding: 0px;
+	line-height: 14px;
+	border: none;
+}
+
+ul#scms_toolbar_menu li {
+	float: left;
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+	text-align: left;
+	line-height: 14px;
+	border-width: 1px;
+	_border-width: 0px;
+	border-color: transparent;
+	border-style: solid;
+	border-bottom: none;
+	background: transparent;
+}
+
+ul#scms_toolbar_menu li a {
+	color: #333;
+	text-decoration: none;
+	display: block;
+	padding: 6px 9px 6px 9px;
+	margin: 0px;
+	font-weight: normal;
+	line-height: 14px;
+	font-family: Tahoma, Verdana, sans-serif;
+	font-size: 12px;
+	border: none;
+	background-color: transparent;
+	outline: 0;	
+}
+
+ul#scms_toolbar_menu li.onmouseover {
+	background-color: #DBE6FE;
+	border-right-color:#C6D2E8;
+	border-left-color:#C6D2E8;
+}
+
+ul#scms_toolbar_menu li.onmouseover a,
+ul#scms_toolbar_menu li.onmouseover a:hover {
+	border-bottom: 1px solid #DBE6FE;
+}
+
+ul#scms_toolbar_menu li a {
+	white-space: nowrap;
+}
+
+ul#scms_toolbar_menu li ul {
+	margin: 0px 0px 0px -1px;
+	padding: 5px 10px 2px 0px;
+	display: none;
+	position: absolute;
+	margin-top: 0px;
+	background-color: #DBE6FE;
+	border-width: 1px;
+	border-color: #C6D2E8;
+	border-style: solid;
+	border-top: none;
+}
+
+ul#scms_toolbar_menu li ul li {
+	margin: 0px;
+	padding: 0px;
+	float: none;
+}
+
+ul#scms_toolbar_menu li ul li a {
+	padding: 0px 9px 6px 9px;
+	text-align: left;
+}
+
+ul#scms_toolbar_menu li ul li a:hover {
+	text-decoration: underline;
+	margin: 0px;
+}
+
+a#scms_editor_toolbar_logo {
+	margin: 0px;
+	padding: 6px 9px 6px 9px;
+	display: block;
+	background: url(gfx/general/toolbar_admin_logo.gif) no-repeat left top;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 28px;
+	height: 14px;
+	cursor: default;
+	border: none;
+	outline: 0; /* no border when clicked in FF */
+}
+
+ul#toolbar_tools {
+	float: right;
+	margin: 0px;
+	margin-right: 15px;
+	padding: 0px;
+	border: none;
+}
+
+ul#toolbar_tools li {
+	float: left;
+	margin: 0px;
+	list-style: none;
+	border-width: 1px;
+	_border-width: 0px;
+	border-color: transparent;
+	border-style: solid;
+	border-bottom: none;
+	padding: 6px 3px 6px 3px;
+	line-height: 14px;
+	font-family: Tahoma, Verdana, sans-serif;
+	font-size: 12px;
+	background-color: transparent;
+	background: transparent;
+	color: #333;
+}
+
+ul#toolbar_tools li.separator {
+	color: #dddddd;
+	padding-left: 1px;
+	padding-right: 1px;
+}
+
+ul#toolbar_tools li a {
+	color: #333;
+	text-decoration: none;
+	font-weight: normal;
+	text-decoration: none;
+	font-weight: normal;
+	line-height: 14px;
+	font-family: Tahoma, Verdana, sans-serif;
+	font-size: 12px;
+	border: none;
+	background-color: transparent;
+	margin: 0px;
+	padding: 0px;
+	outline: 0;	
+}
+
+ul#toolbar_tools li a strong {
+	text-decoration: none;
+	font-weight: bold;
+	border: none;
+	line-height: 14px;
+	font-family: Tahoma, Verdana, sans-serif;
+	font-size: 12px;
+	background-color: transparent;
+	color: #333;
+	margin: 0px;
+	padding: 0px;
+}
+
+ul#toolbar_tools li a:hover,
+ul#toolbar_tools li a:hover strong {
+	text-decoration: underline;
+}
+
+ul#toolbar_tools li#toolbar_tools_username {
+	color: #333;
+	font-weight: bold;
+	padding-left: 13px;
+	background: url(gfx/general/toolbar_admin_usericon.gif) 0px 9px no-repeat;
+}

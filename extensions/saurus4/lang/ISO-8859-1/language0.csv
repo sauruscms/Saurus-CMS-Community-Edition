@@ -1,0 +1,74 @@
+[CHECKSUM=0:1:54]
+[DATE=2008-06-27 14:19:36]
+[ENCODING=ISO-8859-1]
+
+#
+#  Language file: Estonian
+#  Supplier: www.saurus.info 
+#  
+#  Total sys strings: 54
+#  Total descriptions: 54
+#  Status descriptions: OK
+#  Total translations: 54
+#  Status translations: OK
+
+
+# SYSTEM STRING; DESCRIPTION; TRANSLATION;
+
+
+
+[saurus4:33:Saurus 4]
+add;Add;Lisa;
+add comment;Add comment;Lisa kommentaar;
+advanced search;Advanced search;Täppisotsing;
+all the words;All the words;Kõiki sõnu;
+application name;Application;Rakendus;
+applications login info;Applications;Rakendused;
+archive;Archive;Arhiiv;
+author;Author;Autor;
+by title;By title;Pealkirja järgi;
+CAPTCHA failed;Entered text did not match text on the image;Sisestatud tekst ei klappinud pildi tekstiga;
+changed last;Changed last;Viimati muudetud;
+comment;Comment;Kommentaar;
+comments;Comments;Kommentaarid;
+does not include;Does not include;Ei sisalda;
+e-mail;E-mail;E-mail;
+enter_the_text_on_the_image;Enter the text on the image;Sisesta pildil olev tekst;
+exact phrase;Exact phrase;Täpset fraasi;
+forums;Forums;Foorumid;
+from section;From section;Rubriigist;
+hide e-mail;Don't show e-mail;Ära näita minu e-posti aadressi;
+keyword_too_short;Keyword is too short;Palun sisesta vähemalt 4 täheline otsisõna;
+last 3 months;Last 3 months;Viimased 3 kuud;
+last 6 months;Last 6 months;Viimased 6 kuud;
+last month;Last month;Viimane 1 kuu;
+last reply;Last reply;Viimane vastus;
+last week;Last week;Viimane nädal;
+last year;Last year;Viimane aasta;
+latest posts;Latest posts;Viimased postitused;
+mailinglists;Subscribe to mailinglists;Uudiste teemad;
+name;Name;Nimi;
+new comment;New comment;Uus kommentaar;
+new message;New message;Uus postitus;
+new topic;New topic;Uus teema;
+newest first;Newest first;Uuemad enne;
+one of the words;One of the words;Ühte sõnadest;
+password;Password;Parool;
+password expired message;Your password is expired, enter new password;Sinu parool on aegunud, sisesta uus parool;
+please fill in;Please fill in;Palun täida;
+profile;Profile;Profiil;
+register;Register;Registreerimisvorm;
+replies;Replies;Vastused;
+reply;Reply;Vastus;
+rss entries;Entries;Postitused;
+search;Search;Otsi;
+search_order_relevance;By relevance;Relevantsuse järgi;
+see also;See also;Vaata lisaks;
+send;Send;Saada;
+send_replies;Send replies to e-mail;Saada vastused mulle e-postiga;
+sitemap;Sitemap;Sisukaart;
+title;Title;Pealkiri;
+topics;Topics;Teemad;
+username;Username;Kasutajanimi;
+whenever;Whenever;Millal iganes;
+yesterday;Yesterday;Eile;

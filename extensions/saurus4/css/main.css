@@ -1,0 +1,249 @@
+body {
+	margin: 0px;
+	padding: 0px;
+	background-image: url(../images/bg_cont.gif);
+	background-color: #FFF;
+	border: none;
+}
+
+#MainContainer {
+	min-height: 700px;
+	background-image: url(../images/body_bg.gif);
+	background-repeat: repeat-x;
+	padding-bottom: 26px;
+}
+* html #MainContainer {
+	height: 700px;
+}
+
+#LocationBar {
+	line-height: 34px;
+	margin: 0px 0px 0px 42px;
+	font-family: Verdana, sans-serif;
+	font-size: 9px;
+	color: #495B76;
+	text-transform: uppercase;
+	white-space: nowrap;
+}
+
+#LocationBar a {
+	padding: 0px 4px 0px 8px;
+	color: #495B76;
+	text-decoration: none;
+	background-image: url(../images/locationbar_arrow.gif);
+	background-repeat: no-repeat;
+	background-position: left 4px;
+}
+
+#LocationBar a:hover {
+	text-decoration: underline;
+}
+
+#PageContainer {
+	margin: 0px 0px 0px 34px;
+	width: 757px;
+	background-image: url(../images/pagecontainer_bg.gif);
+	background-repeat: no-repeat;
+	background-position: right top;
+}
+
+#HeaderContainer {
+	width: 746px;
+	height: 108px;
+	text-align: right; 
+	background-image: url(../images/headercontainer_bg.jpg);
+}
+
+#TitleContainer {
+	float: left;
+	display: inline;
+	margin: 5px 0px 0px 25px;
+	text-align: left;
+}
+
+#TitleContainer h1 a {
+	color: #0db808;
+	font-size: 46px;
+	font-weight: bold;
+	padding: 0px;
+	font-family: Trebuchet MS, Helvetica, sans-serif;
+	text-decoration: none;
+}
+
+#TitleContainer h2 {
+	color: #7296ea;
+	font-size: 12px;
+	font-weight: bold;
+	font-family: Verdana, sans-serif;
+	padding: 0px;
+}
+
+#LogoLink {
+	margin: 24px 27px 10px 0px;
+}
+
+#LanguageSelector {
+	margin: 0px 36px 10px 0px;
+	font-size: 10px;
+	color: #00CC00;
+}
+
+#LanguageSelector a {
+	text-decoration: none;
+}
+
+#LanguageSelector a:hover {
+	text-decoration: underline;
+}
+
+#LanguageSelector .current {
+	color: #00CC00; 
+}
+
+#ContentContainer {
+	margin: 0px 11px 0px 0px;
+	padding: 0px 0px 16px 26px;
+	background-color: #FFF;
+	border: 1px solid transparent;
+}
+* html #ContentContainer {
+	border: none;
+}
+
+#PrintContentContainer {
+	width: 532px; 
+	margin: 0px;
+	padding-bottom: 10px;
+}
+
+#NavigationContainer {
+	float: right;
+	width: 162px;
+}
+
+#SectionTree {
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+	font-family: Verdana, sans-serif;
+	font-size: 11px;
+}
+
+#SectionTree a {
+	color: #0DB609;
+	text-decoration: none;
+	padding: 0px 0px 0px 6px;
+	display: block;
+}
+
+#SectionTree a:hover {
+	text-decoration: underline;
+}
+
+#SectionTree li {
+	line-height: 210%;
+	padding: 0px 0px 0px 6px;
+}
+
+#SectionTree a.Current {
+	display: block;
+	background-color: #0DB609;
+	padding: 0px 0px 0px 6px;
+	color: #FFF;
+}
+
+#SectionTree ul {
+	margin: 0px 0px 0px 8px;
+	padding: 0px;
+	list-style: none;
+	background-color: white !important;
+}
+
+#SectionTree ul a {
+	display: block;
+	width: 130px;
+	line-height: 170%;
+	color: #495B76;
+	padding-left: 10px; 
+	background-image: url(../images/secondlevel_li.gif);
+	background-repeat: no-repeat;
+	background-position: 2px 6px;
+}
+
+#SectionTree ul a.Selected {
+	font-weight: bold;
+}
+
+#SearchBox {
+	margin: 16px 0px 0px 0px;
+	padding: 5px 9px 5px 9px;
+	border-top: 1px solid #DAE3FA;
+	border-bottom: 1px solid #DAE3FA;
+	font-size: 9px;
+	color: #A3BBF3;
+}
+
+#SearchBox form {
+	margin: 0px;
+	padding: 0px;
+}
+
+#SearchBox input {
+	font-size: 9px;
+}
+
+.SearchField {
+	margin: 0px;
+	width: 105px;
+	height: 18px;
+	line-height: 12px;
+	padding: 3px;
+	border: none;
+	background: #A3BBF3;
+	vertical-align: top;
+	font-family: Verdana, helvetica, sans-serif;
+	font-size: 9px;
+	color: #FFF;
+}
+
+#SearchBox a {
+	color: #A3BBF3;
+	text-decoration: none;
+}
+
+.Clear {
+	clear: both;
+}
+
+#AddOnBoxes {
+	padding: 9px;
+	font-size: 11px;
+}
+
+#AddOnBoxes h3 {
+	margin: 0px 0px 6px 0px;
+	padding: 0px;
+	font-size: 14px;
+	color: #0DB609;
+	font-weight: bold;
+}
+
+#AddOnBoxes h4 {
+	font-size: 12px;
+}
+
+#AddOnBoxes a {
+	font-family: Verdana, helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 170%;
+}
+
+#AddOnBoxes ol {
+	padding-left: 20px;
+	margin-left: 5px;
+}
+
+#AddOnBoxes ul li {
+	list-style-type: none;
+	margin-left: -40px;
+}

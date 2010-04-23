@@ -1,0 +1,344 @@
+body, td {
+	font-family: "Lucida Sans Unicode", Verdana, sans-serif;
+	font-size: 13px;
+	color: #495B76;
+}
+
+a {
+	color: #85A5EF;
+}
+
+h1 {
+	margin: 0px;
+	padding-top: 10px;
+	font-size: 24px;
+	font-weight: normal;
+}
+
+h2 {
+	margin: 0px;
+	padding-top: 10px;
+	font-size: 20px;
+	font-weight: normal;
+}
+
+h3 {
+	margin: 0px;
+	padding-top: 10px;
+	font-size: 16px;
+	font-weight: normal;
+}
+
+p.qoute {
+	margin: 10px 0px 10px 0px;
+	padding-left: 15px;
+	font-style: italic;
+	border-left: 3px solid #85A5EF;
+}
+
+span.Date {
+	font-size: 11px;
+	color: #85A5EF;
+}
+
+table.ArticleColumns {
+	width: 100%;
+}
+
+table.ArticleColumns td {
+	width: 50%;
+	vertical-align: top;
+	padding: 5px;
+}
+
+table.DataTable {
+	width: 100%;
+	border: 1px solid #ccc;
+}
+
+table.DataTable td {
+	vertical-align: top;
+	white-space: nowrap;
+	padding: 4px;
+}
+
+table.DataTable td.DataTableWrap {
+	white-space: normal;
+}
+
+table.ZebraTable tr.dark,
+table.DataTable tr.dark,
+table.DataTable td.dark {
+	background: #FAFAFA;
+}
+
+table.ZebraTable tr.light,
+table.DataTable tr.light,
+table.DataTable td.light { 
+	background: #FFF;
+}
+
+table.FormTable {
+	width: 100%;
+}
+
+table.FormTable td {
+	vertical-align: top;
+	padding: 4px;
+}
+
+table.FormTable caption {
+	padding: 4px 0px;
+}
+
+table.FormTable col.FormTableLabels {
+	text-align: right;
+	white-space: nowrap;
+}
+
+table.FormTable td:first-child {
+	text-align: right;
+	white-space: nowrap;
+}
+
+table.FormTable input.FormText {
+	width: 300px;	
+}
+
+input.FormText {
+	height: 20px;
+	width: 170px;
+	margin: 0px 6px 0px 0px;
+	border: 1px solid #85A5EF;
+	font-family: Verdana, helvetica, sans-serif;
+	font-size: 11px;
+	color: #5A6A70;
+}
+
+select.FormSelect {
+	height: 17px;
+	width: 170px;
+	border: 1px solid #85A5EF;
+	font-family: Verdana, helvetica, sans-serif;
+	font-size: 11px;
+	color: #5A6A70;
+}
+
+textarea.FormTextArea {
+	margin: 6px 0px 0px 0px;
+	width: 100%;
+	height: 150px;
+	border: 1px solid #85A5EF;
+	font-family: Verdana, helvetica, sans-serif;
+	font-size: 13px;
+	color: #5A6A70;
+}
+
+div#SearchTypeSelector {
+	height: 23px;
+	margin-top: 23px;
+	padding-left: 10px;
+	border-top: 1px solid #DAE3FA;
+	border-bottom: 1px solid #DAE3FA;
+	text-transform: uppercase;
+	font-size: 10px;
+	line-height: 23px;
+}
+
+#SearchResultsLabel {
+	margin-right: 12px;
+}
+
+#SearchCount {
+	color: #BB0101;
+}
+
+#FoundResults {
+	height: 100%;
+	padding: 0px 12px 0px 12px;
+	background-color: #DAE3FA; 
+}
+
+#Disabled {
+	height: 100%;
+	padding: 0px 12px 0px 12px;
+	color: #B3BDC1;
+}
+
+#FoundResults {
+	height: 100%;
+	padding: 0px 12px 0px 12px;
+	background-color: #DAE3FA; 
+}
+
+#SearchTypeSelector A {
+	height: 100%;
+	padding: 0px 12px 0px 12px;
+}
+
+div.ResultTitle {
+	padding: 18px 0px 6px 0px;
+}
+
+div.ResultTitle a {
+	margin: 0px;
+	padding: 0px;
+	font-size: 13px;
+	font-weight: bold;
+	color: #7196EC;
+}
+
+#SearchPaging {
+	height: 23px;
+	margin-top: 23px;
+	margin-bottom: 23px;
+	border-top: 1px solid #DAE3FA;
+	border-bottom: 1px solid #DAE3FA;
+	text-transform: uppercase;
+	text-align: center;
+	font-size: 10px;
+	line-height: 23px;
+}
+
+a.DocumentIcon {
+	float: left;
+}
+
+a.DocumentIcon img {
+	border: none;
+}
+
+div.Document {
+	margin-bottom: 12px;
+}
+
+h1.DocumentTitle {
+	font-size: 13px;
+	font-weight: bold;
+}
+
+h1.DocumentTitle a {
+	text-decoration: none;
+	color: #495B76;
+}
+
+h1.DocumentTitle,
+p.DocumentDesc,
+p.DocumentData
+{
+	margin: 0px;
+	padding: 0px;
+	margin-left: 60px;
+}
+
+span.Date {
+	font-size: 11px;
+	color: #85A5EF;
+}
+
+.float {
+	float: right;
+}
+
+a.JumpLink {
+	font-size: 13px;
+	text-decoration: none;
+}
+
+a.JumpLink:hover {
+	text-decoration: underline;
+}
+
+.ucase {
+	text-transform: uppercase;
+}
+
+.separator {
+	text-align: left;
+	border-bottom: 1px solid #CCC;
+	font-size: 14px;
+}
+
+div.gallery {
+	clear: left;
+}
+
+div.ArticlesAfter {
+	clear: left;
+}
+
+div.GalleryThumbnail {
+	float: left;
+	margin: 0px 10px 10px 0px;
+	text-align: center;
+}
+
+div.GalleryThumbnail a img {
+	border: none;
+}
+
+div.GalleryThumbnail table {
+	margin: 0px auto;
+}
+
+div.GalleryThumbnail table td {
+	vertical-align: bottom;
+	text-align: center;
+}
+
+div.GalleryThumbnail div.Description {
+	height: 32px;
+	overflow: hidden;
+}
+
+div#BlogContainer h1 a {
+	text-decoration: none;
+}
+
+div#BlogAddOns {
+	float: right;
+	width: 142px;
+	margin: 0px 0px 20px 20px;
+}
+
+ul.BlogArchiveLinks {
+	padding: 0px;
+	margin: 10px 0px 0px 0px;
+	list-style: none;
+}
+
+ul.BlogLatestLinks {
+	text-align: left;
+	padding: 0px 0px 0px 20px;
+	margin: 10px 0px 0px 0px;
+}
+
+ul.BlogArchiveLinks li, ul.BlogLatestLinks li {
+	margin: 10px 0px 0px 0px;
+	line-height: normal;
+}
+
+ul.BlogArchiveLinks ul {
+	padding: 0px;
+	margin: 0px 0px 0px 20px;
+	list-style: none;
+}
+
+ul.BlogArchiveLinks ul li {
+	margin: 0px 0px 0px 0px;
+	line-height: normal;
+}
+
+div#BlogEntryCommentsContainer {
+	clear: both;
+}
+
+span.highlight {
+	background-color: #FFFF9A;
+	color: black;
+}
+
+span.anti_highlight span.highlight {
+	background-color: inherit;
+	color: inherit;
+}

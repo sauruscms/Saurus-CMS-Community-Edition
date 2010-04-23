@@ -1,0 +1,80 @@
+{**
+ * Articles in two columns, content template
+ * Date: 10.10.08
+ *
+ * @package saurus4
+ * 
+ * @author Saurus <saurus@saurus.info>
+ *
+ *}
+
+<div id="Articles2ColumnsContainer">
+
+<table cellpadding="0" cellspacing="0" class="ArticleColumns">
+	<tr>
+		<td>
+			{* first column articles are positioned to 0 *}
+			{init_articles name="articles" position=0}
+			{$articles_newbutton}
+			
+			{foreach from=$articles item="article" name="articles_loop"}
+						
+				<h1>{$article->buttons}{if $article->show_headline}{$article->title}{/if}</h1>
+				
+				{init_article name="art" id=$article->id}
+								
+				{if $art->lead && $art->body}
+						{$art->lead}
+						{* Read More link from Glossary *}
+						<a href="{$art->href}">{sysword word="More" type="Visual Design"}</a>
+				{else}
+					{$art->lead} {$art->body}
+					{if $art->forum_allowed}
+						{if $art->comment_count}
+							<a href="{$art->href}#comments">{sysword word="comments" type="saurus4"}</a>
+							({$art->comment_count})
+							|
+							<a href="{$art->href}#add_message">{sysword word="add" type="saurus4"}</a>
+						{else}
+							<a href="{$art->href}#add_message">{sysword word="add comment" type="saurus4"}</a>
+						{/if}
+					{/if}
+				{/if}
+			
+			{/foreach}	
+		</td>
+		<td>
+		{* second column articles are positioned to 6 *}
+		{init_articles name="articles" position=6}
+		{$articles_newbutton}
+		
+		{foreach from=$articles item="article" name="articles_loop"}
+					
+			<h1>{$article->buttons}{if $article->show_headline}{$article->title}{/if}</h1>
+			
+			{init_article name="art" id=$article->id}
+			
+			{if $art->lead && $art->body}
+					{$art->lead}
+					{* Read More link from Glossary *}
+					<a href="{$art->href}">{sysword word="More" type="Visual Design"}</a>
+			{else}
+				{$art->lead}{$art->body}
+				{if $art->forum_allowed}
+					{if $art->comment_count}
+						<a href="{$art->href}#comments">{sysword word="comments" type="saurus4"}</a>
+						({$art->comment_count})
+						|
+						<a href="{$art->href}#add_message">{sysword word="add" type="saurus4"}</a>
+					{else}
+						<a href="{$art->href}#add_message">{sysword word="add comment" type="saurus4"}</a>
+					{/if}
+				{/if}
+			{/if}
+		
+		{/foreach}	
+		</td>
+	</tr>
+</table>
+
+</div><!-- / Articles2ColumnsContainer -->

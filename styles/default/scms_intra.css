@@ -1,0 +1,273 @@
+.scms_portal_blockheader {
+	height: 25px;
+	font-weight: bold;
+	background-color: white; 
+	background-image: url(gfx/general/block_hd.gif); 
+	background-repeat: repeat-x;
+	padding-top: 3px;
+	padding-left: 1px;
+}
+
+.scms_portal_blockheader img {
+	margin-right: 4px;
+	margin-left: 4px;
+	margin-top: 2px;
+}
+
+/* Content area */
+.scms_portal_newsfeed_title{
+	display: block;
+	margin: 4px;
+	padding: 4px;
+	width: 50%;
+	border-bottom: 1px solid #597CBF;
+	color: #597CBF;
+	font-weight: bold;
+	white-space: nowrap;
+}
+
+.scms_portal_newsfeed_title a:hover {
+	text-decoration: none;
+}
+
+.scms_portal_focusarticle {
+	display: block;
+	margin: 0px;
+	padding-bottom: 4px;
+	padding-left: 8px;
+	padding-right: 8px;
+	line-height: 16px;
+	text-align: justify;
+}
+
+
+.scms_portal_focusarticle a:hover {
+	text-decoration: none;
+}
+
+
+.scms_portal_focusarticle ul {
+	margin-left: 0;
+	padding-left: 0;
+	list-style: none;
+	
+}
+.scms_portal_focusarticle li {
+	line-height: 16px;
+	background-image: url(gfx/menu/bullet.gif);
+	padding-left: 10px;
+	background-repeat: no-repeat;
+	background-position: 0 50%;
+}	
+
+.scms_article_area {
+	display: block; 
+	width: 80%;
+	padding: 12px;
+	margin: 12px;
+	border: 1px solid #f4f4f4
+
+}
+
+.scms_article_title {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	font-weight: normal;
+	color: #637FB1;
+	vertical-align: middle;
+}
+.scms_article_date {
+	color: #5A5C61;
+	font-size: 10px;
+}
+
+.scms_article_lead {
+	display: block;
+	font-weight: bold;
+	margin-top: 4px;
+	margin-bottom: 8px;
+}
+
+
+
+.scms_portal_doctitle {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	font-weight: normal;
+	color: #637FB1;
+	vertical-align: middle;
+}
+
+/* General content template styles */
+.scms_middle_div table#content_block {
+	border-bottom: 1px solid #EFEEEC;
+	margin-top: 0px;
+	padding: 2px;
+
+}
+
+.scms_middle_div td#content_title {
+	color: #597CBF;
+	font-weight: bold;
+	line-height: 16px;
+}
+
+.scms_middle_div td#content_title a{
+	color: #597CBF;
+	font-weight: bold;
+	line-height: 16px;
+}
+
+
+/* //General content template styles */
+
+	/* "Overview" tools row */
+	.scms_overview_tools {
+		background: white;
+		vertical-align: middle;
+	}
+
+	.scms_overview_tools a, .scms_overview_tools a:hover {
+		font-weight: bold;
+		text-decoration: none;
+	}
+	
+	/* //"Overview" tools row */
+
+	/* Date browser */
+	.scms_db_main {
+		padding-left: 12px;
+		padding-right: 32px;
+		height: 25;
+		background: white; 
+		width: 100%;
+	}
+
+	.scms_db_main a:hover {
+		text-decoration: none
+	}
+
+	.scms_db_main td#1 {
+		border-bottom: 1px solid #f4f4f4
+	}
+	.scms_db_years td{
+		padding: 4px;
+		border: none;
+	}
+
+	.scms_db_years td#act{
+		background: #f4f4f4
+	}
+
+	.scms_db_months td{
+		padding: 4px;
+		width: 12;
+		text-align: center;
+		border: none;
+	}
+
+	.scms_db_months td#act{
+		background: #f4f4f4
+	}
+	/* //Date browser */
+
+	/* Content area tabs */
+
+	.scms_ca_tab_active {
+		background-image: url(gfx/general/tabs/content_area/tb_bg.gif); 
+		background-repeat: repeat-x;
+		text-align: center;	
+		vertical-align: middle;
+		white-space: nowrap;
+		padding: 0px;
+	}
+
+	.scms_ca_tab_active a {
+		width: 100%;
+		height: 25px;
+		line-height: 18px;
+		background-image: url(gfx/general/tabs/content_area/tb_end.gif); 
+		background-position: right;
+		background-repeat: no-repeat;
+		padding-left: 10px;
+		padding-top: 4px;
+		padding-right: 8px;
+		font-weight: bold; 
+	}
+	
+	.scms_ca_tab {
+		padding-left: 6px;
+		padding-right: 4px;
+	}
+
+	/* //Content area tabs */
+
+/* //Content area */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Tabid */
+.scms_tab_active {
+	height: 25px;
+	background-image: url(gfx/general/tab_act_bg.png); 
+	background-repeat: repeat-x;
+	text-align: center;	
+	vertical-align: middle;
+	white-space: nowrap;
+}
+
+.scms_tab{
+	background-image: url(gfx/general/tab_bg.png); 
+	background-repeat: repeat-x;
+	padding-left: 8px;
+	padding-right: 8px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.scms_tab td{
+	border-bottom: 1px solid #ECEBE9;
+}
+
+.scms_tab_active a {
+	line-height: 25px;
+	width: 100%;
+	background-image: url(gfx/general/tab_act_e.png); 
+	background-repeat: none;
+	background-position: right;
+	text-align: center;
+	font-weight: bold;
+}
+
+.scms_tab_active a:hover {
+	text-decoration: none;
+}
+
+.scms_tab a:hover {
+	text-decoration: none;
+}
+
+
+
+
+.scms_selectiongroup {
+	padding-left: 3px;
+	margin-left: 3px;
+	height: 24px;
+	font-size: 11px;
+	font-weight: bold;
+	vertical-align: middle;
+	border-bottom: 1px solid #F4F4F4;
+
+}

@@ -1,0 +1,517 @@
+html, body {
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	background: #f4f4f4;
+	border: none;
+	overflow: hidden;
+}
+
+body {
+	/* to hide body scrollbars */
+	overflow: hidden;
+}
+
+form {
+	margin: 0px;
+	padding: 0px;
+}
+
+a img {
+	border: none;
+}
+
+/* fonts */
+body, td, input, select, textarea {
+	font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #333333;
+}
+
+a:link, a:visited, a:active {
+	color: #5A5C61;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #000000;
+	text-decoration: underline; 
+}
+/* /fonts */
+
+/* form elements */
+input.text,
+input.text_date,
+input.text_time,
+input.text_small,
+input.text_long,
+input.checkbox,
+input.contextual,
+textarea.textarea
+{
+	_vertical-align: middle;
+}
+
+input.checkbox {
+	vertical-align: middle;
+}
+
+input.text,
+input.text_date,
+input.text_config,
+input.text_small,
+input.text_long,
+input.contextual,
+input.text_time
+{
+	padding-left: 3px; 
+	height: 20px;
+	border: 1px solid #7F9DB9;
+	font-size: 11px;
+}
+
+input.text_date {
+	width: 65px;
+}
+
+input.text_config {
+	width: 200px;
+}
+
+input.text_time {
+	width: 35px;
+}
+
+input.text_small {
+	width: 30px;
+}
+
+input.text_long {
+	width: 400px;
+}
+
+input.contextual {
+	width: 100%;
+	border: none;
+	min-height: 18px;
+	height: 17px;
+	padding-right: 2px;
+}
+
+input.button {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+/* /form elements */
+
+/* layout I : one scrollable content container, table based no doctype */
+table.s_Body_container {
+    height: 100%;
+    width: 100%;
+}
+table.s_Body_container td {
+    vertical-align: top;
+}
+
+div#s_Content_container {
+    height: 100%;
+    overflow: scroll;
+    background-color: #fff;
+}
+
+td.s_Page_container {
+    overflow: hidden;
+    padding: 0px 15px;
+}
+
+td.s_Header_container {
+    height: 1px;
+}
+
+td.s_Footer_container {
+    height: 1px;
+}
+
+.grayhead {
+	color:#333333;
+	background-color:#FFFFFF;
+	font-weight:bold;
+}
+
+.tableTitle{
+	color:#333333;
+	background-color:#FFFFFF;
+	font-weight:bold;
+}
+
+.tableTitleActive{
+	background-color:#FFFFFF;
+	font-weight:bold;
+	border-bottom-style:solid;
+	border-bottom-width:1px;;
+	border-bottom-color:#7390c9;
+}
+
+/* main toolbar */
+div.s_Toolbar_container {
+	background-color: #f4f4f4;
+	border-bottom: 1px solid #fff;
+	clear: both;
+}
+
+div.s_Toolbar_content {
+	_height: 26px;
+	min-height: 26px;
+	border-bottom: 1px solid #d4d4d4;
+}
+/* /main toolbar */
+
+div.s_Page_title_bar {
+	margin: 15px 15px 0px 15px;
+	padding: 4px 5px;
+	background-color: #ecebe9;
+	font-weight: bold;
+}
+
+div.s_Page_title_bar td.title {
+	font-weight: bold;
+}
+/* / layout I : one scrollable content container, table based no doctype */
+
+/* layout II : several scrollable content containers, absolutley positioned XHTML strict doctype */
+div#mainContainer {
+}
+
+div.titleArea {
+	background: url(gfx/general/block_hd.gif) repeat-x;
+    background-color: #fff;
+	font-weight: bold;
+	height: 40px;
+	padding: 10px;
+}
+
+div.footerArea {
+	position: absolute;
+    overflow: clip;
+    bottom: 0px;
+    right: 0px;
+    height: 40px;
+}
+
+div.footerArea div.actionButtonsArea {
+	padding: 10px;
+}
+
+div.toolbarArea {
+	background-color: #f4f4f4;
+	border-bottom: 1px solid #fff;
+	_margin-right: -10px;
+}
+
+div.toolbarArea table {
+	border-bottom: 1px solid #d4d4d4;
+	padding: 2px 2px 1px 2px;
+}
+
+div.contentArea {
+	position: absolute;
+    overflow: clip;
+    background-color: #fff;
+    margin: 0px 15px;
+}
+
+div.contentAreaTitle {
+	background-color: #ecebe9;
+	font-weight: bold;
+}
+
+div.contentAreaTitle table {
+	margin: 0px 5px;
+}
+
+div.contentAreaTitle td {
+	vertical-align: middle;
+	height: 24px;
+}
+
+div.contentAreaContent {
+	position: absolute;
+    overflow: auto;
+    background-color: #fff;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+}		
+
+div.contentAreaContent.withTitleBar {
+    top: 24px;
+}		
+
+div.contentAreaContent.withToolBar {
+    top: 30px;
+    _top: 28px;
+}		
+
+div.contentAreaContent.withTitleAndToolBar {
+    top: 54px;
+    _top: 52px;
+}		
+/* / layout II : several scrollable content containers, absolutly positioned XHTML strict doctype */
+
+/* layout II for popups */
+body#popup div.contentArea {
+	margin: 0px;
+}
+
+body#popup div.contentAreaContent {
+	margin: 0px 10px;
+}
+/* / layout II for popups */
+
+/* buttons of all sorts */
+ 
+ul.s_Buttons_container {
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+
+ul.s_Buttons_container li {
+	margin: 0px;
+	padding: 0px;
+	display: inline;
+}
+
+ul.s_Buttons_container li a {
+	display: block;
+	float: left;
+	margin: 1px;
+}
+
+ul.s_Buttons_container li span {
+	display: block;
+	float: left;
+	margin: 1px 2px;
+}
+
+/* contextual field */
+ul.s_Buttons_container li span.contextual {
+	margin: 0px;
+}
+
+table.cf_container {
+	border: 1px solid #7F9DB9;
+	background-color: #fff;
+	text-align: left;
+	vertical-align: top;
+}
+
+table.cf_container th {
+	font-weight: normal;
+}
+
+table.cf_container td a {
+	display: block;
+	background-color: #f4f4f4;
+	border: none;
+	border-left: 1px solid #fff;
+	padding: 1px 5px 4px 5px;
+	_padding: 2px 5px 4px 5px;
+	margin: 0px;
+	text-decoration: none !important;
+}
+
+table.cf_container th span {
+	font-size: 11px;
+	float: none;
+	margin: none;
+	padding: 1px 3px 0px 2px;
+	overflow: hidden;
+	height: 14px;
+}
+
+/* specific */
+a.button,
+a.button_highlighted,
+a.button_save,
+a.button_new,
+a.button_edit,
+a.button_search,
+a.button_search_nolabel,
+a.button_search_reset_nolabel,
+a.button_calendar,
+a.button_look,
+a.button_right,
+a.button_refresh,
+a.button_left,
+a.button_back,
+a.button_upload,
+a.button_exec,
+a.button_delete_nolabel,
+a.button_delete
+{
+	text-decoration: none;
+	border: 1px solid;
+	border-color: #F4F4F4;
+	min-height: 14px;
+	_width: 22px;
+	min-width: 18px;
+	background-position: 2px 2px;
+	background-repeat: no-repeat;
+	padding: 4px 2px 4px 24px;
+	white-space: nowrap;
+	font-size: 11px;
+	font-weight: normal;
+}
+
+a.button:hover,
+a.button_highlighted:hover,
+a.button_save:hover,
+a.button_new:hover,
+a.button_edit:hover,
+a.button_search:hover,
+a.button_search_nolabel:hover,
+a.button_search_reset_nolabel:hover,
+a.button_calendar:hover,
+a.button_look:hover,
+a.button_refresh:hover,
+a.button_right:hover,
+a.button_left:hover,
+a.button_back:hover,
+a.button_upload:hover,
+a.button_exec:hover,
+a.button_delete_nolabel:hover,
+a.button_delete:hover
+{
+	border-color: #637FB1;
+	background-color: #D2DFFA;
+	text-decoration: none;
+}
+
+a.button,
+a.button_highlighted,
+a.button_search_nolabel,
+a.button_search_reset_nolabel,
+a.button_delete_nolabel,
+a.button_calendar
+{
+	padding: 4px 2px 4px 2px;
+}
+
+/* highlighted */
+a.button_highlighted
+{
+	background-color: #ECEBE9;
+}
+/* smaller */
+a.button_left,
+a.button_right
+{
+	background-position: 1px 1px;
+	padding: 2px 1px 2px 1px;
+	_padding: 3px 1px 3px 1px;
+	_width: 20px;
+	min-width: 14px;
+}
+
+a.button_delete {
+	background-image: url(gfx/icons/16x16/actions/delete.png);
+}
+
+a.button_refresh {
+	background-image: url(gfx/icons/16x16/actions/refresh.png);
+}
+a.button_delete_nolabel {
+	background-image: url(gfx/icons/16x16/actions/delete.png);
+}
+
+a.button_save {
+	background-image: url(gfx/icons/16x16/actions/filesave.png);
+}
+
+a.button_new {
+	background-image: url(gfx/icons/16x16/actions/filenew.png);
+}
+
+a.button_edit {
+	background-image: url(gfx/icons/16x16/actions/edit.png);
+}
+
+a.button_search {
+	background-image: url(gfx/icons/16x16/actions/viewmag.png);
+}
+
+a.button_search_nolabel {
+	background-image: url(gfx/icons/16x16/actions/viewmag.png);
+}
+
+a.button_search_reset_nolabel {
+	background-image: url(gfx/icons/16x16/actions/search_reset.gif);
+}
+
+a.button_calendar {
+	background-image: url(gfx/icons/16x16/actions/choose_date2.png);
+}
+
+a.button_look {
+	background-image: url(gfx/icons/16x16/actions/visible.png);
+}
+
+a.button_right {
+	background-image: url(gfx/icons/16x16/actions/right.png);
+}
+
+a.button_left {
+	background-image: url(gfx/icons/16x16/actions/left.png);
+}
+
+a.button_back {
+	background-image: url(gfx/icons/16x16/actions/back.png);
+}
+
+a.button_exec {
+	background-image: url(gfx/icons/16x16/actions/exec.png);
+}
+
+a.button_upload {
+	background-image: url(gfx/icons/16x16/actions/up.png);
+}
+/* /buttons */
+
+/* data tables */
+table.data_table caption {
+	padding: 5px;
+	background-color: #d2dffA;
+	font-weight: bold;
+	text-align: left;
+	font-size: 11px;
+}
+
+table.data_table td {
+	padding: 5px;
+	border-bottom: 1px solid #ecebe9;
+}
+
+table.data_table thead td {
+	padding: 5px;
+	border-bottom: 1px solid #8aa2d2;
+	font-weight: bold;
+}
+
+table.data_table tr.red td {
+	background-color: #ffb1a4;
+}
+
+table.data_table tr.gray td {
+	color: #949494;
+}
+
+table.data_table th {
+	padding: 5px;
+	border-bottom: 1px solid #ecebe9;
+	font-weight: bold;
+	text-align: left;
+}
+
+/* /data tables */

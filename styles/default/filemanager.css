@@ -1,0 +1,620 @@
+html, body {
+	margin: 0;
+	padding: 0;
+	background-color: #fff;
+	font-family: "Trebuchet MS";
+	font-size: 13px;
+	color: #333;
+	border: 0;
+	overflow: hidden;
+	height: 100%;
+}
+
+a {
+	color: #198fef;
+	text-decoration: none;
+	outline: 0;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a img {
+	border: 0;
+}
+
+input {
+	margin: 0;
+	padding: 0;
+	font-family: "Trebuchet MS";
+	font-size: 13px;
+}
+
+.hidden {
+	display: none;
+}
+
+.invisible {
+	visibility: hidden;
+}
+
+input.text {
+	border: 1px solid #7e9fd2;
+	padding: 2px 4px;
+}
+
+input.button, input.cancel, input.disabled_button {
+	border: 1px solid #e3e2d1;
+	background-color: #198fef;
+	padding: 2px 8px 1px 8px;
+	color: #fff;
+	font-weight: bold;
+	min-width: 90px;
+}
+
+input.cancel {
+	border: 1px solid #e3e2d1;
+	background-color: #fff;
+	color: #999;
+}
+
+input.disabled_button {
+	border: 1px solid #e3e2d1;
+	background-color: #fff;
+	color: #e3e2d1;
+}
+
+input#save_folder_name {
+	width: 233px;
+}
+
+input#show_create_folder_button {
+	background-color: #fafafa;
+	color: #333333;
+}
+
+div#scms_header_bar {
+	background-color: #FBFBFB;
+	border-top: 1px solid #E4E4E4;
+	border-bottom: 1px solid #E4E4E4;
+	height: 26px;
+	padding: 4px 7px 4px 7px;
+}
+
+table#scms_file_and_folder_tools {
+	float: left;
+}
+
+td#scms_folder_tools {
+	width: 248px;
+}
+
+td#scms_folder_tools td {
+	padding-right: 5px;
+}
+
+div#scms_search_tools, div#scms_upload_cancel {
+	margin-top: 1px;
+	float: right;
+}
+
+div#scms_left_pane {
+	float: left;
+	border-right: 1px solid #E4E4E4;
+	width: 248px;
+}
+
+div#scms_files_listing {
+	min-width: 400px;
+}
+
+div#scms_fm_body {
+	height: 400px;
+	overflow: hidden;
+}
+
+div#scms_footer_bar {
+	background-color: #FBFBFB;
+	border-top: 1px solid #E4E4E4;
+	border-bottom: 1px solid #E4E4E4;
+	height: 26px;
+	padding: 0px 7px 0px 7px;
+}
+
+div#scms_folder_tree {
+	min-width: 241px;
+	overflow: auto;
+}
+
+div#scms_left_pane_footer {
+	border-right: 1px solid #E4E4E4;
+	width: 241px;
+	height: 26px;
+	float: left;
+}
+
+div#scms_files_listing_footer {
+	float: left;
+	height: 26px;
+}
+
+div#scms_listing_contents {
+	overflow: auto;
+	margin: 0px 0px 0px 256px;
+}
+
+input#search_text {
+	width: 200px;
+	color: #7b7b7b;
+	border: 0;
+	background-color: #fff;
+}
+
+input#paging_text {
+	width: 22px;
+	color: #7b7b7b;
+	border: 1px solid #e4e4e4;
+	background-color: #fff;
+	padding: 0px 4px;
+	text-align: right;
+}
+
+div#search_wrapper {
+	background-color: #fff;
+	border: 1px solid #e4e4e4;
+	padding-left: 4px;
+	height: 21px;
+	width: 250px;
+}
+
+div#search_wrapper div {
+	float: right;
+	background-repeat: no-repeat;
+	background-position: right 5px;
+	height: 21px;
+	width: 21px;
+	cursor: pointer;
+}
+
+div#search_start {
+	background-image: url(gfx/filemanager/search_button.gif);
+}
+
+div#search_clear {
+	background-image: url(gfx/filemanager/search_clear.gif);
+}
+
+div#scms_listing_taskbar {
+	height: 30px;
+}
+
+div#scms_listing_actions_bar {
+	float: left;
+}
+
+div#scms_listing_left_actions_bar {
+	float: right;
+}
+
+table#scms_folder_tree_table {
+	margin: 5px 0px 5px 0px;
+	width: 100%;
+}
+
+table#scms_folder_tree_table td {
+	vertical-align: top;
+	text-align: left;
+}
+
+table#scms_folder_tree_table tr.selected {
+	background-color: #f4f4f4;
+}
+
+table#scms_folder_tree_table td a.folder_link {
+	color: #333;
+	display: block;
+	padding: 3px 5px 3px 30px;
+}
+
+table#scms_folder_tree_table a:hover {
+	text-decoration: none;
+}
+
+table#scms_folder_tree_table td.open a.folder_link {
+	background: url(gfx/filemanager/minus.gif) no-repeat left 5px;
+}
+
+table#scms_folder_tree_table td.no_subfolders a.folder_link {
+	background: url(gfx/filemanager/plain.gif) no-repeat left 5px;
+}
+
+table#scms_folder_tree_table td.closed a.folder_link {
+	background: url(gfx/filemanager/plus.gif) no-repeat left 5px;
+}
+
+table#scms_folder_tree_table td.closed, table#scms_folder_tree_table td.open, table#scms_folder_tree_table td.no_subfolders {
+	width: 100%;
+}
+
+table#scms_folder_tree_table td.context_button_cell {
+	padding: 5px 5px 0px 0px;
+}
+
+table#scms_folder_tree_table tr.level_1 a.folder_link {
+	margin: 0px 0px 0px 7px;
+}
+
+table#scms_folder_tree_table tr.level_2 a.folder_link {
+	margin: 0px 0px 0px 22px;
+}
+
+table#scms_folder_tree_table tr.level_3 a.folder_link {
+	margin: 0px 0px 0px 37px;
+}
+
+table#scms_folder_tree_table tr.level_4 a.folder_link {
+	margin: 0px 0px 0px 52px;
+}
+
+table#scms_folder_tree_table tr.level_5 a.folder_link {
+	margin: 0px 0px 0px 67px;
+}
+
+table#scms_folder_tree_table tr.level_6 a.folder_link {
+	margin: 0px 0px 0px 82px;
+}
+
+table#scms_folder_tree_table tr.level_7 a.folder_link {
+	margin: 0px 0px 0px 97px;
+}
+
+table#scms_folder_tree_table tr.level_8 a.folder_link {
+	margin: 0px 0px 0px 112px;
+}
+
+table#scms_folder_tree_table tr.level_9 a.folder_link {
+	margin: 0px 0px 0px 127px;
+}
+
+table#scms_folder_tree_table tr.level_10 a.folder_link {
+	margin: 0px 0px 0px 142px;
+}
+
+/* etc .. */
+
+img.context_button_anchor {
+	cursor: pointer;
+}
+
+a.context_button_anchor {
+	padding-right: 15px;
+}
+
+a.context_button_anchor:hover {
+	background: url(gfx/filemanager/context_button_anchor.gif) no-repeat right 4px;
+}
+
+div#scms_favorites {
+	border-bottom: 1px solid #E4E4E4;
+}
+
+table#scms_favorites_table {
+	margin: 5px 0px 5px 0px;
+	width: 100%;
+}
+
+table#scms_favorites_table td {
+	vertical-align: top;
+	text-align: left;
+}
+
+table#scms_favorites_table td a.favorite_link {
+	color: #333;
+	display: block;
+	padding: 3px 5px 3px 20px;
+	background: url(gfx/filemanager/bullet_star.png) no-repeat 5px 9px;
+}
+
+table#scms_favorites_table td a:hover {
+	text-decoration: none;
+}
+
+table#scms_favorites_table div.icon {
+	margin: 0px 0px 0px 7px;
+	background-repeat: no-repeat;
+	background-position: left 4px;
+}
+
+table#scms_favorites_table tr.folder div.icon {
+	background-image: url(gfx/filemanager/folder.png);
+}
+
+table#scms_favorites_table tr.file div.icon {
+	background-image: url(gfx/filemanager/page_white.png);
+}
+
+table#scms_favorites_table td.context_button_cell {
+	padding: 5px 5px 0px 0px;
+}
+
+table#scms_favorites_table td.link_cell {
+	width: 100%;
+}
+
+img.context_button_delete {
+	cursor: pointer;
+}
+
+div#scms_listing_actions_bar {
+	margin: 4px 7px 0px 7px;
+}
+
+div#scms_listing_left_actions_bar {
+	margin: 4px 7px 0px 7px;
+}
+
+div.thumbnail {
+	float: left;
+	margin: 0px 7px 5px 0px;
+}
+
+div.thumbnail table td {
+	vertical-align: middle;
+	text-align: center;
+}
+
+div.thumbnail table td.thumbnail_cell {
+	vertical-align: top;
+	text-align: left;
+}
+
+div.thumbnail div.thumbnail_links {
+	position: absolute;
+	z-index: 100;
+	width: 108px;
+	height: 106px;
+	background-color: #fff;
+	opacity: 0.85;
+	filter: alpha(opacity=85);
+	text-align: center;
+}
+
+div.thumbnail_links table {
+	width: 108px;
+	height: 106px;
+}
+
+div.thumbnail_links table table {
+	width: 108px;
+	height: 0;
+}
+
+div.thumbnail_links td.context_button_cell {
+	padding-left: 15px;
+}
+
+div.thumbnail_links td, div.thumbnail_image td {
+	vertical-align: middle;
+	text-align: center;
+}
+
+div.thumbnail_image table {
+	width: 107px;
+	height: 107px;
+}
+
+div.thumbnail td.thumbnail_cell {
+	width: 108px;
+	height: 108px;
+	border: 1px solid #ecebe9;
+}
+
+div.thumbnail td.thumbnail_cell.selected {
+	background-color: #f4f4f4;
+}
+
+div.context_button_container {
+	width: 120px;
+	position: absolute;
+	z-index: 100;
+	margin: 0px 0px 0px -107px;
+}
+
+div.context_button_container ul {
+	border: 1px solid #C5CACC;
+	background-color: #fff;
+	margin: 13px 0px 0px 0px;
+	padding: 0px;
+	list-style: none;
+}
+
+div.context_button_container ul a {
+	display: block;
+	padding: 2px 7px 3px 7px;
+}
+
+div.context_button_container ul a:hover {
+	background-color: #C5CACC;
+}
+
+div#scms_no_files, div#scms_no_search_results {
+	text-align: center;
+	margin: 140px 0px 0px 0px;
+}
+
+div#scms_files_info {
+	float: left;
+	margin: 3px 0px 0px 7px;
+}
+
+div#scms_content_cover {
+	position: absolute;
+	z-index: 200;
+	height: 100%;
+	width: 100%;
+	background-color: #fff;
+	opacity: 0.85;
+	filter: alpha(opacity=85);
+}
+
+div#scms_fm_body_cover {
+	position: absolute;
+	z-index: 200;
+	width: 100%;
+	background-color: #fff;
+	opacity: 0.85;
+	filter: alpha(opacity=85);
+}
+
+div#scms_left_pane_cover {
+	position: absolute;
+	z-index: 200;
+	width: 248px;
+	background-color: #fff;
+	opacity: 0.85;
+	filter: alpha(opacity=85);
+}
+
+div#scms_dialog {
+	position: absolute;
+	z-index: 300;
+	width: 100%;
+}
+
+table#scms_dialog_box {
+	width: 500px;
+	margin: 120px auto 0px auto;
+	background-color: #fff;
+	border: 1px solid #C5CACC;
+}
+
+table#scms_dialog_box td {
+	text-align: center;
+	padding: 15px;
+}
+
+div#scms_file_list {
+	margin: 0px 7px 0px 0px;
+}
+
+table.scms_file_listing {
+	width: 100%;
+}
+
+table.scms_file_listing thead {
+}
+
+table.scms_file_listing thead a {
+	color: #333;
+}
+
+table.scms_file_listing thead a.sort_asc {
+	background: url(gfx/general/sort_down.gif) no-repeat right 5px;
+	padding-right: 20px;
+}
+
+table.scms_file_listing thead a.sort_desc {
+	background: url(gfx/general/sort_up.gif) no-repeat right 5px;
+	padding-right: 20px;
+}
+
+table.scms_file_listing td {
+	text-align: left;
+	overflow: hidden;
+	white-space: nowrap;
+	vertical-align: middle;
+	padding: 2px 3px 2px 3px;
+}
+
+table.scms_file_listing tr.selected {
+	background-color: #f4f4f4;
+}
+
+table.scms_file_listing td.folder_cell {
+	width: 100%;
+}
+
+table.scms_file_listing td.size_cell {
+	text-align: right;
+}
+
+div.preview_thumbnail table {
+	width: 108px;
+	height: 108px;
+}
+
+div.preview_thumbnail table td {
+	width: 108px;
+	height: 108px;
+	text-align: center;
+}
+
+div.preview_thumbnail {
+	position: absolute;
+	width: 108px;
+	height: 108px;
+	border: 1px solid #ecebe9;
+	background-color: #fff;
+}
+
+div#upload_progress_bar {
+	border: 1px solid #198fef;
+	padding: 1px;
+	width: 400px;
+	background-color: #fff;
+}
+
+div#upload_progress_grow {
+	background:  #198fef;
+	width: 0px;
+	height: 12px;
+}
+
+td#scms_upload_progress {
+	padding-top: 2px;
+}
+
+td#scms_upload_cancel {
+	padding-right: 10px;
+}
+
+td#scms_upload_text {
+	padding: 2px 0px 0px 5px;
+}
+
+div#scms_paging {
+	float: right;
+	margin: 3px 0px 0px 7px;
+}
+
+a#paging_next, a#paging_previous {
+	padding: 0px 5px;
+	background-position: left center;
+	background-repeat: none;
+	text-decoration: none;
+}
+
+a#paging_next:hover, a#paging_previous:hover {
+	text-decoration: none;
+}
+
+a#paging_previous {
+	background-image: url(gfx/icons/16x16/actions/left.png);
+}
+
+a#paging_next {
+	background-image: url(gfx/icons/16x16/actions/right.png);
+}
+
+a.single_file_custom_action {
+	font-weight: bold;
+}
+
+td.single_file_custom_action_cell {
+	padding-bottom: 15px;
+}
+
+.bold {
+	font-weight: bold;
+}
