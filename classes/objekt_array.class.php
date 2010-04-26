@@ -883,7 +883,7 @@ class Alamlist extends ObjektArray {
 			
 			$sql = "
 				SELECT objekt.objekt_id, objekt.pealkiri, objekt.on_pealkiri,
-				objekt.on_avaldatud, objekt.keel,
+				objekt.on_avaldatud, objekt.keel, objekt.kesk,
 				objekt.ttyyp_id, objekt.page_ttyyp_id, objekt.on_foorum, objekt.aeg, objekt.meta_keywords, objekt.friendly_url, objekt.meta_title,
 				objekt.meta_description, objekt.sys_alias, objekt.ttyyp_params, objekt.author, objekt.is_hided_in_menu, objekt.last_modified,
 				objekt.created_user_id, objekt.created_user_name, objekt.changed_user_id, objekt.changed_user_name, objekt.created_time, objekt.changed_time, 
