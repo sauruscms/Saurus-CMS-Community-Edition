@@ -49,13 +49,37 @@ $CMS_PARAMS = array(
 #Get debug cookie muutuja
 $debug = $_COOKIE["debug"] ? 1:0;
 
+function show_debug()
+{
+	static $ips;
+	
+	# constant DISPLAY_ERRORS_IP came from index.php. It was taken from config table in db.
+	if(DISPLAY_ERRORS_IP)
+	{
+		$ips = DISPLAY_ERRORS_IP;
+	}
+	
+	if ($ips)
+	{
+		$d_ips = explode(';', DISPLAY_ERRORS_IP);
+		foreach ($d_ips as $err_ip)
+		{
+			if ($_SERVER['REMOTE_ADDR'] == trim($err_ip))
+			{
+				return true;
+			}
+		}
+	}
+	
+	return false;
+}
+
 ###################################
 # Error reporting is always "7"
 error_reporting(7);
 ini_set('display_errors', 0); // hide all errors from screen
 
-
-if ($debug){
+if ($debug && show_debug()){
 	ini_set('display_errors', 1);
 
 	# exception: dont show errors during full installation procedure
@@ -63,16 +87,6 @@ if ($debug){
 		ini_set('display_errors', 0);
 	}
 }	
-
-# constant DISPLAY_ERRORS_IP came from index.php. It was taken from config table in db.
-if (DISPLAY_ERRORS_IP && !ini_get('display_errors')){
-	$ips = explode(';', DISPLAY_ERRORS_IP);
-	foreach ($ips as $err_ip){
-		if ($_SERVER["REMOTE_ADDR"]==trim($err_ip)){
-			ini_set('display_errors', 1);
-		}
-	}
-}
 
 /**
 * saurusErrorHandler

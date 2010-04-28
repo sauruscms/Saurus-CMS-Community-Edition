@@ -62,7 +62,7 @@ class Debug {
 	}	
 
 	function print_hash ($ary,$strings_only,$ary_name) {
-		print $this->hash_get($ary,$strings_only,$ary_name);
+		if(show_debug()) print $this->hash_get($ary,$strings_only,$ary_name);
 	}
 
 	function msg ($message) {
@@ -81,7 +81,7 @@ class Debug {
 	}	
 
 	function print_msg() {
-		print $this->get_msg();
+		if(show_debug()) print $this->get_msg();
 	}
 
 	function get_msg() {
