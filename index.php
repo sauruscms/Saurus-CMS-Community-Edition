@@ -377,7 +377,7 @@ if ($site->fdat[id] == $site->alias("system") && !$site->in_editor) {
 }
 # create page
 $leht = new Leht(array(
-	id => $site->fdat[id] ? $site->fdat[id] : $site->alias("rub_home_id"),
+	id => $site->fdat[id] ? $site->fdat[id] : $site->alias($site->sys_alias ? $site->sys_alias : 'rub_home_id'),
 ));
 # / create site and page
 #################################################
