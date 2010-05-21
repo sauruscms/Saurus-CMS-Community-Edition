@@ -120,7 +120,7 @@ function admin_login_form() {
 	foreach ($site->fdat as $key=>$value) {
 		if (!is_array($value) && $key!="user" && $key!="pass" && !($key == 'op' && $value == 'logout')) {
 	?>
-		<input type="hidden" name="<?=$key?>" value="<?=$value?>">
+		<input type="hidden" name="<?=$key?>" value="<?php echo htmlspecialchars(xss_clean($value)); ?>">
 	<?
 		}
 	}
