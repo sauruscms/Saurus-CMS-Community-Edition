@@ -622,7 +622,8 @@ function allowed_adminpage($args = array()) /* PUBLIC */ {
 		$sql .= $this->site->db->prepare(" WHERE admin_osa.fail LIKE ?", $file);	
 	}
 	$sth = new SQL($sql);
-	$file = $sth->fetch();
+	#BUGFIX Issue 10 fixed
+	$file = $sth->fetchsingle();
 
 	########## go on with non-superuser admin:
 
@@ -1616,8 +1617,8 @@ function get_all_permissions () {
 		######## 2) GROUPS 
 		# priority - atomaarsemad e t???htsamad grupid on allpool,
 		# viimaste gruppide ???igused kirjutavad eelmised ???le
-		# NB! Siin on erand grupi "Everybody" korral (mille abil keelatakse KEELA KÕIGILE reegel): 
-		# juhul kui kasutaja kuulub ka mõnda rolli siis ignoreeritakse Everybody grupi KEELAVAID õiguseid. 
+		# NB! Siin on erand grupi "Everybody" korral (mille abil keelatakse KEELA Kï¿½IGILE reegel): 
+		# juhul kui kasutaja kuulub ka mï¿½nda rolli siis ignoreeritakse Everybody grupi KEELAVAID ï¿½iguseid. 
 
 		reset($grouptree);
 		foreach($grouptree as $key=>$group){
@@ -1626,9 +1627,9 @@ function get_all_permissions () {
 			if(is_array($permgrp[$group['id']])){
 				foreach( array_keys($permgrp[$group['id']]) as $key2=>$obj_id) {
 
-					# kui grupp on Everybody (ID=1) JA leidub rolli-õigused selle objekti kohta,					
+					# kui grupp on Everybody (ID=1) JA leidub rolli-ï¿½igused selle objekti kohta,					
 					if($group['id'] == 1 && sizeof($cemented_perm[$obj_id]) > 0) {
-						# siis ignoreeri Everybody grupi KÕIKI õiguseid selle objekti kohta, sest peavad mõjuma rolli omad. (Bug#2552, #2701)
+						# siis ignoreeri Everybody grupi Kï¿½IKI ï¿½iguseid selle objekti kohta, sest peavad mï¿½juma rolli omad. (Bug#2552, #2701)
 						continue;
 					}
 					
