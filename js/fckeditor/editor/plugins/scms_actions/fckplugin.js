@@ -237,6 +237,21 @@ function SCMSImageFileInsert(data)
 		
 			FCKEmbedAndObjectProcessor.RefreshView( oFakeImage, oItem ) ;
 		}
+		// flash or mp4 video
+		else if(/flv$/i.test(path) || /mp4$/i.test(path))
+		{
+			var oItem = oSCMSEditor.EditorDocument.createElement( 'A' ) ;
+			oItem.href = BaseURL + path;
+			oItem.innerHTML = '&nbsp;';
+			oItem.className = 'scms-flowplayer-anchor';
+			var oFakeImage = null ;
+										
+			oFakeImage = FCKDocumentProcessor_CreateFakeImage( 'SCMS__FlashVideo', oItem ) ;
+			oFakeImage.setAttribute( '_scmsflashvideo', 'true', 0 ) ;
+			oFakeImage = oSCMSEditor.InsertElement( oFakeImage );
+		
+			FCKEmbedAndObjectProcessor.RefreshView( oFakeImage, oItem ) ;
+		}
 		else if(/html$/i.test(path) || /htm$/i.test(path))
 		{
 			file_source_window = parent.openpopup(BaseURL + 'admin/file_source.php?callback=window.opener.frames[0].insert_template&file=' + path, 'file_source', 1, 1);
@@ -453,6 +468,129 @@ function toggleToolbars()
 	SetToolbar(changeToToolbar);
 }
 
+/* Insert flashvideo button */
+var SCMSFlashVideo = function(name)
+{
+	this.Name = name;
+}
+
+SCMSFlashVideo.prototype.Execute = function()
+{
+
+}
+
+// Disable button toggling.
+SCMSFlashVideo.prototype.GetState = function()
+{
+	return FCK_TRISTATE_OFF;
+}
+
+/* Flash */
+FCKCommands.RegisterCommand('SCMSFlashVideo', new FCKDialogCommand('SCMSFlashVideo', FCKLang.SCMSFlashVideoProp, 'dialog/scms_flashvideo.php', 450, 100));
+
+// Add the button.
+var oSCMSFlashVideoItem = new FCKToolbarButton('SCMSFlashVideo', FCKLang.SCMSFlashVideoInsert, null, null, null, null, 83);
+FCKToolbarItems.RegisterItem('SCMSFlashVideo', oSCMSFlashVideoItem);
+
+/* /Insert flashvideo button */
+
+// Parse the document for product blocks
+FCKDocumentProcessor.AppendNew().ProcessDocument = function( document )
+{
+	var matching = document.getElementsByTagName('a');
+
+	var oMatch;
+	var i = matching.length - 1;
+	while ( i>= 0 && ( oMatch = matching[i--] ) )
+	{
+		// Find a tags with class player
+		if(oMatch.className == 'scms-flowplayer-anchor')
+		{
+			// Create the new FakeImage 
+			var oImg = FCKDocumentProcessor_CreateFakeImage('SCMS__FlashVideo', oMatch.cloneNode(true));
+            oImg.setAttribute( '_scmsflashvideo', true, 0 ) ;
+
+			// Place the FakeImage right where the a tag used to be
+			oMatch.parentNode.insertBefore(oImg, oMatch);
+			oMatch.parentNode.removeChild(oMatch);
+		}
+	}
+}
+
+
+var SCMSFlashVideoDeleteCommand = function(name)
+{
+    this.Name = name;
+}
+
+SCMSFlashVideoDeleteCommand.prototype.Execute = function()
+{
+    if (FCK.Selection.GetType()=='Control')
+    {
+        FCK.Selection.Delete();
+    }
+    else
+    {
+        var A=FCK.Selection.GetSelectedElement();
+        
+        if (A)
+        {
+          if (A.tagName=='IMG'&&A.getAttribute('_scmsflashvideo')) oFlashVideo=FCK.GetRealElement(A);
+          else A=null;
+        }
+        
+        if (!A)
+        {
+          oFlashVideo=FCK.Selection.MoveToAncestorNode('A');
+          if (oFlashVideo) FCK.Selection.SelectNode(oFlashVideo);
+        }
+        
+        if (oFlashVideo.href.length!=0)
+        {
+          oFlashVideo.removeAttribute('name');
+          if (FCKBrowserInfo.IsIE) oFlashVideo.className=oFlashVideo.className.replace(FCKRegexLib.FCK_Class,'');
+          return;
+        }
+        
+        if (A)
+        {
+        	A.parentNode.removeChild(A);
+        	return;
+		}
+		
+        if (oFlashVideo.innerHTML.length==0)
+        {
+        	oFlashVideo.parentNode.removeChild(oFlashVideo);
+        	return;
+        }
+        
+        FCKTools.RemoveOuterTags(oFlashVideo);
+    }
+    
+    if (FCKBrowserInfo.IsGecko) FCK.Selection.Collapse(true);
+}
+
+SCMSFlashVideoDeleteCommand.prototype.GetState = function()
+{
+    if (FCK.EditMode!=0) return -1;
+    return FCK.GetNamedCommandState('Unlink');
+}
+
+FCKCommands.RegisterCommand('SCMSFlashVideoDelete', new SCMSFlashVideoDeleteCommand('SCMSFlashVideoDelete'));
+
+FCK.ContextMenu.RegisterListener({
+	AddItems:function(menu,tag,tagName)
+	{
+		if (tagName=='IMG'&&tag.getAttribute('_scmsflashvideo'))
+		{
+			menu.AddSeparator();
+			menu.AddItem('SCMSFlashVideo',FCKLang.SCMSFlashVideoProp,48);
+			menu.AddItem('SCMSFlashVideoDelete',FCKLang.SCMSFlashVideoDelete);
+		}
+	}
+});
+
+
 // SCMSAdvancedToolbar
 var SCMSAdvancedToolbar = function(name)
 {
@@ -485,6 +623,7 @@ SCMSSimpleToolbar.prototype.GetState = function()
 {  
 	return FCK_TRISTATE_OFF;  
 }
+
 
 FCKCommands.RegisterCommand('SCMSSimpleToolbar', new SCMSSimpleToolbar('SCMSSimpleToolbar'));
 

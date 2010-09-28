@@ -41,7 +41,8 @@ Print				: "Prindi",
 SelectAll			: "Vali kõik",
 RemoveFormat		: "Eemalda vorming",
 InsertLinkLbl		: "Link",
-InsertLink			: "Link",VisitLink			: "Ava link",
+InsertLink			: "Link",
+VisitLink			: "Ava link",
 RemoveLink			: "Eemalda link",
 Anchor				: "Ankur",
 AnchorDelete		: "Eemalda ankur",
@@ -333,7 +334,8 @@ DlgCellBtnSelect	: "Vali...",
 DlgFindAndReplace	: "Otsi ja asenda",
 
 // Find Dialog
-DlgFindTitle		: "Otsi",DlgFindandReplaceTitle	: "Otsi ja asenda",
+DlgFindTitle		: "Otsi",
+DlgFindandReplaceTitle	: "Otsi ja asenda",
 
 DlgFindFindBtn		: "Otsi",
 DlgFindNotFoundMsg	: "Valitud teksti ei leitud.",
@@ -549,3 +551,9 @@ FCKLang.DlgSCMS_Paste_your_HTML_snippet_below	= 'Kleebi HTML siia:';
 /* /SCMS Specific translations */
 
 FCKLang.FitWindow	= 'Muuda vaadet';	
+
+/* Flash video translations */
+
+FCKLang.SCMSFlashVideoProp		= 'Flashi video atribuudid';
+FCKLang.SCMSFlashVideoDelete		= 'Eemalda flash video';
+FCKLang.SCMSFlashVideoInsert		= 'Lisa flash video';

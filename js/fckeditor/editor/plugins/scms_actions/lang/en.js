@@ -43,3 +43,8 @@ FCKLang.DlgSCMS_Paste_your_HTML_snippet_below	= 'Paste your HTML snippet below:'
 
 FCKLang.FitWindow	= 'Change view';	
 
+/* Flash video translations */
+
+FCKLang.SCMSFlashVideoProp		= 'Flash video properties';
+FCKLang.SCMSFlashVideoDelete		= 'Remove flash video';
+FCKLang.SCMSFlashVideoInsert		= 'Insert flash video';

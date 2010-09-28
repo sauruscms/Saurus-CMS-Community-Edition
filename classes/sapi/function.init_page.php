@@ -140,7 +140,7 @@ function smarty_function_init_page(&$smarty, $params)
 
 	#####################################
 	# load all EXTENSION CONFIGS as SAPI variable $EXTENSION_NAME, and load filters.
-	$pre_filters_for_page_templates = ($params['on_page_templ'] ? array('page_end_html', 'editor_toolbar', 'context_menu_init') : array());
+	$pre_filters_for_page_templates = ($params['on_page_templ'] ? array('page_end_html', 'editor_toolbar', 'context_menu_init', 'flowplayer') : array());
 	$autoload_filters = array('pre' => $pre_filters_for_page_templates, 'output' => array(), 'post' => array(),);
 	
 	foreach (get_extensions() as $extension)
