@@ -201,7 +201,7 @@ function admin_login_form() {
 					</tr>
 					<tr><td class="bl"></td><td class="bc"></td><td class="br"></td></tr>
 				</table> <!-- shadow_box_wrapper -->
-				<div id="logindisclaimer">Saurus CMS <a href="http://www.saurus.info/" title="Web content management software Saurus CMS">www.saurus.info</a></div>
+				<div id="logindisclaimer">Saurus CMS CE <a href="http://www.saurus.info/" title="Web content management software Saurus CMS">www.saurus.info</a></div>
 			</td>
 		</tr>
 	</table>	
@@ -356,7 +356,7 @@ header("Content-type: text/html;charset=".$site->encoding);
 					</tr>
 					<tr><td class="bl"></td><td class="bc"></td><td class="br"></td></tr>
 				</table> <!-- shadow_box_wrapper -->
-				<div id="logindisclaimer">Saurus CMS <a href="http://www.saurus.info/" title="Web content management software Saurus CMS">www.saurus.info</a></div>
+				<div id="logindisclaimer">Saurus CMS SE <a href="http://www.saurus.info/" title="Web content management software Saurus CMS">www.saurus.info</a></div>
 			</td>
 		</tr>
 	</table>	
