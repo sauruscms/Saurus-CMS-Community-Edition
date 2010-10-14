@@ -1,7 +1,12 @@
 <?php
 
-function smarty_outputfilter_obfuscate_email( $tpl_source, &$smarty ) {
-
+function smarty_outputfilter_obfuscate_email( $tpl_source, &$smarty )
+{
+	global $site;
+	
+	// do not obfuscate for editor
+	if ($site->user->user_id && $site->in_editor) return $tpl_source;
+	
 	//skip for pages beginning with xml declaration
 	if(strpos($tpl_source, '<?xml') === 0)
 	{
@@ -23,7 +28,8 @@ function smarty_outputfilter_obfuscate_email( $tpl_source, &$smarty ) {
    return $tpl_source;
 }
  
-function obfuscate_email_preg_replace_callback($matches) {
+function obfuscate_email_preg_replace_callback($matches)
+{
    global $obfuscated_email_count;
    global $obfuscated_email_run;
    
