@@ -1139,36 +1139,42 @@ function showFileActions()
 		$('div#custom_actions').removeClass('hidden');
 	}
 	
-	if($('input.file_selector:checked').length > 0)
+	if($('input.file_selector:checked').length == 0)
 	{
 		if(settings.callback && settings.select_mode == 1)
 		{
-			$('span#custom_action_text').addClass('hidden');
+			$('a#custom_action').addClass('hidden');
+			$('span#custom_action_text').removeClass('hidden');
+			$('span#default_actions').addClass('hidden');
+		}
+		else if(settings.callback && settings.select_mode == 2 && open_folder_id != 1)
+		{
 			$('a#custom_action').removeClass('hidden');
+			$('div#files_are_selected').addClass('hidden');
 		}
 		else
 		{
-			$('div#files_are_selected').removeClass('hidden');
-			$('div#no_files_are_selected').addClass('hidden');
+			$('div#no_files_are_selected').removeClass('hidden');
+			$('div#files_are_selected').addClass('hidden');
 		}
 	}
 	else
 	{
 		if(settings.callback && settings.select_mode == 1)
 		{
-			$('a#custom_action').addClass('hidden');
-			$('span#custom_action_text').removeClass('hidden');
+			$('span#custom_action_text').addClass('hidden');
+			$('a#custom_action').removeClass('hidden');
+			$('span#default_actions').removeClass('hidden');
 		}
 		else if(settings.callback && settings.select_mode == 2 && open_folder_id != 1)
 		{
-			$('span#custom_action_text').addClass('hidden');
-			$('a#custom_action').removeClass('hidden');
+			$('div#files_are_selected').removeClass('hidden');
+			$('a#custom_action').addClass('hidden');
 		}
 		else
 		{
-			$('a#custom_action').addClass('hidden');
-			$('div#files_are_selected').addClass('hidden');
-			$('div#no_files_are_selected').removeClass('hidden');
+			$('div#no_files_are_selected').addClass('hidden');
+			$('div#files_are_selected').removeClass('hidden');
 		}
 	}
 	
@@ -1266,42 +1272,7 @@ function toggleSelectionActions()
 			$('a.all_files_deselector').addClass('hidden');
 		}
 		
-		if($('input.file_selector:checked').length == 0)
-		{
-			if(settings.callback && settings.select_mode == 1)
-			{
-				$('a#custom_action').addClass('hidden');
-				$('span#custom_action_text').removeClass('hidden');
-			}
-			else if(settings.callback && settings.select_mode == 2 && open_folder_id != 1)
-			{
-				$('a#custom_action').removeClass('hidden');
-				$('div#files_are_selected').addClass('hidden');
-			}
-			else
-			{
-				$('div#no_files_are_selected').removeClass('hidden');
-				$('div#files_are_selected').addClass('hidden');
-			}
-		}
-		else
-		{
-			if(settings.callback && settings.select_mode == 1)
-			{
-				$('span#custom_action_text').addClass('hidden');
-				$('a#custom_action').removeClass('hidden');
-			}
-			else if(settings.callback && settings.select_mode == 2 && open_folder_id != 1)
-			{
-				$('div#files_are_selected').removeClass('hidden');
-				$('a#custom_action').addClass('hidden');
-			}
-			else
-			{
-				$('div#no_files_are_selected').addClass('hidden');
-				$('div#files_are_selected').removeClass('hidden');
-			}
-		}
+		showFileActions();
 	}
 }
 
@@ -1370,7 +1341,7 @@ function getFileThumbnailHTML(file)
 		//if(file.permissions.U == 1) HTML += '<tr><td><a class="single_file_move" id="file_move_' + file.objekt_id + '" href="javascript:void(0);">' + translations.move_file + '</a></td></tr>';
 		
 		// delete
-		//if(file.permissions.D == 1) HTML += '<tr><td><a class="single_file_delete" id="file_delete_' + file.objekt_id + '" href="javascript:void(0);">' + translations.delete_file + '</a></td></tr>';
+		if(file.permissions.D == 1) HTML += '<tr><td><a class="single_file_delete bold" id="file_delete_' + file.objekt_id + '" href="javascript:void(0);">' + translations.delete_file + '</a></td></tr>';
 		
 		// empty row
 		HTML += '<tr><td>&nbsp;</td></tr>';

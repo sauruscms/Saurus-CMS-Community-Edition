@@ -376,6 +376,7 @@ var translations = {
 	folder_delete_confirmation: '<?php echo $site->sys_sona(array('sona' => 'folder_delete_confirmation', 'tyyp' => 'Files')); ?>',
 	delete_folder: '<?php echo $site->sys_sona(array('sona' => 'delete_folder', 'tyyp' => 'Files')); ?>',
 	create_subfolder: '<?php echo $site->sys_sona(array('sona' => 'create_subfolder', 'tyyp' => 'Files')); ?>',
+	delete_file: '<?php echo ucfirst($site->sys_sona(array('sona' => 'delete_file', 'tyyp' => 'Files'))); ?>',
 	file_delete_confirmation: '<?php echo $site->sys_sona(array('sona' => 'file_delete_confirmation', 'tyyp' => 'Files')); ?>',
 	files_delete_confirmation: '<?php echo $site->sys_sona(array('sona' => 'files_delete_confirmation', 'tyyp' => 'Files')); ?>',
 	edit_file: '<?php echo $site->sys_sona(array('sona' => 'edit_file', 'tyyp' => 'Files')); ?>',
@@ -563,6 +564,7 @@ $(document).ready(function()
 					</div>
 					<div id="custom_actions" class="hidden">
 						<span id="custom_action_text"></span><a id="custom_action" class="hidden" href="javascript:void(0);"></a>
+						<span id="default_actions" class="hidden"> | <?php echo $site->sys_sona(array('sona' => 'files_selected', 'tyyp' => 'Files')); ?>: <a href="javascript:void(0);" id="file_multi_move"><?php echo $site->sys_sona(array('sona' => 'move_file', 'tyyp' => 'Files')); ?></a>, <a href="javascript:void(0);" id="file_multi_delete"><?php echo $site->sys_sona(array('sona' => 'delete_file', 'tyyp' => 'Files')); ?></a>.</span>
 					</div>
 				</div><!-- / scms_files_actions_bar -->
 				
