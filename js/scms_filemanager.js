@@ -527,7 +527,9 @@ function toggleFileView()
 		$('a#switch_to_list').removeClass('hidden');
 	}
 	
-	setCookie('scms_filemanager_view_mode', view_mode);
+	var cookie_exp = new Date();
+	cookie_exp.setFullYear(cookie_exp.getFullYear() + 1);
+	setCookie('scms_filemanager_view_mode', view_mode, cookie_exp);
 	
 	initFiles();
 }
@@ -1976,7 +1978,9 @@ function toggleFolder(id)
 			}
 		}
 		
-		setCookie('scms_filemanager_open_folder_id', selected_id);
+		var cookie_exp = new Date();
+		cookie_exp.setFullYear(cookie_exp.getFullYear() + 1);
+		setCookie('scms_filemanager_open_folder_id', selected_id, cookie_exp);
 		
 		displayFiles(selected_id);
 	}
