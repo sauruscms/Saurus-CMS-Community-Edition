@@ -172,7 +172,7 @@ $open_folder_id = (int)(isset($site->fdat['folder_id']) ? $site->fdat['folder_id
 // default is public
 if(!$open_folder_id) $open_folder_id = $public_folder_id;
 
-$view_mode = (isset($_COOKIE['scms_filemanager_open_folder_id']) ? $_COOKIE['scms_filemanager_view_mode'] : 'thumbs');
+$view_mode = (isset($_COOKIE['scms_filemanager_view_mode']) ? $_COOKIE['scms_filemanager_view_mode'] : 'thumbs');
 
 if($view_mode != 'thumbs' && $view_mode != 'list') $view_mode = 'thumbs';
 
