@@ -87,7 +87,7 @@ class Site {
 
 		$this->fatal_error='';
 
-		$this->script_version = '4.7.0';
+		$this->script_version = '4.7.1';
 		
 		$this->site_poll_url = "http://extranet.saurus.ee/register/cms_site_polling.php";  // auth is register:register
 

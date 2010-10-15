@@ -93,10 +93,11 @@ $current_ver = current_version(); # try to connect database and find which versi
 ############# VERSION NUMBERS
 
 # version numbers // the CE version can only be update'd from a 4.6.6 version
-$versions = array();
-array_push($versions, '4.6.6');
-array_push($versions, '4.7.0');
-
+$versions = array(
+	'4.6.6',
+	'4.7.0',
+	'4.7.1',
+);
 ##############################
 
 # get the new version number
@@ -121,7 +122,7 @@ if ($install) { # install
 else { # update
 	
 	// scrub EE licensing and commercial modules (not used on CE)
-	$default_data_files[] = 'admin/updates/updateEEtoCE.sql';
+	if($current_ver == '4.6.6') $default_data_files[] = 'admin/updates/updateEEtoCE.sql';
 	
 	$i = 1;
 	foreach ($versions as $version_array_index => $tmpver)
@@ -1206,7 +1207,7 @@ else {
 ?>
 	<h2>Welcome</h2>
 
-	This will update your Saurus CMS <?php echo (strtolower($license_key) == 'free' ? 'Free' : (!$license_key ? 'Community Edition' : '')); ?> <?=$current_ver?><?php echo (strtolower($license_key) != 'free' ? ' using license: '.$license_key : ''); ?> to Saurus CMS Community Edition version <?=$new_ver?>.<br />
+	This will update your Saurus CMS <?php echo (strtolower($license_key) == 'free' ? 'Free' : (!$license_key ? 'Community Edition' : '')); ?> <?=$current_ver?><?php echo ($license_key && strtolower($license_key) != 'free' ? ' using license: '.$license_key : ''); ?> to Saurus CMS Community Edition version <?=$new_ver?>.<br />
 	
 	You will be taken through a number of pages, each configuring a different portion of your site. The entire process should take about 5 minutes.<br />
 	
