@@ -15,4 +15,4 @@
 # VERSION CHANGE:
 ###################################################
 
-INSERT INTO version (version_nr, release_date, install_date, description) VALUES ('4.7.1', '2010-11-15', now(), 'Nelle');
+INSERT INTO version (version_nr, release_date, install_date, description) VALUES ('4.7.1', '2010-10-15', now(), 'Nelle');
