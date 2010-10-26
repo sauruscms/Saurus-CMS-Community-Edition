@@ -122,7 +122,7 @@ if ($install) { # install
 else { # update
 	
 	// scrub EE licensing and commercial modules (not used on CE)
-	if($current_ver == '4.6.6') $default_data_files[] = 'admin/updates/updateEEtoCE.sql';
+	$default_data_files[] = 'admin/updates/updateEEtoCE.sql';
 	
 	$i = 1;
 	foreach ($versions as $version_array_index => $tmpver)
@@ -1109,7 +1109,7 @@ if ($install) {
 
 	?>
 	<h2>Welcome</h2>
-	<p>This will install a fresh copy of Saurus CMS Community Edition version 4.7.0.</p>
+	<p>This will install a fresh copy of Saurus CMS Community Edition version 4.7.1.</p>
 	<p>You will be taken through a number of pages, each configuring a different portion of your site. <br />We estimate that the entire process will take about 5 minutes.</p>
 	
 	<?
