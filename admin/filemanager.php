@@ -423,7 +423,7 @@ $(document).ready(function()
 	swfu = new SWFUpload({
 		flash_url : '<?php echo $site->CONF['wwwroot'].$site->CONF['js_path']?>/swfupload/swfupload.swf',
 		upload_url: '<?php echo $site->CONF['wwwroot']?>/admin/ajax_response.php',
-		post_params: {'PHPSESSID' : '<?php echo session_id(); ?>', 'op': 'file_upload'},
+		post_params: {'<?php echo session_name(); ?>' : '<?php echo session_id(); ?>', 'op': 'file_upload'},
 		file_size_limit : '<?php echo (is_int(ini_get('upload_max_filesize')) ? round(ini_get('upload_max_filesize') / 1024) : ini_get('upload_max_filesize').'B'); ?>',
 		file_types : '*.*',
 		file_types_description : 'All Files',
