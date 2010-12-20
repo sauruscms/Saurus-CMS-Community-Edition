@@ -436,7 +436,7 @@ function edit_objekt()
         <input type="hidden" name="extension_path" value="<?=$site->fdat['extension_path']?>" />
 		
 		<input type="hidden" name="opener_location" value="" />
-		<input type="hidden" name="publish" value="<?=($site->fdat['publish'] ? $site->fdat['publish'] : $objekt->all['on_avaldatud'])?>" />
+		<input type="hidden" name="publish" value="<?php echo ($site->fdat['publish'] || $objekt->all['on_avaldatud'] ? 1 : 0); ?>">
 
 		<input name="permanent_parent_id" type="hidden" value="<?=$objekt->parent_id?>" />
 		<input name="sys_alias" type="hidden" value="<?=($site->fdat['sys_alias'] ? $site->fdat['sys_alias'] : $objekt->all['sys_alias'])?>" />
@@ -497,7 +497,7 @@ function edit_objekt()
 					<?php ########### publishing  ########?>
 					<tr>
 						<td class="label"><?=$site->sys_sona(array('sona' => 'visible_to_visitors', 'tyyp' => 'editor'))?></td>
-						<td><input type="radio" name="publish" id="object_published" value="1"<?=($site->fdat['publish'] || $objekt->all['on_avaldatud'] ? ' checked' : '')?>> <label for="object_published"><?=$site->sys_sona(array('sona' => 'published', 'tyyp' => 'editor'))?></label>	<input type="radio" name="publish" id="object_unpublished" value="0"<?=($site->fdat['publish'] == 0 && $objekt->all['on_avaldatud'] == 0 ? ' checked' : '')?>> <label for="object_unpublished"><?=$site->sys_sona(array('sona' => 'unpublished', 'tyyp' => 'editor'))?></label></td>
+						<td><input type="radio" name="publish" id="object_published" value="1"<?=($site->fdat['publish'] || $objekt->all['on_avaldatud'] ? ' checked' : '')?><?php echo (!$objekt->permission['P'] ? ' disabled="disabled"' : NULL); ?>> <label for="object_published"><?=$site->sys_sona(array('sona' => 'published', 'tyyp' => 'editor'))?></label>	<input type="radio" name="publish" id="object_unpublished" value="0"<?=($site->fdat['publish'] == 0 && $objekt->all['on_avaldatud'] == 0 ? ' checked' : '')?><?php echo (!$objekt->permission['P'] ? ' disabled="disabled"' : NULL); ?>> <label for="object_unpublished"><?=$site->sys_sona(array('sona' => 'unpublished', 'tyyp' => 'editor'))?></label></td>
 					</tr>
 				</table>
 				

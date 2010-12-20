@@ -96,8 +96,8 @@ function edit_objekt()
 
 <fieldset>
 	<legend><?=$site->sys_sona(array('sona' => 'visible_to_visitors', 'tyyp' => 'editor'))?></legend>
-	<input type="radio" name="publish" id="object_published" value="1"<?=($site->fdat['publish'] || $objekt->all['on_avaldatud'] ? ' checked' : '')?>> <label for="object_published"><?=$site->sys_sona(array('sona' => 'published', 'tyyp' => 'editor'))?></label><br>
-	<input type="radio" name="publish" id="object_unpublished" value="0"<?=($site->fdat['publish'] == 0 && $objekt->all['on_avaldatud'] == 0 ? ' checked' : '')?>> <label for="object_unpublished"><?=$site->sys_sona(array('sona' => 'unpublished', 'tyyp' => 'editor'))?></label><br>
+	<input type="radio" name="publish" id="object_published" value="1"<?=($site->fdat['publish'] || $objekt->all['on_avaldatud'] ? ' checked' : '')?><?php echo (!$objekt->permission['P'] ? ' disabled="disabled"' : NULL); ?>> <label for="object_published"><?=$site->sys_sona(array('sona' => 'published', 'tyyp' => 'editor'))?></label><br>
+	<input type="radio" name="publish" id="object_unpublished" value="0"<?=($site->fdat['publish'] == 0 && $objekt->all['on_avaldatud'] == 0 ? ' checked' : '')?><?php echo (!$objekt->permission['P'] ? ' disabled="disabled"' : NULL); ?>> <label for="object_unpublished"><?=$site->sys_sona(array('sona' => 'unpublished', 'tyyp' => 'editor'))?></label><br>
 </fieldset>
 
 <fieldset>
@@ -471,7 +471,7 @@ $_SESSION['current_article_parent_selection']['display_fields'] = array('select_
 
 
 	global $site, $class_path, $objekt, $tyyp, $keel;
-
+	
 	include_once($class_path.'adminpage.inc.php');
 	include_once($class_path.'SCMSEditor.php');
 	include_once($class_path.'extension.class.php');
@@ -844,6 +844,8 @@ $_SESSION['current_article_parent_selection']['display_fields'] = array('select_
                 <input type="hidden" name="sorting" value="<?=$site->fdat['sorting'];?>">
 
 				<input type="hidden" name="extension_path" value="<?=$site->fdat['extension_path'];?>">
+				
+				<input type="hidden" name="publish" value="<?php echo ($site->fdat['publish'] || $objekt->all['on_avaldatud'] ? 1 : 0); ?>">
 		<?php /* /hidden form stuff */ ?>
 
 	<table cellpadding="0" cellspacing="0" class="layout" border="0">
