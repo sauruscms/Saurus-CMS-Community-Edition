@@ -158,7 +158,7 @@ ul.context_plugin_dropdown li.context_plugin_item a.scms_delete_object {
 
 .scms_dropdown {
 	margin-left: 0px;
-	background: #fff url(gfx/menu/dropdown_background.gif) repeat-y;
+	background: #fff;
 	border: 1px solid #637FB1;
 	border-top: none;
 	overflow: hidden;
@@ -213,8 +213,6 @@ table.scms_dropdown {
 	margin: 0px;
 	padding: 0px;
 	height: 1px;
-	background-image: url(gfx/menu/dropdown_divider.gif);
-	background-repeat: repeat-y;
 }
 
 /* dropdown div */
