@@ -1,12 +1,7 @@
 /* 
-
 This stylesheet defines Saurus CMS Calendar styles.
 The styles are used in various templates and applications.
-
 */
-
-/* Import tracker CSS */
-	@import url("scms_calendar_tracker.css");
 
 /* Import resources CSS */
 	@import url("scms_calendar_resources.css");
@@ -84,4 +79,3 @@ The styles are used in various templates and applications.
 	}
 
 /* //Calendar area */
-
