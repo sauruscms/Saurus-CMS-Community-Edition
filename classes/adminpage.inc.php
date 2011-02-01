@@ -2477,7 +2477,7 @@ function get_files_list($list)
 	
 	while ($file = $list->next()) 
 	{
-		if(strpos($file->all['relative_path'], $site->CONF['file_path']) === 0)
+		if(strpos($file->all['relative_path'], $site->CONF['file_path']) === 0 || strpos($file->all['relative_path'], $site->CONF['secure_file_path']) === 0)
 		{
 			$thumbnail_file = str_replace($file->all['filename'], '.thumbnails/'.$file->all['filename'], $file->all['relative_path']);
 			$thumbnail_path = preg_replace('#/$#', '', $site->absolute_path).$thumbnail_file;
