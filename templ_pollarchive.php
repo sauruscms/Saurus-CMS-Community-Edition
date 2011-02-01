@@ -87,7 +87,7 @@ if (!$obj) {
 }
 
 if ($obj->on_404) {
-	header('Locate: '.$site->CONF['wwwroot'].'/?id='.$obj->objekt_id);
+	header('Location: '.$site->CONF['wwwroot'].'/?id='.$obj->objekt_id);
 	exit;
 
 } elseif($obj) {
