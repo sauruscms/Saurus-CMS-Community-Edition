@@ -25,16 +25,16 @@
 		<a href="{$art->href}">{sysword word="More" type="Visual Design"}</a>
 	{else}
 		{$art->lead} {$art->body}
-		{if $art->forum_allowed}
-			{if $art->comment_count}
-				<a href="{$art->href}#comments">{sysword word="comments" type="saurus4"}</a>
-				({$art->comment_count})
-				|
-				<a href="{$art->href}#add_message">{sysword word="add" type="saurus4"}</a>
-			{else}
-				<a href="{$art->href}#add_message">{sysword word="add comment" type="saurus4"}</a>
+		
+		{if $art->comment_count}
+			<a href="{$art->href}#comments">{sysword word="comments" type="saurus4"}</a> ({$art->comment_count})
+			{if $conf.allow_commenting && $art->forum_allowed && !($conf.only_regusers_comment && !$user)}
+			| <a href="{$art->href}#add_message">{sysword word="add" type="saurus4"}</a>
 			{/if}
+		{elseif $conf.allow_commenting && $art->forum_allowed && !($conf.only_regusers_comment && !$user)}
+			<a href="{$art->href}#add_message">{sysword word="add comment" type="saurus4"}</a>
 		{/if}
+		
 	{/if}
 
 {/foreach}	

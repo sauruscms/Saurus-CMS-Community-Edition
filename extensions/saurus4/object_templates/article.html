@@ -17,24 +17,24 @@
 {if $article->lead}{$article->lead}{/if}
 {if $article->body}{$article->body}{/if}
 
-{if $article->forum_allowed}
-	{* Article comments *}
-	<a name="comments"></a>	
-	{init_messages name="messages" parent=$id order="objekt_id asc"}
-	{if $messages|@sizeof}<p class="separator">{sysword word="comments" type="saurus4"}</p>{/if}
-	
-	<table cellpadding="2" cellspacing="2" width="100%" class="ZebraTable">
-	{foreach from=$messages item="message"}	
-		<tr class="{cycle values="dark, light"}">
-			<td>
-				{$message->buttons}{$message->author} <span class="Date">{$message->date}</span>
-				<p>{$message->body|parse_emoticons|parse_html}</p>
-			</td>
-		</tr>
-	{/foreach}
-	</table>
-	{* /Article comments *}
+{* Article comments *}
+<a name="comments"></a>	
+{init_messages name="messages" parent=$id order="objekt_id asc"}
+{if $messages|@sizeof}<p class="separator">{sysword word="comments" type="saurus4"}</p>{/if}
 
+<table cellpadding="2" cellspacing="2" width="100%" class="ZebraTable">
+{foreach from=$messages item="message"}	
+	<tr class="{cycle values="dark, light"}">
+		<td>
+			{$message->buttons}{$message->author} <span class="Date">{$message->date}</span>
+			<p>{$message->body|parse_emoticons|parse_html}</p>
+		</td>
+	</tr>
+{/foreach}
+</table>
+{* /Article comments *}
+
+{if $conf.allow_commenting && $article->forum_allowed && !($conf.only_regusers_comment && !$user)}
 	{* New comment form *}
 	<a name="add_message"></a>
 
