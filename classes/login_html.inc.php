@@ -288,7 +288,7 @@ header("Content-type: text/html;charset=".$site->encoding);
 	foreach ($site->fdat as $key=>$value) {
 		if (!is_array($value) && $key!="email" && $key!="op2") {
 	?>
-		<input type="hidden" name="<?=$key?>" value="<?=$value?>">
+		<input type="hidden" name="<?php echo htmlspecialchars(xss_clean($key)); ?>" value="<?php echo htmlspecialchars(xss_clean($value)); ?>">
 	<?
 		}
 	}
