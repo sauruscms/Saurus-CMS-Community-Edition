@@ -16,7 +16,7 @@
 	{assign var="current_page" value=0}
 {/if}
 
-{init_search_results name="search" start=$current_page*$limit limit=$limit use_fulltext=1 query=$smarty.get.query exclude=$smarty.get.exclude search_type=$smarty.get.bool section=$smarty.get.section last_changed=$smarty.get.time order=$smarty.get.order}
+{init_search_results name="search" start=$current_page*$limit limit=$limit use_fulltext=1 query=$smarty.request.query exclude=$smarty.request.exclude search_type=$smarty.request.bool section=$smarty.request.section last_changed=$smarty.request.time order=$smarty.request.order}
 {* if fulltext searching is not working for your language omit the parameter from the tag or set it to 0, in this case LIKE search will be performed *}
 
 {if $smarty.request.label}
@@ -35,6 +35,18 @@
 {/if}
 {*** /backwards comaptibility with 'otsi' ***}
 
+{*** clean query string ***}
+{assign var="query_string" value=$wwwroot|cat:"/?"}
+{foreach from=$smarty.request key="key" item="value"}
+	{if $smarty.get.$key || $smarty.post.$key}
+		{assign var="key" value=$key|xss_clean|htmlspecialchars}
+		{assign var="value" value=$value|xss_clean|htmlspecialchars}
+		{assign var="query_string" value=$query_string|cat:$key|cat:"="|cat:$value|cat:"&amp;"}
+	{/if}
+{/foreach}
+
+{assign var="query_string" value=$query_string|regex_replace:"/\&amp\;$/":""}
+
 <div id="SearchResultsContainer">
 
 {********* Search header **********}
@@ -49,7 +61,7 @@
 			{assign var="current_count" value=$label->counttotal}
 			{assign var="total_pages" value=$current_count/$limit|ceil}
 		{else}
-			<a href="?{if $smarty.request.label}{$smarty.server.QUERY_STRING|replace:"label=`$current_label`":"label=`$label->name`"|replace:"&amp;page=`$current_page`":""}{else}{$smarty.server.QUERY_STRING|replace:"&amp;page=`$current_page`":""|cat:"&amp;label=`$label->name`"}{/if}">{$label->title} ({$label->counttotal})</a>
+			<a href="{if $smarty.request.label}{$query_string|replace:"label=`$current_label`":"label=`$label->name`"|replace:"&amp;page=`$current_page`":""}{else}{$query_string|replace:"&amp;page=`$current_page`":""|cat:"&amp;label=`$label->name`"}{/if}">{$label->title} ({$label->counttotal})</a>
 		{/if}
 	{/foreach}
 </div>
@@ -101,7 +113,7 @@
 {if $current_count}
 {********* Paging **********}
 <div id="SearchPaging">
-	{if $current_page-1 >= 0}<a href="?{if isset($smarty.request.page)}{$smarty.server.QUERY_STRING|replace:"page=`$current_page`":"page=0"}{else}{$smarty.server.QUERY_STRING|cat:"&amp;page=0"}{/if}">&laquo;</a> <a href="?{if isset($smarty.request.page)}{$smarty.server.QUERY_STRING|replace:"page=`$current_page`":"page=`$current_page-1`"}{else}{$smarty.server.QUERY_STRING|cat:"&amp;page=`$current_page-1`"}{/if}">&lt;</a>{/if}
+	{if $current_page-1 >= 0}<a href="{if isset($smarty.request.page)}{$query_string|replace:"page=`$current_page`":"page=0"}{else}{$query_string|cat:"&amp;page=0"}{/if}">&laquo;</a> <a href="{if isset($smarty.request.page)}{$query_string|replace:"page=`$current_page`":"page=`$current_page-1`"}{else}{$query_string|cat:"&amp;page=`$current_page-1`"}{/if}">&lt;</a>{/if}
 	
 	{if $total_pages <= 5}
 		{assign var="pages_loop" value=$total_pages}
@@ -116,10 +128,10 @@
 		{/if}
 	{/if}
 	{section name="pages" loop=$pages_loop start=$pages_loop_start}
-	{if $smarty.section.pages.index != $current_page}<a href="?{if isset($smarty.request.page)}{$smarty.server.QUERY_STRING|replace:"page=`$current_page`":"page=`$smarty.section.pages.index`"}{else}{$smarty.server.QUERY_STRING|cat:"&amp;page=`$smarty.section.pages.index`"}{/if}">{/if}{$smarty.section.pages.index+1}{if $smarty.section.pages.index != $current_page}</a>{/if}
+	{if $smarty.section.pages.index != $current_page}<a href="{if isset($smarty.request.page)}{$query_string|replace:"page=`$current_page`":"page=`$smarty.section.pages.index`"}{else}{$query_string|cat:"&amp;page=`$smarty.section.pages.index`"}{/if}">{/if}{$smarty.section.pages.index+1}{if $smarty.section.pages.index != $current_page}</a>{/if}
 	{/section}
 	
-	{if $current_page+1 != $total_pages}<a href="?{if isset($smarty.request.page)}{$smarty.server.QUERY_STRING|replace:"page=`$current_page`":"page=`$current_page+1`"}{else}{$smarty.server.QUERY_STRING|cat:"&amp;page=`$current_page+1`"}{/if}">&gt;</a> <a href="?{if isset($smarty.request.page)}{$smarty.server.QUERY_STRING|replace:"page=`$current_page`":"page=`$total_pages-1`"}{else}{$smarty.server.QUERY_STRING|cat:"&amp;page=`$total_pages-1`"}{/if}">&raquo;</a>{/if}
+	{if $current_page+1 != $total_pages}<a href="{if isset($smarty.request.page)}{$query_string|replace:"page=`$current_page`":"page=`$current_page+1`"}{else}{$query_string|cat:"&amp;page=`$current_page+1`"}{/if}">&gt;</a> <a href="{if isset($smarty.request.page)}{$query_string|replace:"page=`$current_page`":"page=`$total_pages-1`"}{else}{$query_string|cat:"&amp;page=`$total_pages-1`"}{/if}">&raquo;</a>{/if}
 </div>
 {********* //Paging **********}
 {/if}
