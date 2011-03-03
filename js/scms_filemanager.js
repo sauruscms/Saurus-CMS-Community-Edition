@@ -155,6 +155,8 @@ function changeFilePage(page)
 				var data = { op: 'get_folder_files', folder_id: open_folder_id, sort_by: sorting_column, sort_dir: sorting_direction, page: file_page };
 			}
 			
+			$.extend(data, ajax_token);
+			
 			$.ajax({
 			    url: site_url + '/admin/ajax_response.php',
 			    cache: false,
@@ -235,9 +237,12 @@ function toggleFavorite(objekt_id)
 	
 	$('tr#single_file_favorite_row_' + objekt_id).toggleClass('hidden');
 	
+	var data = { op: 'toggle_favorite', objekt_id: objekt_id };
+	$.extend(data, ajax_token);
+	
 	$.ajax({
 	    url: site_url + '/admin/ajax_response.php',
-	    data: { op: 'toggle_favorite', objekt_id: objekt_id },
+	    data: data,
 	    cache: false,
 	    type: 'POST',
 	    dataType: 'json',
@@ -336,11 +341,14 @@ function searchFiles(search_page)
 	$('div#scms_file_list').empty();
 	$('div#scms_file_thumbnails').empty();
 	
+	var data = { op: 'search_files', keyword: keyword, sort_by: sorting_column, sort_dir: sorting_direction, page: file_page };
+	$.extend(data, ajax_token);
+	
 	// load
 	$.ajax({
 	    url: site_url + '/admin/ajax_response.php',
 	    cache: false,
-	    data: { op: 'search_files', keyword: keyword, sort_by: sorting_column, sort_dir: sorting_direction, page: file_page },
+	    data: data,
 	    type: 'POST',
 	    dataType: 'json',
 	    timeout: ajax_timeout,
@@ -463,6 +471,8 @@ function sortFiles()
 	{
 		var data = { op: 'get_folder_files', folder_id: open_folder_id, sort_by: sorting_column, sort_dir: sorting_direction, page: file_page };
 	}
+	
+	$.extend(data, ajax_token);
 	
 	// load
 	$.ajax({
@@ -647,9 +657,12 @@ function moveFiles(to_folder_id, files_to_move)
 	    	continue;
 		}
 		
+		var data = {op: 'move_files', from_folder_id: folder_id, to_folder_id: to_folder_id, files: parents_and_files[folder_id].join(',')};
+		$.extend(data, ajax_token);
+		
 		$.ajax({
 		    url: site_url + '/admin/ajax_response.php',
-		    data: {op: 'move_files', from_folder_id: folder_id, to_folder_id: to_folder_id, files: parents_and_files[folder_id].join(',')},
+		    data: data,
 		    cache: false,
 		    type: 'POST',
 		    dataType: 'json',
@@ -1212,9 +1225,12 @@ function deleteFiles(files_to_delete)
 	
 	disableFilemanager();
 	
+	var data = {op: 'delete_files', files: deletetable_files.join(',')};
+	$.extend(data, ajax_token);
+	
 	$.ajax({
 	    url: site_url + '/admin/ajax_response.php',
-	    data: {op: 'delete_files', files: deletetable_files.join(',')},
+	    data: data,
 	    cache: false,
 	    type: 'POST',
 	    dataType: 'json',
@@ -1375,10 +1391,13 @@ function createFolder()
 	{
 		disableFolderDialogue();
 		
+		var data = {op: 'create_folder', name: folder_name, parent_id: parent_id};
+		$.extend(data, ajax_token);
+		
 		$.ajax({
 		    url: site_url + '/admin/ajax_response.php',
 		    cache: false,
-		    data: {op: 'create_folder', name: folder_name, parent_id: parent_id},
+		    data: data,
 		    type: 'POST',
 		    dataType: 'json',
 		    timeout: ajax_timeout,
@@ -1460,10 +1479,13 @@ function saveFolder()
 	{
 		disableFolderDialogue();
 		
+		var data = {op: 'edit_folder', name: folder_name, folder_id: folder_id};
+		$.extend(data, ajax_token);
+		
 		$.ajax({
 		    url: site_url + '/admin/ajax_response.php',
 		    cache: false,
-		    data: {op: 'edit_folder', name: folder_name, folder_id: folder_id},
+		    data: data,
 		    type: 'POST',
 		    dataType: 'json',
 		    timeout: ajax_timeout,
@@ -1649,11 +1671,14 @@ function showFolderContextMenu()
 				
 				$('img.context_button_anchor').addClass('invisible');
 				$('div.context_button_container').remove();
+
+				var data = { op: 'delete_folder', folder_id: folder_id };
+				$.extend(data, ajax_token);
 				
 				$.ajax({
 				    url: site_url + '/admin/ajax_response.php',
 				    cache: false,
-				    data: { op: 'delete_folder', folder_id: folder_id },
+				    data: data,
 				    type: 'POST',
 				    dataType: 'json',
 				    timeout: ajax_timeout,
@@ -1728,9 +1753,12 @@ function showFolderContextMenu()
 		
 		file_page = 1;
 		
+		var data = { op: 'synchronise_folder', folder_id: folder_id, sort_by: sorting_column, sort_dir: sorting_direction };
+		$.extend(data, ajax_token);
+		
 		$.ajax({
 		    url: site_url + '/admin/ajax_response.php',
-		    data: { op: 'synchronise_folder', folder_id: folder_id, sort_by: sorting_column, sort_dir: sorting_direction },
+		    data: data,
 		    cache: false,
 		    type: 'POST',
 		    dataType: 'json',
@@ -1917,10 +1945,13 @@ function toggleFolder(id)
 			// load children
 			if(folder_tree[selected_id].has_children && !found_children)
 			{
+				var data = { op: 'get_folders', parent_id: selected_id };
+				$.extend(data, ajax_token);
+				
 				$.ajax({
 				    url: site_url + '/admin/ajax_response.php',
 				    cache: false,
-				    data: { op: 'get_folders', parent_id: selected_id },
+				    data: data,
 				    type: 'POST',
 				    dataType: 'json',
 				    timeout: ajax_timeout,
@@ -1964,11 +1995,14 @@ function displayFiles(folder_id)
 	{
 		disableFilemanager();
 		
+		var data = { op: 'get_folder_files', folder_id: folder_id, sort_by: sorting_column, sort_dir: sorting_direction, page: file_page };
+		$.extend(data, ajax_token);
+		
 		// load
 		$.ajax({
 		    url: site_url + '/admin/ajax_response.php',
 		    cache: false,
-		    data: { op: 'get_folder_files', folder_id: folder_id, sort_by: sorting_column, sort_dir: sorting_direction, page: file_page },
+		    data: data,
 		    type: 'POST',
 		    dataType: 'json',
 		    timeout: ajax_timeout,

@@ -20,6 +20,8 @@
 	{assign var="show_form" value=1}
 	
 	{if $smarty.post.save == 1}
+	
+		{verify_form_token}
 		
 		{if $userdata->user_id}
 			{*************** UPDATE USER DATA ************}
@@ -168,6 +170,8 @@
 
 		{/if}
 			
+		{create_form_token form_id="edit-profile"}
+		
 		<input type="hidden" name="id" value="{$id}">
 		<input type="hidden" name="save" value="1">
 		<input type="hidden" name="op" value="{$op}">

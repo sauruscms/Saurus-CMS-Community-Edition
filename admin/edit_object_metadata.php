@@ -31,6 +31,7 @@ function edit_objekt_metadata () {
 ?>
 
 <form name="frmEdit" action="<?=$site->self?>" method="POST">
+<?php create_form_token('edit-object-seo'); ?>
 <input type=hidden name=tab value="<?=$site->fdat['tab']?>">
 <input type=hidden name=id value="<?=$site->fdat['id']?>">
 <input type=hidden name=op value="<?=$site->fdat['op']?>">
@@ -140,6 +141,8 @@ function edit_objekt_metadata () {
 function salvesta_objekt_metadata () {
 	global $site;
 
+	verify_form_token();
+	
 	$class_path = "../classes/";
 
 	$objekt=new Objekt(array('objekt_id'=>$site->fdat['id']));

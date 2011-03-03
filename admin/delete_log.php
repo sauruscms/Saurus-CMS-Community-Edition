@@ -81,6 +81,7 @@ else {
 #############################
 
 if ($site->fdat[kustuta]) {
+	verify_form_token();
 	foreach ($site->fdat as $key=>$value) {
 		if ( substr ($key, 0, 8) == "delmonth" ) {			
 			$sql = $site->db->prepare("DELETE FROM ".$tbl." WHERE CONCAT(YEAR(".$time_field."),'.',MONTH(".$time_field."))=?", $value); 
@@ -118,7 +119,7 @@ if ($site->fdat[kustuta]) {
 #############################
 ?>
 <form action="<?$site->self?>" method="post" name="vorm">
-
+<?php create_form_token(''); ?>
 <?###### 1. Master table ?>
 <TABLE border="0" cellpadding="0" cellspacing="0" style="width:100%; height:100%">
 <TR>

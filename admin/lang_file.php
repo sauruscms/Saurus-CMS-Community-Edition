@@ -110,7 +110,7 @@ $pagename = $adminpage_names['pagename'];
 if($site->fdat['op'] == 'import' || $site->fdat['op'] == 'import_cvs') { ?>
 
 <FORM method=post action="<?=$site->self ?>" enctype="multipart/form-data">
-
+<?php create_form_token('import-glossary'); ?>
 
 <!-- Popup table -->
 <table border="0" cellpadding="0" cellspacing="0" style="width:100%; height:100%">
@@ -140,6 +140,7 @@ if($site->fdat['op'] == 'import' || $site->fdat['op'] == 'import_cvs') { ?>
 	########################
 	# STEP 2: SAVE IMPORT
 	if($site->fdat['op2'] == 'salvesta') {
+		verify_form_token();
 		import2glossary(); 
 	}
 	########################

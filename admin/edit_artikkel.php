@@ -824,29 +824,30 @@ $_SESSION['current_article_parent_selection']['display_fields'] = array('select_
 <body id="scms_editor_popup">
 
 	<form action="edit.php" method="POST" name="frmEdit" id="frmEdit" class="article_submit_form">
-		<?php /* hidden form stuff */ ?>
-				<input type=hidden name="op" value="<?=$site->fdat['op'];?>">
-				<input type=hidden name="op2" id="op2" value="saveclose">
-				<input type=hidden name="refresh" value="0">
+		
+		<?php create_form_token('edit-article'); ?>
+		
+		<input type=hidden name="op" value="<?=$site->fdat['op'];?>">
+		<input type=hidden name="op2" id="op2" value="saveclose">
+		<input type=hidden name="refresh" value="0">
 
-				<input type="hidden" name="tyyp_id" value="<?=$tyyp['tyyp_id'];?>">
-				<input type="hidden" name="tyyp" value="<?=$tyyp['klass'];?>">
-				<input type="hidden" name="sys_alias" value="<?=$site->fdat['sys_alias'];?>">
+		<input type="hidden" name="tyyp_id" value="<?=$tyyp['tyyp_id'];?>">
+		<input type="hidden" name="tyyp" value="<?=$tyyp['klass'];?>">
+		<input type="hidden" name="sys_alias" value="<?=$site->fdat['sys_alias'];?>">
 
-				<input type="hidden" name="id" value="<?=$site->fdat['id'];?>">
-				<input type="hidden" name="kesk" value="<?=$site->fdat['kesk'];?>">
-				<input type="hidden" name="parent_id" value="<?=$site->fdat['parent_id'];?>">
-				<input type="hidden" name="previous_id" value="<?=$site->fdat['previous_id'];?>">
-				<input type="hidden" name="keel" value="<?=$keel;?>">
-				<input type="hidden" name="baseurl" value="<?=(empty($_SERVER['HTTPS']) ? 'http://': 'https://').$site->CONF['hostname'].$site->CONF['wwwroot'];?>/">
-				<input type="hidden" name="wwwroot" value="<?=$site->CONF['wwwroot'];?>/">
+		<input type="hidden" name="id" value="<?=$site->fdat['id'];?>">
+		<input type="hidden" name="kesk" value="<?=$site->fdat['kesk'];?>">
+		<input type="hidden" name="parent_id" value="<?=$site->fdat['parent_id'];?>">
+		<input type="hidden" name="previous_id" value="<?=$site->fdat['previous_id'];?>">
+		<input type="hidden" name="keel" value="<?=$keel;?>">
+		<input type="hidden" name="baseurl" value="<?=(empty($_SERVER['HTTPS']) ? 'http://': 'https://').$site->CONF['hostname'].$site->CONF['wwwroot'];?>/">
+		<input type="hidden" name="wwwroot" value="<?=$site->CONF['wwwroot'];?>/">
 
-                <input type="hidden" name="sorting" value="<?=$site->fdat['sorting'];?>">
+        <input type="hidden" name="sorting" value="<?=$site->fdat['sorting'];?>">
 
-				<input type="hidden" name="extension_path" value="<?=$site->fdat['extension_path'];?>">
-				
-				<input type="hidden" name="publish" value="<?php echo ($site->fdat['publish'] || $objekt->all['on_avaldatud'] ? 1 : 0); ?>">
-		<?php /* /hidden form stuff */ ?>
+		<input type="hidden" name="extension_path" value="<?=$site->fdat['extension_path'];?>">
+		
+		<input type="hidden" name="publish" value="<?php echo ($site->fdat['publish'] || $objekt->all['on_avaldatud'] ? 1 : 0); ?>">
 
 	<table cellpadding="0" cellspacing="0" class="layout" border="0">
 		<tr>
@@ -912,6 +913,8 @@ function salvesta_objekt () {
 	global $objekt;
 
 	$class_path = "../classes/";
+	
+	verify_form_token();
 
 	# -----------------------------
 	# lyhi ja sisu koristamine

@@ -1,39 +1,22 @@
 <?php
 
 /**
-
  * This source file is is part of Saurus CMS content management software.
-
  * It is licensed under MPL 1.1 (http://www.opensource.org/licenses/mozilla1.1.php).
-
  * Copyright (C) 2000-2010 Saurused Ltd (http://www.saurus.info/).
-
  * Redistribution of this file must retain the above copyright notice.
-
  * 
-
  * Please note that the original authors never thought this would turn out
-
  * such a great piece of software when the work started using Perl in year 2000.
-
  * Due to organic growth, you may find parts of the software being
-
  * a bit (well maybe more than a bit) old fashioned and here's where you can help.
-
  * Good luck and keep your open source minds open!
-
  * 
-
  * @package		SaurusCMS
-
  * @copyright	2000-2010 Saurused Ltd (http://www.saurus.info/)
-
  * @license		Mozilla Public License 1.1 (http://www.opensource.org/licenses/mozilla1.1.php)
-
  * 
-
  */
-
 function edit_objekt ()
 {
 	global $site;
@@ -204,6 +187,8 @@ function edit_objekt ()
 			
 			var folder_path = '<?php echo  $album_folder_path; ?>';
 			
+			var ajax_token = <?php echo create_form_token_json('edit-album-ajax'); ?>;
+			
 			var swfu;
 			
 			window.onload = function ()
@@ -222,10 +207,14 @@ function edit_objekt ()
 				resizeWindow();
 				
 				<?php if($site->CONF['fm_allow_multiple_upload'] && $parent->all['ttyyp_id'] != 39) { ?>
+				
+				var post_params = {'<?php echo session_name(); ?>' : '<?php echo session_id(); ?>', 'op': 'add_image_to_album'};
+				$.extend(post_params, ajax_token);
+				
 				swfu = new SWFUpload({
 					flash_url : '<?php echo $site->CONF['wwwroot'].$site->CONF['js_path']?>/swfupload/swfupload.swf',
 					upload_url: '<?php echo $site->CONF['wwwroot']?>/admin/ajax_response.php',
-					post_params: {'PHPSESSID' : '<?php echo session_id(); ?>', 'op': 'add_image_to_album'},
+					post_params: post_params,
 					file_size_limit : '<?php echo (is_int(ini_get('upload_max_filesize')) ? round(ini_get('upload_max_filesize') / 1024) : ini_get('upload_max_filesize').'B'); ?>',
 					file_types : '*.gif;*.png;*.jpeg;*.jpg',
 					file_types_description : 'Images',
@@ -646,6 +635,8 @@ function edit_objekt ()
 		
 		<form action="edit.php" name="editForm" id="editForm" method="POST"  enctype="multipart/form-data">
 		
+		<?php create_form_token('edit-album'); ?>
+		
 		<input type="hidden" name="tab" value="<?php echo $site->fdat['tab']?>" />
 		<input type="hidden" id="op" name="op" value="<?php echo htmlspecialchars($site->fdat['op'])?>" />
 		<input type="hidden" id="op2" name="op2" value="" />
@@ -889,6 +880,9 @@ function save_tyyp_params (){
 function salvesta_objekt () {
 	global $site;
 	global $objekt;
+	
+	verify_form_token();
+	
 
 	if ($objekt->objekt_id) {
 

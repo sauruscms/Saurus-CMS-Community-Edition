@@ -416,6 +416,8 @@ function edit_objekt()
 		
 		<form action="edit.php" name="editForm" id="editForm" method="POST"  enctype="multipart/form-data">
 		
+		<?php create_form_token('edit-section'); ?>
+		
 		<input type="hidden" name="tab" value="<?=$site->fdat['tab']?>" />
 		<input type="hidden" id="op" name="op" value="<?=htmlspecialchars($site->fdat['op'])?>" />
 		<input type="hidden" id="op2" name="op2" value="" />
@@ -644,6 +646,8 @@ function salvesta_objekt () {
 
 	$class_path = "../classes/";
 
+	verify_form_token();
+	
 	if ($objekt->objekt_id) {
 
 		if ($objekt->on_sisu_olemas) {

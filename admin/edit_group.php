@@ -150,6 +150,8 @@ if ($site->fdat[refresh]) {
 if($op2 && !$site->fdat['refresh']) {
 	$form_error = array();
 
+	verify_form_token();
+	
 	##############
 	# SAVE GROUP TAB
 	if($site->fdat['tab'] == 'group') {
@@ -391,6 +393,7 @@ if ($site->fdat[refresh]) {
 if($op == 'delete') {
 ?>
 	<form name="frmEdit" action="<?=$site->self?>" method="POST">
+	<?php create_form_token('delete-group'); ?>
 	<input type=hidden name=group_id value="<?=$site->fdat['group_id']?>">
 	<input type=hidden name=op value="<?=$site->fdat['op']?>">
 	<input type=hidden name=op2 value="">
@@ -516,6 +519,7 @@ if($site->fdat['tab'] == 'group') {
     <td valign="top" width="100%" class="scms_dialog_area" height="100%"> 
       <table width="100%"  border="0" cellspacing="3" cellpadding="0" class="scms_borderbox">
 	<form name="frmEdit" action="<?=$site->self?>" method="POST">
+	<?php create_form_token('edit-group'); ?>
 	<input type=hidden name=tab value="<?=$site->fdat['tab']?>">
 	<input type=hidden name=group_id value="<?=$site->fdat['group_id']?>">
 	<input type=hidden name=op value="<?=$site->fdat['op']?>">

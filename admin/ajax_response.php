@@ -75,6 +75,8 @@ if($site->user->user_id && $_REQUEST['op'] == 'check_file' && $site->fdat['name'
 // get subfolders
 if($site->user->user_id && $site->fdat['op'] == 'get_folders' && (int)$site->fdat['parent_id'])
 {
+	verify_form_token();
+	
 	include_once($class_path.'adminpage.inc.php');
 	include_once($class_path.'custom.inc.php');
 	include_once($class_path.'lgpl/Services_JSON.class.php');
@@ -101,6 +103,8 @@ if($site->user->user_id && $site->fdat['op'] == 'get_folders' && (int)$site->fda
 // create subfolder
 if($site->user->user_id && $site->fdat['op'] == 'create_folder' && (int)$site->fdat['parent_id'])
 {
+	verify_form_token();
+	
 	include_once($class_path.'adminpage.inc.php');
 	include_once($class_path.'custom.inc.php');
 	include_once($class_path.'lgpl/Services_JSON.class.php');
@@ -142,6 +146,8 @@ if($site->user->user_id && $site->fdat['op'] == 'create_folder' && (int)$site->f
 // delete folder
 if($site->user->user_id && $site->fdat['op'] == 'delete_folder' && (int)$site->fdat['folder_id'])
 {
+	verify_form_token();
+	
 	include_once($class_path.'adminpage.inc.php');
 	include_once($class_path.'custom.inc.php');
 	include_once($class_path.'lgpl/Services_JSON.class.php');
@@ -174,6 +180,8 @@ if($site->user->user_id && $site->fdat['op'] == 'delete_folder' && (int)$site->f
 // edit folder
 if($site->user->user_id && $site->fdat['op'] == 'edit_folder' && (int)$site->fdat['folder_id'] && $site->fdat['name'])
 {
+	verify_form_token();
+	
 	include_once($class_path.'adminpage.inc.php');
 	include_once($class_path.'custom.inc.php');
 	include_once($class_path.'lgpl/Services_JSON.class.php');
@@ -217,6 +225,8 @@ if($site->user->user_id && $site->fdat['op'] == 'edit_folder' && (int)$site->fda
 // get folder files
 if($site->user->user_id && $site->fdat['op'] == 'get_folder_files' && (int)$site->fdat['folder_id'])
 {
+	verify_form_token();
+	
 	include_once($class_path.'adminpage.inc.php');
 	include_once($class_path.'custom.inc.php');
 	include_once($class_path.'lgpl/Services_JSON.class.php');
@@ -275,6 +285,8 @@ if($site->user->user_id && $site->fdat['op'] == 'get_folder_files' && (int)$site
 // search files
 if($site->user->user_id && $site->fdat['op'] == 'search_files' && $site->fdat['keyword'])
 {
+	verify_form_token();
+	
 	include_once($class_path.'adminpage.inc.php');
 	include_once($class_path.'custom.inc.php');
 	include_once($class_path.'lgpl/Services_JSON.class.php');
@@ -332,6 +344,8 @@ if($site->user->user_id && $site->fdat['op'] == 'search_files' && $site->fdat['k
 // delete files
 if($site->user->user_id && $site->fdat['op'] == 'delete_files' && $site->fdat['files'])
 {
+	verify_form_token();
+	
 	include_once($class_path.'adminpage.inc.php');
 	include_once($class_path.'custom.inc.php');
 	include_once($class_path.'lgpl/Services_JSON.class.php');
@@ -350,6 +364,8 @@ if($site->user->user_id && $site->fdat['op'] == 'delete_files' && $site->fdat['f
 // move files
 if($site->user->user_id && $site->fdat['op'] == 'move_files' && (int)$site->fdat['from_folder_id'] && (int)$site->fdat['to_folder_id'] && $site->fdat['files'])
 {
+	verify_form_token();
+	
 	include_once($class_path.'adminpage.inc.php');
 	include_once($class_path.'custom.inc.php');
 	include_once($class_path.'lgpl/Services_JSON.class.php');
@@ -368,6 +384,8 @@ if($site->user->user_id && $site->fdat['op'] == 'move_files' && (int)$site->fdat
 // synchronise folder
 if($site->user->user_id && $site->fdat['op'] == 'synchronise_folder' && (int)$site->fdat['folder_id'])
 {
+	verify_form_token();
+	
 	include_once($class_path.'adminpage.inc.php');
 	include_once($class_path.'custom.inc.php');
 	include_once($class_path.'lgpl/Services_JSON.class.php');
@@ -433,6 +451,8 @@ if($site->user->user_id && $site->fdat['op'] == 'synchronise_folder' && (int)$si
 // upload file
 if($site->user->user_id && $site->fdat['op'] == 'file_upload' && (int)$site->fdat['folder_id'])
 {
+	verify_form_token();
+	
 	include_once($class_path.'adminpage.inc.php');
 	include_once($class_path.'custom.inc.php');
 	//include_once($class_path.'lgpl/Services_JSON.class.php');
@@ -460,6 +480,8 @@ if($site->user->user_id && $site->fdat['op'] == 'file_upload' && (int)$site->fda
 // toggle favorite
 if($site->user->user_id && $site->fdat['op'] == 'toggle_favorite' && (int)$site->fdat['objekt_id'])
 {
+	verify_form_token();
+	
 	include_once($class_path.'adminpage.inc.php');
 	include_once($class_path.'custom.inc.php');
 	include_once($class_path.'lgpl/Services_JSON.class.php');
@@ -489,6 +511,8 @@ if($site->user->user_id && $site->fdat['op'] == 'toggle_favorite' && (int)$site-
 // album images upload
 if($site->user->user_id && $site->fdat['op'] == 'add_image_to_album' && $site->fdat['folder_path'])
 {
+	verify_form_token();
+	
 	include_once($class_path.'adminpage.inc.php');
 	include_once($class_path.'custom.inc.php');
 	include_once($class_path.'lgpl/Services_JSON.class.php');
@@ -510,6 +534,8 @@ if($site->user->user_id && $site->fdat['op'] == 'add_image_to_album' && $site->f
 // subsite (keel) setting edit
 if($site->user->user_id && $site->fdat['op'] == 'edit_site_settings')
 {
+	verify_form_token();
+	
 	include_once($class_path.'adminpage.inc.php');
 	//include_once($class_path.'lgpl/Services_JSON.class.php');
 	
@@ -544,6 +570,8 @@ if($site->user->user_id && $site->fdat['op'] == 'edit_site_settings')
 // subsite (keel) object count
 if($site->user->user_id && $site->fdat['op'] == 'get_site_objects_count' && is_numeric($site->fdat['site_id']))
 {
+	verify_form_token();
+	
 	include_once($class_path.'adminpage.inc.php');
 	//include_once($class_path.'lgpl/Services_JSON.class.php');
 	
@@ -559,6 +587,8 @@ if($site->user->user_id && $site->fdat['op'] == 'get_site_objects_count' && is_n
 // subsite (keel) delete
 if($site->user->user_id && $site->fdat['op'] == 'delete_site' && is_numeric($site->fdat['site_id']))
 {
+	verify_form_token();
+	
 	include_once($class_path.'adminpage.inc.php');
 	include_once($class_path.'lgpl/Services_JSON.class.php');
 	
@@ -611,6 +641,8 @@ if($site->user->user_id && $site->fdat['op'] == 'delete_site' && is_numeric($sit
 // subsite (keel) create
 if($site->user->user_id && $site->fdat['op'] == 'create_new_site')
 {
+	verify_form_token();
+	
 	include_once($class_path.'adminpage.inc.php');
 	include_once($class_path.'lgpl/Services_JSON.class.php');
 	
@@ -655,6 +687,8 @@ if($site->user->user_id && $site->fdat['op'] == 'create_new_site')
 // glossary create
 if($site->user->user_id && $site->fdat['op'] == 'create_glossary')
 {
+	verify_form_token();
+	
 	include_once($class_path.'adminpage.inc.php');
 	include_once($class_path.'lgpl/Services_JSON.class.php');
 	
@@ -693,6 +727,8 @@ if($site->user->user_id && $site->fdat['op'] == 'create_glossary')
 // glossary usage
 if($site->user->user_id && $site->fdat['op'] == 'get_glossary_usage' && is_numeric($site->fdat['glossary_id']))
 {
+	verify_form_token();
+	
 	include_once($class_path.'adminpage.inc.php');
 	include_once($class_path.'lgpl/Services_JSON.class.php');
 	
@@ -720,6 +756,8 @@ if($site->user->user_id && $site->fdat['op'] == 'get_glossary_usage' && is_numer
 // glossary remove
 if($site->user->user_id && $site->fdat['op'] == 'remove_glossary' && is_numeric($site->fdat['glossary_id']))
 {
+	verify_form_token();
+	
 	include_once($class_path.'adminpage.inc.php');
 	include_once($class_path.'lgpl/Services_JSON.class.php');
 	
@@ -750,6 +788,8 @@ if($site->user->user_id && $site->fdat['op'] == 'remove_glossary' && is_numeric(
 // glossary edit
 if($site->user->user_id && $site->fdat['op'] == 'edit_glossary_settings' && is_numeric($site->fdat['glossary_id']))
 {
+	verify_form_token();
+	
 	include_once($class_path.'adminpage.inc.php');
 	include_once($class_path.'lgpl/Services_JSON.class.php');
 	
@@ -787,6 +827,8 @@ if($site->user->user_id && $site->fdat['op'] == 'edit_glossary_settings' && is_n
 // system word delete
 if($site->user->user_id && $site->fdat['op'] == 'delete_sys_word' && is_numeric($site->fdat['word_id']))
 {
+	verify_form_token();
+	
 	include_once($class_path.'adminpage.inc.php');
 	include_once($class_path.'lgpl/Services_JSON.class.php');
 	

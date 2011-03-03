@@ -92,6 +92,7 @@ if( $site->fdat['tab'] == 'edit'){
 # STEP2:  SAVE DATA : close popup or don't close and refresh
 if($op2) {
 	
+	verify_form_token();
 	##############
 	# SAVE EDIT TAB
 	if($site->fdat['tab'] == 'edit') {
@@ -206,14 +207,9 @@ if($op2) {
 		<?
 		exit;
 	}
-	
-
 }
 # / STEP2:  SAVE DATA 
 #################
-
-
-
 
 ##################
 # 0. HTML
@@ -238,6 +234,7 @@ if($op2) {
 if($op == 'delete') {
 ?>
 	<form name="frmEdit" action="<?=$site->self?>" method="POST">
+	<?php create_form_token('delete-table'); ?>
 	<input type=hidden name=id value="<?=$site->fdat['id']?>">
 	<input type=hidden name=op value="<?=$site->fdat['op']?>">
 	<input type=hidden name=op2 value="">
@@ -288,6 +285,7 @@ elseif($site->fdat['tab'] == 'edit') {
 	<table width="100%"  border="0" cellspacing="0" cellpadding="3">
 	
 	<form name="frmEdit" action="<?=$site->self?>" method="POST">
+	<?php create_form_token('edit-table'); ?>
 	<input type=hidden id=tab name=tab value="<?=$site->fdat['tab']?>">
 	<input type=hidden id=id name=id value="<?=$site->fdat['id']?>">
 	<input type=hidden name=op value="<?=$site->fdat['op']?>">

@@ -72,6 +72,7 @@ if (!$site->user->allowed_adminpage()) {
 # SAVE
 if ($site->fdat['save']) {
 
+	verify_form_token();
 	############# CUSTOM CSS
 
 	$sql = "SELECT * FROM css WHERE name='custom_css'";
@@ -176,6 +177,7 @@ while ($tmp = $sth->fetch()){
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" height="100%">
 	<form action="<?=$site->self ?>" name="dataform" method="POST">
+	<?php create_form_token('edit-styles'); ?>
 	<input type="hidden" name="save" value="1">
 
  <?

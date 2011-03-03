@@ -40,6 +40,8 @@ $allowed_edit = true;
 
 if($site->fdat['action'] == 'save' && $site->fdat['op'] == 'edit')
 {
+	verify_form_token();
+	
 	foreach($site->fdat['translation'] as $word_id => $translation)
 	{
 		if(strpos($word_id, 'missing_') === 0)
@@ -397,6 +399,8 @@ function hideConfirmDialog()
 		
 			<form id="translations_form" action="<?=$_SERVER['PHP_SELF']?>" method="POST">
 			
+				<?php create_form_token('edit-translations'); ?>
+				
 				<input type="hidden" name="op" value="<?php echo ($site->fdat['op'] == 'edit' ? 'edit' : 'new') ?>" />
 				<input type="hidden" name="action" value="save" />
 				<input type="hidden" name="action" value="save" />

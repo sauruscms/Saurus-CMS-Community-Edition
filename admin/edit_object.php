@@ -254,6 +254,7 @@ $pearubriik = $par_obj->all[sys_alias]=="home" ? 1 : 0;
 <form action="edit.php" method=post name=frmEdit id=frmEdit  enctype="multipart/form-data">
 </table>
 
+<?php create_form_token('edit-object'); ?>
 <input type=hidden name=tab value="<?=$site->fdat['tab']?>">
 <input type=hidden id="op" name="op" value="<?=$site->fdat['op']?>">
 <input type=hidden id="op2" name=op2 value="">
@@ -569,6 +570,7 @@ function save_object () {
 
 	global $tyyp;
 
+verify_form_token();
 
 ###################
 # 1. special case: if object is NEW picture

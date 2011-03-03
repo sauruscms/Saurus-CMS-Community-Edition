@@ -152,8 +152,8 @@ $adminpage_names = get_adminpage_name(array('script_name' => $site->script_name)
 
 <script type="text/javascript">
 
+	var ajax_token = <?php echo create_form_token_json('sites'); ?>;
 	var site_url = '<?php echo (empty($_SERVER['HTTPS']) ? 'http://': 'https://').$site->CONF['hostname'].$site->CONF['wwwroot'];?>';
-	
 	var sites = [];
 	<?php foreach ($sites as $site_data)  { ?>
 	sites[<?php echo $site_data['keel_id'] ?>] = <?php echo $json_encoder->encode($site_data) ?>;
@@ -243,6 +243,7 @@ $(document).ready(function()
 	    	op: 'get_site_objects_count',
 	    	site_id: site_id
 		}
+		$.extend(data, ajax_token);
 		
 		$('div#scms_content_cover').removeClass('hidden');
 		
@@ -268,6 +269,8 @@ $(document).ready(function()
 				    	op: 'delete_site',
 				    	site_id: site_id
 					}
+					
+					$.extend(data, ajax_token);
 					
 					$.ajax({
 					    url: site_url + '/admin/ajax_response.php',
@@ -319,6 +322,8 @@ $(document).ready(function()
 	    	page_template_id: $('select#site_page_template_id').attr('value'),
 	    	content_template_id: $('select#site_content_template_id').attr('value')
 		}
+		
+		$.extend(data, ajax_token);
 		
 		$.ajax({
 		    url: site_url + '/admin/ajax_response.php',
@@ -444,6 +449,8 @@ $(document).ready(function()
 			}
 			
 			$('div#scms_content_cover').removeClass('hidden');
+			
+			$.extend(data, ajax_token);
 			
 			$.ajax({
 			    url: site_url + '/admin/ajax_response.php',

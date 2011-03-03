@@ -58,23 +58,21 @@ global $selected_group;
 # / FUNCTION print_group_selectbox
 #################################
 
-
 if(!$called_from_install_script) {
 
 	$site = new Site(array(
 		on_debug=>0,
 		on_admin_keel => 1
 	));
+	
 	if (!$site->user->allowed_adminpage()) {
 		exit;
 	}
 
-		######### get adminpage name
-		$adminpage_names = get_adminpage_name(array("script_name" => $site->script_name));
-		$parent_pagename = $adminpage_names['parent_pagename'];
-		$pagename = $adminpage_names['pagename'];
-
-
+	######### get adminpage name
+	$adminpage_names = get_adminpage_name(array("script_name" => $site->script_name));
+	$parent_pagename = $adminpage_names['parent_pagename'];
+	$pagename = $adminpage_names['pagename'];
 
 	if($site->fdat['group']==1){
 
@@ -140,7 +138,9 @@ if(!$called_from_install_script) {
 
 			if($curr_objekt->all['sys_alias'] == 'home'){
 
-				if ($site->fdat[save] && $curr_objekt && !$site->fdat[lang_swiched]){
+				if ($site->fdat[save] && $curr_objekt && !$site->fdat[lang_swiched])
+				{
+					verify_form_token();
 
 					$site->debug->print_hash($site->fdat,0,"FDAT");
 					new Log(array(
@@ -1105,6 +1105,7 @@ if($site->fdat['group']==1){
 	?>  
      <table width="100%" border="0" class="scms_table" cellspacing="10" cellpadding="0">
 	<form action="<?=$site->self ?>" name="dataform" method=post>
+	<?php create_form_token('change-config'); ?>
 	<input type="hidden" name="group" value="1">
 	<?php if($editor_mode) { ?>
 		<input type="hidden" name="op" value="">
@@ -1339,6 +1340,7 @@ if($site->fdat['group']==1){
     <div id=listing class="scms_middle_div" style="min-height: 440px"> 
 	<table width="100%" border="0" cellspacing="10" cellpadding="0" style="height:100%;">
 	<form action="<?=$site->self ?>" name="dataform" method=post>
+	<?php create_form_token('change-config'); ?>
 	<?
 	#################
 	# DATA ROWS

@@ -215,7 +215,7 @@ $adminpage_names = get_adminpage_name(array('script_name' => $site->script_name)
 <script type="text/javascript">
 
 	var site_url = '<?php echo (empty($_SERVER['HTTPS']) ? 'http://': 'https://').$site->CONF['hostname'].$site->CONF['wwwroot'];?>';
-	
+	var ajax_token = <?php echo create_form_token_json('filemanager'); ?>;
 	var glossaries = <?php echo $json_encoder->encode($glossaries); ?>;
 	var allGlossaries = <?php echo $json_encoder->encode($all_glossaries); ?>;
 	
@@ -319,6 +319,8 @@ $(document).ready(function()
 			return;
 		}
 		
+		$.extend(data, ajax_token);
+		
 		$.ajax({
 		    url: site_url + '/admin/ajax_response.php',
 		    cache: false,
@@ -381,6 +383,8 @@ $(document).ready(function()
 		
 		$('div#scms_content_cover').removeClass('hidden');
 		
+		$.extend(data, ajax_token);
+		
 		$.ajax({
 		    url: site_url + '/admin/ajax_response.php',
 		    cache: false,
@@ -405,6 +409,8 @@ $(document).ready(function()
 				    	op: 'remove_glossary',
 				    	glossary_id: glossary_id
 					}
+					
+					$.extend(data, ajax_token);
 					
 					$.ajax({
 					    url: site_url + '/admin/ajax_response.php',
@@ -457,6 +463,8 @@ $(document).ready(function()
     	confirmDialog('<?php echo $site->sys_sona(array('sona' => 'glossary_translation_delete_confirm', 'tyyp' => 'admin')); ?>' , function ()
 		{
 			$('div#scms_content_cover').removeClass('hidden');
+			
+			$.extend(data, ajax_token);
 			
 			$.ajax({
 			    url: site_url + '/admin/ajax_response.php',
@@ -552,6 +560,8 @@ $(document).ready(function()
 	    	locale: $('input#edit_glossary_locale').attr('value'),
 	    	encoding: $('select#edit_glossary_encoding').attr('value')
 		}
+		
+		$.extend(data, ajax_token);
 		
 		$.ajax({
 		    url: site_url + '/admin/ajax_response.php',

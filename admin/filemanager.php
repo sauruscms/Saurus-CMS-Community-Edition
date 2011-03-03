@@ -363,6 +363,7 @@ var favorites = <?php echo $json_encoder->encode($favorites);?>;
 var selected_file = <?php echo $selected_file_id; ?>;
 var file_page = 1;
 var settings = <?php echo $json_encoder->encode($settings);?>;
+var ajax_token = <?php echo create_form_token_json('filemanager'); ?>;
 var translations = {
 	search_files: '<?php echo $site->sys_sona(array('sona' => 'search_files', 'tyyp' => 'Files')); ?>',
 	upload_queue_limit: '<?php echo $site->sys_sona(array('sona' => 'upload_queue_limit', 'tyyp' => 'Files')); ?>',
@@ -397,33 +398,17 @@ var translations = {
 
 $(document).ready(function()
 {
-	/*
-	<?php if($site->fdat['keepThis']) {  ?>
-	// IE8 workaround to set content dimensions with thickbox
-	var delayTimer;
-	
-	if(delayTimer)
-	{
-		clearTimeout(delayTimer);
-		delayTimer = null;
-	}
-	
-	delayTimer = setTimeout(function ()
-	{
-		setContentDimensions();
-	}, 10);
-
-	<?php } ?>
-	*/
-	
-
 	make_breadcrumb('<?=$adminpage_names['parent_pagename'];?>', '<?=$adminpage_names['pagename'];?>');
 	
 	<?php if($site->CONF['fm_allow_multiple_upload']) { ?>
+	
+	var post_params = {'<?php echo session_name(); ?>' : '<?php echo session_id(); ?>', 'op': 'file_upload'};
+	$.extend(post_params, ajax_token);
+	
 	swfu = new SWFUpload({
 		flash_url : '<?php echo $site->CONF['wwwroot'].$site->CONF['js_path']?>/swfupload/swfupload.swf',
 		upload_url: '<?php echo $site->CONF['wwwroot']?>/admin/ajax_response.php',
-		post_params: {'<?php echo session_name(); ?>' : '<?php echo session_id(); ?>', 'op': 'file_upload'},
+		post_params: post_params,
 		file_size_limit : '<?php echo (is_int(ini_get('upload_max_filesize')) ? round(ini_get('upload_max_filesize') / 1024) : ini_get('upload_max_filesize').'B'); ?>',
 		file_types : '*.*',
 		file_types_description : 'All Files',

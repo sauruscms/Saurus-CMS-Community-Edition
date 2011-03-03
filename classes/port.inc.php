@@ -74,6 +74,49 @@ function show_debug()
 	return false;
 }
 
+function create_form_token_json($form_id)
+{
+	$token = crypt(md5(time().rand(1, 1000)), rand(1, 2000));
+	
+	$form_id = $form_id.'-'.md5(time().rand(1, 30000));
+	
+	$_SESSION['scms_form_tokens'][$form_id] = $token;
+	
+	return json_encode(array('scms_form_id' => $form_id, 'scms_form_token' => $token));
+}
+
+function create_form_token($form_id)
+{
+	$token = crypt(md5(time().rand(1, 1000)), rand(1, 2000));
+	
+	$form_id = $form_id.'-'.md5(time().rand(1, 30000));
+	
+	$_SESSION['scms_form_tokens'][$form_id] = $token;
+	
+	echo '<input type="hidden" name="scms_form_id" value="'.$form_id.'">';
+	echo '<input type="hidden" name="scms_form_token" value="'.$token.'">';
+	
+	return $token;
+}
+
+function verify_form_token()
+{
+	$form_id = $_REQUEST['scms_form_id'];
+	$token = $_REQUEST['scms_form_token'];
+	
+	if(isset($_SESSION['scms_form_tokens'][$form_id]) && $_SESSION['scms_form_tokens'][$form_id] == $token)
+	{
+		return true;
+	}
+	
+	new Log(array(
+		'type' => 'ERROR',
+		'message' => 'Form tokens do not match! form ID: '.$form_id,
+	));
+	
+	exit();
+}
+
 ###################################
 # Error reporting is always "7"
 error_reporting(7);

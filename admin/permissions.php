@@ -103,6 +103,7 @@ foreach($grouptree as $tmgroup) {
 #################
 # SAVE
 if($site->fdat['op']=='save'){
+	verify_form_token();
 	save_all_permissions();
 
 	$site->fdat['op']=='';
@@ -215,6 +216,7 @@ function checkIt(string)
 
 <?############ FORM #########?>
 <form name="selectform" action="<?=$site->self?>" method="POST">
+<?php create_form_token('edit-permissions'); ?>
 <?
 ######## gather all fdat values into hidden fields
 #foreach($site->fdat as $fdat_field=>$fdat_value) { 
