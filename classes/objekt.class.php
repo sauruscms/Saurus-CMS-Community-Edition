@@ -364,6 +364,16 @@ class Objekt extends BaasObjekt {
 		$this->sisu = new HTML($sisu);
 		$this->debug->msg($this->sisu->debug->get_msgs());
 			
+		# 28.02.2011 Mati: replace links to local files with hostname+url for them to work in editor or with aliases
+		$url = $this->all["url"];
+		global $site;
+		if ($url
+		    && (substr($url, 0, 7) == 'public/' || substr($url, 0, 7) == 'shared/')
+		    # the replacement is not necessary when editing the link
+		    && $site->script_name != 'edit.php') {
+			$this->all["url"] = $hostname.'/'.$url;
+		}
+		
 		$this->on_sisu = 1;
 		$this->debug->msg("Sisu on loetud");
 

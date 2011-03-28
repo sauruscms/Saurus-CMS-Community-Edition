@@ -22,6 +22,14 @@ function edit_objekt () {
 	global $site;
 	global $objekt;
 	$on_intra = $site->CONF[editor_intra_link];
+
+	// setup file select
+	$_SESSION['scms_filemanager_settings']['scms_select_file_link'] = array(
+		'select_mode' => 1, // 1 - select single file
+		'action_text' => $site->sys_sona(array('sona' => 'fm_choose_file_for_link', 'tyyp' => 'editor')),
+		'action_trigger' => $site->sys_sona(array('sona' => 'fm_choose_file_for_link', 'tyyp' => 'editor')),
+		'callback' => 'window.opener.setFile',
+	);
 ?>
 	<tr>
       <td nowrap><?=$site->sys_sona(array(sona => "URL", tyyp=>"editor"))?>:</td>
@@ -65,7 +73,27 @@ function edit_objekt () {
 		</SCRIPT>
 		<input name="url" style="width:300px" class="scms_flex_input"  value="<?=$objekt->all[url]?$objekt->all[url]:"http://"?>"><input type="button" value="<?=$site->sys_sona(array(sona => "otsi", tyyp=>"editor"))?>" name="browse" class="btn2" onclick="url_browse.click();url.value=do_regexp_swap(url_browse);" >
 		<? } else { ?>
-		<input name="url" class="scms_flex_input"  value="<?=$objekt->all[url]?$objekt->all[url]:"http://"?>">
+
+		<? // 28.02.2011 Mati: added option to choose local files into link editor using filemanager ?>
+		<SCRIPT LANGUAGE="JavaScript">
+		<!--
+			function chooseFile()
+			{
+				filemanager_window = openpopup('filemanager.php?setup=scms_select_file_link', 'filemanager', 980, 600);
+			}
+			function setFile(data)
+			{
+				filemanager_window.close();
+				$('input#url').attr('value', data.files[0].folder.replace(/^\//, '') + '/' + data.files[0].filename);
+			}
+		//-->
+		</SCRIPT>
+		<table cellpadding="0" cellspacing="0" border="0" class="cf_container">
+			<tr>
+				<th style="padding:0px;"><input id="url" name="url" class="scms_flex_input" style="border:0px;" value="<?=$objekt->all[url]?$objekt->all[url]:"http://"?>"></th>
+				<td><a href="javascript:chooseFile();">..</a></td>
+			</tr>
+		</table>
 		<? } ?>
 		</td>
     </tr>
