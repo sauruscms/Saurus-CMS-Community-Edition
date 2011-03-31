@@ -39,7 +39,7 @@
 					<select name="folder">
 						<option></option>
 						{foreach from=$folders item="fldr"}
-						<option value="{$fldr->title}"{if $fldr->id == $folder || $fldr->title == $folder} selected="selected"{/if}>{$fldr->title}</option>
+						<option value="{$fldr->path}"{if $fldr->id == $folder || $fldr->path == $folder} selected="selected"{/if}>{$fldr->path}</option>
 						{/foreach}
 					</select>
 				</td>
