@@ -118,7 +118,7 @@ function admin_login_form() {
 	  <form method="post" name="loginform" action="<?=$site->wwwroot?><?if($site->in_admin){echo "/admin";}if($site->in_editor){echo "/editor";}?>/index.php">
 	<?
 	foreach ($site->fdat as $key=>$value) {
-		if (!is_array($value) && $key!="user" && $key!="pass" && !($key == 'op' && $value == 'logout')) {
+		if (!is_array($value) && $key!='user' && $key!='pass' && $key != 'Submit' && $key != 'keel' && $key != 'url' && $key != 'op' && !($key == 'op' && $value == 'logout')) {
 	?>
 		<input type="hidden" name="<?php echo htmlspecialchars(xss_clean($key)); ?>" value="<?php echo htmlspecialchars(xss_clean($value)); ?>">
 	<?
