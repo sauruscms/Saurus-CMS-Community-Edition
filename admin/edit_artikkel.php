@@ -614,6 +614,7 @@ $_SESSION['current_article_parent_selection']['display_fields'] = array('select_
 	$_SESSION['site_linking']['display_fields'] = array('select_checkbox', 'pealkiri', 'klass',);
 	// /setup for site linking
 
+	global $parent;
 	$parent = new Objekt(array('objekt_id' => $site->fdat['parent_id']));
 	// to get the correct path to parent objects set use_alises on
 	$site->CONF['use_aliases'] = 1;
