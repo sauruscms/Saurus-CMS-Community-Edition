@@ -177,7 +177,6 @@ if ($site->fdat['permanent_remove'] || $objekt->parent_id==$rub_trash_id || (is_
 # -------------------------------------
 if ($objekt) {
 
-
 	# vaatame millised t��bid lubavad alampuu kustutada
 
 	$sql = "select tyyp_id from tyyp where on_alampuu_kustutamine='1'";
@@ -247,6 +246,7 @@ if ($objekt) {
 
 if ($site->fdat['kinnitus']) {
 	
+verify_form_token();
 	# kontrollime �igused alampuus
 		if (!function_exists('on_access')) {    
 		function on_access($id) {
@@ -488,6 +488,7 @@ else {
 	if (!$hidden_output){
 ?>
 <form action="<?=$site->self ?>" method=get>
+<?php create_form_token('delete-object'); ?>
 <table border="0" cellpadding="0" cellspacing="0" style="width:100%;  height:100px">
   <tr> 
 	<td valign="top" width="100%" class="scms_confirm_alert_cell" height="100%">
@@ -612,7 +613,8 @@ else if (!$hidden_output){
 	################################
 	# Move to Recycle Bin here:
 	if ($site->fdat['kinnitus']){
-
+		
+		verify_form_token();
 
 		$sql = $site->db->prepare("UPDATE objekt_objekt SET parent_id=? WHERE objekt_id=? AND parent_id=?", $rub_trash_id, $objekt->objekt_id, $objekt->parent_id);
 		$sth15 = new SQL($sql);
@@ -650,6 +652,7 @@ else if (!$hidden_output){
 
 ?>
 	<form action="<?=$site->self ?>" method=get>
+	<?php create_form_token('delete-object'); ?>
 <table border="0" cellpadding="0" cellspacing="0" style="width:100%; height:100px">
   <tr> 
     <td valign="top" width="100%" class="scms_confirm_delete_cell" height="100%">

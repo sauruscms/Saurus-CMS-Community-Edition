@@ -40,7 +40,6 @@ class DB {
 
 	function DB() {
 		$args = func_get_arg(0);
-#old		$this->BaasObjekt($args);
 
 		global $site;
 		$this->site = &$site;

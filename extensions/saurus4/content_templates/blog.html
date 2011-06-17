@@ -114,7 +114,7 @@
 			{foreach from=$articles item="article" name="articles_loop"}
 						
 				<h1>{$article->buttons}<a href="{$article->href}{if strpos($article->href, '?')}&amp;{else}?{/if}c_tpl={$c_tpl}">{if $article->show_headline}{$article->title}{/if}</a></h1>
-				<div class="BlogDetails">{$article->fdate|mysql_date_to_string}{if $article->author} | {$article->author}{/if}{if $article->forum_allowed} | {if $article->comment_count}<a href="{$article->href}{if strpos($article->href, '?')}&amp;{else}?{/if}c_tpl={$c_tpl}#comments">{sysword word="comments" type="saurus4"} ({$article->comment_count})</a>{else}<a href="{$article->href}{if strpos($article->href, '?')}&amp;{else}?{/if}c_tpl={$c_tpl}#add_message">{sysword word="add comment" type="saurus4"}</a>{/if}{/if}</div>
+				<div class="BlogDetails">{$article->fdate|mysql_date_to_string}{if $article->author} | {$article->author}{/if}{if $article->comment_count} | <a href="{$article->href}{if strpos($article->href, '?')}&amp;{else}?{/if}c_tpl={$c_tpl}#comments">{sysword word="comments" type="saurus4"} ({$article->comment_count})</a>{/if}{if $conf.allow_commenting && $article->forum_allowed && !($conf.only_regusers_comment && !$user)} | <a href="{$article->href}{if strpos($article->href, '?')}&amp;{else}?{/if}c_tpl={$c_tpl}#add_message">{sysword word="add comment" type="saurus4"}</a>{/if}</div>
 				
 				{init_article name="art" id=$article->id}
 				
@@ -140,7 +140,8 @@
 		{init_article name="article" id=$id buttons="new,edit,hide,delete"}
 	
 		<h1>{$article->buttons}<a href="{$article->href}{if strpos($article->href, '?')}&amp;{else}?{/if}c_tpl={$c_tpl}">{if $article->show_headline}{$article->title}{/if}</a></h1>
-		<div class="BlogDetails">{$article->fdate|mysql_date_to_string}{if $article->author} | {$article->author}{/if}{if $article->forum_allowed} | {if $article->comment_count}<a href="#comments">{sysword word="comments" type="saurus4"} ({$article->comment_count})</a>{else}<a href="#add_message">{sysword word="add comment" type="saurus4"}</a>{/if}{/if}</div>
+		
+		<div class="BlogDetails">{$article->fdate|mysql_date_to_string}{if $article->author} | {$article->author}{/if}{if $article->comment_count} | <a href="#comments">{sysword word="comments" type="saurus4"} ({$article->comment_count})</a>{/if}{if $conf.allow_commenting && $article->forum_allowed && !($conf.only_regusers_comment && !$user)} | <a href="#add_message">{sysword word="add comment" type="saurus4"}</a>{/if}</div>
 		
 		<p>{if $article->lead}{$article->lead} {/if}{$article->body}</p>
 	</div><!-- / BlogEntry -->
@@ -168,7 +169,7 @@
 		
 	</div><!-- / BlogEntryCommentsContainer -->
 	
-	{if $article->forum_allowed}
+	{if $conf.allow_commenting && $article->forum_allowed && !($conf.only_regusers_comment && !$user)}
 	<div id="BlogEntryCommentForm">
 	
 		{* New comment form *}

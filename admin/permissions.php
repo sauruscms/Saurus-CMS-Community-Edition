@@ -103,6 +103,7 @@ foreach($grouptree as $tmgroup) {
 #################
 # SAVE
 if($site->fdat['op']=='save'){
+	verify_form_token();
 	save_all_permissions();
 
 	$site->fdat['op']=='';
@@ -215,6 +216,7 @@ function checkIt(string)
 
 <?############ FORM #########?>
 <form name="selectform" action="<?=$site->self?>" method="POST">
+<?php create_form_token('edit-permissions'); ?>
 <?
 ######## gather all fdat values into hidden fields
 #foreach($site->fdat as $fdat_field=>$fdat_value) { 
@@ -665,7 +667,7 @@ $idx = 0;
 	else { $extension_where_str = " 0 "; }
 
 	####### SQL with permissions check: get only extensions, which are read-allowed to user
-  	$sql = $site->db->prepare("SELECT extension_id AS id, parent_id AS parent, name FROM extensions ");
+  	$sql = $site->db->prepare("SELECT extension_id AS id, name FROM extensions ");
 	$sql .= " WHERE ".$extension_where_str;
 	$sql .= " ORDER BY name";
 	#print $sql;
@@ -686,7 +688,7 @@ $idx = 0;
 	#echo '<br>'.$extension_level.". ".$extension_name;
 	?>
 		<!-- 1st level -->
-		<TR style="display: <?if($extension_level>0) { ?>none<?}?>" id="overview<?=$value['parent'].'_'.$idx?>EXT">
+		<TR style="display: <?if($extension_level>0) { ?>none<?}?>" id="overview<?=(int)$value['parent'].'_'.$idx?>EXT">
 			<td id="section"><?echo str_repeat('&nbsp;&nbsp;',$extension_level);?>
 			<? #### if subtree exists
 			if(is_array(get_array_leafs($temp_tree, $value['id'])) ) {  ?>

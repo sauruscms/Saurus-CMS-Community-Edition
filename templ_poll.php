@@ -122,7 +122,7 @@ if ($objekt && $objekt->all[on_avatud] && preg_match("/^\d+$/",$site->fdat[vastu
 	}
 
 	####### SHOW POLL
-	header('Locate: '.$site->CONF['wwwroot'].'/?id='.$artikkel->objekt_id);
+	header('Location: '.$site->CONF['wwwroot'].'/?id='.$artikkel->objekt_id);
 	exit;
 }
 

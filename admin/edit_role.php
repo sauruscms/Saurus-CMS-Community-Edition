@@ -65,6 +65,7 @@ if (!strlen($keel_id)) { $keel_id = $site->keel; }
 # role: Save role name & close
 
 if($site->fdat['op2'] == 'save_role' || $site->fdat['op2'] == 'saveclose_role') {
+	verify_form_token();
 	if($site->fdat['role_name']) {
 		if($op=='new') {
 			## New
@@ -118,6 +119,7 @@ if($site->fdat['op2'] == 'save_role' || $site->fdat['op2'] == 'saveclose_role') 
 
 if($op2 == 'deleteconfirmed' && is_numeric($site->fdat['role_id']) ) {
 
+	verify_form_token();
 	# delete permissions
 	$sql = $site->db->prepare("DELETE FROM permissions WHERE role_id=?",$site->fdat['role_id']);
 	$sth = new SQL($sql);
@@ -171,6 +173,7 @@ if($op == 'delete' && $site->fdat['role_id']) {
 </head>
 <body class="popup_body">
 	<form name="frmEdit" action="<?=$site->self?>" method="POST">
+	<?php create_form_token('delete-role'); ?>
 	<input type=hidden name=role_id value="<?=$site->fdat['role_id']?>">
 	<input type=hidden name=op value="<?=$site->fdat['op']?>">
 	<input type=hidden name=op2 value="">
@@ -253,6 +256,7 @@ if($site->fdat['role_id']) {
 <body class="popup_body" onLoad="this.focus();document.forms['vorm'].role_name.focus();">
 
 <FORM action="<?=$site->self ?>" method="post" name="vorm">
+	<?php create_form_token('edit-role'); ?>
 <table border="0" cellpadding="0" cellspacing="0" style="width:100%; height:100%">
 <tr> 
     <td valign="top" width="100%" class="scms_dialog_area_top"  height="100%">

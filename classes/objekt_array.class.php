@@ -17,8 +17,6 @@
  * 
  */
 
-
-
 class ObjektArray extends BaasObjekt {
 
 	var $size;
@@ -128,7 +126,7 @@ class ObjektArray extends BaasObjekt {
 		# 1 kui antud id on parentide hulgas, 
 		# 0 kui mitte
 
-		if (!strcasecmp(get_class($objekt),"Objekt")) {
+		if (is_object($objekt) && !strcasecmp(get_class($objekt),'Objekt')) {
 			# input on objekt
 			$objekt_id = $objekt->objekt_id;
 		} elseif (preg_match("/^\d+$/",$objekt)) {
@@ -226,7 +224,7 @@ class Parents extends ObjektArray {
 		$this->ObjektArray();
 		$this->meta = Array();
 		
-		if (!strcasecmp(get_class($args["parent"]),"Objekt")) {
+		if (is_object($args['parent']) && !strcasecmp(get_class($args['parent']),'Objekt')) {
 			# parent on objekt
 			$this->parent_id = $args["parent"]->objekt_id;
 			$this->debug->msg("Parents. Antud on objekt: parent_id = ".$this->parent_id);
@@ -627,12 +625,6 @@ class Parents extends ObjektArray {
 	} # function Parents
 } # class Parents
 
-
-
-
-
-
-
 class AlamlistSQL extends BaasObjekt {
 	var $from;
 	var $where;
@@ -659,7 +651,7 @@ class AlamlistSQL extends BaasObjekt {
 		$this->asukoht = $args["asukoht"];
 		$this->order = $args["order"] ? " ORDER BY ".$args["order"]." " : "";
 
-		if (!strcasecmp(get_class($args["parent"]),"Objekt")) {
+		if (is_object($args['parent']) && !strcasecmp(get_class($args['parent']),'Objekt')) {
 			# parent on objekt
 			$this->parent_id = $args["parent"]->objekt_id;
 		#} elseif (preg_match("/^\d+$/",$args["parent"])) {

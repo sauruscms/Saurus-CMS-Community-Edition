@@ -183,6 +183,7 @@ function delete_profile_field(){
 # PROFILE: Save profile name & close
 
 if($site->fdat['op2'] == 'save_profile_name' || $site->fdat['op2'] == 'saveclose_profile_name') {
+	verify_form_token();
 	if($site->fdat['profile_name']) {
 
 		$site->fdat['profile_name'] = strtolower($site->fdat['profile_name']); // #2743
@@ -364,6 +365,7 @@ if($site->fdat['op2'] == 'save_profile_name' || $site->fdat['op2'] == 'saveclose
 
 if($op2 == 'deleteconfirmed' && is_numeric($site->fdat['pid']) && !$site->fdat['did']) {
 
+	verify_form_token();
 	## Get existing profile
 	$prof_row = $site->get_profile(array(id=>$site->fdat['pid'])); 
 	$existing_data = unserialize($prof_row['data']);
@@ -426,6 +428,7 @@ if($op2 == 'deleteconfirmed' && is_numeric($site->fdat['pid']) && !$site->fdat['
 ###############################
 # FIELD: DELETE a profile field (1 row)
 if($site->fdat['op2'] == "deleteconfirmed" && is_numeric($site->fdat['profile_id']) && $site->fdat['did']) {
+		verify_form_token();
 		## Get existing profile
 		$prof_row = $site->get_profile(array(id=>$site->fdat['profile_id'])); 
 		$existing_data = unserialize($prof_row['data']);
@@ -483,6 +486,7 @@ if($site->fdat['op2'] == "deleteconfirmed" && is_numeric($site->fdat['profile_id
 if($op2=='save_profile_definition' || $op2=='saveclose_profile_definition') {
 #echo printr($site->fdat);
 
+	verify_form_token();
 	############################
 	# 1. kui t��pe v�is ka selectboxist muuta
 	# profile_map on tegelik v�ljanimi tabelis
@@ -677,6 +681,7 @@ if($op == 'delete' && $site->fdat['pid']) {
 </head>
 <body class="popup_body">
 	<form name="frmEdit" action="<?=$site->self?>" method="POST">
+	<?php create_form_token('delete-profile'); ?>
 	<input type=hidden name=pid value="<?=$site->fdat['pid']?>">
 	<input type=hidden name=op value="<?=$site->fdat['op']?>">
 	<input type=hidden name=op2 value="">
@@ -788,6 +793,7 @@ if($op == 'delete' && is_numeric($site->fdat['profile_id']) && $site->fdat['did'
 </head>
 <body class="popup_body">
 	<form name="frmEdit" action="<?=$site->self?>" method="POST">
+	<?php create_form_token('delete-profile-field'); ?>
 	<input type=hidden name=did value="<?=$site->fdat['did']?>">
 	<input type=hidden name=profile_id value="<?=$site->fdat['profile_id']?>">
 	<input type=hidden name=op value="<?=$site->fdat['op']?>">
@@ -858,6 +864,7 @@ if($site->fdat['pid']) {
 <body class="popup_body" onLoad="this.focus();document.forms['vorm'].profile_name.focus();">
 
 <FORM action="<?=$site->self ?>" method="post" name="vorm">
+	<?php create_form_token('edit-profile'); ?>
 <table border="0" cellpadding="0" cellspacing="0" style="width:100%; height:100%">
 <tr> 
     <td valign="top" width="100%" class="scms_dialog_area_top"  height="100%">
@@ -1181,6 +1188,7 @@ if($site->fdat['op'] == "newdef" ||
 if($profile_def['source_table'] == 'obj_asset'){?>change_profile_map_value1(document.forms['vorm'].profile_type.options[document.forms['vorm'].profile_type.options.selectedIndex].value);<?}else{?>change_profile_map_value2(document.forms['vorm'].definition_name.value);<?}?>">
 
 <FORM action="<?=$site->self ?>" method="post" name="vorm">
+	<?php create_form_token('edit-profile-field'); ?>
 <?
 ###################
 # luba profiili MUUTA ja nime muuta ainult siis kui andmeid SELLE KONKREETSE V�LJA KOHTA pole veel sisestatud:

@@ -59,6 +59,7 @@ if($site->fdat['table_name']) {
 # SAVE & CLOSE
 
 if($site->fdat['op2'] == 'save' || $site->fdat['op2'] == 'saveclose') {
+	verify_form_token();	
 	if($site->fdat['table_name']) {
 		###### create table with default fields id, profile_id, name
 		$sql = $site->db->prepare("create table ".$site->fdat['table_name']." (id int UNSIGNED NOT NULL AUTO_INCREMENT , profile_id int (4) UNSIGNED NOT NULL DEFAULT '0', name varchar (255) , PRIMARY KEY (id))");
@@ -101,6 +102,7 @@ if($site->fdat['op2'] == 'save' || $site->fdat['op2'] == 'saveclose') {
 ###############################
 # DELETE TABLE or ONE FIELD
 if($site->fdat['op2'] == 'deleteconfirmed' && $site->fdat['table_name']) {
+	verify_form_token();
 	# double check: delete only when no data found
 	$data_count = 0;
 	$sql = $site->db->prepare("SELECT COUNT(*) FROM ".$site->fdat['table_name']." ");
@@ -213,6 +215,7 @@ if($site->fdat['op'] == "new") {
 <body class="popup_body" onLoad="this.focus();document.forms['vorm'].table_name.focus();">
 
 <FORM action="<?=$site->self ?>" method="post" name="vorm">
+<?php create_form_token('data-new'); ?>
 <table border="0" cellpadding="0" cellspacing="0" style="width:100%; height:100%">
 <tr> 
     <td valign="top" width="100%" class="scms_dialog_area_top"  height="100%">
@@ -238,6 +241,7 @@ if($site->fdat['op'] == "new") {
 </table>
 
 <?########### hidden ########?>
+<?php create_form_token(''); ?>
 <INPUT TYPE="hidden" name="op" value="<?=$site->fdat['op']?>">
 <INPUT TYPE="hidden" name="op2" value="save">
 </form>
@@ -264,7 +268,8 @@ if($site->fdat['op'] == 'delete' && $site->fdat['table_name']) {
 <SCRIPT LANGUAGE="JavaScript" SRC="<?=$site->CONF['wwwroot'].$site->CONF['js_path']?>/yld.js"></SCRIPT>
 </head>
 <body  class="popup_body">
-	<form name="frmEdit" action="<?=$site->self?>" method="POST">
+	<form name="frmEdit" action	="<?=$site->self?>" method="POST">
+	<?php create_form_token('delete-data'); ?>
 	<input type=hidden name=table_name value="<?=$site->fdat['table_name']?>">
 	<input type=hidden name=field_name value="<?=$site->fdat['field_name']?>">
 	<input type=hidden name=op value="<?=$site->fdat['op']?>">

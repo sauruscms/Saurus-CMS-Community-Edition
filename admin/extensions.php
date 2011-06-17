@@ -67,12 +67,9 @@ if($site->fdat['op'] == "upload"){
 	$ext = new extension_upload();
 }
 
-
-
-
-
-if($site->fdat['upload']){
-
+if($site->fdat['upload'])
+{
+	verify_form_token();
 	$ext->tmp_location=$site->absolute_path."shared/".time()."_".rand(1,837838);
 	$ext->extensions_folder=$site->absolute_path."extensions";
 	$ext->overwrite_extension=$site->fdat['overwrite'];
@@ -86,8 +83,6 @@ if($site->fdat['upload']){
 	$zip->deltree($ext->tmp_location);
 	@rmdir($ext->tmp_location);
 }
-
-
 
 if($site->fdat['download']){
 
@@ -136,6 +131,7 @@ if($site->fdat['op'] == "upload"){
 	</head>
 	<body id="popup">
 		<form name="upload_extension" method="POST" enctype="multipart/form-data">
+		<?php create_form_token('upload-extension'); ?>
 		<div id="mainContainer">
 			<div class="titleArea">
 				<?=$site->sys_sona(array(sona => "extension_upload", tyyp=>"admin"))?>
@@ -222,25 +218,6 @@ if($ext->error()){
 	<?######### extension FUNCTION BAR ############?>
       <table border="0" cellpadding="0" cellspacing="0">
         <tr> 
-			<?############ NEW button ###########?>
-			<!--
-				<TD nowrap><a href="javascript:void(openpopup('edit_extension.php?op=new','extension','366','150'))" ><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/filenew.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" id=pt> <?=$site->sys_sona(array(sona => "new", tyyp=>"editor"))?>
-				</TD>
-			-->
-		  <?############ EDIT extension button ###########?>
-		  <!--
-				<TD nowrap><?if($site->fdat['name']){?><a href="javascript:void(openpopup('edit_extension.php?op=edit&name=<?= $site->fdat['name']?>','extension','366','475'))"><?}?><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/edit<?=(!$site->fdat['name'] ? '_inactive' : '')?>.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" align=absmiddle><?if($site->fdat['name']){?></a><?}?></TD>
-			-->
-
-		  <?############ UNINSTALL extension button ###########?>
-		  <!--
-				<TD><?if($site->fdat['name']){?><a href="javascript:void(openpopup('edit_extension.php?op=uninstall&name=<?= $site->fdat['name']?>','extension','413','208'))"><?}?><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/delete<?=(!$site->fdat['name'] ? '_inactive' : '')?>.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" align=absmiddle>&nbsp;<?=$site->sys_sona(array('sona' => 'Kustuta', 'tyyp' => 'editor'))?><?if($site->fdat['name']){?></a><?}?></TD>
-
-				<TD><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/general/s_toolbar_divider.gif" WIDTH="14" HEIGHT="20" BORDER="0" ALT="" align=absmiddle></TD>
-			
-			-->
-
-
 
 		  <?############ SYNC button ###########?>
 				<TD><a href="<?= $site->self ?>?op=sync" class="scms_button_img"><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/refresh.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" align=absmiddle>&nbsp;<?=$site->sys_sona(array('sona' => 'Refresh', 'tyyp' => 'admin'))?></a></TD>

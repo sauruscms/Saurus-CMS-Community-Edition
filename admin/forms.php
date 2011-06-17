@@ -67,6 +67,7 @@ if($site->fdat['form_id']) {
 if($site->fdat['op2'] == 'save' || $site->fdat['op2'] == 'saveclose') {
 #	echo printr($site->fdat);
 
+		verify_form_token();
 
 		if($site->fdat['op']=='new') {
 
@@ -231,6 +232,7 @@ if($site->fdat['op'] == 'delete' && $site->fdat['form_id']) {
 </head>
 <body class="popup_body">
 	<form name="frmEdit" action="<?=$site->self?>" method="POST">
+	<?php create_form_token('edit-forms'); ?>
 	<input type=hidden name=form_id value="<?=$site->fdat['form_id']?>">
 	<input type=hidden name=op value="<?=$site->fdat['op']?>">
 	<input type=hidden name=op2 value="">
@@ -311,6 +313,7 @@ if($site->fdat['op'] == "new" || ($site->fdat['op'] == "edit" && is_numeric($sit
 <body class="popup_body" onLoad="this.focus();document.forms['vorm'].name.focus();">
 
 <FORM action="<?=$site->self ?>" method="post" name="vorm">
+<?php create_form_token('edit-forms'); ?>
 <table border="0" cellpadding="0" cellspacing="0" style="width:100%; height:100%">
 <tr> 
     <td valign="top" width="100%" class="scms_dialog_area_top"  height="100%">

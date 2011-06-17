@@ -645,7 +645,7 @@ if (get_class($kast)=="Objekt" || is_subclass_of($kast,"Objekt")) {
 			 <td valign="top" class="<?=($kast->site->agent ? "txt" : "txt1")?>"><?=$vastus[vastus] ?></td>
 		 </tr>
 		 <tr>
-			 <td valign="top"><b><font class="<?=($kast->site->agent ? "txt" : "txt1")?>">- <?=$percent ?>%</font></b> <img src="<?=$kast->site->img_path ?>/gallup_bar<?=(($stat[maksi]==$vastus[count] && $vastus[count])? "2":"1") ?>.gif" width="<?= ($kast->site->dbstyle("menyy_laius","layout")-40)*($percent/100) ?>" height=8 border="1"></td>
+			 <td valign="top"><b><font class="<?=($kast->site->agent ? "txt" : "txt1")?>">- <?=$percent ?>%</font></b> <img src="<?=$kast->site->img_path ?>/gallup_bar<?=(($stat[maksi]==$vastus[count] && $vastus[count])? "2":"1") ?>.gif" width="<?= 110 * ($percent/100) ?>" height=8 border="1"></td>
 		 </tr>
 <?
 			} # while vastus

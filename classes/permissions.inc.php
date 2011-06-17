@@ -280,6 +280,7 @@ function get_copypermissions_url(acl,id){
         <div style="width:100%;" class="scms_scrolltable_header">
 		   <table width="100%" cellpadding="0" cellspacing="0">
 	<form name="frmEdit" action="<?=$site->self?>" method="POST">
+	<?php create_form_token('edit-permissions'); ?>
 	<input type=hidden name=tab value="<?=$site->fdat['tab']?>">
 	<input type=hidden name=id value="<?=$site->fdat['id']?>">
 	<input type=hidden name=keel value="<?=$site->fdat['keel']?>">
@@ -514,6 +515,8 @@ function save_permissions($args) {
 	global $class_path;
 	global $keel;
 
+	verify_form_token();
+	
 	# if objekt is not created (probably error situation), try to create it again
 	if(!$objekt->objekt_id){
 		$objekt = new Objekt(array(

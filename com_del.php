@@ -56,6 +56,7 @@ if ($site->fdat['op2'] == 'deleteconfirmed') {
 	/*-------------------------------------
 	//Valime kasutaja_id kelle oma see kommentaar on
 	--------------------------------------*/
+	verify_form_token();
 
 	$sql = $site->db->prepare("SELECT kasutaja_id FROM obj_kommentaar WHERE objekt_id = ?",$site->fdat[id]);
 	$sth = new SQL($sql);
@@ -174,6 +175,7 @@ else {
 	<body class="popup_body" onLoad="this.focus()">
 
 	<form name="editform" action="<?=$site->self ?>" method=get>
+		<?php create_form_token('delete-comments'); ?>
 <table border="0" cellpadding="0" cellspacing="0" style="width:100%; height:100%">
   <tr> 
 	<td valign="top" width="100%" class="scms_confirm_delete_cell" height="100%">

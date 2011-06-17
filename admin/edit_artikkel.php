@@ -27,7 +27,7 @@ function edit_objekt()
 {
 	function print_profiles()
 	{
-		global $site, $objekt;
+		global $site, $objekt, $parent;
 
 		$sql = $site->db->prepare("SELECT profile_id AS id, source_table AS parent, name FROM object_profiles WHERE source_table=? ORDER BY name",'obj_artikkel');
 		$sth = new SQL($sql);
@@ -96,8 +96,8 @@ function edit_objekt()
 
 <fieldset>
 	<legend><?=$site->sys_sona(array('sona' => 'visible_to_visitors', 'tyyp' => 'editor'))?></legend>
-	<input type="radio" name="publish" id="object_published" value="1"<?=($site->fdat['publish'] || $objekt->all['on_avaldatud'] ? ' checked' : '')?>> <label for="object_published"><?=$site->sys_sona(array('sona' => 'published', 'tyyp' => 'editor'))?></label><br>
-	<input type="radio" name="publish" id="object_unpublished" value="0"<?=($site->fdat['publish'] == 0 && $objekt->all['on_avaldatud'] == 0 ? ' checked' : '')?>> <label for="object_unpublished"><?=$site->sys_sona(array('sona' => 'unpublished', 'tyyp' => 'editor'))?></label><br>
+	<input type="radio" name="publish" id="object_published" value="1"<?=($site->fdat['publish'] || $objekt->all['on_avaldatud'] ? ' checked' : '')?><?php echo (($objekt->permission && !$objekt->permission['P']) || (!$objekt->permission && !$parent->permission['P']) ? ' disabled="disabled"' : NULL); ?>> <label for="object_published"><?=$site->sys_sona(array('sona' => 'published', 'tyyp' => 'editor'))?></label><br>
+	<input type="radio" name="publish" id="object_unpublished" value="0"<?=($site->fdat['publish'] == 0 && $objekt->all['on_avaldatud'] == 0 ? ' checked' : '')?><?php echo (($objekt->permission && !$objekt->permission['P']) || (!$objekt->permission && !$parent->permission['P']) ? ' disabled="disabled"' : NULL); ?>> <label for="object_unpublished"><?=$site->sys_sona(array('sona' => 'unpublished', 'tyyp' => 'editor'))?></label><br>
 </fieldset>
 
 <fieldset>
@@ -471,7 +471,7 @@ $_SESSION['current_article_parent_selection']['display_fields'] = array('select_
 
 
 	global $site, $class_path, $objekt, $tyyp, $keel;
-
+	
 	include_once($class_path.'adminpage.inc.php');
 	include_once($class_path.'SCMSEditor.php');
 	include_once($class_path.'extension.class.php');
@@ -614,6 +614,7 @@ $_SESSION['current_article_parent_selection']['display_fields'] = array('select_
 	$_SESSION['site_linking']['display_fields'] = array('select_checkbox', 'pealkiri', 'klass',);
 	// /setup for site linking
 
+	global $parent;
 	$parent = new Objekt(array('objekt_id' => $site->fdat['parent_id']));
 	// to get the correct path to parent objects set use_alises on
 	$site->CONF['use_aliases'] = 1;
@@ -824,27 +825,30 @@ $_SESSION['current_article_parent_selection']['display_fields'] = array('select_
 <body id="scms_editor_popup">
 
 	<form action="edit.php" method="POST" name="frmEdit" id="frmEdit" class="article_submit_form">
-		<?php /* hidden form stuff */ ?>
-				<input type=hidden name="op" value="<?=$site->fdat['op'];?>">
-				<input type=hidden name="op2" id="op2" value="saveclose">
-				<input type=hidden name="refresh" value="0">
+		
+		<?php create_form_token('edit-article'); ?>
+		
+		<input type=hidden name="op" value="<?=$site->fdat['op'];?>">
+		<input type=hidden name="op2" id="op2" value="saveclose">
+		<input type=hidden name="refresh" value="0">
 
-				<input type="hidden" name="tyyp_id" value="<?=$tyyp['tyyp_id'];?>">
-				<input type="hidden" name="tyyp" value="<?=$tyyp['klass'];?>">
-				<input type="hidden" name="sys_alias" value="<?=$site->fdat['sys_alias'];?>">
+		<input type="hidden" name="tyyp_id" value="<?=$tyyp['tyyp_id'];?>">
+		<input type="hidden" name="tyyp" value="<?=$tyyp['klass'];?>">
+		<input type="hidden" name="sys_alias" value="<?=$site->fdat['sys_alias'];?>">
 
-				<input type="hidden" name="id" value="<?=$site->fdat['id'];?>">
-				<input type="hidden" name="kesk" value="<?=$site->fdat['kesk'];?>">
-				<input type="hidden" name="parent_id" value="<?=$site->fdat['parent_id'];?>">
-				<input type="hidden" name="previous_id" value="<?=$site->fdat['previous_id'];?>">
-				<input type="hidden" name="keel" value="<?=$keel;?>">
-				<input type="hidden" name="baseurl" value="<?=(empty($_SERVER['HTTPS']) ? 'http://': 'https://').$site->CONF['hostname'].$site->CONF['wwwroot'];?>/">
-				<input type="hidden" name="wwwroot" value="<?=$site->CONF['wwwroot'];?>/">
+		<input type="hidden" name="id" value="<?=$site->fdat['id'];?>">
+		<input type="hidden" name="kesk" value="<?=$site->fdat['kesk'];?>">
+		<input type="hidden" name="parent_id" value="<?=$site->fdat['parent_id'];?>">
+		<input type="hidden" name="previous_id" value="<?=$site->fdat['previous_id'];?>">
+		<input type="hidden" name="keel" value="<?=$keel;?>">
+		<input type="hidden" name="baseurl" value="<?=(empty($_SERVER['HTTPS']) ? 'http://': 'https://').$site->CONF['hostname'].$site->CONF['wwwroot'];?>/">
+		<input type="hidden" name="wwwroot" value="<?=$site->CONF['wwwroot'];?>/">
 
-                <input type="hidden" name="sorting" value="<?=$site->fdat['sorting'];?>">
+        <input type="hidden" name="sorting" value="<?=$site->fdat['sorting'];?>">
 
-				<input type="hidden" name="extension_path" value="<?=$site->fdat['extension_path'];?>">
-		<?php /* /hidden form stuff */ ?>
+		<input type="hidden" name="extension_path" value="<?=$site->fdat['extension_path'];?>">
+		
+		<input type="hidden" name="publish" value="<?php echo ($site->fdat['publish'] || $objekt->all['on_avaldatud'] ? 1 : 0); ?>">
 
 	<table cellpadding="0" cellspacing="0" class="layout" border="0">
 		<tr>
@@ -910,6 +914,8 @@ function salvesta_objekt () {
 	global $objekt;
 
 	$class_path = "../classes/";
+	
+	verify_form_token();
 
 	# -----------------------------
 	# lyhi ja sisu koristamine

@@ -1,5 +1,5 @@
-[CHECKSUM=0:18:1029]
-[DATE=2009-11-23 16:10:13]
+[CHECKSUM=0:20:1030]
+[DATE=2011-05-17 12:02:13]
 [ENCODING=UTF-8]
 
 #
@@ -7,11 +7,78 @@
 #  Supplier: www.saurus.info 
 #  
 
+
 # SYSTEM STRING; DESCRIPTION; TRANSLATION;
 
 
 
-[system:1:System]
+[sample:100:Sample Extension]
+
+
+
+[saurus4:101:Saurus 4]
+add;Add;Lisa;
+add comment;Add comment;Lisa kommentaar;
+advanced search;Advanced search;Täppisotsing;
+all the words;All the words;Kõiki sõnu;
+application name;Application;Rakendus;
+applications login info;Applications;Rakendused;
+archive;Archive;Arhiiv;
+author;Author;Autor;
+by title;By title;Pealkirja järgi;
+CAPTCHA failed;Entered text did not match text on the image;Sisestatud tekst ei klappinud pildi tekstiga;
+changed last;Changed last;Viimati muudetud;
+comment;Comment;Kommentaar;
+comments;Comments;Kommentaarid;
+does not include;Does not include;Ei sisalda;
+e-mail;E-mail;E-mail;
+enter_the_text_on_the_image;Enter the text on the image;Tekst pildil;
+exact phrase;Exact phrase;Täpset fraasi;
+forums;Forums;Foorumid;
+from section;From section;Rubriigist;
+hide e-mail;Don't show e-mail;Ära näita minu e-posti aadressi;
+keyword_too_short;Keyword is too short;Palun sisesta vähemalt 4 täheline otsisõna;
+last 3 months;Last 3 months;Viimased 3 kuud;
+last 6 months;Last 6 months;Viimased 6 kuud;
+last month;Last month;Viimane 1 kuu;
+last reply;Last reply;Viimane vastus;
+last week;Last week;Viimane nädal;
+last year;Last year;Viimane aasta;
+latest posts;Latest posts;Viimased postitused;
+mailinglists;Subscribe to mailinglists;Uudiste teemad;
+name;Name;Nimi;
+new comment;New comment;Uus kommentaar;
+new message;New message;Uus postitus;
+new topic;New topic;Uus teema;
+newest first;Newest first;Uuemad enne;
+one of the words;One of the words;Ühte sõnadest;
+password;Password;Parool;
+password expired message;Your password is expired, enter new password;Sinu parool on aegunud, sisesta uus parool;
+please fill in;Please fill in;Palun täida;
+profile;Profile;Profiil;
+register;Register;Registreerimisvorm;
+replies;Replies;Vastused;
+reply;Reply;Vastus;
+rss entries;Entries;Postitused;
+search;Search;Otsi;
+search_order_relevance;By relevance;Relevantsuse järgi;
+see also;See also;Vaata lisaks;
+send;Send;Saada;
+send_replies;Send replies to e-mail;Saada vastused mulle e-postiga;
+sitemap;Sitemap;Sisukaart;
+title;Title;Pealkiri;
+topics;Topics;Teemad;
+username;Username;Kasutajanimi;
+whenever;Whenever;Millal iganes;
+yesterday;Yesterday;Eile;
+
+
+
+[saurus4_estidcard:102:Saurus 4 Estonian ID card]
+
+
+
+[system:103:System]
 404error;Error 404 - page not found;404 viga - lehekülge ei leitud;
 add_cart;The item has been added to the cart;Toode on lisatud ostukorvi;
 Album;Album;Album;
@@ -66,7 +133,7 @@ your_IP_disabled;User IP blocked;Kasutaja IP aadress on blokeeritud;
 
 
 
-[editor:3:Editor]
+[editor:104:Editor]
 access denied;Access denied;Kasutajal pole õigust selle operatsioonile;
 Address;Aadress;Aadress;
 add_images;add_images;Lisa pilte;
@@ -117,6 +184,7 @@ Faili nimi juba kinni;Filename already in use;Faili nimi on juba kinni;
 Faili salvestamisel tekkis viga;Error in saving file;Faili salvestamisel tekkis viga;
 fieldname;fieldname;Välja nimi;
 Filename;File name;Failinimi;
+fm_choose_file_for_link;Choose file for link;Vali fail, millele linkida;
 fm_choose_file_into_article;Choose a file to insert file into article;Vali fail artiklisse asetamiseks;
 fm_choose_file_into_profile_field;Choose a file;Vali fail;
 fm_choose_user_image;Choose an image as user image;Vali pilt kasutaja pildiks;
@@ -266,7 +334,7 @@ Yes;Yes;Jah;
 
 
 
-[dokumendid:4:Documents]
+[dokumendid:105:Documents]
 Aeg;Time;Aeg;
 Autor;Author;Autor;
 fail;File;Faili nimi;
@@ -278,7 +346,7 @@ type;Type;Tüüp;
 
 
 
-[kalender:5:Calendar]
+[kalender:106:Calendar]
 clear;clear;puhasta;
 close;close;sulge;
 Daily;Daily;Päeva kaupa;
@@ -326,7 +394,7 @@ yearly;Yearly;Iga aasta;
 
 
 
-[otsing:7:Search]
+[otsing:107:Search]
 Ei sisalda sonu;Doesn't include words;Ei sisalda sõnu;
 Eile;Yesterday;Eile;
 Koiki sonu;All words;Kõiki sõnu;
@@ -365,7 +433,7 @@ yhte sonadest;One of the words;Ühte sõnadest;
 
 
 
-[kujundus:9:Visual design]
+[kujundus:108:Visual design]
 Add;Add;Lisa;
 Arhiiv;Archive;Arhiiv;
 Artiklil on;This article has;Sellel artiklil on;
@@ -407,7 +475,7 @@ Viga;Error;Viga;
 
 
 
-[kasutaja:11:Users]
+[kasutaja:109:Users]
 Account;Account;Ligipääs;
 Account_nr;Account number;Kontonumber;
 Additional info;Additional info;Lisainfo;
@@ -482,7 +550,7 @@ wrong email format;Incorrect e-mail format;Vale e-posti aadressi formaat!;
 
 
 
-[admin:12:Admin]
+[admin:110:Admin]
 about;About;Info;
 Actions;Actions;Tegevused;
 Active;Active;Aktiivne;
@@ -709,8 +777,6 @@ Site_styles;Site Styles;Saidi stiilid;
 slogan;Slogan;Slogan;
 Spam;Spam;Spam;
 sso_applications;SSO applications;SSO rakendused;
-Static Content Export;Static Content Export;;
-Statistics;Statistics;Statistika;
 Status;Status;Staatus;
 Styles;Styles;Stiilid;
 subject_line;subject line;Pealkiri;
@@ -757,7 +823,7 @@ XML;XML;XML;
 
 
 
-[e_commerce:17:E-Commerce]
+[e_commerce:111:E-Commerce]
 amount;Amount;Kogus;
 cart;Cart;Ostukorv;
 cart delete confirmation;Delete this shoppingcart?;Kas tahate ostukorvi kustutada?;
@@ -785,12 +851,12 @@ VAT;VAT;KM summa;
 
 
 
-[sapi:19:Saurus API]
+[sapi:112:Saurus API]
 Clear cache;Clear cache;Tühjenda vahemälu;
 
 
 
-[xml:20:XML]
+[xml:113:XML]
 add date and time info to filename;add date and time info to filename;lisa failinimesse loomise aeg;
 CMS objects from Sections;CMS objects from Sections;CMS-i objektid rubriikidest;
 Custom SQL;Custom SQL;Isekoostatud SQL;
@@ -827,7 +893,7 @@ XML Root End;XML Root End;XML-i lõpetav element;
 
 
 
-[powertools:21:Power Tools]
+[powertools:114:Power Tools]
 any case;any case;Osa sõnast;
 Are you sure?;Are you sure?;Oled kindel?;
 Article;Article;Artikkel;
@@ -864,88 +930,7 @@ whole word;whole word;Terve sõna;
 
 
 
-[statistics:25:Statistics]
-activities;Activities;Tegevused;
-Agent Information;Agent Information;Veebibrauseri info;
-another pages;another pages;Järgmised lehed;
-Average;Average;Keskmine;
-Average pages per day;Average pages per day;Keskmiselt lehti päevas;
-Average pages per month;Average pages per month;Keskmiselt lehti kuus;
-Average visitors per day;Average visitors per day;Keskmiselt külastajaid päevas;
-Average visitors per month;Average visitors per month;Keskmiselt külastajaid kuus;
-Average visits per day;Average visits per day;Keskmiselt külastusi päevas;
-Average visits per month;Average visits per month;Keskmiselt külastusi kuus;
-Browsers;Browsers;Veebibrauserid;
-Daily stats;Daily stats;Päeva statistika;
-deleted;Deleted;Kustutatud;
-Detailed stats available since;Detailed stats available since;Detailne statistika olemas alates;
-Domains;Domains;Domeenid;
-downloads;Downloads;Alla laadimisi;
-entry time;entry time;Sisenemise aeg;
-First hit;First hit;Esimene vaatamine;
-first page;first page;Esimene leht;
-found page;found page;Leitud leht;
-Full referrers;Full referrers;Kõik viitajad;
-host_ip;Host / IP;Klient/IP;
-Last hit;Last hit;Viimane külastus;
-last reload;last reload;Viimane leht;
-Legend;Legend;Legend;
-link;link;link;
-logins;Log ins;Sisselogimised;
-minutes;minutes;minuti jooksul;
-most_downloaded_files;TOP 20 downloaded files;20 enim alla laetud faili;
-no_files_found;No files found;Ei leitud ühtki faili;
-One-time visitors;One-time visitors;Ühekordsed külastajad;
-online;online;Lehel;
-Online visitors;Online visitors;Lehel viibivad külastajad;
-Page;Page;Leht;
-Page views;Page views;Lehevaateid;
-Pages;Pages;Lehti;
-page_back;Back;Tagasi;
-page_browsers;Browsers;Veebisirvijad;
-page_clock;Clock;Kell;
-page_config;Config;Seaded;
-page_files;Files;Failid;
-page_pages;Pages;Lehed;
-page_referrers;Referrers;Viitajad;
-page_searches;Searches;Otsingud;
-page_summary;Summary;Kokkuvõte;
-page_users;Users;Kasutajad;
-page_visitors;Visitors;Külastajad;
-percent;percent;Osakaal;
-proxy;proxy;Vahemäluserver;
-Recent visitors;Recent 15 visitors;viimast külastajat;
-refered page;refered page;Viidatud leht;
-REFERRED;REFERRED!;Viidatud;
-referrer;referrer;Viitaja;
-Refresh;Refresh;Uuenda;
-Reg.user;Reg.user;Reg. kasutaja;
-Search engine;Search engine;Otsingumootor;
-searches;searches;Otsinguid;
-search_for_files;Search for files;Otsi faili;
-Server time now is;Server time now is;Serveri kell on praegu;
-Show visitors for the last;Show visitors for the last;Kuvatakse kasutajaid, kes olid lehel viimase;
-Site tree;Site tree;Lehe struktuur;
-Statistics for;Statistics for;Statistika;
-Stats;Stats;Stats;
-Stats available since;Stats available since;Statistika alates;
-Stats for section;Stats for section;Sektsiooni statistika;
-stats not available;Stats are not available for selected period.;Valitud perioodi statistika puudub;
-stats_for_file;Stats for file;Faili statistika;
-Sum;Sum;Kokku;
-Systems;Systems;Op. süsteemid;
-TOP 20 visited pages;TOP 20 visited pages;20 enimkülastatud lehte;
-TOP 50 Search keywords;TOP 50 Search keywords;50 enimkasutatud otsingusõna;
-Totals;Totals;Kokku;
-unique;Unique;Unikaalseid;
-user;User;Kasutaja;
-users;Users;Kasutajad;
-Visitors;Visitors;Külastajad;
-visits;visits;Külastusi;
-
-
-
-[event:26:Event]
+[event:116:Event]
 Assign to;Assign to;Määra;
 completed;Completed;Lõpetatud;
 Conflicts found!;Conflicts found!;Leiti konflikte!;
@@ -978,7 +963,7 @@ workday;Workday;tööpäev;
 
 
 
-[files:27:Files]
+[files:117:Files]
 add_file_favorite;Add favorite;Lisa lemmik;
 add_folder;Add folder;Uus kaust;
 add_folder_favorite;Add favorite;Lisa lemmik;
@@ -1038,7 +1023,7 @@ view_file;View;Vaata;
 
 
 
-[extensions:28:Extensions]
+[extensions:118:Extensions]
 Extension;Extension;Tarkvara laiendus;
 icon_path;Icon path;Logo asukoht;
 min_saurus_modules;Minimum Saurus modules required;Nõutavad Sauruse moodulid;
@@ -1048,64 +1033,6 @@ Version;Version;Versioon;
 
 
 
-[workflow:29:Workflow Manager]
+[workflow:119:Workflow Manager]
 Definitions;Definitions;Definitsioonid;
 Processes;Processes;Protsessid;
-
-
-
-[saurus4:101:Saurus 4]
-add;Add;Lisa;
-add comment;Add comment;Lisa kommentaar;
-advanced search;Advanced search;Täppisotsing;
-all the words;All the words;Kõiki sõnu;
-application name;Application;Rakendus;
-applications login info;Applications;Rakendused;
-archive;Archive;Arhiiv;
-author;Author;Autor;
-by title;By title;Pealkirja järgi;
-CAPTCHA failed;Entered text did not match text on the image;Sisestatud tekst ei klappinud pildi tekstiga;
-changed last;Changed last;Viimati muudetud;
-comment;Comment;Kommentaar;
-comments;Comments;Kommentaarid;
-does not include;Does not include;Ei sisalda;
-e-mail;E-mail;E-mail;
-enter_the_text_on_the_image;Enter the text on the image;Tekst pildil;
-exact phrase;Exact phrase;Täpset fraasi;
-forums;Forums;Foorumid;
-from section;From section;Rubriigist;
-hide e-mail;Don't show e-mail;Ära näita minu e-posti aadressi;
-keyword_too_short;Keyword is too short;Palun sisesta vähemalt 4 täheline otsisõna;
-last 3 months;Last 3 months;Viimased 3 kuud;
-last 6 months;Last 6 months;Viimased 6 kuud;
-last month;Last month;Viimane 1 kuu;
-last reply;Last reply;Viimane vastus;
-last week;Last week;Viimane nädal;
-last year;Last year;Viimane aasta;
-latest posts;Latest posts;Viimased postitused;
-mailinglists;Subscribe to mailinglists;Uudiste teemad;
-name;Name;Nimi;
-new comment;New comment;Uus kommentaar;
-new message;New message;Uus postitus;
-new topic;New topic;Uus teema;
-newest first;Newest first;Uuemad enne;
-one of the words;One of the words;Ühte sõnadest;
-password;Password;Parool;
-password expired message;Your password is expired, enter new password;Sinu parool on aegunud, sisesta uus parool;
-please fill in;Please fill in;Palun täida;
-profile;Profile;Profiil;
-register;Register;Registreerimisvorm;
-replies;Replies;Vastused;
-reply;Reply;Vastus;
-rss entries;Entries;Postitused;
-search;Search;Otsi;
-search_order_relevance;By relevance;Relevantsuse järgi;
-see also;See also;Vaata lisaks;
-send;Send;Saada;
-send_replies;Send replies to e-mail;Saada vastused mulle e-postiga;
-sitemap;Sitemap;Sisukaart;
-title;Title;Pealkiri;
-topics;Topics;Teemad;
-username;Username;Kasutajanimi;
-whenever;Whenever;Millal iganes;
-yesterday;Yesterday;Eile;

@@ -172,7 +172,7 @@ $open_folder_id = (int)(isset($site->fdat['folder_id']) ? $site->fdat['folder_id
 // default is public
 if(!$open_folder_id) $open_folder_id = $public_folder_id;
 
-$view_mode = (isset($_COOKIE['scms_filemanager_open_folder_id']) ? $_COOKIE['scms_filemanager_view_mode'] : 'thumbs');
+$view_mode = (isset($_COOKIE['scms_filemanager_view_mode']) ? $_COOKIE['scms_filemanager_view_mode'] : 'thumbs');
 
 if($view_mode != 'thumbs' && $view_mode != 'list') $view_mode = 'thumbs';
 
@@ -363,6 +363,7 @@ var favorites = <?php echo $json_encoder->encode($favorites);?>;
 var selected_file = <?php echo $selected_file_id; ?>;
 var file_page = 1;
 var settings = <?php echo $json_encoder->encode($settings);?>;
+var ajax_token = <?php echo create_form_token_json('filemanager'); ?>;
 var translations = {
 	search_files: '<?php echo $site->sys_sona(array('sona' => 'search_files', 'tyyp' => 'Files')); ?>',
 	upload_queue_limit: '<?php echo $site->sys_sona(array('sona' => 'upload_queue_limit', 'tyyp' => 'Files')); ?>',
@@ -376,6 +377,7 @@ var translations = {
 	folder_delete_confirmation: '<?php echo $site->sys_sona(array('sona' => 'folder_delete_confirmation', 'tyyp' => 'Files')); ?>',
 	delete_folder: '<?php echo $site->sys_sona(array('sona' => 'delete_folder', 'tyyp' => 'Files')); ?>',
 	create_subfolder: '<?php echo $site->sys_sona(array('sona' => 'create_subfolder', 'tyyp' => 'Files')); ?>',
+	delete_file: '<?php echo ucfirst($site->sys_sona(array('sona' => 'delete_file', 'tyyp' => 'Files'))); ?>',
 	file_delete_confirmation: '<?php echo $site->sys_sona(array('sona' => 'file_delete_confirmation', 'tyyp' => 'Files')); ?>',
 	files_delete_confirmation: '<?php echo $site->sys_sona(array('sona' => 'files_delete_confirmation', 'tyyp' => 'Files')); ?>',
 	edit_file: '<?php echo $site->sys_sona(array('sona' => 'edit_file', 'tyyp' => 'Files')); ?>',
@@ -396,33 +398,17 @@ var translations = {
 
 $(document).ready(function()
 {
-	/*
-	<?php if($site->fdat['keepThis']) {  ?>
-	// IE8 workaround to set content dimensions with thickbox
-	var delayTimer;
-	
-	if(delayTimer)
-	{
-		clearTimeout(delayTimer);
-		delayTimer = null;
-	}
-	
-	delayTimer = setTimeout(function ()
-	{
-		setContentDimensions();
-	}, 10);
-
-	<?php } ?>
-	*/
-	
-
 	make_breadcrumb('<?=$adminpage_names['parent_pagename'];?>', '<?=$adminpage_names['pagename'];?>');
 	
 	<?php if($site->CONF['fm_allow_multiple_upload']) { ?>
+	
+	var post_params = {'<?php echo session_name(); ?>' : '<?php echo session_id(); ?>', 'op': 'file_upload'};
+	$.extend(post_params, ajax_token);
+	
 	swfu = new SWFUpload({
 		flash_url : '<?php echo $site->CONF['wwwroot'].$site->CONF['js_path']?>/swfupload/swfupload.swf',
 		upload_url: '<?php echo $site->CONF['wwwroot']?>/admin/ajax_response.php',
-		post_params: {'PHPSESSID' : '<?php echo session_id(); ?>', 'op': 'file_upload'},
+		post_params: post_params,
 		file_size_limit : '<?php echo (is_int(ini_get('upload_max_filesize')) ? round(ini_get('upload_max_filesize') / 1024) : ini_get('upload_max_filesize').'B'); ?>',
 		file_types : '*.*',
 		file_types_description : 'All Files',
@@ -563,6 +549,7 @@ $(document).ready(function()
 					</div>
 					<div id="custom_actions" class="hidden">
 						<span id="custom_action_text"></span><a id="custom_action" class="hidden" href="javascript:void(0);"></a>
+						<span id="default_actions" class="hidden"> | <?php echo $site->sys_sona(array('sona' => 'files_selected', 'tyyp' => 'Files')); ?>: <a href="javascript:void(0);" id="file_multi_move"><?php echo $site->sys_sona(array('sona' => 'move_file', 'tyyp' => 'Files')); ?></a>, <a href="javascript:void(0);" id="file_multi_delete"><?php echo $site->sys_sona(array('sona' => 'delete_file', 'tyyp' => 'Files')); ?></a>.</span>
 					</div>
 				</div><!-- / scms_files_actions_bar -->
 				

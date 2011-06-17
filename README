@@ -1,0 +1,121 @@
+=============================
+Saurus CMS Community Editon
+=============================
+This is Community Editon of Saurus CMS web content management software
+www.saurus.info info@saurus.info / Copyright 2000-2011 Saurused Ltd
+
+Contents of this readme file:
+
+- System Requirements
+- Installation
+- Upgrading
+- More information
+
+
+SYSTEM REQUIREMENTS
+---------------------
+Minimum requirements for running Saurus CMS on your server:
+
+1. Web Server Software: Apache.
+2. Program language: PHP 5 until 5.3.x.
+3. Database: MySQL 4.x until 5.0.51.
+
+
+INSTALLATION
+--------------
+
+Linux (using shell access)
+--------------------------
+
+1. Make sure you have Apache web server, PHP and MySQL installed before you continue. 
+
+2. Open the web browser and go to the URL of the website, eg.: 
+	
+	http://www.yoursite.com/install.php
+
+	Main installation script will install the database and the config.php file will be adjusted with the required database access variables.
+
+or use the command line option:
+
+	php install.php -h<database hostname> -u<database username> -p<database password> -d<database name> -U<cms username> -P<cms password> -H<url of your site>
+	
+3. Make sure that the following directories have write permissions by the web server:
+
+	public/ - upload folder, public folder and subfolders are accessible to everyone.
+	shared/ - upload folder, shared folder and subfolders have limited access depending on given permissions. 
+	extensions/ - for uploading Saurus 4 extensions. 
+	classes/smarty/templates - Saurus API templates
+	classes/smarty/templates_c - Saurus API compiled templates code
+
+
+Installation using only FTP access
+----------------------------------
+
+1. Use binary mode (not ascii mode!) for file transfer and upload CMS files to the root folder of your website using FTP.
+
+2. Set up temporary read & write permission for everybody (666) for following files using the FTP program:
+
+	config.php
+
+3. Run web-based installation script:
+
+	http://www.yoursite.com/install.php
+
+4. Change file permissions back to normal: read & write for the owner, read for everybody (644):
+
+	config.php
+
+5. Make sure that the following directories have write permissions by the web server:
+
+	public/ - upload folder, public folder and subfolders are accessible to everyone.
+	shared/ - upload folder, shared folder and subfolders have limited access depending on given permissions. 
+	extensions/ - for uploading Saurus 4 extensions. 
+	classes/smarty/cache - Saurus API templates cache
+	classes/smarty/templates - Saurus API templates
+	classes/smarty/templates_c - Saurus API compiled templates code
+
+
+Troubleshooting
+---------------
+If you have trouble with the installation (e.g. if install.php displayes a blank page), then run script check_requirements.php inside admin/ folder. This script will check if your server has all the necessary server requirements fulfilled.
+
+
+UPGRADING
+-----------
+
+Linux (using shell access)
+--------------------------
+
+1. Log in as an administrator to your website:
+
+	http://www.yoursite.com/admin/
+
+2. Unpack the files to your site root.
+
+        then run the update script: 
+	
+	http://www.yoursite.com/update.php
+
+or use the command line option:
+
+	php update.php
+
+
+Updating using only FTP access
+------------------------------
+
+1. Log in as an administrator to your website:
+
+	http://www.yoursite.com/admin/
+
+2. Use binary mode (not ascii mode!) for file transfer and upload CMS files to the root folder of your website using FTP.
+
+        then run the update script: 
+	
+	http://www.yoursite.com/update.php
+
+
+4. MORE INFORMATION
+----------------------
+Please refer to Saurus CMS Installation Guide for more information about setting up and configuring your site: http://www.saurus.info/installation/.
+

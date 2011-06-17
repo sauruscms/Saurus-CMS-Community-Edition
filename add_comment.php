@@ -88,6 +88,11 @@ if($site->CONF['allow_commenting'] == 0)
 	exit;
 }
 
+if($site->CONF['only_regusers_comment'] == 1 && !$site->user->id)
+{
+	header('Location: index.php');
+	exit;
+}
 
 if($site->CONF['check_for_captcha'] == 1)
 {

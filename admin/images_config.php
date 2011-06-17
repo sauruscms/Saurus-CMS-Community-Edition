@@ -54,6 +54,8 @@ $selected_lang = (isset($_COOKIE['images_config_lang']) ? $_COOKIE['images_confi
 // save image configs
 if($_POST['save_configs'])
 {
+	verify_form_token();
+	
 	new SQL($site->db->prepare('update config set sisu = ? where nimi = \'image_width\'', $site->fdat['image_width']));
 	new SQL($site->db->prepare('update config set sisu = ? where nimi = \'thumb_width\'', $site->fdat['thumb_width']));
 }
@@ -86,6 +88,8 @@ while($row = $result->fetch('ASSOC'))
 $delete_ids = array();
 if(is_array($site->fdat['definitions']))
 {
+	verify_form_token();
+	
 	foreach($site->fdat['definitions'] as $def_id => $definition)
 	{
 		// delete
@@ -294,6 +298,7 @@ if(is_array($site->fdat['definitions']))
 				</div><!-- / toolbarArea -->
 				<div class="contentAreaContent withTitleAndToolBar">
                 	<form name="definitions" id="definitions" method="POST" action="<?=$_SERVER['PHP_SELF'];?>">
+						<?php create_form_token('image-definitions'); ?>
                 		<input type="hidden" name="lang" value="<?=(int)$selected_lang;?>">
 	                	<table cellpadding="0" cellspacing="0" class="data_table">
 	                		<thead>
@@ -331,6 +336,7 @@ if(is_array($site->fdat['definitions']))
 				</div><!-- / toolbarArea -->
 				<div class="contentAreaContent withTitleAndToolBar">
 					<form name="configs_form" id="configs_form" method="POST" action="<?=$_SERVER['PHP_SELF'];?>">
+						<?php create_form_token('image-configs'); ?>
 						<input type="hidden" name="save_configs" value="1">
 		    			<table cellpadding="0" cellspacing="0" class="data_table">
 		    				<tr>

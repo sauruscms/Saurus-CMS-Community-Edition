@@ -118,7 +118,7 @@ function admin_login_form() {
 	  <form method="post" name="loginform" action="<?=$site->wwwroot?><?if($site->in_admin){echo "/admin";}if($site->in_editor){echo "/editor";}?>/index.php">
 	<?
 	foreach ($site->fdat as $key=>$value) {
-		if (!is_array($value) && $key!="user" && $key!="pass" && !($key == 'op' && $value == 'logout')) {
+		if (!is_array($value) && $key!='user' && $key!='pass' && $key != 'Submit' && $key != 'keel' && $key != 'url' && $key != 'op' && !($key == 'op' && $value == 'logout')) {
 	?>
 		<input type="hidden" name="<?php echo htmlspecialchars(xss_clean($key)); ?>" value="<?php echo htmlspecialchars(xss_clean($value)); ?>">
 	<?
@@ -201,7 +201,7 @@ function admin_login_form() {
 					</tr>
 					<tr><td class="bl"></td><td class="bc"></td><td class="br"></td></tr>
 				</table> <!-- shadow_box_wrapper -->
-				<div id="logindisclaimer">Saurus CMS <a href="http://www.saurus.info/" title="Web content management software Saurus CMS">www.saurus.info</a></div>
+				<div id="logindisclaimer">Saurus CMS CE <a href="http://www.saurus.info/" title="Web content management software Saurus CMS">www.saurus.info</a></div>
 			</td>
 		</tr>
 	</table>	
@@ -288,7 +288,7 @@ header("Content-type: text/html;charset=".$site->encoding);
 	foreach ($site->fdat as $key=>$value) {
 		if (!is_array($value) && $key!="email" && $key!="op2") {
 	?>
-		<input type="hidden" name="<?=$key?>" value="<?=$value?>">
+		<input type="hidden" name="<?php echo htmlspecialchars(xss_clean($key)); ?>" value="<?php echo htmlspecialchars(xss_clean($value)); ?>">
 	<?
 		}
 	}
@@ -356,7 +356,7 @@ header("Content-type: text/html;charset=".$site->encoding);
 					</tr>
 					<tr><td class="bl"></td><td class="bc"></td><td class="br"></td></tr>
 				</table> <!-- shadow_box_wrapper -->
-				<div id="logindisclaimer">Saurus CMS <a href="http://www.saurus.info/" title="Web content management software Saurus CMS">www.saurus.info</a></div>
+				<div id="logindisclaimer">Saurus CMS CE <a href="http://www.saurus.info/" title="Web content management software Saurus CMS">www.saurus.info</a></div>
 			</td>
 		</tr>
 	</table>	

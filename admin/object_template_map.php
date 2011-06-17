@@ -17,13 +17,10 @@
  * 
  */
 
-
-
 /**
  * Saurus CMS adminpage "Templates > Object templates"
  * 
  */
-
 
 global $site;
 $class_path = "../classes/";
@@ -66,6 +63,7 @@ $pagename = $adminpage_names['pagename'];
 #
 
 if($site->fdat[save]) {
+	verify_form_token();	
 	foreach($site->fdat as $key => $value) {
 		if(eregi("^tyyp_id(.+)",$key,$regs)) {
 			$sql = $site->db->prepare("UPDATE tyyp SET ttyyp_id = ? WHERE tyyp_id = ?",$value,$regs[1]);
@@ -112,35 +110,6 @@ if($site->fdat[save]) {
 
 <body>
 <?
-# Comment this out as we dont need this at this point
-#
-/*
-<table border="0" cellspacing="0" cellpadding="1" align="right">
-<tr> 
-<td class="txt" nowrap align="right"><?=$site->sys_sona(array(sona => "keel", tyyp=>"editor"))?>:</td>
-<td> 
-	<select name="flt_keel" onChange="" class="drop">
-
-	<?	
-		# Keeled
-			$sql = "SELECT nimi,keel_id FROM keel WHERE on_kasutusel = '1' ORDER BY nimi";
-			$sth = new SQL($sql);
-			$site->debug->msg($sth->debug->get_msgs());
-			
-			while ($keel = $sth->fetch()) {
-				if (in_array($keel[keel_id], $allowed_langs)){
-					print "	<option value=\"$keel[keel_id]\" ".($keel[keel_id] == $keel_id ? "selected":"").">$keel[nimi]</option>";
-				}
-			}
-	?>	
-	</select>
-</td>
-</tr>
-</table>
-*/
-?>
-
-<?
 #################
 # CONTENT TABLE
 ?>
@@ -177,6 +146,7 @@ if($site->fdat[save]) {
 		?>
 
 		<FORM action="<?=$site->self?>" method="post" name="vorm">
+		<?php create_form_token('edit-object-templates'); ?>
 		<input type=hidden name="save" id="save" value="1">
 
 			  <table border="0" cellspacing="0" cellpadding="3" width="100%">

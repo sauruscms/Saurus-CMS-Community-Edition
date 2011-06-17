@@ -58,6 +58,8 @@ $adminpage_names = get_adminpage_name(array('script_name' => $site->script_name)
 // change the extension
 if($site->fdat['extension'] && $site->fdat['activate'])
 {
+	verify_form_token();
+	
 	$extension = get_extensions('DB', false, $site->fdat['extension']);
 	$ext_path = $extension[$site->fdat['extension']]['path'];
 	$extension = load_extension_config($extension[$site->fdat['extension']]);
@@ -238,6 +240,7 @@ if($site->fdat['op'] == "upload"){
 
 if($site->fdat['upload']){
 
+	verify_form_token();
 	$ext->tmp_location=$site->absolute_path."shared/".time()."_".rand(1,837838);
 	$ext->extensions_folder=$site->absolute_path."extensions";
 	$ext->overwrite_extension=$site->fdat['overwrite'];
@@ -288,6 +291,7 @@ if($site->fdat['op'] == "upload"){
 	</head>
 	<body id="popup">
 		<form name="upload_extension" method="POST" enctype="multipart/form-data">
+		<?php create_form_token('upload-extension'); ?>
 		<div id="mainContainer">
 			<div class="titleArea">
 				<?=$site->sys_sona(array('sona' => "extension_upload", 'tyyp' => 'admin'))?>
@@ -383,6 +387,7 @@ if($site->fdat['extension'])
 			<div class="footerArea">
 				<div class="actionButtonsArea">
 					<form id="installForm" action="<?=$_SERVER['PHP_SELF']?>" method="POST">
+						<?php create_form_token('install-extension'); ?>
 						<input type="hidden" name="activate" value="1" />
 						<?php if($editor_mode) { ?>
 						<input type="hidden" name="keepThis" value="true" />
@@ -559,6 +564,7 @@ else
 	                	<div class="extensions_list">
 							
 		                	<form id="installForm" action="<?=$_SERVER['PHP_SELF']?>" method="POST">
+								<?php create_form_token('install-extension'); ?>
 								<input type="hidden" name="activate" value="1">
 								<input type="hidden" name="direct" value="1">
 								<?php if($editor_mode) { ?>

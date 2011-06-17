@@ -159,6 +159,8 @@ if ($site->fdat['refresh']) {
 # STEP2: SAVE DATA 
 if(!$site->fdat['refresh'] && ($op2 == 'save' || $op2 == 'saveclose' || $op2 == 'deleteconfirmed' || $op2 == 'lockconfirmed')) {
 
+	verify_form_token();
+	
 	$form_error = $site->fdat['error'];
 
 	# get all table fields:
@@ -568,6 +570,7 @@ if ($site->fdat[refresh]) {
 if($op == 'delete') {
 ?>
 	<form name="frmEdit" action="<?=$site->self?>" method="POST">
+	<?php create_form_token('delete-user'); ?>
 	<input type=hidden name=user_id value="<?=$site->fdat['user_id']?>">
 	<input type=hidden name=op value="<?=$site->fdat['op']?>">
 	<input type=hidden name=op2 value="">
@@ -616,6 +619,7 @@ if($op == 'delete') {
 elseif($op == 'lock') {
 ?>
 	<form name="frmEdit" action="<?=$site->self?>" method="POST">
+	<?php create_form_token('edit-user-lock'); ?>
 	<input type=hidden name=user_id value="<?=$site->fdat['user_id']?>">
 	<input type=hidden name=op value="<?=$site->fdat['op']?>">
 	<input type=hidden name=op2 value="">
@@ -762,6 +766,7 @@ if($site->fdat['tab'] == 'user') {
 
       <table width="100%"  border="0" cellspacing="3" cellpadding="0" class="scms_borderbox">
 	<form name="frmEdit" action="<?=$site->self?>" method="POST">
+	<?php create_form_token('edit-user-permission'); ?>
 	<input type=hidden name=tab value="<?=$site->fdat['tab']?>">
 	<input type=hidden name=user_id value="<?=$site->fdat['user_id']?>">
 	<input type=hidden name=op value="<?=$site->fdat['op']?>">
@@ -961,6 +966,7 @@ elseif($site->fdat['tab'] == 'account') {
     <td valign="top" width="100%" class="scms_dialog_area" height="100%"> 
     <table width="100%"  border="0" cellspacing="3" cellpadding="0" class="scms_borderbox">
 	<form name="frmEdit" action="<?=$site->self?>" method="POST">
+	<?php create_form_token('edit-user-account'); ?>
 	<input type=hidden name=tab value="<?=$site->fdat['tab']?>">
 	<input type=hidden name=user_id value="<?=$site->fdat['user_id']?>">
 	<input type=hidden name=group_id value="<?=$site->fdat['group_id']?>">
@@ -1138,6 +1144,7 @@ elseif($site->fdat['tab'] == 'mailinglist') {
 
 		<table width="100%" height=100% border="0" cellspacing="3" cellpadding="0" class="scms_borderbox">
 	<form name="frmEdit" action="<?=$site->self?>" method="POST">
+	<?php create_form_token('edit-user-mailinglist'); ?>
 	<input type=hidden name=tab value="<?=$site->fdat['tab']?>">
 	<input type=hidden name=user_id value="<?=$site->fdat['user_id']?>">
 	<input type=hidden name=group_id value="<?=$site->fdat['group_id']?>">
