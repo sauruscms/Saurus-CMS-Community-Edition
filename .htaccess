@@ -1,0 +1,30 @@
+DirectoryIndex index.php index.html
+
+<FilesMatch "\.(.git\w+)$">
+  Order allow,deny
+</FilesMatch>
+
+Options -Indexes
+Options +SymLinksIfOwnerMatch
+
+<IfModule mod_rewrite.c>
+	# rewrite rules for CMS alias's
+	RewriteEngine On
+
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_URI} !^admin(/.*)
+	RewriteCond %{REQUEST_URI} !^classes(/.*)
+	RewriteCond %{REQUEST_URI} !^editor(/.*)
+	RewriteCond %{REQUEST_URI} !^extensions(/.*)
+	RewriteCond %{REQUEST_URI} !^idcard(/.*)
+	RewriteCond %{REQUEST_URI} !^js(/.*)
+	RewriteCond %{REQUEST_URI} !^public(/.*)
+	RewriteCond %{REQUEST_URI} !^px(/.*)
+	RewriteCond %{REQUEST_URI} !^px_custom(/.*)
+	RewriteCond %{REQUEST_URI} !^shared(/.*)
+	RewriteCond %{REQUEST_URI} !^styles(/.*)
+
+	RewriteRule ^(.*)$  map.php?cmd=$1 [L,QSA]
+</IfModule>
+

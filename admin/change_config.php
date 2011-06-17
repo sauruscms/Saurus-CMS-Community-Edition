@@ -31,11 +31,11 @@ if(!isset($class_path)) {
 }
 
 include_once($class_path."port.inc.php");
-include($class_path."adminpage.inc.php");
+include_once($class_path."adminpage.inc.php");
 
 # if this file is included from "install.php" then dont do some part
-global $versions;
-if (sizeof($versions)>0){
+global $is_installation_script;
+if ($is_installation_script){
 	$called_from_install_script = 1;
 }
 

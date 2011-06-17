@@ -107,7 +107,7 @@ function ReadConf() {
 
 	# check if file config.php exists at all
 	if( !file_exists($file)) { 
-		print "<font color=red>Error: file \"$file\" not found!</font>";
+		print "<font color=red>Error: can't write config.php, create this file and make sure it is writable by the webserver.</font>";
 		exit;
 	} 
 	$CONFIG = fopen ($file, "r");
@@ -214,7 +214,7 @@ function dbconnect($root_access, $rootuser, $rootpasswd, $db)
 
 	// include database independent API functions
 	include_once($class_path.$CONF[dbtype].".inc.php");
-
+	
 	// connect to database
 	// if connect using root access,
 	// then use param values instead of config values
@@ -228,8 +228,7 @@ function dbconnect($root_access, $rootuser, $rootpasswd, $db)
 		user	=> $user,
 		pass	=> $passwd,
 		'mysql_set_names' => $CONF["mysql_set_names"],
-	));	
-
+	));
 };
 
 
@@ -317,6 +316,8 @@ function check_db(){
 
 	// connect to database 
 	dbconnect(0, '', '', ''); 
+	
+	print $conn->error;
 
 	// check if database exists
 
@@ -324,7 +325,7 @@ function check_db(){
 		$sql = "SHOW DATABASES";
 
 		$sth = new SQL($sql);
-		if ($sth->error) { print "<font color=red>Error: ".$sth->error."</font>"; }
+		//if ($sth->error) { print "<font color=red>Error: ".$sth->error."</font>"; }
 
 		while ($rec = $sth->fetch()) {
 			if ($rec[0] == $CONF["db"]) {
@@ -360,29 +361,6 @@ function check_allpriv($user) {
 	}
 # POOLELI
 	return 0;
-}
-
-
-
-/***********************************/
-/* NOT USED: CREATE_TABLES_CMD               */
-/* creates tables using command line */
-/***********************************/
-function create_tables_cmd()
-{
-	global $CONF, $conn, $default_data_file, $error_file;
-
-/* see siin peaks olema andmbaasist sõltumatu e asuma failis mysql-inc.php */
-
-	$dump_cmd = "mysql -h".$CONF["dbhost"]." -P".$CONF["dbport"]." -u".$CONF["user"]." -p".$CONF["passwd"]." ".$CONF["db"]." < ".$default_data_file." > /dev/null 2>".$error_file;
-	$ret = `$dump_cmd`;
-	$ret = `cat $error_file`;
-
-	if (!strcmp("ERROR", substr($ret, 0, 5))) {
-		echo ($ret."<br />");
-		return 0;
-	}
-	else { return 1; }
 }
 
 /***********************************/
@@ -635,34 +613,61 @@ function fix_hostname($path)
 /* modify config file              */
 /***********************************/
 
-function modify_file($src, $dest, $reg_src, $reg_rep)
+function modify_file($src, $reg_src, $reg_rep)
 {
-
-    //return 'ok';
-	// Copy the current config file to the config-old filename, permissions kept.
-    if (! @copy($src, $dest))
+	$buffers = array();
+	
+	$out = @fopen($src, "r");
+    if ($out)
     {
-        return "Error: unable to copy $src to $dest. ";
+	    while (!feof($out))
+	    {
+	        $buffers[] = fgets($out, 4096);
+	    }
     }
 
-	$in = @fopen($dest, "r");
-    if (! $in)
+    if(sizeof($buffers) < 2)
     {
-        return "Error: unable to open $dest for read";
-    }
+    	$buffers = array(
+			'<? /*'."\n",
+			"\n",
+			'########################'."\n",
+			'# database connect'."\n",
+			"\n",
+			'dbhost = localhost'."\n",
+			'dbport = 3306'."\n",
+			'db = sauruscms'."\n",
+			'user = sauruscms'."\n",
+			'passwd = nopasswdset'."\n",
+			'dbtype = mysql'."\n",
+			"\n",
+			'# run MySQL SET NAMES query'."\n",
+			'# mysql_set_names = utf8'."\n",
+			"\n",
+			'# Enable/disable polling Saurus server for live site statistics collecting'."\n",
+			'disable_site_polling = 0'."\n",
+			"\n",
+			'# Allow using PHP-tags in Smarty templates'."\n",
+			'allow_php_tags = 0'."\n",
+			"\n",
+			'*/?>',
+		);
+	}
     
     $out = @fopen($src, "w");
-    if (! $out)
+    if (!$out)
     {
-        return "Error: unable to open $src for write";
+		if(php_sapi_name() == 'cli')
+			echo 'Can\'t write config.php, no permissions'."\n";
+		else
+			echo "<font color=red>Error: can't write config.php, make sure it is writable by the webserver.</font>";
+		exit;
     }
 
     $lines = 0; // Keep track of the number of lines changed
     
-    while (!feof($in))
+    foreach ($buffers as $buffer)
     {
-        $buffer = fgets($in, 4096);
-        
         $new = preg_replace($reg_src, $reg_rep, $buffer);
         if ($new != $buffer)
         {
@@ -672,19 +677,19 @@ function modify_file($src, $dest, $reg_src, $reg_rep)
         fputs($out, $new);
     }
     
-    fclose($in);
     fclose($out);
+    
+    // make the config.php read-only for others
+    @chmod($src, 0644);
     
     if ($lines == 0) 
     {
         // Skip the rest - no lines changed
-        return "0 lines changed, did nothing";
+        return "$src";
     }
     
-       
-    
      // Success!
-    return "$src updated with $lines lines of changes, backup is called $dest";
+    return "$src updated with $lines lines of changes";
 }
 
 // Two global arrays
@@ -716,27 +721,15 @@ EOT;
 /* UPDATE_CONFIG_PHP               */
 /***********************************/
 
-function update_config_php($dbhost, $dbport, $db, $dbtype, $user, $passwd)
+function update_config_php($dbhost, $dbport, $db, $user, $passwd)
 {
     global $reg_src, $reg_rep;
  
     add_src_rep("dbhost", $dbhost);
     add_src_rep("dbport", $dbport);
     add_src_rep("db", $db);
-    add_src_rep("dbtype", $dbtype);
     add_src_rep("user", $user);
     add_src_rep("passwd", $passwd);
-
-	add_src_rep("allow_php_tags", '0'); # XXX seda vaja parast ara kustutada
-
-/*
-	add_src_rep("dbhost", base64_encode($dbhost));
-    add_src_rep("dbport", base64_encode($dbport));
-    add_src_rep("db", base64_encode($db));
-    add_src_rep("dbtype", base64_encode($dbtype));
-    add_src_rep("user", base64_encode($user));
-    add_src_rep("passwd", base64_encode($passwd));
-*/
 
 	######## get absolute path of website root
 	$absolute_path = getcwd().'/';
@@ -750,7 +743,7 @@ function update_config_php($dbhost, $dbport, $db, $dbtype, $user, $passwd)
 	####### read config.php
 	$file = $absolute_path."config.php";
 	
-    $ret = modify_file($file, "config-old.php", $reg_src, $reg_rep);
+	$ret = modify_file($file, $reg_src, $reg_rep);
 
 	return $ret;
 
@@ -832,4 +825,36 @@ function delete_file($filename) {
 		$success = unlink($filename);
 	}
 	return $success;
+}
+
+function files_folders_permissions()
+{
+	// if not exists create templates, templates_c
+	if(!is_dir('classes/smarty/templates'))
+	{
+		@mkdir('classes/smarty/templates');
+	}
+	@chmod('classes/smarty/templates', 0777);
+	
+	if(!is_dir('classes/smarty/templates_c'))
+	{
+		@mkdir('classes/smarty/templates_c');
+	}
+	@chmod('classes/smarty/templates_c', 0777);
+	
+	//  permissions for public, shared, extensions
+	if(is_dir('public'))
+	{
+		@chmod('public', 0777);
+	}
+	
+	if(is_dir('shared'))
+	{
+		@chmod('shared', 0777);
+	}
+	
+	if(is_dir('extensions'))
+	{
+		@chmod('extensions', 0777);
+	}
 }

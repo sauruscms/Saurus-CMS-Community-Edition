@@ -87,7 +87,7 @@ class Site {
 
 		$this->fatal_error='';
 
-		$this->script_version = '4.7.1';
+		$this->script_version = '4.7.FINAL';
 		
 		$this->site_poll_url = "http://extranet.saurus.ee/register/cms_site_polling.php";  // auth is register:register
 
@@ -739,9 +739,6 @@ class Site {
 			# check for install script file
 
 		if ($this->fdat['debug']!='on' && $this->fdat['debug']!='off'){
-			if(file_exists("../install.php") || file_exists("../install/")) { 
-				print "<span style=\"color: red;\">Security warning: please delete file \"install.php\"and folder \"install/\" after installation!</span><br>";
-			}
 
 			# check if versions in database and in script match
 			if($this->cms_version != $this->script_version) {

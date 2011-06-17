@@ -45,6 +45,17 @@ if ($matches[1]=="editor"){
 
 #################################################
 # Debug cookies
+if ($_GET['debug'] == 'on')
+{
+		setcookie ('debug', '1');
+		$_COOKIE['debug'] = 1;
+}
+else if ($_GET['debug'] == 'off')
+{
+		setcookie ('debug', '0', time()-100000);
+		$_COOKIE['debug'] = 0;
+}
+
 $debug = $_COOKIE["debug"] ? 1:0;
 
 ################################
@@ -327,8 +338,6 @@ include_once($class_path."port.inc.php");
 
 #################################################
 # error_reporting
-# if (debug=on OR url-il on vastav parameeter), # siis error_reporting=7, else 0
-#error_reporting(isset($_GET["error_reporting"]) ? $_GET["error_reporting"] : ($debug ? "7" : "0"));
 error_reporting(7);
 
 #################################################
@@ -368,7 +377,7 @@ if ($site->fdat[id] == $site->alias("system") && !$site->in_editor) {
 }
 # create page
 $leht = new Leht(array(
-	id => $site->fdat[id] ? $site->fdat[id] : $site->alias("rub_home_id"),
+	id => $site->fdat[id] ? $site->fdat[id] : $site->alias($site->sys_alias ? $site->sys_alias : 'rub_home_id'),
 ));
 # / create site and page
 #################################################

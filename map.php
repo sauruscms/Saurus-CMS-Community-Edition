@@ -46,7 +46,7 @@ session_start();
 include_once($cls_pth."/custom.inc.php");
 
 $_SESSION['alias']="";
-$uri = $_SERVER['REQUEST_URI'] = $_GET['mod_rewrite'];
+$uri = $_SERVER['REQUEST_URI'] = str_replace($_GET['cmd'], '', $_SERVER['REQUEST_URI']);
 
 #echo "<br><br>".$_SERVER['REQUEST_URI']."<br><br>";
 if (substr_count($uri,'/px')){

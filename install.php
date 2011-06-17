@@ -17,7 +17,6 @@
  * 
  */
 
-
 /**
  * Saurus CMS installation and version upgrade script.
  * Independent script, not for including, new Site is generated.
@@ -32,14 +31,10 @@
  *
  * 3. display database settings
  *    + [INSTALL: write config.php + create Database and user]
- *    + [UPGRADE: check db user permissions]
- *    + ask for db dump file
  * 
  * 4. run SQL file(s)
- *	  + [UPGRADE: import language files]
  *
  * 5. [INSTALL: CMS admin account form]
- *    + [UPGRADE: run php update-scripts]
  *    + show configuration table
  *
  * 6. [INSTALL: save cms admin account]
@@ -52,7 +47,11 @@
 $FDAT = (sizeof($_POST) > 0 ? $_POST : $_GET);
 
 $op = $FDAT["op"];
-$install = $FDAT["install"];
+
+if(php_sapi_name() != 'cli') session_start();
+
+$install = php_sapi_name() == 'cli' ? 1 : $_SESSION['install'];
+if(php_sapi_name() != 'cli') unset($_SESSION['install']);
 
 # if install.php should show any HTML output or not
 $skip_html = false; # default value: false
@@ -76,7 +75,16 @@ if ( intval(ini_get('memory_limit')) < 24 ) {
 /***********************************/
 $class_path = "./classes/";
 
+// create config.php
+
 $is_installation_script = true; # needed for error display handling in core
+
+if(!(file_exists('config.php') && filesize('config.php')))
+{
+	include_once($class_path."install.inc.php"); # all installation related functions
+	update_config_php('localhost', '3306', 'sauruscms', 'sauruscms', 'nopasswdset');
+}
+
 include_once($class_path."port.inc.php");
 include_once($class_path."nodebug.inc.php");
 include_once($class_path."install.inc.php"); # all installation related functions
@@ -90,25 +98,173 @@ $CONF = ReadConf(); # db connect data from config.php
 ############# VERSION CHECK
 $current_ver = current_version(); # try to connect database and find which version is installed returns 0, if no database found
 
-############# VERSION NUMBERS
+// CLI install
+if(!$current_ver && php_sapi_name() == 'cli')
+{
+	$opts  = array(
+		'h::', // dbhost:dbport default localhost:3306
+		'd:', // db
+		'u:', // dbuser
+		'p:', // dbpass
+		'U:', // cms user
+		'P:', // cms pass
+		'H:', // cms hostname/wwwroot
+	);	
+	
+	$options = array(
+		'dbhost' => 'localhost',
+		'dbport' => '3306',
+		'db' => NULL,
+		'dbuser' => NULL,
+		'dbpasswd' => NULL,
+		'cmsuser' => NULL,
+		'cmspasswd' => NULL,
+		'cmshostname' => NULL,
+		'cmswwwroot' => NULL,
+	);
+	
+	$opts = getopt(implode('', $opts));
+	
+	foreach ($opts as $key => $opt)
+	{
+		if($opt === false)
+		{
+			echo 'Value missing for '.$key."\n";
+			exit;
+		}
+		
+		switch ($key)
+		{
+			case 'h':
+				$opt = explode(':', $opt);
+				if($opt[0]) $options['dbhost'] = $opt[0];
+				if($opt[1]) $options['dbport'] = $opt[1];
+			break;
+			
+			case 'H':
+				$opt = explode('/', $opt);
+				if($opt[0]) $options['cmshostname'] = $opt[0];
+				if($opt[1]) $options['cmswwwroot'] = '/'.$opt[1];
+			break;
+			
+			case 'd': $options['db'] = $opt; break;
+			
+			case 'u': $options['dbuser'] = $opt; break;
+			
+			case 'p': $options['dbpasswd'] = $opt; break;
+			
+			case 'U': $options['cmsuser'] = $opt; break;
+			
+			case 'P': $options['cmspasswd'] = $opt; break;
+			
+			default: break;
+		}
+	}
+	
+	foreach ($options as $key => $opt)
+	{
+		if(!$opt)
+		{
+			echo 'Value missing for '.$key."\n";
+			exit;
+		}
+	}
+	
+	if($options['cmspasswd'] == 'saurus')
+	{
+		echo "The CMS password can't be 'saurus'.\n";
+		exit;
+	}
+	
+	//var_dump($options);
+	
+	// write config 
+	update_config_php($options['dbhost'], $options['dbport'], $options['db'], $options['dbuser'], $options['dbpasswd']);
+	
+	global $conn;
+	
+	$CONF = ReadConf();
+	
+	$db_found = check_db();
+	
+	if(!$db_found)
+	{
+		echo 'Could not connect to database.'."\n";
+		if($conn->error) echo $conn->error."\n";
+		exit;
+	}
+	
+	############# VERSION CHECK
+	$current_ver = current_version(); # try to connect database and find which version is installed returns 0, if no database found
+	
+	if($current_ver)
+	{
+		echo 'CMS is already installed, to update run update.php'."\n";
+		exit;
+	}
+	
+	// create folders
+	files_folders_permissions();
+	
+	// dump database
+	include_once('admin/updates/full_install_db.php');
+	
+	echo 'Installing database: ';
+	dump_full_database();
+	echo "\n";
+	
+	// set hostname and wwwroot 
+	# update database
+	new SQL("UPDATE config SET sisu='".$options['cmshostname']."' WHERE nimi='hostname'");
 
-# version numbers // the CE version can only be update'd from a 4.6.6 version
-$versions = array(
-	'4.6.6',
-	'4.7.0',
-	'4.7.1',
-);
-##############################
+	# update database
+	new SQL("UPDATE config SET sisu='".$options['cmswwwroot']."' WHERE nimi='wwwroot'");
+	
+	$site = new Site(array(
+		'on_debug' => ($_COOKIE['debug'] ? 1:0),
+		'on_admin_keel' => 1
+	));
 
-# get the new version number
-$new_ver = end($versions);
+	$site->site_polling(2); // poll Saurus for site stats
+	
+	// create the user
+	$FDAT['adminname'] = $FDAT['admin'] = $options['cmsuser'];
+	$FDAT['adminpasswd'] = $FDAT['adminpasswd_check'] = $options['cmspasswd'];
+	
+	store_admin_data();
+	
+	// run updates
+	include_once($class_path.'Update.class.php');
+	$update = new Update();
+	
+	$update->runUpdates();
+
+	echo 'Synchronising extensions';
+	$update->synchroniseExtensions();
+	echo '.'."\n";
+	
+	echo 'Importing glossaries:'."\n";
+	$update->importGlossaries();
+	echo 'done.'."\n";
+	
+	echo 'Clearing caches';
+	$update->clearCaches();
+	echo '.'."\n";
+	
+	echo 'Done.'."\n";
+	exit;
+}
+elseif (php_sapi_name() == 'cli')
+{
+	echo 'CMS is already installed, to update run update.php'."\n";
+	exit;
+}
 
 # kui esileht ja current versiooni ei leitud, siis järelikult install
 if (!$current_ver && !$install) {
 	$install = 1;
 }
 $step_count = 6;
-$error_file = "install_errors.txt";
 $url = site_url();
 
 ##########################
@@ -116,52 +272,13 @@ $url = site_url();
 
 $default_data_files = array();
 
-if ($install) { # install
-	array_push($default_data_files, "install/default_db.sql");
-} 
-else { # update
-	
-	// scrub EE licensing and commercial modules (not used on CE)
-	$default_data_files[] = 'admin/updates/updateEEtoCE.sql';
-	
-	$i = 1;
-	foreach ($versions as $version_array_index => $tmpver)
-	{
-		$next = $versions[$version_array_index + 1];
-		# if not current version yet, go to next ver
-		# jooksev ver <= installitav ver
-		
-		if (strnatcmp($current_ver, $tmpver) <= 0) {
-
-			# if overinstalling same ver, then go back in versions
-			# jooksev ver = installitav ver
-			if (strnatcmp($current_ver,$new_ver)==0) {
-				array_push($default_data_files, "admin/updates/update".$versions[$i-2]."to".$tmpver.".sql");
-			}
-			# usual case
-			else {
-				array_push($default_data_files, "admin/updates/update".$tmpver."to".$next.".sql");
-			}
-		}
-		$i++;
-	} # foreach
-	# remove last element if not repairing/overinstalling same version
-	if (strnatcmp($current_ver,$new_ver) != 0) {
-		array_pop($default_data_files);
-	}
-
+$install = 1; if (!$install)
+{
+	print '<font color=red>Error: Saurus CMS is already installed, to update run the <a href="update.php">update.php</a> script.</font>';
+	exit;
 }
 
-############# leia saidi default keele encoding ja kasuta seda siin lehel (Bug #1854)
-
-if(!$install){
-	# otsida välja default keel:
-	$sqlK = "SELECT encoding FROM keel WHERE on_default = '1'"; 
-	$sthK = new SQL($sqlK);
-	$encoding = $sthK->fetchsingle();
-}
-## new install: default encoding is UTF-8 (Bug #2225)
-$encoding = $encoding ? $encoding : 'UTF-8';
+$encoding = 'UTF-8';
 
 /***********************************/
 /* HTML START                      */
@@ -172,7 +289,7 @@ if( ! $skip_html) { # display HTML output
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
-		<title>Saurus CMS CE <?=($install?"Installation":"Update")." ".$new_ver?></title>
+		<title>Saurus CMS CE Installation</title>
 		<meta name="author" content="Saurus - www.saurus.info">
 		<meta http-equiv="Cache-Control" content="no-cache">
 		<meta http-equiv="Content-Type" content="text/html; charset=<?=$encoding?>">
@@ -192,7 +309,7 @@ $step_nr = substr(strtolower($op?$op:"step1"),-1);
 <div id="installheader">
 	<table width="750">
 	<tr>
-		<td valign="bottom"><h1>Saurus CMS CE <?=$new_ver." ".($install?"Installation":"Update")?>: Step <?=$step_nr?> of 6</h1></td>
+		<td valign="bottom"><h1>Saurus CMS CE Installation: Step <?=$step_nr?> of 6</h1></td>
 		<td align="right"><img class="logo" src="styles/default/gfx/install/logo.gif" height="20" width="101" alt="Saurus" /></td>
 	</tr>
 	</table>
@@ -220,8 +337,6 @@ switch(@$op) {
 STEP 2
 INSTALL:
 - ask db connect info
-UPDATE:
-- ask db user info with all privileges
 ***************************/
 ?>
 
@@ -278,7 +393,7 @@ if ($install) {
 	<INPUT type="submit" value="Next" class="redbutton">
 
 	<INPUT type="hidden" name="op" id="op" value="Step3">
-	<INPUT type="hidden" name="install" value="1">
+	<?php $_SESSION['install'] = 1; ?>
 	</center>
 	</form>
 <?
@@ -286,60 +401,6 @@ if ($install) {
 # / if INSTALL step2
 #########################
 
-#########################
-# if UPDATE step2
-
-else {
-?>
-	<h2>Database</h2>
-	<form action="install.php" method="post" name="form">
-	
-	Full access to database "<?=$CONF["db"]?>" is needed to update table structures. Click Next if user "<?=$CONF["db"]?>" has appropriate privileges or specify another account.
-	
-	<br /><br />
-	
-    <table border="0" width="750">
-            <tr>
-			<td align="left">Database host</td>
-            <td align="left"><?=$CONF[dbhost];?></td>
-			</tr>
-            <tr>
-			<td align="left">Database port</td>
-            <td align="left"><?=$CONF[dbport];?></td>
-			</tr>
-            <tr>
-			<td align="left">Database name</td>
-            <td align="left"><?=$CONF[db];?></td>
-			</tr>
-			<tr>
-			<td align="left">Database user name</td>
-            <td><input type="text" NAME="update_user" SIZE=30 maxlength=80 value="<?=$CONF[user];?>"></td>
-			</tr>
-            <tr>
-			<td align="left">Database user password</td>
-            <td><input type="password" NAME="update_passwd" SIZE=30 maxlength=80 value="<?=$CONF[passwd];?>"></td>
-			</tr>
-            <tr>
-			<td align="left">Database type</td>
-            <td align="left"><?=$CONF[dbtype];?></td>
-		</tr>
-   </table>
-	<br />
-
-	<center>
-	<INPUT type="button" value="Previous" onclick="javascript:document.getElementById('op').value='';document.form.submit();" class="redbutton">
-	<INPUT type="submit" value="Next" class="redbutton">
-
-	<INPUT type="hidden" name="op" id="op" value="Step3">
-	</center>
-	</form>
-
-	<br />
-
-<?
-}
-# / if UPDATE step2
-#########################
 ?>
 	</font>
 	</td>
@@ -357,12 +418,6 @@ INSTALL:
 - if root: create db and user
 - if no root: check if db exists
 - ask db dump file
-UPDATE:
-- show db connect data 
-- check user privileges CREATE, DROP, ALTER, INDEX
-- if not OK, show error
-- if OK, ask for db dump file
-
 ***************************/
 
 ?>
@@ -378,13 +433,13 @@ if ($install) {
 ?>
 	<h2>Database info confirmation</h2>
 
-	<form action="install.php" method="post" name="form" enctype="multipart/form-data">
+	<form action="install.php" method="POST" name="form" enctype="multipart/form-data">
 
 	<?/*** write db connect data into config file ***/?>
 	Database connection parameters were saved into file:
 	<?    
 
-	$conf_update_result = update_config_php($FDAT["dbhost"], $FDAT["dbport"], $FDAT["db"], $FDAT["dbtype"], $FDAT["user"], $FDAT["passwd"]); 
+	$conf_update_result = update_config_php($FDAT["dbhost"], $FDAT["dbport"], $FDAT["db"], $FDAT["user"], $FDAT["passwd"]); 
 
 
     if (preg_match("/Error/", $conf_update_result)) {
@@ -511,17 +566,10 @@ if ($install) {
 		<p>In next step, the database will be updated using default SQL definitions at <br>
 		<?=join(", ",$default_data_files)?></p>
 		
-		
-		<p>Advanced users may select a custom SQL file:<br>
-		<input type="file" NAME="data_file"></p>
-
-
-			<center>
-			<INPUT type="button" value="Previous" onclick="javascript:document.getElementById('op').value='Step2';document.form.submit();" class="redbutton">
-			<INPUT type="submit" value="Next" class="redbutton">
-			</center>
-
-
+		<center>
+		<INPUT type="button" value="Previous" onclick="javascript:document.getElementById('op').value='Step2';document.form.submit();" class="redbutton">
+		<INPUT type="submit" value="Next" class="redbutton">
+		</center>
 	
 		<? 
 	
@@ -537,95 +585,13 @@ if ($install) {
 	<INPUT type="hidden" name="update_passwd" value="<?=$CONF["passwd"] ?>">
 
 	<INPUT type="hidden" name="op" id="op" value="Step4">
-	<INPUT type="hidden" name="install" value="1">
+	<?php $_SESSION['install'] = 1; ?>
 	</form>
 
 	<br />
 <?
 }
 # / if INSTALL  step3
-#########################
-#########################
-# if UPDATE  step3
-/*
-UPDATE:
-- show db connect data 
-- check user privileges CREATE, DROP, ALTER, INDEX
-- if not OK, show error
-- if OK, ask for db dump file
-*/
-else {
-?>
-	<h2>Database info confirmation</h2>
-    <table border="0" width="400">
-            <tr>
-			<td align="left">Database host</td>
-            <td align="left"><?=$CONF[dbhost];?></td>
-			</tr>
-            <tr>
-			<td align="left">Database port</td>
-            <td align="left"><?=$CONF[dbport];?></td>
-			</tr>
-            <tr>
-			<td align="left">Database name</td>
-            <td align="left"><?=$CONF[db];?></td>
-			</tr>
-            <tr>
-			<td align="left">Database user name</td>
-            <td><?=$FDAT["update_user"];?></td>
-			</tr>
-            <tr>
-			<td align="left">Database user password</td>
-            <td><?=$FDAT["update_passwd"];?></td>
-			</tr>
-            <tr>
-			<td align="left">Database type</td>
-            <td align="left"><?=$CONF[dbtype];?></td>
-			</tr>
-    </table>
-
-	<?
-	# check if user has all privileges 
-	#	$error = check_allpriv($FDAT["update_user"],$FDAT["update_passwd"]);	
-	$error = 0;
-
-
-	if ($error) {
-	?>
-	<br /><br /><font color=red><?=$error?></font>
-	<br />
-	<form action="install.php" method="post" name="form">
-		<center>
-		<INPUT type="button" value="Previous" onclick="javascript:document.getElementById('op').value='Step2';document.form.submit();" class="redbutton">
-		</center>
-		<INPUT type="hidden" name="op" id="op" value="Step4">
-	</form>
-
-	<? } else { ?>
-	<form action="install.php" method="post" name="form" enctype="multipart/form-data">
-		<br />
-		<br />
-		The database will be updated using default SQL file (<?=join(", ",$default_data_files)?>).<br />If you have a custom SQL file, select it here:<br />
-		<input type="file" NAME="data_file">
-		
-		<INPUT type="hidden" name="op" id="op" value="Step4">
-
-		<INPUT type="hidden" name="update_user" value="<?=$FDAT["update_user"]?>">
-		<INPUT type="hidden" name="update_passwd" value="<?=$FDAT["update_passwd"]?>">
-		
-		<br />
-		<br />
-		
-		<center>
-		<INPUT type="button" value="Previous" onclick="javascript:document.getElementById('op').value='Step2';document.form.submit();" class="redbutton">
-		<INPUT type="submit" value="Next" class="redbutton">
-		</center>
-
-	</form>
-<?
-	}
-}
-# / if UPDATE  step3
 #########################
 
 ?>	
@@ -642,9 +608,6 @@ else {
 STEP 4
 INSTALL:
 - create tables
-UPDATE:
-- run sql files
-- import language files
 ***************************/
 
 #########################
@@ -659,7 +622,22 @@ if ($install) {
 	<?	
 
 	if (!$FDAT["dont_make_db"]) {
-		$tbl_error = run_dumpfile();
+		if ($_POST["update_user"] != '' || $_POST["update_passwd"] != '') {
+			$conn = 0;
+			dbconnect(1, $_POST["update_user"], $_POST["update_passwd"], $CONF["db"]);
+		} 
+		### use CONF values
+		elseif($CONF["user"] != '' || $CONF["passwd"] != '') {
+			$conn = 0;
+			dbconnect(1, $CONF["user"], $CONF["passwd"], $CONF["db"]);
+		}
+		else {
+			print "<font color=red>Error: DB user name and password were empty!</font><br />";
+			exit;
+		}
+		
+		include_once('admin/updates/full_install_db.php');
+		dump_full_database();
 	}
 
 	?>
@@ -682,7 +660,7 @@ if ($install) {
 	} else { 
 
 	?>
-			<p>Tables for database "<?=$CONF["db"] ?>" have been created.</p>
+			<p>Done.</p>
 	<?
 	} # tbl error 
 
@@ -693,132 +671,13 @@ if ($install) {
 	</center>
 
 		<input type="hidden" name="op" id="op" value="Step5">
-		<input type="hidden" name="install" value="1">
+		<?php $_SESSION['install'] = 1; ?>
 	      
 	</form>
 
 	<?
 }
 # / if INSTALL  step4
-#########################
-#########################
-# if UPDATE  step4
-else {
-?>
-
-	<h2>Updating Database</h2>
-	<font class="txt">
-	<form action="install.php" method="post" name="form">
-	<?
-	###############
-	# run sql
-	$upd_error = run_dumpfile();
-?>
-  <table width="580" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td><font class="txt">
-<?
-	if ($upd_error != '') { ?>
-		<font color="red">
-		<br />Fatal error occured during updating database "<?=$CONF["db"] ?>"!</font>
-		<INPUT type="button" value="Previous" onclick="javascript:document.getElementById('op').value='Step3';document.form.submit();" class="redbutton">
-	<? } else { 
-
-	?>
-		Database "<?=$CONF["db"] ?>" update finished.<br>
-
-<?
-	flush();usleep(500000);
-
-?>	
-	</font>
-	</td>
-  </tr>
-  </table>
-  <br />
-	
-	<font class="txt">
-<?	
-
-	###############
-	# lang file import: importida ainult need keeled, mis saidis aktiivsed
-
-	# 0 - Estonian, 1 - English
-	$default_languages = array('0','1');
-
-	# get languages in use
-	$sqlK = "select distinct b.glossary_id as keel_id, b.encoding as encoding from keel as a left join keel as b on a.keel_id = b.glossary_id where b.on_kasutusel = '1'";
-	$sthK = new SQL($sqlK);
-
-	###############
-	# loop over active languages
-	while ($keel = $sthK->fetch()) {
-
-		# check if it is default language?
-		if(!in_array($keel['keel_id'], $default_languages)) {
-			continue;
-		}
-
-		# get site encoding, default is UTF-8 if not set
-		$lang_encoding = $keel['encoding'] ? strtoupper($keel['encoding']) : "UTF-8";
-
-		# file = admin/updates/language0.csv	
-		$file = "admin/updates/".$lang_encoding."/language".$keel['keel_id'].".csv";
-
-		# kui leidub selle keele keelefail
-		if(file_exists($file)) {
-			echo "Importing file '".$file."'...";
-			echo "<script>document.getElementById('listing').scrollTop = document.getElementById('listing').scrollHeight - 500;</script>";
-			flush();usleep(500000);
-
-			$one_lang_error = import_langfile($file,$keel);
-			if(!$one_lang_error) { # import OK
-				$lang_error .= $one_lang_error;
-				echo " Done.<br>";
-			}
-			echo "<script>document.getElementById('listing').scrollTop = document.getElementById('listing').scrollHeight - 500;</script>";
-			flush();usleep(500000);
-		} 	
-		
-	}
-	# /  loop over active languages
-	###############
-
-	
-	?>
-	<br />
-	<table width=600 border=0 cellspacing=0 cellpadding=0><tr><td><font class=txt>
-
-	<?###### language result #######?>
-	<? if ($lang_error != '') { ?>
-		<font color="red">
-		<?=$lang_error?>
-		<br />Fatal error occured during importing language files into database "<?=$CONF["db"] ?>"!</font>
-		<INPUT type="button" value="Previous" onclick="javascript:document.getElementById('op').value='Step3';document.form.submit();" class="redbutton">
-	<? } else { 
-		echo "Glossary import finished.";
-	} # if import language files ok
-
-	?>
-	</font></td></tr></table>
-	<?
-	##################
-	# next nupp
-	?>
-	<br /><br />
-	<center>
-	<INPUT type="submit" value="Next" class="redbutton">
-	</center>
-
-	<INPUT type="hidden" name="op" id="op" value="Step5">
-	</form>
-	<script>document.getElementById('listing').scrollTop = document.getElementById('listing').scrollHeight - 500;</script>
-
-	<? 
-	} # if run sql ok
-	
-}
-# / if UPDATE  step4
 #########################
 
     break;
@@ -830,10 +689,6 @@ INSTALL
 - CMS admin account form
 - show configuration table
 - poll free
-UPDATE
-- run php update-scripts
-- save new templates info into db
-- show configuration table
 ***************************/
 ?>
   <table width="580" border="0" cellspacing="0" cellpadding="0">
@@ -846,16 +701,11 @@ UPDATE
 if ($install) {
 ?>
 
-	<h2>Site Settings</h2>
 	<form action="install.php" method="post" name="form">
 	<? 
 	// connect to database 
 	if (!$conn) { dbconnect(0, '', '', ''); }
-	?>
 	
-	<p>Please create user account for logging in to Saurus CMS. You can not use "saurus" for password.</p>
-
-	<?
 		// read the other config data from config table
 		$CONFDB = ReadConfDB();
 
@@ -873,7 +723,31 @@ if ($install) {
 
 			#####################
 			# ask admin login access
+			# create new site for config script
+			include_once($class_path.'port.inc.php');
+			$site = new Site(array(
+				'on_debug' => ($_COOKIE['debug'] ? 1:0),
+				'on_admin_keel' => 1
+			));
+
+			$site->site_polling(2); // poll Saurus for site stats
+			
+			// run updates
+			
+			include_once($class_path.'Update.class.php');
+			$update = new Update();
+			
 			?>
+			<p><?php $update->runUpdates(); ?></p>
+			
+			<p>Synchronising extensions<?php $update->synchroniseExtensions(); ?>.</p>
+		
+			<p>Importing glossaries:<br> <?php $update->importGlossaries(); ?> Done.</p>
+			
+			<h2>Site Settings</h2>
+			
+			<p>Please create user account for logging in to Saurus CMS. You can not use "saurus" for password.</p>
+
 			<table border="0">
 				<tr>
 				<td align="left">Username</td>
@@ -900,17 +774,13 @@ if ($install) {
 			?>
 			<table width="580" border=0>
 			<?
-			# create new site for config script
-			include_once($class_path.'port.inc.php');
-			$site = new Site(array(
-				'on_debug' => ($_COOKIE['debug'] ? 1:0),
-				'on_admin_keel' => 1
-			));
+			echo 333;
 			include_once("admin/change_config.php");
+			echo 111;
 
 			print_config_table();
+			echo 222;
 
-			$site->site_polling(2); // poll Saurus for site stats
 			?>
 
 			</table>
@@ -926,7 +796,7 @@ if ($install) {
 	} # if config tabelit pole olemas
 	?>
 		<INPUT type="hidden" name="op" id="op" value="Step6">
-		<INPUT type="hidden" name="install" value="1">
+		<?php $_SESSION['install'] = 1; ?>
 		<INPUT type="hidden" name="dont_make_db" value="1">
 		</form>
 		</center>
@@ -934,40 +804,7 @@ if ($install) {
 }
 # / if INSTALL  step5
 #########################
-#########################
-# if UPDATE  step5
-else {
-?>
-	<h2>Site Settings</h2>
-	<br />
 
-	<form action="install.php" method="post" name="form">
-	<table border="0" cellspacing="0" cellpadding="3" width="580">
-	<?
-	#####################
-	# connect to database 
-	if (!$conn) { dbconnect(0, '', '', ''); }
-
-	#####################
-	# print config rows
-
-	include_once("admin/change_config.php");
-	print_config_table();
-?>
-	</table>
-
-	<br />
-	<center>
-	<INPUT type="submit" value="Next" class="redbutton">
-
-	<INPUT type="hidden" name="op" id="op" value="Step6">
-	</form>
-	</center>
-
-<?
-}
-# / if UPDATE  step5
-#########################
 ?>	
 	</font>
 	</td>
@@ -980,8 +817,6 @@ else {
 STEP 6
 INSTALL
 - save cms admin account
-- save configuration table data
-UPGRADE
 - save configuration table data
 ***************************/
     case "Step6":
@@ -1006,6 +841,8 @@ if ($install) {
 		if ($error) {
 ?>
 			<h2>Installation error</h2>
+			
+			<?php $_SESSION['install'] = 1; ?>
 
 			<font color="red"><?=$error?></font>
 
@@ -1029,35 +866,10 @@ if ($install) {
 			</p>
 
 			<p>&nbsp;</p>
-			<p>If you are in Linux environment don't forget to run post_install.sh script now! <br>It will delete install.php from your website root directory for security reasons and also change file permissions for config.php back to normal.
-			</p>
 <?
 		} # if OK
 }
 # / if INSTALL  step6
-#########################
-#########################
-# if UPDATE  step6
-else {
-	// clean template and site cache
-	ini_set('display_errors', 'On');
-	new SQL("DELETE FROM cache WHERE url <> ''");
-	
-	include_once($class_path.'adminpage.inc.php');
-	clear_template_cache(getcwd().'/classes/smarty/templates_c/');
-?>
-	<h2>Update Finished</h2>
-	<br />
-	<? store_config_data(); ?>
-	
-	Congratulations, we hope you enjoy your new copy of Saurus CMS!<br />
-	
-	What to do next?<br />
-	
-	<br />
-<?
-}
-# / if UPDATE  step6
 #########################
 
 ###################
@@ -1092,10 +904,6 @@ INSTALL:
 -check config file chmod
 -EULA agreement
 -system requirements
-UPDATE:
--intro
--system requirements
-- backwards compability check
 ***************************/
 ?>
   <table width="730" border="0" cellspacing="0" cellpadding="0">
@@ -1109,7 +917,7 @@ if ($install) {
 
 	?>
 	<h2>Welcome</h2>
-	<p>This will install a fresh copy of Saurus CMS Community Edition version 4.7.1.</p>
+	<p>This will install a fresh copy of Saurus CMS Community Edition.</p>
 	<p>You will be taken through a number of pages, each configuring a different portion of your site. <br />We estimate that the entire process will take about 5 minutes.</p>
 	
 	<?
@@ -1126,13 +934,6 @@ if ($install) {
 	# add slash to the end
 	if (!preg_match("/\/$/",$absolute_path)) {$absolute_path .= "/"; }
 
-	####### read config.php and config-old.php
-	$file = $absolute_path."config.php";
-	$file2 = $absolute_path."config-old.php";
-
-	#########################
-	# if config is writable
-	if(is_writable($file) && is_writable($file2)){
 ?>
 		<script type="text/javascript">
 		function toggle_next(check_box)
@@ -1153,6 +954,7 @@ if ($install) {
 		Please scroll down to check the system requirements and press Next to continue. Incompatibilities between required values and your system are marked red.
 	</p>
 	<?
+	files_folders_permissions();
 	$called_from_another_script = 1;
 	include_once("admin/check_requirements.php");
 	print_requirements_table();
@@ -1162,140 +964,16 @@ if ($install) {
 			<form action="install.php" method="post" name="form">
 			<center>
 			<INPUT type="hidden" name="op" id="op" value="Step2">
+			<?php $_SESSION['install'] = 1; ?>
 			<INPUT type="submit" id="next_button" value="Next" class="redbutton" disabled>
 			</center>
 			</form>
 			<br />
 
 	<?
-	#########################
-	# if config is NOT writable
-	} else { ?>
-		<font color=red>
-		<br />
-		Error: File permissions are incorrect! Configuration files must be temporarily writable for the webserver during installation, please set 666 permissions for following files:<br /><br />
-		<b><?echo $file?></b>
-		<br />
-		<b><?echo $file2?></b>
-		</font>
-		<br />
-		<br />
-		<form action="install.php" method="post" name="form">
-		<center>
-		<INPUT type="hidden" name="op" id="op" value="">
-		<INPUT type="submit" value=" Check again " class="redbutton">
-		</center>
-		</form>
-	<?    
-	} 
-	# / if config is writable
-	#########################
-
 
 }
 # / if INSTALL step1
-#########################
-
-#########################
-# if UPDATE step1
-else {
-	
-	$sql = 'select license_key from license order by date desc limit 1';
-	$result = new SQL($sql);
-	
-	$license_key = $result->fetchsingle();
-?>
-	<h2>Welcome</h2>
-
-	This will update your Saurus CMS <?php echo (strtolower($license_key) == 'free' ? 'Free' : (!$license_key ? 'Community Edition' : '')); ?> <?=$current_ver?><?php echo ($license_key && strtolower($license_key) != 'free' ? ' using license: '.$license_key : ''); ?> to Saurus CMS Community Edition version <?=$new_ver?>.<br />
-	
-	You will be taken through a number of pages, each configuring a different portion of your site. The entire process should take about 5 minutes.<br />
-	
-<? if ($current_ver) {		?>
-
-	<br />
-	<br />	
-	<? 
-	####################
-	# same version reinstall
-
-	if ($current_ver == $new_ver) { ?>
-		<br /><font color=red>
-		NB! You already have version <?=$new_ver?>. If you want to repair or re-install it, click Next.</font>
-		<br />
-	<?}
-
-
-	#####################
-	# print requirements table
-?>
-	<br /><h2>System requirements</h2>
-	
-	Please scroll down to check the system requirements and press Next to continue. Incompatibilities between required values and your system are marked red.<br />
-	
-	<?
-	$called_from_another_script = 1;
-	include_once("admin/check_requirements.php");
-	print_requirements_table();
-	unset($called_from_another_script);
-
-	if (version_compare($current_ver, '4.6.6') == -1) { ?>
-	
-	<br />
-	<br />
-	Because of compatibility issues the CMS version must be at least <b>4.6.6</b> before you can upgrade to Community Edition.
-	<br />
-	<br />
-	
-	<?php } else { 
-	###################
-	# NEXt button
-	?>
-	<br />
-	<br />
-		<form action="install.php" method="post" name="form">
-		<center>
-		<INPUT type="hidden" name="op" id="op" value="Step2">
-		<INPUT type="submit" value="Next" class="redbutton">
-		</center>
-		</form>
-		<br /><br />
-	<?php }  ?>
-	<?
-
-	} # site not found => show error
-	else {?>
-		<br />
-		<br /><font color=red>
-		not found!</font>
-		<br />
-	<?}?>
-
-	<?	#####################
-	# check backwards compability (initially for version 4.0.6, Bug #1597)
-?>
-	<?
-	$called_from_another_script = 1;
-	
-	foreach ($versions as $version_array_index => $tmpver) {
-		$next = $versions[$version_array_index + 1];
-		# if not current version yet, go to next ver
-		# jooksev ver <= installitav ver
-		
-		if ($current_ver != $tmpver && strnatcmp($current_ver,$tmpver)<=0) {
-
-			if(file_exists('admin/updates/check_compability'.$tmpver.'.php'))
-			{
-				include_once('admin/updates/check_compability'.$tmpver.'.php');
-				$check_compability_function = 'check_compability_'.str_replace('.', '', $tmpver);
-				$check_compability_function();
-			}
-		}
-	} # foreach
-	
-	unset($called_from_another_script);
-}
-# / if UPDATE step1
 #########################
 
 	if( ! $skip_html) { # display HTML output			
