@@ -4,6 +4,7 @@
 jQuery(function ()
 { 
 	jQuery('.scms-flowplayer-anchor').each(function(index) {
+		jQuery(this).css('display', 'block').css('height', '10px').css('width', '10px');
 		jQuery(this).attr('id', 'flownumber'+index);
 		jQuery(this).html('');
 		flowplayer(jQuery(this).attr('id'), {src: wwwroot+'/js/flowplayer/flowplayer.swf', wmode: 'transparent'}, {
