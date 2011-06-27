@@ -4,17 +4,17 @@
  * It is licensed under MPL 1.1 (http://www.opensource.org/licenses/mozilla1.1.php).
  * Copyright (C) 2000-2010 Saurused Ltd (http://www.saurus.info/).
  * Redistribution of this file must retain the above copyright notice.
- * 
+ *
  * Please note that the original authors never thought this would turn out
  * such a great piece of software when the work started using Perl in year 2000.
  * Due to organic growth, you may find parts of the software being
  * a bit (well maybe more than a bit) old fashioned and here's where you can help.
  * Good luck and keep your open source minds open!
- * 
+ *
  * @package		SaurusCMS
  * @copyright	2000-2010 Saurused Ltd (http://www.saurus.info/)
  * @license		Mozilla Public License 1.1 (http://www.opensource.org/licenses/mozilla1.1.php)
- * 
+ *
  */
 
 
@@ -60,8 +60,8 @@ function get_visible_fields() {
 	$pref = $sth->fetchsingle();
 	$data = unserialize($pref);
 
-	############# if preference NOT FOUND and it's COLUMN FIELDS prefernce 
-	# then ADD NEW preference - get DEFAULT values and make these fields visible 
+	############# if preference NOT FOUND and it's COLUMN FIELDS prefernce
+	# then ADD NEW preference - get DEFAULT values and make these fields visible
 	if(!is_array($data) ){
 		############ DEFAULT preference values
 		$tables = array(
@@ -77,10 +77,10 @@ function get_visible_fields() {
 		);
 		# if we know, from which table to retrieve fields info, go on
 		if(in_array($prefpage_name,array_keys($tables))){
-			# 1) get DEFAULT values 
+			# 1) get DEFAULT values
 			$default_fields = split(",",$tables[$prefpage_name]["fields"]);
 #			printr($default_fields);
-			# 2) get all table FIELDS 
+			# 2) get all table FIELDS
 			$fields = split(",",$site->db->get_fields(array("table" => $tables[$prefpage_name]["table"] )));
 			foreach($fields as $field){
 				# make it visible if it's default field
@@ -106,12 +106,12 @@ function get_visible_fields() {
 			# get translation: search translation from given types (in the given order!)
 			$translation = '';
 			foreach($sst_arr as $sysword_type) {
-				$translation = $site->sys_sona(array(sona => $value['fieldname'], tyyp=> $sysword_type)); 
+				$translation = $site->sys_sona(array(sona => $value['fieldname'], tyyp=> $sysword_type));
 #				print "<br> sysword_type: ".$sysword_type." => found ".$translation;
 				# if found translation then don't search anymore
 				if($translation && substr($translation,0,1)!='[' && substr($translation,-1)!=']' ) { break; }
 			}
-			$visible_fields[$value['fieldname']] = $translation; 
+			$visible_fields[$value['fieldname']] = $translation;
 		}
 	}
 	return $visible_fields;
@@ -154,7 +154,7 @@ function print_column_headers() {
 	} else {
 		$td_width = '1%';
 	}
-	
+
 	if (!is_array($visible_fields)){$visible_fields = array();}
 
 	# loop over visible fields
@@ -174,8 +174,8 @@ function print_column_headers() {
 		?>
         <td width="<?=$td_width?>" onClick="document.location='<?=$href?>'"  <?=($site->fdat['sortby']==$sortfield ? 'class="scms_tableheader_active"' : '')?> ><a href="<?=$href?>"><?=$visible_fields[$field]?><?####### arrow ?><?if($site->fdat['sortby']==$sortfield) {?><img src="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/general/sort_<?=$site->fdat['sort']=='asc'?'up':'down'?>.gif" width="20" height="9" border=0><?}?></a></td>
 
-	<? } # foreach 
-	########## open preferences popup 
+	<? } # foreach
+	########## open preferences popup
 	?>
 
 	</tr></table>
@@ -194,7 +194,7 @@ function print_column_headers() {
 *	print_pagenumbers(array(
 *		"total_count" => 2000,
 *		"rows_count" => 20,
-*       OR 
+*       OR
 *		"rows_count" => array(20,50,100),
 *		"always_visible" => 0/1 default "0", // If "1", then show pagenumbers, even not found any records
 *	));
@@ -221,13 +221,13 @@ function print_pagenumbers() {
 	if(!$rows_count) { $rows_count = 20; }
 
 	######## gather all fdat values into url string
-	foreach($site->fdat as $fdat_field=>$fdat_value) { 
+	foreach($site->fdat as $fdat_field=>$fdat_value) {
 		if($fdat_field != 'page'){
 			#echo $fdat_field."=".$fdat_value."<hr>";
 			$url_parameters .= '&'.$fdat_field."=".$fdat_value;
 			$hidden_parameters .= '<input type=hidden name="'.$fdat_field.'" value="'.$fdat_value.'">';
-		} 
-	} 
+		}
+	}
 	$pagenumbers = get_page_numbers(array(
 		"total" => $total_count,
 		"limit" => $rows_count,
@@ -252,7 +252,7 @@ function print_pagenumbers() {
 <? if (count($rows_count_arr)>0) { ?>
 			<td>
 				<select name="rows_count" class="scms_flex_input" style="width:44px" onChange="document.forms['pageform'].page.value=1; this.form.submit();">
-<? 
+<?
 foreach ($rows_count_arr as $cnt){
 	echo '<option value="'.$cnt.'"  '.($site->fdat['rows_count']==$cnt ? 'selected':'').'>'.$cnt.'</option>\n';
 }
@@ -297,7 +297,7 @@ function print_language_selectbox() {
 	$sql = "SELECT nimi,keel_id FROM keel WHERE on_kasutusel = '1' ORDER BY nimi";
 	$sth = new SQL($sql);
 	$site->debug->msg($sth->debug->get_msgs());
-	
+
 	?>
     <table border="0" cellspacing="0" cellpadding="1">
 	<form name="languageform" method=get>
@@ -307,14 +307,14 @@ function print_language_selectbox() {
 	<?	}
 	}?>
 	<?php if($sth->rows > 1) { ?>
-        <tr> 
+        <tr>
           <td nowrap align="right"><?=$site->sys_sona(array(sona => "keel", tyyp=>"editor"))?>:</td>
-          <td> 
+          <td>
 	<?if(!isset($site->fdat['lang_swiched'])) {?>
 		<input type=hidden name=lang_swiched value=0>
 	<?}?>
 	<select name="flt_keel" onChange="document.forms['languageform'].lang_swiched.value='1';document.forms['languageform'].submit();">
-	<?	
+	<?
 			while ($keel = $sth->fetch()) {
 				if($keel['keel_id'] == $site->fdat['flt_keel']) {
 					$selected='selected';
@@ -354,7 +354,7 @@ function print_glossary_selectbox() {
 	$sql = "select distinct keel as glossary_id, nimi from sys_sonad left join keel on keel = keel_id order by nimi";
 	$sth = new SQL($sql);
 	$site->debug->msg($sth->debug->get_msgs());
-	
+
 	?>
     <table border="0" cellspacing="0" cellpadding="1">
 	<form name="languageform" method=get>
@@ -364,14 +364,14 @@ function print_glossary_selectbox() {
 	<?	}
 	}?>
 	<?php if($sth->rows > 1) { ?>
-        <tr> 
+        <tr>
           <td nowrap align="right"><?=$site->sys_sona(array('sona' => 'translations', 'tyyp' =>'admin'))?>:</td>
-          <td> 
+          <td>
 	<?if(!isset($site->fdat['lang_swiched'])) {?>
 		<input type=hidden name=lang_swiched value=0>
 	<?}?>
 	<select name="flt_keel" onChange="document.forms['languageform'].lang_swiched.value='1';document.forms['languageform'].submit();">
-	<?	
+	<?
 			while ($keel = $sth->fetch()) {
 				if($keel['glossary_id'] == $site->fdat['flt_keel']) {
 					$selected='selected';
@@ -398,11 +398,11 @@ function print_glossary_selectbox() {
 
 /**
 * get_adminpage_name
-* 
+*
 * returns adminpage name and page parent name
-* 
+*
 * @package CMS
-* 
+*
 * @param string script_name - filename of adminpage
 *
 * list($parent_pagename, $pagename,$parent_pagename_eng, $pagename_eng) = get_adminpage_name(array(
@@ -413,7 +413,7 @@ function get_adminpage_name() {
 	global $site;
 	$args = func_get_arg(0);
 
-	$sql = $site->db->prepare("SELECT b.eng_nimetus AS parent_pagename, a.eng_nimetus AS pagename FROM admin_osa a, admin_osa b WHERE a.parent_id = b.id AND a.fail = ?",$args['script_name']);
+	$sql = $site->db->prepare("SELECT b.eng_nimetus AS parent_pagename, a.eng_nimetus AS pagename FROM admin_osa a, admin_osa b WHERE a.parent_id = b.id AND a.fail like ?",'%'.$args['script_name']);
 	$sth = new SQL($sql);
 
 	$names = array();
@@ -430,16 +430,16 @@ function get_adminpage_name() {
 
 /**
 * print_profile_fields
-* 
-* prints profile input fields in right format; 
+*
+* prints profile input fields in right format;
 * used in object/user/group/etc edit-popup window;
 * prints 2 columns: 1) profile label 2) input field
-* 
+*
 * Note: function "print_profile_fields()" is used for EDITING profile fields,
 * function "format_profile_values()" is used for just SHOWING profile fields
-* 
+*
 * @package CMS
-* 
+*
 * @param array field_values - array of object values, $field_values['field_name'] = $field_value
 * @param array profile_fields - array of profile fields, already unserialized data
 * @param fields_width - width of cell, where field located. Can be used as integer or with % (150 or 50%)
@@ -462,7 +462,7 @@ function print_profile_fields() {
 	$field_html = ''; ## one field html generated in this function
 
 	$form_error = $site->fdat['form_error']; # is array of errors, keys are fieldnames and values are error messages
-	
+
 	###################
 	# loop over attributes / profile fields
 		if(is_array($profile_fields)) {
@@ -509,7 +509,7 @@ function print_profile_fields() {
 			#print "--".$source_profile_table."--";
 
 
-			########### get all users 
+			########### get all users
 			if ($source_profile_table=='users') { # if data source is system table "users"
 				$sql_select = $site->db->prepare("
 					SELECT CONCAT(users.firstname,' ',users.lastname) AS pealkiri, users.user_id AS id
@@ -521,8 +521,8 @@ function print_profile_fields() {
 			elseif (substr($source_profile_table,0,4)=='ext_') { # prefix is "ext_"
 				$sql_select = $site->db->prepare("
 					SELECT name AS pealkiri, id
-					FROM ".$source_profile_table."  
-					WHERE profile_id LIKE ? 
+					FROM ".$source_profile_table."
+					WHERE profile_id LIKE ?
 					ORDER BY name ",
 					$source_profile_id
 				);
@@ -537,10 +537,10 @@ function print_profile_fields() {
 				# Bug #2611
 				$sql_select = $site->db->prepare("
 					SELECT objekt.pealkiri,obj_asset.objekt_id AS id ".$select_add."
-					FROM objekt 
+					FROM objekt
 					LEFT JOIN objekt_objekt on objekt.objekt_id=objekt_objekt.objekt_id
 					LEFT JOIN obj_asset on objekt.objekt_id=obj_asset.objekt_id
-					WHERE objekt.tyyp_id=? AND obj_asset.profile_id=? AND objekt_objekt.parent_id<>? 
+					WHERE objekt.tyyp_id=? AND obj_asset.profile_id=? AND objekt_objekt.parent_id<>?
 					ORDER BY objekt.pealkiri ",
 					"20",
 					$source_profile_id,
@@ -551,10 +551,10 @@ function print_profile_fields() {
 			elseif($source_profile_table=='obj_artikkel') {
 				$sql_select = $site->db->prepare("
 					SELECT objekt.pealkiri,obj_artikkel.objekt_id AS id ".$select_add."
-					FROM objekt 
+					FROM objekt
 					LEFT JOIN objekt_objekt on objekt.objekt_id=objekt_objekt.objekt_id
 					LEFT JOIN obj_artikkel on objekt.objekt_id=obj_artikkel.objekt_id
-					WHERE objekt.tyyp_id=? AND obj_artikkel.profile_id=? AND objekt_objekt.parent_id<>? 
+					WHERE objekt.tyyp_id=? AND obj_artikkel.profile_id=? AND objekt_objekt.parent_id<>?
 					ORDER BY objekt.pealkiri ",
 					"2",
 					$source_profile_id,
@@ -564,10 +564,10 @@ function print_profile_fields() {
 			#print $sql_select;
 			$sth_select = new SQL ($sql_select);
 			######## 1. add record to array
-			$tmp_title = ''; 
-			while($tmp = $sth_select->fetch() ) {		
+			$tmp_title = '';
+			while($tmp = $sth_select->fetch() ) {
 				# if asset titles are equal, then remember these titles
-				if($tmp_title == $tmp['pealkiri'] ) { 
+				if($tmp_title == $tmp['pealkiri'] ) {
 					$rememb_titles[] = $tmp['pealkiri'];
 				}
 				$sel_list[] = $tmp;
@@ -575,19 +575,19 @@ function print_profile_fields() {
 			} # while asset list
 			#printr($rememb_titles);
 
-			######### 2. rare case (for compability with version 3): if asset titles are equal, then show additional title after / symbol 
+			######### 2. rare case (for compability with version 3): if asset titles are equal, then show additional title after / symbol
 			# ( info is taken from the field obj_asset.varchar_1)
 
 			for($i=0; $i<sizeof($sel_list);$i++) {
 
-				if(is_array($rememb_titles) && in_array( $sel_list[$i]['pealkiri'], $rememb_titles) ) { 
+				if(is_array($rememb_titles) && in_array( $sel_list[$i]['pealkiri'], $rememb_titles) ) {
 					# get additional asset name:
 					$sql_select2 = $site->db->prepare("SELECT objekt.pealkiri FROM objekt 				LEFT JOIN objekt_objekt on objekt.objekt_id=objekt_objekt.objekt_id					LEFT JOIN obj_asset on objekt.objekt_id=obj_asset.objekt_id	WHERE objekt.keel=? AND objekt.tyyp_id=? AND objekt_objekt.parent_id<>? AND objekt.objekt_id=?	ORDER BY objekt_objekt.sorteering DESC ", $site->keel,	"20",	$site->alias("trash"),	$sel_list[$i]['pealkiri2'] );
 					$sth_select2 = new SQL ($sql_select2);
 					$tmp_pealkiri2 = $sth_select2->fetchsingle();
 					if($tmp_pealkiri2){
 						$sel_list[$i]['pealkiri'] .= ' / '. $tmp_pealkiri2;
-					}				
+					}
 				} # rare case: if titles are equal
 			} # 2. if asset titles are equal
 
@@ -625,14 +625,14 @@ function print_profile_fields() {
 
 	####### FIELD #######
 	$row_html .= '<td width="100%">';
-	
+
 		$field_html = '';
-		#### 1) kui v???li pole read-only, siis n???ita input elementi: 
+		#### 1) kui v???li pole read-only, siis n???ita input elementi:
 		if( !$value['is_readonly'] ) {
-			#### vali vastavalt t??????bile ???ige html v???ljastuskuju: ##### 
+			#### vali vastavalt t??????bile ???ige html v???ljastuskuju: #####
 			########### TEXTAREA ###########
 
-			if($value['type'] == "TEXTAREA") { 
+			if($value['type'] == "TEXTAREA") {
 
 				# replace line breaks
 				$fieldvalue = str_replace("<br />", "\n",$fieldvalue);
@@ -640,27 +640,27 @@ function print_profile_fields() {
 
 				/* bug #2230 */
 				$field_html = '<textarea name="'. $fieldname .'" id="'.  $field  .'" rows="10" style="width:100%">'.  stripslashes($fieldvalue)  .'</textarea>';
-			########### SELECT ########### 
-			} elseif($value['type'] == "SELECT") { 
+			########### SELECT ###########
+			} elseif($value['type'] == "SELECT") {
 				$field_html = '<select name="'.  $fieldname  .'" id="'.  $field  .'" style="width:100%">
 				<option value="" '. ($field_values[$field]?"":"selected") .'></option>';
-				foreach($sel_list as $sel_item) {  
+				foreach($sel_list as $sel_item) {
 					$field_html .= '<option value="'.  $sel_item['id']  .'" '.  ($fieldvalue == $sel_item['id'] || (($site->fdat['op']=='new' || $load_defaults) && $value['default_value'] == $sel_item['id'])?"selected":"")  .'>'.  htmlspecialchars(stripslashes($sel_item['pealkiri']))  .'</option>';
-				} 
+				}
 				$field_html .= '</select>';
 
 			########### MULTIPLE SELECT ###########
-			} elseif($value['type'] == "MULTIPLE SELECT") { 
-			
+			} elseif($value['type'] == "MULTIPLE SELECT") {
+
 				$field_html = '<select name="'.  $fieldname  .'[]" id="'.  $field  .'" multiple style="WIDTH: 99%; height: 70px" size=7>';
-				foreach($sel_list as $sel_item) { 
+				foreach($sel_list as $sel_item) {
 					$field_html .= '<option value="'.  $sel_item['id']  .'" '. ( in_array($sel_item['id'], split(",",$fieldvalue))?"selected":"")  .'>'.  htmlspecialchars(stripslashes($sel_item['pealkiri']))  .'</option>';
-				} 
+				}
 				$field_html .= '</select>';
 			########### BROWSE ###########
 			} elseif($value['type'] == "BROWSE") {
 
-				##### DISABLE invalid data sources by disabling browse button: 
+				##### DISABLE invalid data sources by disabling browse button:
 				# right now allow BROWSE only for system table "users" and "groups",
 				# because similar file to "admin/select_group.php" is always needed to open browse popup
 				if (! ($source_profile_table=='users' || $source_profile_table=='groups') ) { $disabled=' disabled'; }
@@ -677,7 +677,7 @@ function print_profile_fields() {
 					list($sel_type,$sel_id) = split(":",$field_values[$field]);
 					if($sel_type == 'group_id') {
 						$group = new Group(array(group_id => $sel_id));
-						$show_value = $group->name;				
+						$show_value = $group->name;
 					} # if group ID
 					elseif($sel_type == 'user_id') {
 						$user = new User(array(user_id => $sel_id));
@@ -685,58 +685,58 @@ function print_profile_fields() {
 					} # if user ID
 				}
 				####### / show value : user readable value
-				
+
 
 				$js = "javascript:void(openpopup('".$site->CONF['wwwroot'].$site->CONF['adm_path']."/select_group.php?select_one=1&paste2box=".$fieldname."&pastename2box=tmptmp_".$fieldname."','selectgroup','500','500'))";
-				
+
 			 $field_html = '<input type="text" name="tmptmp_'.  $fieldname  .'" id="tmptmp_'.  $fieldname  .'" value="'.  $show_value  .'" class="scms_flex_input" style="width:80%" onchange="javascript:if(this.value==\'\'){document.getElementById(\''. $fieldname .'\').value=\'\';}"><input type="hidden" name="'.  $fieldname  .'" id="'.  $fieldname  .'" value="'.  $field_values[$field]  .'">&nbsp;<INPUT TYPE="button" value="..." onclick="'. $js .'" '. $disabled .'>';
-			
-			########### RADIO ########### 
-			} elseif($value['type'] == "RADIO") { 
+
+			########### RADIO ###########
+			} elseif($value['type'] == "RADIO") {
 			$field_html = '<table border="0" cellspacing="0" cellpadding="0">';
-			foreach($sel_list as $sel_item) {  
-				$z++; 
-              $field_html .= '<tr> 
-                <td style="padding:0px"> 
+			foreach($sel_list as $sel_item) {
+				$z++;
+              $field_html .= '<tr>
+                <td style="padding:0px">
 				<input id="'.  $fieldname.$z  .'" type=radio name="'.  $fieldname  .'" value="'.  $sel_item['id']  .'" '. ( (in_array($sel_item['id'], split(",",$fieldvalue))  || (($site->fdat['op']=='new' || $load_defaults) && $value['default_value'] == $sel_item['id']) ) ?"checked":"" )  .'>
 				</td>
                 <td style="padding:0px"><label for="'. $fieldname.$z .'">'.  htmlspecialchars(stripslashes($sel_item['pealkiri']))  . '</label></td>
 			  </tr>';
-			}  
+			}
 			$field_html .= '</table>';
-			
-			########### CHECKBOX ########### 
-			} elseif($value['type'] == "CHECKBOX") {  
+
+			########### CHECKBOX ###########
+			} elseif($value['type'] == "CHECKBOX") {
             $field_html = '<table border="0" cellspacing="0" cellpadding="0">';
-			foreach($sel_list as $sel_item) { 
-				$z++;   		
-				########### undocumented feature: field with value "[separator]" is seprating line 
-				if($sel_item['pealkiri'] == '[separator]') {  
+			foreach($sel_list as $sel_item) {
+				$z++;
+				########### undocumented feature: field with value "[separator]" is seprating line
+				if($sel_item['pealkiri'] == '[separator]') {
 					$field_html .= '<tr><td colspan=2 style="padding:0px"><hr "size=1px"></td></tr>';
-				} 
+				}
 				## usual stuff
 				else {
-	              $field_html .= '<tr> 
+	              $field_html .= '<tr>
                 <td style="padding:0px"><input id="'.  $fieldname.$z  .'" type=checkbox name="'.  $fieldname  .'[]" value="'.  $sel_item['id']  .'" '. ( (in_array($sel_item['id'], split(",",$fieldvalue))  || (($site->fdat['op']=='new' || $load_defaults) && $value['default_value'] == $sel_item['id']) )?"checked":"" )  .'>
 					</td>
 		            <td style="padding:0px"><label for="'. $fieldname.$z  .'">'.  htmlspecialchars(stripslashes($sel_item['pealkiri']))  .'</label></td>
 			  </tr>';
 				}
-			} 
+			}
 			$field_html .= '</table>';
 			########### BOOLEAN ###########
-			} elseif($value['type'] == "BOOLEAN") { 
+			} elseif($value['type'] == "BOOLEAN") {
             $field_html = '<table border="0" cellspacing="0" cellpadding="0">
-              <tr> 
-                <td style="padding:0px"> 
+              <tr>
+                <td style="padding:0px">
 				<input type=checkbox id="tmptmp_'.  $fieldname  .'" name="tmptmp_'.  $fieldname  .'" value="1" '.  ($fieldvalue || (($site->fdat['op']=='new' || $load_defaults) && $value['default_value'])  ?"checked":"") .' onclick="if(this.checked){document.getElementById(\''. $fieldname .'\').value=\'1\';}else {document.getElementById(\''. $fieldname .'\').value=\'0\';}">
 				<input type=hidden id="'.  $fieldname  .'" name="'.  $fieldname  .'" value="'.  ($fieldvalue ||  (($site->fdat['op']=='new' || $load_defaults) && $value['default_value'])?"1":"0") .'">
 				</td>
                 <td style="padding:0px"><label for="tmptmp_'. $fieldname .'">'. $site->sys_sona(array(sona => "yes", tyyp=>"editor")) .'</label></td>
 			  </tr>
 			</table>';
-			########### FILE ########### 
-			} elseif($value['type'] == "FILE") { 
+			########### FILE ###########
+			} elseif($value['type'] == "FILE") {
 			// setup file insert
 			$_SESSION['scms_filemanager_settings']['scms_profile_file_'.$fieldname] = array(
 				'select_mode' => 1, // 1 - select single file
@@ -744,11 +744,11 @@ function print_profile_fields() {
 				'action_trigger' => $site->sys_sona(array('sona' => 'fm_insert_file_into_profile_field', 'tyyp' => 'editor')),
 				'callback' => 'window.opener.profile_file_callback_'.$fieldname,
 			);
-			
+
 			$field_html = '<script type="text/javascript">var filemanager; function profile_file_callback_'.$fieldname.'(data) { document.getElementById("'.$fieldname.'").value = ".." + data.files[0].folder + "/" + data.files[0].filename; filemanager.window.close();}</script>
 			<table border="0" cellspacing="0" cellpadding="0" width="100%">
-              <tr> 
-                <td style="padding:0px" width="90%"> 
+              <tr>
+                <td style="padding:0px" width="90%">
 					<input type="text" id="'.  $fieldname  .'" name="'.  $fieldname  .'" value="'.  $fieldvalue  .'" class="scms_flex_input" style="'. ($fields_width ? "width:".$fields_width:"")  .'">
 				</td>
 				<td style="padding:0px">
@@ -757,26 +757,26 @@ function print_profile_fields() {
 			  </tr>
 			</table>';
 
-			########### DATE ########### 
-			} elseif($value['type'] == "DATE") { 
+			########### DATE ###########
+			} elseif($value['type'] == "DATE") {
 				$date = $fieldvalue;
 				### format date but only if there's no error and the date is not already formatted
 				$date = $date && $date != '0000-00-00' ? ( !$form_error[$field] && !strpos($date, '.') ? $site->db->MySQL_ee($date) : $date) : $date = "";
-			
+
 			$field_html = '<table border="0" cellspacing="0" cellpadding="0">
               <tr>';
-				######### date box  
-                $field_html .= '<td style="padding:0px"> 
-					<input type="text" id="'. $fieldname .'" name="'. $fieldname .'" value="'.  $date  .'" class="scms_flex_input" style="width:80px; text-align: right;"> 
+				######### date box
+                $field_html .= '<td style="padding:0px">
+					<input type="text" id="'. $fieldname .'" name="'. $fieldname .'" value="'.  $date  .'" class="scms_flex_input" style="width:80px; text-align: right;">
 				</td>
                 <td style="padding:0px">&nbsp;</td>';
-				######### calendar  
+				######### calendar
                 $field_html .= '<td style="padding:0px"><a href="#"><img src="'. $site->CONF['wwwroot'].$site->CONF['styles_path'] .'/gfx/calendar/cal.gif" width="16" height="15" hspace="4" border="0" alt="Calendar" onclick="init_datepicker(\''. $fieldname.'\')"></a></td>
               </tr>
             </table>';
 
-			########### DATETIME ########### 
-			} elseif($value['type'] == "DATETIME") { 	
+			########### DATETIME ###########
+			} elseif($value['type'] == "DATETIME") {
 				### format date but only if there's no error and the date is not already formatted
 				$datetime = $fieldvalue;
 				$datetime = $datetime && $datetime != '0000-00-00 00:00:00' ? ( !$form_error[$field] && !strpos($datetime, '.') ? $site->db->MySQL_ee_long($datetime) : $datetime) : "";
@@ -798,54 +798,54 @@ function print_profile_fields() {
 				######### generate result refreshing js
 				$refresh_result = 'document.getElementById(\''. $fieldname .'\').value=document.getElementById(\'tmp_datedate'. $fieldname .'\').value+ \' \'+document.getElementById(\'tmp_time'. $fieldname .'\').value';
 
-				######### date box  
-                $field_html .= '<td style="padding:0px"> 
-					<input type="text" id="tmp_datedate'. $fieldname .'" name="tmp_datedate'. $fieldname .'" value="'.  $date  .'" class="scms_flex_input" style="width:80px; text-align: right;" onkeyup="'.$refresh_result.'" onfocus="'.$refresh_result.'" onblur="'.$refresh_result.'"> 
+				######### date box
+                $field_html .= '<td style="padding:0px">
+					<input type="text" id="tmp_datedate'. $fieldname .'" name="tmp_datedate'. $fieldname .'" value="'.  $date  .'" class="scms_flex_input" style="width:80px; text-align: right;" onkeyup="'.$refresh_result.'" onfocus="'.$refresh_result.'" onblur="'.$refresh_result.'">
 				</td>
                 <td style="padding:0px">&nbsp;</td>';
-				######### time box  
-                $field_html .= '<td style="padding:0px"> 
+				######### time box
+                $field_html .= '<td style="padding:0px">
                   <input type="text" id="tmp_time'. $fieldname .'" name="tmp_time'. $fieldname .'"  class="scms_flex_input" style="width:40px; text-align: right;" value="'.  $time .'" onkeyup="'.$refresh_result.'" onblur="'.$refresh_result.'">';
-				######### hidden field with result value  
+				######### hidden field with result value
 				$field_html .= ' <input type="hidden" id="'.  $fieldname  .'" name="'.  $fieldname  .'" value="'.  $datetime  .'" >
                 </td>';
-				######### calendar  
+				######### calendar
                 $field_html .= '<td style="padding:0px"><a href="#" onblur="'.$refresh_result.'" onclick="init_datepicker(\'tmp_datedate'. $fieldname.'\')"><img src="'. $site->CONF['wwwroot'].$site->CONF['styles_path'] .'/gfx/calendar/cal.gif" width="16" height="15" hspace="4" border="0" alt="Calendar"></a></td>
               </tr>
             </table>';
 
-			########### INTEGER/FLOAT => TEXT (short) ########### 
-			} elseif($value['db_type'] == "integer" || $value['db_type'] == "float") {  
+			########### INTEGER/FLOAT => TEXT (short) ###########
+			} elseif($value['db_type'] == "integer" || $value['db_type'] == "float") {
 				$field_html = '<input type="text" name="'.  $fieldname  .'" id="'.  $fieldname  .'" value="'.  htmlspecialchars(stripslashes($fieldvalue))  .'" class="scms_flex_input" style="width:80px; text-align: right;">';
 
-			########### addition type PASSWORD ########### 
-			} elseif($value['type'] == "password" || $value['name']=='password') {  
+			########### addition type PASSWORD ###########
+			} elseif($value['type'] == "password" || $value['name']=='password') {
 				$field_html = '<input type="password" name="'.  $fieldname  .'" id="'.  $fieldname  .'" value="" class="scms_flex_input" style="'. ($fields_width ? "width:".$fields_width:"")  .'">';
 
-			########### else => TEXT (long) ########### 
-			} else { 
+			########### else => TEXT (long) ###########
+			} else {
 				$field_html = '<input type="text" name="'.  $fieldname  .'" id="'.  $fieldname  .'" value="'.  htmlspecialchars(stripslashes($fieldvalue))  .'" class="scms_flex_input" style="'. ($fields_width ? "width:".$fields_width:"")  .'">';
-			}  
+			}
 		######## error message ######
 		$field_html .= $form_error[$field]?'<br><font color=red><b>'.$form_error[$field].'</b></font>':'';
 
-		}	
-		#### 2) kui v???li on read-only, siis n???ita ainult v???lja v??????rtust: 
+		}
+		#### 2) kui v???li on read-only, siis n???ita ainult v???lja v??????rtust:
 		else {
 			$formatted_values = format_profile_values(array(
 				"profile_data" => $args['profile_fields'],
 				"data" => $args['field_values'],
 			));
 			$field_html = $formatted_values[$value['name']];
-			## show hidden field with correct value 
+			## show hidden field with correct value
 
-			if($value['type'] == "DATE") { 
+			if($value['type'] == "DATE") {
 				$fieldvalue = $fieldvalue ? $site->db->MySQL_ee($fieldvalue) : "";
 			}
-			elseif($value['type'] == "DATETIME") { 	
+			elseif($value['type'] == "DATETIME") {
 				$fieldvalue = $fieldvalue ? $site->db->MySQL_ee_long($fieldvalue) : "";
 			}
-#			elseif($value['type'] == "BOOLEAN") { 	
+#			elseif($value['type'] == "BOOLEAN") {
 #				$fieldvalue = ($fieldvalue == $site->sys_sona(array(sona => "yes", tyyp=>"editor")) ? 1 : 0);
 #			}
 			$field_html .= '<input type="hidden" name="'. $fieldname .'" value="'.htmlspecialchars(stripslashes($fieldvalue)). '">';
@@ -883,27 +883,27 @@ function print_profile_fields() {
 
 /**
 * format_profile_values
-* 
+*
 * returns profile fields array in right format:
 * changes selectlist ID-s to names, changes date formats, etc
 * It is used before printing out profile fields rows: name + value.
 *
 * Note: function "print_profile_fields()" is used for EDITING profile fields,
 * function "format_profile_values()" is used for just SHOWING profile fields.
-* 
+*
 * @package CMS
-* 
+*
 * @param pointer profile_data - pointer to array of profile fields
 * @param pointer data - array of object data
 *
 * Call example:
-*	$profile_data = unserialize($profile_def['data']); # field object_profiles.data	
+*	$profile_data = unserialize($profile_def['data']); # field object_profiles.data
 *	$data = $group->all;
 *	$formatted_values = format_profile_values(array(
 *		"profile_data" => &$profile_data,
 *		"data" => &$data,
 *	));
-* where 
+* where
 */
 function format_profile_values() {
 	global $site;
@@ -920,9 +920,9 @@ function format_profile_values() {
 	if(is_array($profile_fields)) {
 
 	########## 1. loop over fields and get fieldvalues for select-lists (beacuse only ID-s are saved in database)
-	foreach ($profile_fields as $field) { 
+	foreach ($profile_fields as $field) {
 		# if is select && if value is not empty
-		if($profile_data[$field]['source_object'] && $data[$field]){ 
+		if($profile_data[$field]['source_object'] && $data[$field]){
 			# value can be comma-separated list of ID-s, split it
 			$values = split(",",$data[$field]);
 			foreach($values as $value){
@@ -935,7 +935,7 @@ function format_profile_values() {
 		$selectlist = array_unique($selectlist);
 		####### get names of asset objects
 		$sql = $site->db->prepare("SELECT objekt.pealkiri,objekt.objekt_id	FROM objekt WHERE objekt.objekt_id IN(".join(",",$selectlist).")" );
-		$sth_names = new SQL ($sql);	
+		$sth_names = new SQL ($sql);
 
 		while($tmp_names = $sth_names->fetch()) {
 			$asset_names[$tmp_names['objekt_id']] = $tmp_names['pealkiri'];
@@ -945,9 +945,9 @@ function format_profile_values() {
 
 	reset($profile_fields);
 
-	foreach ($profile_fields as $field) { 
+	foreach ($profile_fields as $field) {
 		# if SELECT LIST
-		if($profile_data[$field]['source_object']) { 
+		if($profile_data[$field]['source_object']) {
 			# change attribute from asset ID => asset NAME
 			# value can be comma-separated list of ID-s, split it
 			$ids = split(",",$data[$field]);
@@ -958,21 +958,21 @@ function format_profile_values() {
 			# pane komade taha t???hikud:
 			$new_value = str_replace(",",", ",$new_value);
 			$profile_values[$field] = $new_value;
-		} 
+		}
 		# if FILE
-		elseif($profile_data[$field]['type'] == 'FILE') { 
+		elseif($profile_data[$field]['type'] == 'FILE') {
 			$profile_values[$field] = $data[$field] ? '<a href="'.$data[$field].'" target=_blank>'.$data[$field].'</a>' : "";
 		}
-		# if DATE 
-		elseif($profile_data[$field]['type'] == 'DATE') { 
+		# if DATE
+		elseif($profile_data[$field]['type'] == 'DATE') {
 			$profile_values[$field] = $data[$field] && $data[$field]!='0000-00-00'? $site->db->MySQL_ee($data[$field]) : "";
 		}
 		# if DATETIME
-		elseif($profile_data[$field]['type'] == 'DATETIME') { 
+		elseif($profile_data[$field]['type'] == 'DATETIME') {
 			$profile_values[$field] = $data[$field] ? $site->db->MySQL_ee_long($data[$field]) : "";
 		}
-		# if BOOLEAN 
-		elseif($profile_data[$field]['type'] == 'BOOLEAN') { 
+		# if BOOLEAN
+		elseif($profile_data[$field]['type'] == 'BOOLEAN') {
 			$profile_values[$field] = $data[$field] ? $site->sys_sona(array(sona => "yes", tyyp=>"editor")) : $site->sys_sona(array(sona => "no", tyyp=>"editor"));
 		}
 		# usual TEXT value
@@ -989,13 +989,13 @@ function format_profile_values() {
 
 /**
 * save_systemword
-* 
+*
 * saves system word to database:
 * checks if word exist for given language, if not then inserts it, othwerwise updates translation.
-* 
-* 
+*
+*
 * @package CMS
-* 
+*
 * @param string sysword - unique systemword name itself (sys_sona)
 * @param string translation - translation for given language
 * @param int lang_id - language ID where to save systemword
@@ -1015,55 +1015,55 @@ function save_systemword() {
 	# erand: kui v???li on predefined, siis v???ib tema t???lge olla juba olemas teise t??????bi all kui parameetriga antud t??????p.
 	# seep???rast otsi predefined v???ljade puhul s???ss???na K???IGIST t??????pidest:
 	if($site->fdat['is_predefined']){ # predefined v???li
-		$sql = $site->db->prepare("SELECT COUNT(*) FROM sys_sonad WHERE sys_sona LIKE ? AND keel=? ", $sysword, $lang_id); 
+		$sql = $site->db->prepare("SELECT COUNT(*) FROM sys_sonad WHERE sys_sona LIKE ? AND keel=? ", $sysword, $lang_id);
 	}
 	else { # tavaline/custom v???li
-		$sql = $site->db->prepare("SELECT count(*) FROM sys_sonad WHERE sys_sona LIKE ? AND keel=? AND sst_id=?", $sysword, $lang_id, $sst_id); 
+		$sql = $site->db->prepare("SELECT count(*) FROM sys_sonad WHERE sys_sona LIKE ? AND keel=? AND sst_id=?", $sysword, $lang_id, $sst_id);
 	}
 	$sth_s = new SQL($sql);
 	$site->debug->msg($sth_s->debug->get_msgs());
 	$exists = $sth_s->fetchsingle();
 
 	######### 2. kui selle keele s???ss???na ei leidu, siis LISA
-	if (!$exists) {	
+	if (!$exists) {
 		# lisa ainult siis kui s???ss???na ja t???lge pole t???hi
 		if($sysword && $translation) {
 			# sys_sonad
-			$sql = $site->db->prepare("INSERT INTO sys_sonad (sys_sona, keel, sona, sst_id) values(?,?,?,?)", $sysword, $lang_id, $translation, $sst_id); 
+			$sql = $site->db->prepare("INSERT INTO sys_sonad (sys_sona, keel, sona, sst_id) values(?,?,?,?)", $sysword, $lang_id, $translation, $sst_id);
 			$sth_i = new SQL($sql);
 			$site->debug->msg($sth_i->debug->get_msgs());
-			
+
 			# sys_sonad_kirjeldusse lisa ainult siis kui s???ss???na ???hegi keele jaoks olemas ei ole
 			# kontrolli, kas ???le???ldse s???ss???na leidub
-			$sql = $site->db->prepare("SELECT count(*) FROM sys_sonad_kirjeldus WHERE sys_sona like ? and sst_id=?", $sysword, $sst_id); 
+			$sql = $site->db->prepare("SELECT count(*) FROM sys_sonad_kirjeldus WHERE sys_sona like ? and sst_id=?", $sysword, $sst_id);
 			$sth_s = new SQL($sql);
 			$site->debug->msg($sth_s->debug->get_msgs());
 			$sysword_exists = $sth_s->fetchsingle();
 			# kui ???ldse s???s???na ei leidu, siis lisa see:
-			if (!$sysword_exists) {	
-				$sql = $site->db->prepare("INSERT INTO sys_sonad_kirjeldus (sys_sona, sona, sst_id, last_update) values(?,?,?,".$site->db->unix2db_datetime(time()).")", $sysword,  $sysword, $sst_id); 
+			if (!$sysword_exists) {
+				$sql = $site->db->prepare("INSERT INTO sys_sonad_kirjeldus (sys_sona, sona, sst_id, last_update) values(?,?,?,".$site->db->unix2db_datetime(time()).")", $sysword,  $sysword, $sst_id);
 				$sth_i = new SQL($sql);
 				$site->debug->msg($sth_i->debug->get_msgs());
 			} # s???ss???na ei leidinud ???ldse
 		} # kui s???ss???na ja t???lge olemas
-	} 
+	}
 	########### 3. kui leidub selle keele s???steemis???na, siis UUENDA:
 	else {
-		$sql = $site->db->prepare("UPDATE sys_sonad SET sona=? WHERE sys_sona=? AND keel=?", $translation, $sysword, $lang_id); 
+		$sql = $site->db->prepare("UPDATE sys_sonad SET sona=? WHERE sys_sona=? AND keel=?", $translation, $sysword, $lang_id);
 		$sth_i = new SQL($sql);
-		$site->debug->msg($sth_i->debug->get_msgs());		
+		$site->debug->msg($sth_i->debug->get_msgs());
 	}
 } # function
 
 
 /**
 * print_error_html
-* 
+*
 * Prints error page (entire page), erro message with red color.
 * Usually used in popups.
-* 
+*
 * @package CMS
-* 
+*
 *	print_error_html(array(
 *		"message" => $site->sys_sona(array(sona => "access denied", tyyp=>"editor"))
 *	));
@@ -1087,44 +1087,44 @@ function print_error_html(){
 <body class="popup_body" >
 
 <table border="0" cellpadding="0" cellspacing="0" style="width:100%; height:100%">
-  <tr> 
+  <tr>
 	<td valign="top" width="100%" class="scms_confirm_alert_cell" height="100%">
 
 <font color=red><?=$message?></font>
 
 	</td>
   </tr>
-  <tr align="right"> 
-    <td valign="top" colspan=2 > 
-			<input type="button" value="<?=$site->sys_sona(array(sona => "close", tyyp=>"editor")) ?>" onclick="javascript:<?=$close_js?>window.close();"> 
+  <tr align="right">
+    <td valign="top" colspan=2 >
+			<input type="button" value="<?=$site->sys_sona(array(sona => "close", tyyp=>"editor")) ?>" onclick="javascript:<?=$close_js?>window.close();">
     </td>
   </tr>
 </table>
 
 </body>
 </html>
-	<?	
+	<?
 }
 # / FUNCTION print_error_html
 ################################
 
 /**
 * check_profile_values
-* 
+*
 * checks entered profile values after save-form submitting.
 * Returns SQL-ready array of fields (can feed to SQL).
 * Errors are saved to $site->fdat['form_error']
 *
 * It is used before executing UPDATE/INSERT SQL
 *
-* 
+*
 * @package CMS
-* 
+*
 * @param pointer profile_def - pointer to profile definition (record)
 * @param string skip_fields - comma separated list of fields not for checking
 *
 * Call example:
-* 	$profile_def = $site->get_profile(array("id"=>$site->fdat['profile_id'])); 
+* 	$profile_def = $site->get_profile(array("id"=>$site->fdat['profile_id']));
 *
 *	$sql_field_values = check_profile_values(array(
 *		"profile_def" => &$profile_def,
@@ -1164,7 +1164,7 @@ function check_profile_values() {
 		{
 			$save_fields = array_unique($profile_fields);
 		}
-		else 
+		else
 		{
 			$save_fields = array_unique(array_merge($table_fields,$profile_fields));
 		}
@@ -1172,20 +1172,20 @@ function check_profile_values() {
 		# remove skipped field from array:
 		$skip_fields_arr = array();
 		if ($skip_fields) $skip_fields_arr = explode(',', $skip_fields);
-		
+
 		if($skip_non_active_fields){
 			foreach($profile_data as $skip_field){
-				if(!$skip_field['is_active']) $skip_fields_arr[] = $skip_field['name']; 
+				if(!$skip_field['is_active']) $skip_fields_arr[] = $skip_field['name'];
 			}
 		} # is array
-		
+
 		if(is_array($skip_fields_arr)){
 			foreach($skip_fields_arr as $skip_field){
 				$id_key = array_search(trim($skip_field), $save_fields);
-				if($id_key !== false) unset($save_fields[$id_key]); 
+				if($id_key !== false) unset($save_fields[$id_key]);
 			}
 		} # is array
-		
+
 		# remove non active field from array:
 
 		############ GET FORM DATA and put it into array
@@ -1195,7 +1195,7 @@ function check_profile_values() {
 		foreach ($save_fields as $key=>$field) {
 			# btw, if profile field is not found in form values (should exist always!) => the value is set to NULL
 			$sql_field_values[$field] = $site->fdat[$field.$field_suffix];
-		} # loop over table fields 
+		} # loop over table fields
 
 		# + REQUIRED: CHECK FOR REQUIRED FIELDS
 		# + CHECK FORMAT
@@ -1229,7 +1229,7 @@ function check_profile_values() {
 				}
 				else
 				{
-					$sql_field_values[$field] = $site->db->ee_MySQL_long($sql_field_values[$field]); 			
+					$sql_field_values[$field] = $site->db->ee_MySQL_long($sql_field_values[$field]);
 				}
 			}
 			####### DATE
@@ -1238,7 +1238,7 @@ function check_profile_values() {
 				{
 					$form_error[$field]='wrong format!';
 				}
-				else 
+				else
 				{
 					$sql_field_values[$field] = $site->db->ee_MySQL($sql_field_values[$field]);
 				}
@@ -1253,12 +1253,12 @@ function check_profile_values() {
 				$sql_field_values[$field] = str_replace("\r\n", "<br />",$sql_field_values[$field]);
 				$sql_field_values[$field] = str_replace("\n", "<br />",$sql_field_values[$field]);
 			}
-			
+
 			####### QUOTE:
 			$sql_field_values[$field] = $site->db->quote($sql_field_values[$field]);
 
 		} # loop over fields
-		
+
 		#### Loop again for custom validation
 		foreach ($sql_field_values as $field=>$value)
 		{
@@ -1271,7 +1271,7 @@ function check_profile_values() {
 					if(is_array($args['custom_validation'][$field]['args'])) foreach ($args['custom_validation'][$field]['args'] as $profile_field => $arg)
 					{
 						if($arg == 'USE_PROFILE_FIELD')
-							if(in_array($profile_field, array_keys($sql_field_values))) 
+							if(in_array($profile_field, array_keys($sql_field_values)))
 							{
 								$args['custom_validation'][$field]['args'][$profile_field] = $sql_field_values[$profile_field];
 							}
@@ -1285,7 +1285,7 @@ function check_profile_values() {
 				}
 			}
 		}
-		
+
 	} # is array
 
 	$site->fdat['form_error'] = $form_error; # save form errors to global var
@@ -1322,7 +1322,7 @@ function print_template_selectbox($selected_value,$templ_type) {
 
 	##########################
 	# general SQL:
-	# show all templates (both visible and hidden) that 
+	# show all templates (both visible and hidden) that
 	# are allowewd by modules or not depending on any module at all
 
 	$gen_sql = $site->db->prepare("SELECT templ_tyyp.ttyyp_id,templ_tyyp.nimi,templ_tyyp.templ_fail, templ_tyyp.extension
@@ -1343,13 +1343,13 @@ function print_template_selectbox($selected_value,$templ_type) {
 	################################
 	# Template selectbox
 
-	$ttyyp="";	# init ttyyp 
+	$ttyyp="";	# init ttyyp
 
 	if($templ_type == 'object')
-		print "<option value=\"\"></option>"; 
+		print "<option value=\"\"></option>";
 
 	############################
-	# group USER DEFINED: 
+	# group USER DEFINED:
 	# SAPI templates (ttyyp_id >= 1000), not predefined (ttyyp_id < 2000), not extension template
 
 	$sql = $gen_sql . ($templ_type=='page'? $sql_page_templ : $sql_content_templ) . $sql_no_extension. $sql_user_defined;
@@ -1370,7 +1370,7 @@ function print_template_selectbox($selected_value,$templ_type) {
 	} # if found templates
 
 	############################
-	# group EXTENSIONS: 
+	# group EXTENSIONS:
 	# SAPI extension CONTENT templates
 
 	$sql = $gen_sql . ($templ_type=='page'? $sql_page_templ : $sql_content_templ) . $sql_extension;
@@ -1380,7 +1380,7 @@ function print_template_selectbox($selected_value,$templ_type) {
 	$ttyyp_e = print_extension_templates($sql,$selected_value);
 
 	############################
-	# group SAURUS 3 (was PREDEFINED): 
+	# group SAURUS 3 (was PREDEFINED):
 	# BUILT-IN PHP-templates (ttyyp_id < 1000) + predefined SAPI templates (ttyyp_id >= 2000)
 
 	$sql = $gen_sql . ($templ_type=='page'? $sql_page_templ : $sql_content_templ) . $sql_no_extension . $sql_saurus3;
@@ -1431,24 +1431,24 @@ function change_default_template($language_id, $template_id, $type, $object_type
 	$template_id = (int)$template_id;
 	$language_id = (int)$language_id;
 	$object_type_id = (int)$object_type_id;
-	
+
 	switch ($type)
 	{
 		case 'page':
 			$sql = 'update keel set page_ttyyp_id = '.$template_id.' where keel_id = '.$language_id;
 			new SQL($sql);
 		break;
-		
+
 		case 'content':
 			$sql = 'update keel set ttyyp_id = '.$template_id.' where keel_id = '.$language_id;
 			new SQL($sql);
 		break;
-		
+
 		case 'object':
 			$sql = 'update tyyp set ttyyp_id = '.$template_id.' where tyyp_id = '.$object_type_id;
 			new SQL($sql);
 		break;
-		
+
 		default:
 			// unknown template type
 		break;
@@ -1458,22 +1458,22 @@ function change_default_template($language_id, $template_id, $type, $object_type
 /**
  * changes the op template
  *
- * @param string $op 
+ * @param string $op
  * @param integer $template_id
  */
 function change_op_template($op, $template_id)
 {
 	global $site;
-	
+
 	$template_id = (int)$template_id;
-	
+
 	if($op && $template_id)
 	{
 		$op = translate_ee($op);
-		
+
 		$sql = $site->db->prepare("update templ_tyyp set op = NULL where op = ?", $op);
 		new SQL($sql);
-		
+
 		$sql = $site->db->prepare("update templ_tyyp set op = ? where ttyyp_id = ?", $op, $template_id);
 		new SQL($sql);
 	}
@@ -1488,31 +1488,31 @@ function change_op_template($op, $template_id)
 function clear_template_cache ($templ_cache_path)
 {
 	$return = true;
-	
-	function deletedir($file) { 
-		chmod($file,0777); 
-		if (is_dir($file)) { 
-			$handle = opendir($file); 
-			//while($filename = readdir($handle)) { 
-			while (false !== ($file = readdir($handle))) { 
-				if ($filename != "." && $filename != "..") { 
-					deletedir($file."/".$filename); 
-				} 
+
+	function deletedir($file) {
+		chmod($file,0777);
+		if (is_dir($file)) {
+			$handle = opendir($file);
+			//while($filename = readdir($handle)) {
+			while (false !== ($file = readdir($handle))) {
+				if ($filename != "." && $filename != "..") {
+					deletedir($file."/".$filename);
+				}
 			} #while
-			closedir($handle); 
-			if (@rmdir($file)){return 1;}; 
-		} else { 
-			if(@unlink($file)) return 1; 
-		} 
-	} 
+			closedir($handle);
+			if (@rmdir($file)){return 1;};
+		} else {
+			if(@unlink($file)) return 1;
+		}
+	}
 
 	if ($DIR = @opendir($templ_cache_path)) {
 
 
 		############################
 		# ts�kkel �le failide
-		while (false !== ($file = readdir($DIR))) { 
-			if ($file != "." && $file != "..") { 
+		while (false !== ($file = readdir($DIR))) {
+			if ($file != "." && $file != "..") {
 				if (!@deletedir($templ_cache_path.$file)){
 					$err_catalogs[] = $templ_cache_path.$file;
 				};
@@ -1527,14 +1527,14 @@ function clear_template_cache ($templ_cache_path)
 			$error .=  "<br><br><b>have write permissions for the web server.</b><br></font>";
 			$return = false;
 		}
-		closedir($DIR); 
+		closedir($DIR);
 	}
 	# kui kataloogi ei saa avada, kirjutada logisse veateade
 	else {
 		print "<br><font color=red>Error! Can't open directory '".$templ_cache_path."'</font>";
 		$return = false;
 	}
-	
+
 	return $return;
 }
 
@@ -1555,7 +1555,7 @@ global $site;
 	$sth = new SQL($sql);
 
 	while ($adminpage = $sth->fetch()) {
-		
+
 		# 3. vaata kas admin-leht on userile lubatud
 		$perm = get_user_permission(array(
 			type => 'ADMIN',
@@ -1575,12 +1575,12 @@ global $site;
 #printr($alamlipikud);
 	# see on n��d k�igi vaatamiseks lubatud adminlehtede massiiv:
 	$alamlipikud_joined = join("','",$alamlipikud);
-	
+
 
 	############## Alamlipiku id jargi otsime pealipikud
 	 $sql = $site->db->prepare("SELECT A.id AS peaid, A.nimetus AS peanimetus, A.eng_nimetus AS eng_peanimetus, A.sorteering FROM admin_osa
 		LEFT JOIN admin_osa as A ON A.id = admin_osa.parent_id
-		WHERE ".(!$site->in_admin?"A.show_in_editor=1 AND ":"")." admin_osa.id IN ('$alamlipikud_joined') 
+		WHERE ".(!$site->in_admin?"A.show_in_editor=1 AND ":"")." admin_osa.id IN ('$alamlipikud_joined')
 		GROUP BY A.id, A.nimetus, A.eng_nimetus, A.sorteering ORDER BY A.sorteering DESC"
 	);
 
@@ -1599,9 +1599,9 @@ global $site;
 	}
 
 /*
-We now need to find out if there are duplicate menus (because different modules might share the same menus and they are both in use, which means there are double menus in the array. Easiest example is the E-Commerce module that requires the existance of E-Payment module. Both of them use the same menus, but E-Payment can also be as a standalone module, not requireing E-Commerce. 
+We now need to find out if there are duplicate menus (because different modules might share the same menus and they are both in use, which means there are double menus in the array. Easiest example is the E-Commerce module that requires the existance of E-Payment module. Both of them use the same menus, but E-Payment can also be as a standalone module, not requireing E-Commerce.
 
-We try to find out if the duplicate menus are basically the same thing just linked to a different module. If so, we just remove one of them. But if they are different things (say the name is the same, but the file it links to is different) we just add them under one main menu. 
+We try to find out if the duplicate menus are basically the same thing just linked to a different module. If so, we just remove one of them. But if they are different things (say the name is the same, but the file it links to is different) we just add them under one main menu.
 
 Peeter 26.08.2008
 
@@ -1609,12 +1609,12 @@ Peeter 26.08.2008
 
 $list = array();
 
-// Count the times main menu names are listed in the array. 
+// Count the times main menu names are listed in the array.
 foreach($admin_menu as $am){
 	$list[$am['name']]++;
 }
 
-//remove all the unique (occurs 1 time) names. 
+//remove all the unique (occurs 1 time) names.
 foreach($list as $k=>$v){
 	if($v < 2){
 		unset($list[$k]);
@@ -1622,7 +1622,7 @@ foreach($list as $k=>$v){
 }
 
 
-//if any menus are represented several times we need to check their submenus and merge them. 
+//if any menus are represented several times we need to check their submenus and merge them.
 if(sizeof($list)>0){
 
 	//we sort through each of the main menus and get their submenus into one array.
@@ -1655,7 +1655,7 @@ if(sizeof($list)>0){
 	}
 }
 
-		//Now that we have removed the duplicate main menus and sub-menus there is still a chance that there are duplicate submenus (For instance Extension menu may have several fields by the same name and path, so we basically run through the menu/submenu tree and remove duplicates. 
+		//Now that we have removed the duplicate main menus and sub-menus there is still a chance that there are duplicate submenus (For instance Extension menu may have several fields by the same name and path, so we basically run through the menu/submenu tree and remove duplicates.
 
 
 		foreach($admin_menu as $k=>$v){
@@ -1670,7 +1670,7 @@ if(sizeof($list)>0){
 
 
 
-//this function need an array to process and a list of field names (in array form) that need to be unique. 
+//this function need an array to process and a list of field names (in array form) that need to be unique.
 
 
 function remove_duplicates($array, $field)
@@ -1695,7 +1695,7 @@ function remove_duplicates($array, $field)
 			}
 		}
 
-		//the array has no match in the new array list so we add it to the list. 
+		//the array has no match in the new array list so we add it to the list.
 
 		if(!$matched){
 			$new_array[]=$array[$k];
@@ -1747,7 +1747,7 @@ global $site;
 					$submenu[sizeof($submenu)-1]['translated_name']=$site->sys_sona(array(sona => $alamlp['eng_nimetus'] , tyyp=>'admin', lang_id=>$_SESSION['keel_admin']['glossary_id']));
 					if($in_editor){
 
-						
+
 						if(eregi("^/",$submenu[sizeof($submenu)-1]['fail'])||eregi("^http:",$submenu[sizeof($submenu)-1]['fail'])||eregi("^https:",$submenu[sizeof($submenu)-1]['fail'])){
 
 						}elseif(eregi("'about.php'",$submenu[sizeof($submenu)-1]['fail'])){
@@ -1781,7 +1781,7 @@ global $site;
 
 /**
  * Creates a friendly URL/filename from a (UTF-8) string
- * 
+ *
  * @param string $string
  * @return string
  */
@@ -1894,14 +1894,14 @@ function create_alias_from_string($string, $preserve_dot_underscore = false)
 	// lower case
 	$string = strtolower($string);
 	}
-	
+
 	// filter out all non roman and numeric characters except "-", "_" and whitespace
 	if($preserve_dot_underscore){
 	$string = preg_replace('/[^a-zA-Z0-9\.\-\s_]+/', '', $string);
 	}else{
 	$string = preg_replace('/[^a-zA-Z0-9\-\s_]+/', '', $string);
 	}
-	
+
 	if(!$preserve_dot_underscore){
 	// replace whitespace with "-"
 	$string = preg_replace('/[\s]+/', '-', $string);
@@ -1909,16 +1909,16 @@ function create_alias_from_string($string, $preserve_dot_underscore = false)
 	// replace whitespace with "_"
 	$string = preg_replace('/[\s]+/', '_', $string);
 	}
-	
+
 	// replace multiple "-" with single "-"
 	$string = preg_replace('/\-+/', '-', $string);
-	
+
 	// remove first and last "-"
 	$string = preg_replace('/^\-/', '', $string);
 	$string = preg_replace('/\-$/', '', $string);
-	
+
 	if($string == '-') $string = '';
-		
+
 	return $string;
 }
 
@@ -1937,15 +1937,15 @@ function create_alias_from_string($string, $preserve_dot_underscore = false)
 function check_for_existing_alias($alias, $language_id)
 {
 	global $site;
-	
+
 	$sql = $site->db->prepare("select friendly_url from objekt where keel = ? and friendly_url = ? limit 1", $language_id, $alias);
 	$result = new SQL($sql);
-	
+
 	if($result->rows)
 	{
 		return true;
 	}
-	
+
 	return false;
 }
 
@@ -1959,7 +1959,7 @@ function check_for_existing_alias($alias, $language_id)
 function create_alias_for_object($utf8_string, $language_id)
 {
 	$supplement = 2;
-	
+
 	$alias = create_alias_from_string($utf8_string);
 
 	$blacklist=array(
@@ -1977,12 +1977,12 @@ function create_alias_for_object($utf8_string, $language_id)
 	if(in_array($alias,$blacklist)){
 		$alias.='-'.$supplement;
 	}
-	
+
 	if($alias !== '') while(check_for_existing_alias($alias, $language_id))
 	{
 		$alias = create_alias_from_string($utf8_string.'-'.$supplement);
 		$supplement++;
-		
+
 		// guard
 		if($supplement > 1000)
 		{
@@ -1990,7 +1990,7 @@ function create_alias_for_object($utf8_string, $language_id)
 			break;
 		}
 	}
-	
+
 	return $alias;
 }
 
@@ -2003,15 +2003,15 @@ function create_alias_for_object($utf8_string, $language_id)
 function get_subfolders($parent_id)
 {
 	global $site;
-	
+
 	$parent = new Objekt(array('objekt_id' => $parent_id, 'on_sisu' => 1));
-	
+
 	if($parent->objekt_id && $parent->all['tyyp_id'] == 22)
 	{
 		$parent_folders = explode('/', $parent->all['relative_path']);
-		
+
 		$site_abs_path = preg_replace('#/$#', '', $site->absolute_path);
-		
+
 		$folders = array(
 			$parent->objekt_id => array(
 				'objekt_id' => $parent->objekt_id,
@@ -2025,25 +2025,25 @@ function get_subfolders($parent_id)
 				'permissions' => $parent->permission,
 			),
 		);
-	
+
 		$list_sql = new AlamlistSQL(array(
 			'parent' => $parent_id,
 			'klass'	=> 'folder',
 			'order' => ' relative_path ',
 		));
-	
+
 		$list_sql->add_select("obj_folder.relative_path");
-	
-		$list_sql->add_from("LEFT JOIN obj_folder ON objekt.objekt_id=obj_folder.objekt_id");		
-	
+
+		$list_sql->add_from("LEFT JOIN obj_folder ON objekt.objekt_id=obj_folder.objekt_id");
+
 		$list = new Alamlist(array(
 			'alamlistSQL' => $list_sql,
 		));
-		
-		while ($folder = $list->next()) 
+
+		while ($folder = $list->next())
 		{
 			$parent_folders = explode('/', $folder->all['relative_path']);
-			
+
 			$folders[$folder->objekt_id] = array(
 				'objekt_id' => $folder->objekt_id,
 				'parent_id' => $folder->parent_id,
@@ -2057,46 +2057,46 @@ function get_subfolders($parent_id)
 				'permissions' => $folder->permission,
 			);
 		}
-		
+
 		$sql = 'select parent_id from obj_folder left join objekt_objekt on obj_folder.objekt_id = objekt_objekt.objekt_id where parent_id in ('.implode(',', array_keys($folders)).')';
 		$result = new SQL($sql);
-		
+
 		while($objekt_id = $result->fetchsingle())
 		{
 			$folders[$objekt_id]['has_children'] = 1;
 		}
-		
+
 		$sql = 'select parent_id, count(objekt_objekt.objekt_id) as file_count from objekt_objekt left join objekt on objekt_objekt.objekt_id = objekt.objekt_id where objekt_objekt.parent_id in ('.implode(',', array_keys($folders)).') and objekt.tyyp_id = 21 group by objekt_objekt.parent_id';
 		$result = new SQL($sql);
-		
+
 		while($row = $result->fetch('ASSOC'))
 		{
 			$folders[$row['parent_id']]['file_count'] = $row['file_count'];
 		}
-	
+
 		return $folders;
 	}
-	else 
+	else
 	{
 		return 'no_such_parent_folder';
 	}
-	
+
 }
 
 function get_folder_list($start = 'public')
 {
 	global $site;
-	
+
 	$folders = array();
-	
+
 	$sql = $site->db->prepare("select objekt_id, relative_path from obj_folder where relative_path like '/".$start."/%' order by relative_path");
 	$result = new SQL($sql);
-	
+
 	while($row = $result->fetch('ASSOC'))
 	{
 		$folders[$row['objekt_id']] = $row;
 	}
-	
+
 	return $folders;
 }
 
@@ -2110,14 +2110,14 @@ function get_folder_list($start = 'public')
 function create_folder($name, $parent_id)
 {
 	global $site;
-	
+
 	$safe_name = safe_filename2($name);
 	$parent_id = (int)$parent_id;
-	
+
 	if($safe_name && $parent_id)
 	{
 		$parent = new Objekt(array('objekt_id' => $parent_id, 'on_sisu' => 1));
-		
+
 		if($parent->objekt_id == $parent_id && $parent->all['tyyp_id'] == 22)
 		{
 			// check for Create permission
@@ -2129,13 +2129,13 @@ function create_folder($name, $parent_id)
 					'component' => 'Files',
 					'message' => "Attempt to create folder under '".$parent->all['relative_path']."' (ID = ".$parent->objekt_id.") with no create permission.",
 				));
-				
+
 				return 'no_permissions_to_create_folder';
 			}
-			
+
 			$folder_name = $parent->all['relative_path'].'/'.$safe_name;
 			$folder_path = preg_replace('#/$#', '', $site->absolute_path).$folder_name;
-			
+
 			// check if folder already exists
 			$sql = $site->db->prepare("select objekt_id from obj_folder where relative_path = ?", $folder_name);
 			$result = new SQL($sql);
@@ -2143,10 +2143,10 @@ function create_folder($name, $parent_id)
 			{
 				return 'folder_already_exists';
 			}
-			else 
+			else
 			{
 				$current_path = preg_replace('#/$#', '', $site->absolute_path).$parent->all['relative_path'].'/'.$name;
-				
+
 				// try to rename to safe name
 				if(file_exists($current_path) && $name != $safe_name)
 				{
@@ -2154,7 +2154,7 @@ function create_folder($name, $parent_id)
 					{
 						$folder_created = true;
 					}
-					else 
+					else
 					{
 						new Log(array(
 							'action' => 'create',
@@ -2162,11 +2162,11 @@ function create_folder($name, $parent_id)
 							'type' => 'ERROR',
 							'message' => "Could not rename '".$parent->all['relative_path'].'/'.$name."' to '".$folder_name."', file system error.",
 						));
-						
+
 						return 'could_not_rename_folder';
 					}
 				}
-				
+
 				if(!file_exists($folder_path))
 				{
 					$mask = umask(0);
@@ -2177,7 +2177,7 @@ function create_folder($name, $parent_id)
 				{
 					$folder_created = true;
 				}
-				
+
 				if($folder_created)
 				{
 					// objekt
@@ -2185,19 +2185,19 @@ function create_folder($name, $parent_id)
 																	values (?, 22, '1', 1, ?, now(), now(), ?, ?)", $safe_name, $safe_name, $site->user->user_id, $site->user->name);
 					$result = new SQL($sql);
 					$folder_id = $result->insert_id;
-					
+
 					$sql = 'select max(sorteering) from objekt_objekt';
 					$result = new SQL($sql);
 					$sorting = $result->fetchsingle();
-					
+
 					// objekt_objekt
 					$sql = 'insert into objekt_objekt (objekt_id, parent_id, sorteering) values ('.$folder_id.', '.$parent_id.', '.$sorting.')';
 					new SQL($sql);
-					
+
 					// obj_folder
 					$sql = "insert into obj_folder (objekt_id, relative_path) values (".$folder_id.", '".$folder_name."')";
 					new SQL($sql);
-					
+
 					// copy parent permissions
 					$sql = $site->db->prepare("SELECT * FROM permissions WHERE type=? AND source_id=?",
 						'OBJ',
@@ -2206,9 +2206,9 @@ function create_folder($name, $parent_id)
 					$sth = new SQL ($sql);
 					while($perm = $sth->fetch())
 					{
-							$sql2 = $site->db->prepare("INSERT INTO permissions (type,source_id,role_id,group_id,user_id,C,R,U,P,D) VALUES (?,?,?,?,?,?,?,?,?,?)", 	
-								'OBJ', 
-								$folder_id, 
+							$sql2 = $site->db->prepare("INSERT INTO permissions (type,source_id,role_id,group_id,user_id,C,R,U,P,D) VALUES (?,?,?,?,?,?,?,?,?,?)",
+								'OBJ',
+								$folder_id,
 								$perm['role_id'],
 								$perm['group_id'],
 								$perm['user_id'],
@@ -2220,17 +2220,17 @@ function create_folder($name, $parent_id)
 							);
 							$sth2 = new SQL($sql2);
 					}
-					
+
 					new Log(array(
 						'action' => 'create',
 						'component' => 'Files',
 						'objekt_id' => $folder_id,
 						'message' => "Folder '".$folder_name."' (ID = ".$folder_id.") created.",
 					));
-					
+
 					return (int)$folder_id;
 				}
-				else 
+				else
 				{
 					new Log(array(
 						'action' => 'create',
@@ -2238,18 +2238,18 @@ function create_folder($name, $parent_id)
 						'type' => 'ERROR',
 						'message' => "Could not create folder: '".$folder_name."', file system error.",
 					));
-					
+
 					return 'could_not_create_folder';
 				}
 			}
 		}
-		else 
+		else
 		{
 			return 'no_such_parent_folder';
 		}
-		
+
 	}
-	else 
+	else
 	{
 		return 'parameters_missing';
 	}
@@ -2264,11 +2264,11 @@ function create_folder($name, $parent_id)
 function delete_folder($folder_id)
 {
 	global $site;
-	
+
 	$folder_id = (int)$folder_id;
-	
+
 	$objekt = new Objekt(array('objekt_id' => $folder_id, 'on_sisu' => 1));
-	
+
 	if($objekt->objekt_id == $folder_id && $objekt->all['tyyp_id'] == 22)
 	{
 		// check for Delete permission
@@ -2281,63 +2281,63 @@ function delete_folder($folder_id)
 				'objekt_id' => $objekt->objekt_id,
 				'message' => "Attempt to delete folder '".$objekt->all['relative_path']."' (ID = ".$objekt->objekt_id.") with no delete permission.",
 			));
-			
+
 			return 'no_permissions_to_delete_folder';
 		}
-			
+
 		if($objekt->all['relative_path'] == '/public' || $objekt->all['relative_path'] == '/shared')
 		{
 			return 'unable_to_modify_public_shared_folder';
 		}
-		else 
+		else
 		{
 			$sql = "select count(objekt_id) from obj_folder where relative_path like '".$objekt->all['relative_path']."/%'";
 			$result = new SQL($sql);
-			
+
 			if($result->fetchsingle() > 0)
 			{
 				return 'folder_has_subfolders';
 			}
-			else 
+			else
 			{
 				$sql = "select count(objekt_id) from obj_file where relative_path like '".$objekt->all['relative_path']."/%'";
 				$result = new SQL($sql);
-				
+
 				if($result->fetchsingle() > 0)
 				{
 					return 'folder_has_files';
 				}
-				else 
+				else
 				{
 					$dir = preg_replace('#/$#', '', $site->absolute_path).$objekt->all['relative_path'];
-					
+
 					if(file_exists($dir))
 					{
 						delete_directory($dir.'/.thumbnails');
 						delete_directory($dir.'/.gallery_pictures');
 						delete_directory($dir.'/.gallery_thumbnails');
-						
+
 						if(!rmdir($dir))
 						{
 							return 'could_not_delete_folder_from_filesystem';
 						}
 					}
-					
+
 					$objekt->del();
-					
+
 					new Log(array(
 						'action' => 'delete',
 						'component' => 'Files',
 						'objekt_id' => $objekt->objekt_id,
 						'message' => "Folder '".$objekt->all['relative_path']."' (ID = ".$objekt->objekt_id.") deleted.",
 					));
-					
+
 					return true;
 				}
 			}
 		}
 	}
-	else 
+	else
 	{
 		return 'no_such_folder_object';
 	}
@@ -2355,20 +2355,20 @@ function delete_directory($dir)
 	{
 		return false;
 	}
-	
+
 	if(!$dh = @opendir($dir))
 	{
 		return false;
 	}
-	
+
 	while(false !== ($obj = readdir($dh)))
 	{
 		if($obj == '.' || $obj == '..') continue;
 		if(!@unlink($dir.'/'.$obj)) delete_directory($dir.'/'.$obj);
 	}
-	
+
 	@closedir($dh);
-	
+
 	return @rmdir($dir);
 }
 
@@ -2382,13 +2382,13 @@ function delete_directory($dir)
 function rename_folder($name, $folder_id)
 {
 	global $site;
-	
+
 	$folder_id = (int)$folder_id;
-	
+
 	$name = safe_filename2($name);
-	
+
 	$objekt = new Objekt(array('objekt_id' => $folder_id, 'on_sisu' => 1));
-	
+
 	if($objekt->objekt_id == $folder_id && $name && $objekt->all['tyyp_id'] == 22)
 	{
 		// check for Update permission
@@ -2401,23 +2401,23 @@ function rename_folder($name, $folder_id)
 				'objekt_id' => $objekt->objekt_id,
 				'message' => "Attempt to update folder '".$objekt->all['relative_path']."' (ID = ".$objekt->objekt_id.") with no update permission.",
 			));
-			
+
 			return 'no_permissions_to_update_folder';
 		}
-		
+
 		if($objekt->all['relative_path'] == '/public' || $objekt->all['relative_path'] == '/shared')
 		{
 			return 'unable_to_modify_public_shared_folder';
 		}
-		else 
+		else
 		{
 			$new_folder_name = explode('/', $objekt->all['relative_path']);
 			$new_folder_name = $new_folder_name[count($new_folder_name) - 1];
 			$new_folder_name = preg_replace('#/'.preg_quote($new_folder_name, '#').'$#', '/'.$name, $objekt->all['relative_path']);
-			
+
 			$from_name = preg_replace('#/$#', '', $site->absolute_path).$objekt->all['relative_path'];
 			$to_name = preg_replace('#/$#', '', $site->absolute_path).$new_folder_name;
-			
+
 			// check if folder already exists
 			$sql = $site->db->prepare("select objekt_id from obj_folder where relative_path = ? and objekt_id <> ?", $new_folder_name, $folder_id);
 			$result = new SQL($sql);
@@ -2425,39 +2425,39 @@ function rename_folder($name, $folder_id)
 			{
 				return 'folder_already_exists';
 			}
-			else 
+			else
 			{
 				if(rename($from_name, $to_name))
 				{
 					$sql = $site->db->prepare("update objekt set pealkiri = ?, pealkiri_strip = ?, changed_time = now(), changed_user_id = ?, changed_user_name = ? where objekt_id = ?", $name, $name, $site->user->user_id, $site->user->name, $folder_id);
 					new SQL($sql);
-					
+
 					$sql = $site->db->prepare("update obj_folder set relative_path = ? where objekt_id = ?", $new_folder_name, $folder_id);
 					new SQL($sql);
-					
+
 					$sql = $site->db->prepare("update obj_folder set relative_path = replace(relative_path, ?, ?) where relative_path like '".$objekt->all['relative_path']."/%'", $objekt->all['relative_path'], $new_folder_name);
 					new SQL($sql);
-					
+
 					$sql = $site->db->prepare("update obj_file set relative_path = replace(relative_path, ?, ?) where relative_path like '".$objekt->all['relative_path']."/%'", $objekt->all['relative_path'], $new_folder_name);
 					new SQL($sql);
-					
+
 					new Log(array(
 						'action' => 'update',
 						'component' => 'Files',
 						'objekt_id' => $objekt->objekt_id,
 						'message' => "Folder '".$new_folder_name."' (ID = ".$objekt->objekt_id.") renamed from: '".$objekt->all['relative_path']."'.",
 					));
-					
+
 					return true;
 				}
-				else 
+				else
 				{
 					return 'could_not_rename_folder';
 				}
 			}
 		}
 	}
-	else 
+	else
 	{
 		return 'no_such_folder_object';
 	}
@@ -2472,16 +2472,16 @@ function rename_folder($name, $folder_id)
 function get_files_list($list)
 {
 	global $site;
-	
+
 	$files = array();
-	
-	while ($file = $list->next()) 
+
+	while ($file = $list->next())
 	{
 		if(strpos($file->all['relative_path'], $site->CONF['file_path']) === 0 || strpos($file->all['relative_path'], $site->CONF['secure_file_path']) === 0)
 		{
 			$thumbnail_file = str_replace($file->all['filename'], '.thumbnails/'.$file->all['filename'], $file->all['relative_path']);
 			$thumbnail_path = preg_replace('#/$#', '', $site->absolute_path).$thumbnail_file;
-			
+
 			$pathinfo = pathinfo($file->all['relative_path']);
 			$pathinfo['extension'] = strtolower($pathinfo['extension']);
 
@@ -2489,20 +2489,20 @@ function get_files_list($list)
 			{
 				$thumbnail_url = $site->CONF['wwwroot'].$thumbnail_file;
 			}
-			else 
+			else
 			{
 				$thumbnail_path = $site->absolute_path.$site->CONF['styles_path'].'/gfx/icons/48x48/mime/'.$pathinfo['extension'].'.png';
-				
+
 				if(file_exists($thumbnail_path))
 				{
 					$thumbnail_url = $site->CONF['wwwroot'].$site->CONF['styles_path'].'/gfx/icons/48x48/mime/'.$pathinfo['extension'].'.png';
 				}
-				else 
+				else
 				{
 					$thumbnail_url = $site->CONF['wwwroot'].$site->CONF['styles_path'].'/gfx/icons/48x48/mime/unknown.png';
 				}
 			}
-			
+
 			$files[$file->objekt_id] = array(
 				'title' => $file->all['pealkiri'],
 				'objekt_id' => $file->objekt_id,
@@ -2520,16 +2520,16 @@ function get_files_list($list)
 			);
 		}
 	}
-	
+
 	return $files;
 }
 
 function get_files_by_search($keyword, $sorting = 'objekt.pealkiri asc', $page = 1)
 {
 	global $site;
-	
+
 	$keyword = (string)$keyword;
-	
+
 	if($keyword)
 	{
 		$list_sql = new AlamlistSQL(array(
@@ -2537,37 +2537,37 @@ function get_files_by_search($keyword, $sorting = 'objekt.pealkiri asc', $page =
 			'order' => $sorting,
 			'where' => "(objekt.pealkiri like '%".mysql_real_escape_string($keyword)."%' or obj_file.filename like '%".mysql_real_escape_string($keyword)."%')",
 	 	));
-	
+
 		$list_sql->add_select("obj_file.profile_id, obj_file.relative_path, obj_file.filename, obj_file.mimetype, obj_file.size");
-	
-		$list_sql->add_from("LEFT JOIN obj_file ON objekt.objekt_id=obj_file.objekt_id");		
-	
+
+		$list_sql->add_from("LEFT JOIN obj_file ON objekt.objekt_id=obj_file.objekt_id");
+
 		$list = new Alamlist(array(
 			'alamlistSQL' => $list_sql,
 			'start' => ($page - 1) * 100,
 			'limit' => 100,
 		));
-		
+
 		$count_sql = new AlamlistSQL(array(
 			'klass'	=> 'file',
 			'where' => "(objekt.pealkiri like '%".mysql_real_escape_string($keyword)."%' or obj_file.filename like '%".mysql_real_escape_string($keyword)."%')",
 		));
-		
-		$count_sql->add_from("LEFT JOIN obj_file ON objekt.objekt_id=obj_file.objekt_id");		
-		
+
+		$count_sql->add_from("LEFT JOIN obj_file ON objekt.objekt_id=obj_file.objekt_id");
+
 		$count = new Alamlist(array(
 			'alamlistSQL' => $count_sql,
 			'on_counter' => 1,
 		));
-		
+
 		//return get_files_list($list);
-		
+
 		return array(
 			'total_files' => (int)$count->rows,
 			'files' => get_files_list($list),
 		);
 	}
-	else 
+	else
 	{
 		return 'no_keyword_given';
 	}
@@ -2576,9 +2576,9 @@ function get_files_by_search($keyword, $sorting = 'objekt.pealkiri asc', $page =
 function get_files_from_folder($folder_id, $sorting = 'objekt.pealkiri asc', $page = 1)
 {
 	global $site;
-	
+
 	$objekt = new Objekt(array('objekt_id' => $folder_id));
-	
+
 	if($objekt->objekt_id == $folder_id && $objekt->all['tyyp_id'] == 22)
 	{
 		$list_sql = new AlamlistSQL(array(
@@ -2589,19 +2589,19 @@ function get_files_from_folder($folder_id, $sorting = 'objekt.pealkiri asc', $pa
 
 		$list_sql->add_select("obj_file.profile_id, obj_file.relative_path, obj_file.filename, obj_file.mimetype, obj_file.size");
 
-		$list_sql->add_from("LEFT JOIN obj_file ON objekt.objekt_id=obj_file.objekt_id");		
+		$list_sql->add_from("LEFT JOIN obj_file ON objekt.objekt_id=obj_file.objekt_id");
 
 		$list = new Alamlist(array(
 			'alamlistSQL' => $list_sql,
 			'start' => ($page - 1) * 100,
 			'limit' => 100,
 		));
-		
+
 		$count_sql = new AlamlistSQL(array(
 			'parent' => $folder_id,
 			'klass'	=> 'file',
 		));
-		
+
 		$count = new Alamlist(array(
 			'alamlistSQL' => $count_sql,
 			'on_counter' => 1,
@@ -2612,7 +2612,7 @@ function get_files_from_folder($folder_id, $sorting = 'objekt.pealkiri asc', $pa
 			'files' => get_files_list($list),
 		);
 	}
-	else 
+	else
 	{
 		return 'no_such_folder_object';
 	}
@@ -2621,20 +2621,20 @@ function get_files_from_folder($folder_id, $sorting = 'objekt.pealkiri asc', $pa
 function delete_files($files)
 {
 	global $site;
-	
+
 	$files = (array)$files;
 	$deleted_files = array();
-	
+
 	$return = array(
 		'error' => 0,
 		'error_message' => '',
 		'deleted_files' => array(),
 	);
-	
+
 	foreach ($files as $file_id)
 	{
 		$objekt = new Objekt(array('objekt_id' => $file_id, 'on_sisu' => 1));
-		
+
 		if($objekt->objekt_id == $file_id && $objekt->all['tyyp_id'] == 21)
 		{
 			// check for Delete permission
@@ -2647,36 +2647,36 @@ function delete_files($files)
 					'objekt_id' => $objekt->objekt_id,
 					'message' => "Attempt to delete file '".$objekt->all['relative_path']."' (ID = ".$objekt->objekt_id.") with no delete permission.",
 				));
-				
+
 				$return['error'] = 3;
 				$return['error_message'] = 'item_error';
-				
+
 				continue;
 			}
-			
+
 			$file_fullpath = preg_replace('#/$#', '', $site->absolute_path).$objekt->all['relative_path'];
-			
+
 			if(file_exists($file_fullpath))
 			{
 				if(unlink($file_fullpath))
 				{
 					$pathinfo = pathinfo($file_fullpath);
 					$thumbnail_path = $pathinfo['dirname'].'/.thumbnails/'.$objekt->all['filename'];
-					
+
 					if(file_exists($thumbnail_path)) unlink($thumbnail_path);
-					
+
 					$objekt->del();
-					
+
 					new Log(array(
 						'action' => 'delete',
 						'component' => 'Files',
 						'objekt_id' => $objekt->objekt_id,
 						'message' => "File '".$objekt->all['relative_path']."' (ID = ".$objekt->objekt_id.") deleted.",
 					));
-					
+
 					$return['deleted_files'][] = $file_id;
 				}
-				else 
+				else
 				{
 					new Log(array(
 						'action' => 'delete',
@@ -2685,58 +2685,58 @@ function delete_files($files)
 						'objekt_id' => $objekt->objekt_id,
 						'message' => "Could not delete file '".$objekt->all['relative_path']."' (ID = ".$objekt->objekt_id."), file system error.",
 					));
-					
+
 					$return['error'] = 2;
 					$return['error_message'] = 'item_error';
 				}
 			}
-			else 
+			else
 			{
 				$objekt->del();
-				
+
 				new Log(array(
 					'action' => 'delete',
 					'component' => 'Files',
 					'objekt_id' => $objekt->objekt_id,
 					'message' => "File '".$objekt->all['relative_path']."' (ID = ".$objekt->objekt_id.") deleted.",
 				));
-				
+
 				$return['deleted_files'][] = $file_id;
 			}
 		}
-		else 
+		else
 		{
 			$return['error'] = 1;
 			$return['error_message'] = 'item_error';
 		}
 	}
-	
+
 	return $return;
 }
 
 function synchronise_folder($folder_id)
 {
 	global $site;
-	
+
 	$folder_id = (int)$folder_id;
-	
+
 	$objekt = new Objekt(array('objekt_id' => $folder_id));
-	
+
 	if($objekt->objekt_id == $folder_id && $objekt->all['tyyp_id'] == 22)
 	{
 		$objekt->load_sisu();
-		
+
 		$folder_path = preg_replace('#/$#', '', $site->absolute_path).$objekt->all['relative_path'];
-		
+
 		// get folder & file count in this from database
 		$sql = 'select count(objekt_id) from objekt_objekt where parent_id = '.$folder_id;
 		$result = new SQL($sql);
-		
+
 		$db_object_count = $result->fetchsingle();
-		
+
 		// check if folder & file count from db matches count in file system
 		$fs_object_count = 0;
-		
+
 		if ($dir = opendir($folder_path))
 		{
 			while (false !== ($file = readdir($dir)))
@@ -2750,20 +2750,20 @@ function synchronise_folder($folder_id)
 			}
 			closedir($dir);
 		}
-		else 
+		else
 		{
 			// not a folder ... TODO
 		}
-		
+
 		//if the fs and db object count do not match syncronise folder contents
 		if($fs_object_count != $db_object_count)
 		{
 			// collect files and folder from fs
 			$fs_files = array();
 			$fs_folders = array();
-			
+
 			$dir = opendir($folder_path);
-			
+
 			while (false !== ($file = readdir($dir)))
 			{
 				if (strpos($file, '.') !== 0)
@@ -2772,7 +2772,7 @@ function synchronise_folder($folder_id)
 					{
 						$fs_folders[$file] = $file;
 					}
-					else 
+					else
 					{
 						$fs_files[$file] = array(
 							'filename' => $file,
@@ -2783,14 +2783,14 @@ function synchronise_folder($folder_id)
 				}
 			}
 			closedir($dir);
-			
-			
+
+
 			// files first
 			$sql = 'select obj_file.objekt_id, filename, mimetype, size from obj_file left join objekt_objekt on obj_file.objekt_id = objekt_objekt.objekt_id where parent_id = '.$folder_id;
 			$result = new SQL($sql);
-			
+
 			$files_to_delete = array();
-			
+
 			while($row = $result->fetch('ASSOC'))
 			{
 				// mark files not found in fs for deletion
@@ -2798,20 +2798,20 @@ function synchronise_folder($folder_id)
 				{
 					$files_to_delete[] = $row['objekt_id'];
 				}
-				else 
+				else
 				{
 					// update file size, mimetype if needed
 					if($fs_files[$row['filename']]['size'] != $row['size'] || $fs_files[$row['filename']]['mimetype'] != $row['mimetype'])
 					{
 						$sql = $site->db->prepare("update obj_file set size = ?, mimetype = ? where objekt_id = ?", $fs_files[$row['filename']]['size'], $fs_files[$row['filename']]['mimetype'], $row['objekt_id']);
 						new SQL($sql);
-						
+
 						// set
 						$sql = $site->db->prepare("update objekt set changed_time = now(), changed_user_id = ?, changed_user_name = ? where objekt_id = ?",
 																					$site->user->user_id, $site->user->name, $row['objekt_id']);
 						new SQL($sql);
 					}
-					
+
 					// check for thumbnail
 					if(!file_exists($folder_path.'/.thumbnails/'.$row['filename']))
 					{
@@ -2819,15 +2819,15 @@ function synchronise_folder($folder_id)
 						create_file_thumbnail($folder_path.'/'.$row['filename']);
 					}
 
-					
+
 					// remove from fs object array
 					unset($fs_files[$row['filename']]);
 				}
 			}
-			
+
 			// delete files not in fs TODO: catch errors from file delete
 			delete_files($files_to_delete);
-			
+
 			// left over files are new, create them
 			foreach($fs_files as $filename => $file)
 			{
@@ -2837,7 +2837,7 @@ function synchronise_folder($folder_id)
 					if(rename($folder_path.'/'.$filename, $folder_path.'/'.$safe_filename))
 					{
 					}
-					else 
+					else
 					{
 						// log unable to rename, skip
 						new Log(array(
@@ -2846,71 +2846,71 @@ function synchronise_folder($folder_id)
 							'type' => 'ERROR',
 							'message' => "Could not rename '".$objekt->all['relative_path'].'/'.$filename."' to '".$objekt->all['relative_path'].'/'.$safe_filename."', file system error.",
 						));
-						
+
 						continue;
 					}
 				}
-				
+
 				// objekt
 				insert_new_file_object($objekt, $filename, $file['size'], $file['mimetype']);
-				
+
 				// create thumbnail
 				create_file_thumbnail($folder_path.'/'.$safe_filename);
 			}
-			
+
 			// folders next
 			$sql = 'select obj_folder.objekt_id, relative_path from obj_folder left join objekt_objekt on obj_folder.objekt_id = objekt_objekt.objekt_id where parent_id = '.$folder_id;
 			$result = new SQL($sql);
-			
+
 			$folders_to_delete = array();
-			
+
 			while($row = $result->fetch('ASSOC'))
 			{
 				$folder_name = str_replace($objekt->all['relative_path'].'/', '', $row['relative_path']);
-				
+
 				// mark folders not found in fs for deletion
 				if(!$fs_folders[$folder_name])
 				{
 					$folders_to_delete[] = $row['objekt_id'];
 				}
-				else 
+				else
 				{
 					// remove from fs object array
 					unset($fs_folders[$folder_name]);
 				}
 			}
-			
+
 			// delete folders present in db but not present in fs
 			foreach($folders_to_delete as $folder_id)
 			{
 				// TODO: error catching from folder deleting
 				delete_folder($folder_id);
 			}
-			
+
 			// create new folders
 			foreach($fs_folders as $folder_name)
 			{
 				create_folder($folder_name, $objekt->objekt_id);
 			}
-			
+
 			new Log(array(
 				'action' => 'sync',
 				'component' => 'Files',
 				'objekt_id' => $objekt->objekt_id,
 				'message' => "Folder '".$objekt->all['relative_path']."' (ID = ".$objekt->objekt_id.") synchronised.",
 			));
-			
+
 			// recurse?
 			return true;
 		}
-		else 
+		else
 		{
 			// nothing to syncro
 			return true;
 		}
-		
+
 	}
-	else 
+	else
 	{
 		return 'no_such_folder_object';
 	}
@@ -2919,26 +2919,26 @@ function synchronise_folder($folder_id)
 function insert_new_file_object($folder, $filename, $size, $mimetype)
 {
 	global $site;
-	
+
 	$safe_filename = safe_filename2($filename);
-	
+
 	$pathinfo = pathinfo($filename);
 	$title = str_replace('.'.$pathinfo['extension'], '', $pathinfo['basename']);
-	
+
 	// objekt
 	$sql = $site->db->prepare("insert into objekt (pealkiri, tyyp_id, on_avaldatud, keel, pealkiri_strip, aeg, created_time, created_user_id, created_user_name)
 													values (?, 21, '1', 1, ?, now(), now(), ?, ?)", $title, $filename, $site->user->user_id, $site->user->name);
 	$result = new SQL($sql);
 	$file_id = $result->insert_id;
-	
+
 	$sql = 'select max(sorteering) + 1 from objekt_objekt';
 	$result = new SQL($sql);
 	$sorting = $result->fetchsingle();
-	
+
 	// objekt_objekt
 	$sql = 'insert into objekt_objekt (objekt_id, parent_id, sorteering) values ('.$file_id.', '.$folder->objekt_id.', '.$sorting.')';
 	new SQL($sql);
-	
+
 	// obj_file
 	$sql = $site->db->prepare("insert into obj_file (objekt_id, filename, size, mimetype,  relative_path) values (?, ?, ?, ?, ?)",
 																	$file_id, $safe_filename, $size, $mimetype, $folder->all['relative_path'].'/'.$safe_filename);
@@ -2950,7 +2950,7 @@ function insert_new_file_object($folder, $filename, $size, $mimetype)
 		'objekt_id' => $file_id,
 		'message' => "File '".$folder->all['relative_path'].'/'.$safe_filename."' (ID = ".$file_id.") created.",
 	));
-	
+
 	return $file_id;
 }
 
@@ -2962,11 +2962,11 @@ function insert_new_file_object($folder, $filename, $size, $mimetype)
 function create_file_thumbnail($fullpath)
 {
 	global $site, $class_path;
-	
+
 	include_once($class_path.'picture.inc.php');
 
 	// Check if Thumbnail directory exists
-	 
+
 	if(!is_dir(dirname(realpath($fullpath)).'/.thumbnails'))
 	{
 		$mask = umask(0);
@@ -2975,7 +2975,7 @@ function create_file_thumbnail($fullpath)
 	}
 
 	$pathinfo = pathinfo($fullpath);
-	
+
 	if(preg_match("/(jpeg|pjpeg|jpg|png|gif)/i", $pathinfo['extension']))
 	{
 		$thumb_max_size = 95;
@@ -2990,7 +2990,7 @@ function create_file_thumbnail($fullpath)
 		//Calculate thumb size
 
 		$image_rate = max($cur_x/$thumb_max_size,$cur_y/$thumb_max_size);
-	
+
 		$new_x = round($cur_x/$image_rate);
 		$new_y = round($cur_y/$image_rate);
 
@@ -2999,7 +2999,7 @@ function create_file_thumbnail($fullpath)
 		$image->image_ratio_y = true;
 		$image->file_auto_rename = false;
 		$image->process($pathinfo['dirname'].'/.thumbnails');
-		
+
 		@chmod($pathinfo['dirname'].'/.thumbnails/'.$pathinfo['basename'], 0666);
 	}
 }
@@ -3007,14 +3007,14 @@ function create_file_thumbnail($fullpath)
 function upload_file_to_folder($data, $folder_fullpath)
 {
 	global $site;
-	
+
 	$data['name'] = safe_filename2($data['name']);
 
 	$file = realpath($folder_fullpath).'/'.$data['name'];
 	$file = str_replace('\\', '/', $file);
-	
+
 	if(move_uploaded_file($data['tmp_name'], $file))
-	{ 
+	{
 		chmod($file, 0666);
 		$site->debug->msg("File uploaded as ".$file);
 	}
@@ -3023,32 +3023,32 @@ function upload_file_to_folder($data, $folder_fullpath)
 		//print $site->sys_sona(array(sona => "Faili salvestamisel tekkis viga", tyyp=>"editor"));
 		return 'error_on_file_upload';
 	}
-	
+
 	return true;
 }
 
 function move_files_to_folder($from_folder_id, $to_folder_id, $files)
 {
 	global $site;
-	
+
 	$return = array(
 		'error' => 0,
 		'error_message' => '',
 		'moved_files' => array(),
 	);
-	
+
 	if(count($files) && $to_folder_id && $to_folder_id != $from_folder_id)
 	{
 		$to_folder_obj = new Objekt(array('objekt_id' => (int)$to_folder_id, 'on_sisu' => 1));
 		$from_folder_obj = new Objekt(array('objekt_id' => (int)$from_folder_id, 'on_sisu' => 1));
-		
+
 		if($to_folder_obj->objekt_id == $to_folder_id && $to_folder_obj->all['klass'] == 'folder' && $from_folder_obj->objekt_id == $from_folder_id && $from_folder_obj->all['klass'] == 'folder')
 		{
 			if($to_folder_obj->permission['C'] == 1)
 			{
 				$to_folder_obj->all['fullpath'] = preg_replace('#/$#', '', $site->absolute_path).$to_folder_obj->all['relative_path'];
 				$from_folder_obj->all['fullpath'] = preg_replace('#/$#', '', $site->absolute_path).$from_folder_obj->all['relative_path'];
-				
+
 				foreach($files as $object_id)
 				{
 					$file_obj = new Objekt(array('objekt_id' => (int)$object_id, 'on_sisu' => 1));
@@ -3056,18 +3056,18 @@ function move_files_to_folder($from_folder_id, $to_folder_id, $files)
 					{
 						//if file exists and there is not a file with the same name in the destination folder
 						$file_obj->all['fullpath'] = preg_replace('#/$#', '', $site->absolute_path).$file_obj->all['relative_path'];
-						
+
 						if(file_exists($file_obj->all['fullpath']) && !file_exists($to_folder_obj->all['fullpath'].'/'.$file_obj->all['filename']))
 						{
 							$relative_path = $to_folder_obj->all['relative_path'].'/'.$file_obj->all['filename'];
-							
+
 							if(rename($file_obj->all['fullpath'], $to_folder_obj->all['fullpath'].'/'.$file_obj->all['filename']))
 							{
 								// file successfully moved, update db object
 								$sql = "update obj_file set relative_path = '".$relative_path."' where objekt_id = ".$file_obj->objekt_id;
 								//printr($sql);
 								new SQL($sql);
-								
+
 								// update parent -> object relation
 								$sql = "update objekt_objekt set parent_id = ".$to_folder_obj->objekt_id." where objekt_id = ".$file_obj->objekt_id." and parent_id = ".$from_folder_obj->objekt_id;
 								//printr($sql);
@@ -3079,9 +3079,9 @@ function move_files_to_folder($from_folder_id, $to_folder_id, $files)
 									'objekt_id' => $file_obj->objekt_id,
 									'message' => "File '".$file_obj->all['relative_path']."' (ID = ".$file_obj->objekt_id.") moved to '".$relative_path."'",
 								));
-								
+
 								$return['moved_files'][] = $file_obj->objekt_id;
-								
+
 								// also move thumbnails, keep quiet about success?
 								if(file_exists($from_folder_obj->all['fullpath'].'/.thumbnails/').$file_obj->all['filename'])
 								{
@@ -3091,18 +3091,18 @@ function move_files_to_folder($from_folder_id, $to_folder_id, $files)
 										$thumbnails_folder = mkdir($to_folder_obj->all['fullpath'].'/.thumbnails', 0777);
 										umask($mask);
 									}
-									else 
+									else
 									{
 										$thumbnails_folder = is_dir($to_folder_obj->all['fullpath'].'/.thumbnails/');
 									}
-									
+
 									if($thumbnails_folder)
 									{
 										rename($from_folder_obj->all['fullpath'].'/.thumbnails/'.$file_obj->all['filename'], $to_folder_obj->all['fullpath'].'/.thumbnails/'.$file_obj->all['filename']);
 									}
 								}
 							}
-							else 
+							else
 							{
 								// file move failed
 								new Log(array(
@@ -3112,7 +3112,7 @@ function move_files_to_folder($from_folder_id, $to_folder_id, $files)
 									'objekt_id' => $file_obj->objekt_id,
 									'message' => "File '".$file_obj->all['relative_path']."' (ID = ".$file_obj->objekt_id.") move to '".$to_folder_obj->all['relative_path']."' failed, file system error.",
 								));
-								
+
 								$return['error'] = 5;
 								$return['error_message'] = 'item_error';
 							}
@@ -3127,20 +3127,20 @@ function move_files_to_folder($from_folder_id, $to_folder_id, $files)
 								'objekt_id' => $file_obj->objekt_id,
 								'message' => "File '".$file_obj->all['relative_path']."' (ID = ".$file_obj->objekt_id.") could not be moved to '".$to_folder_obj->all['relative_path']."'. File already exists.",
 							));
-							
+
 							$return['error'] = 4;
 							$return['error_message'] = 'item_error';
 						}
-						else 
+						else
 						{
 							// no such file, del from db
 							$file_obj->del();
-							
+
 							// file is moved in a sense, to nothing
 							$return['moved_files'][] = $file_obj->objekt_id;
 						}
 					}
-					else 
+					else
 					{
 						//no file to move or no cms permissions
 						new Log(array(
@@ -3150,13 +3150,13 @@ function move_files_to_folder($from_folder_id, $to_folder_id, $files)
 							'objekt_id' => $file_obj->objekt_id,
 							'message' => "File (ID = ".$object_id.") move to '".$to_folder_obj->all['relative_path']."' failed, access denied.",
 						));
-						
+
 						$return['error'] = 3;
 						$return['error_message'] = 'no_permissions_to_move_files';
 					}
 				}
 			}
-			else 
+			else
 			{
 				//no file to move or no cms permissions
 				new Log(array(
@@ -3166,34 +3166,34 @@ function move_files_to_folder($from_folder_id, $to_folder_id, $files)
 					'objekt_id' => $file_obj->objekt_id,
 					'message' => "File (ID = ".$object_id.") move to '".$to_folder_obj->all['relative_path']."' failed, access denied.",
 				));
-				
+
 				$return['error'] = 4;
 				$return['error_message'] = 'no_permissions_to_move_files';
 			}
 		}
-		else 
+		else
 		{
 			$return['error'] = 2;
 			$return['error_message'] = 'no_such_folder_object';
 		}
 	}
-	else 
+	else
 	{
 		$return['error'] = 1;
 		$return['error_message'] = 'parameters_missing';
 	}
-	
+
 	return $return;
 }
 
 function upload_to_folder($file, $folder_id)
 {
 	global $site;
-	
+
 	$folder_id = (int)$folder_id;
-	
+
 	$objekt = new Objekt(array('objekt_id' => $folder_id, 'on_sisu' => 1));
-	
+
 	if($objekt->objekt_id == $folder_id && $objekt->all['tyyp_id'] == 22)
 	{
 		// check for Create permission
@@ -3206,12 +3206,12 @@ function upload_to_folder($file, $folder_id)
 				'objekt_id' => $objekt->objekt_id,
 				'message' => "Attempt to create file under '".$objekt->all['relative_path']."' (ID = ".$objekt->objekt_id.") with no create permission.",
 			));
-			
+
 			return 'no_permissions_to_create_file';
 		}
-		
+
 		$folder_path = preg_replace('#/$#', '', $site->absolute_path).$objekt->all['relative_path'];
-		
+
 		$filename = $file['name'];
 		$filename_parts = explode('.', $file['name']);
 		if(sizeof($filename_parts) > 1)
@@ -3219,34 +3219,34 @@ function upload_to_folder($file, $folder_id)
 			$file_extension = array_pop($filename_parts);
 			$file_basename = implode('.', $filename_parts);
 		}
-		else 
+		else
 		{
 			$file_extension = '';
 			$file_basename = $filename;
 		}
-		
+
 		$i = 0;
 		while(file_exists($folder_path.'/'.$filename))
 		{
 			$filename = $file_basename.'_'.++$i.($file_extension ? '.'.$file_extension : '');
-			
+
 			// loop guard
 			if($i > 1000) return 'file_already_exists';
 		}
-		
+
 		$file['name'] = $filename;
-		
+
 		$upload_result = upload_file_to_folder($file, $folder_path);
 		if($upload_result === true)
 		{
 			$file_id = insert_new_file_object($objekt, $file['name'], $file['size'], $file['type']);
-			
+
 			// thumbnail?
 			create_file_thumbnail($folder_path.'/'.safe_filename2($file['name']));
-			
+
 			return (int)$file_id;
 		}
-		else 
+		else
 		{
 			new Log(array(
 				'action' => 'update',
@@ -3254,11 +3254,11 @@ function upload_to_folder($file, $folder_id)
 				'type' => 'ERROR',
 				'message' => "Could not create file in '".$objekt->all['relative_path']."', file system error.",
 			));
-			
+
 			return $upload_result;
 		}
 	}
-	else 
+	else
 	{
 		return 'no_such_folder_object';
 	}
@@ -3267,12 +3267,12 @@ function upload_to_folder($file, $folder_id)
 function get_filemanager_favorites()
 {
 	global $site;
-	
+
 	$favorites = $site->user->get_favorites(array(
 		'tyyp_id' => '21,22',
 		'order' => 'objekt.tyyp_id desc, objekt.pealkiri',
 	));
-	
+
 	if(is_array($favorites)) foreach ($favorites as $key => $favorite)
 	{
 		$favorites[$key] = array(
@@ -3284,16 +3284,16 @@ function get_filemanager_favorites()
 			'title' => $favorite['pealkiri'],
 		);
 	}
-	
+
 	return $favorites;
 }
 
 function create_folder_from_path($folder_path)
 {
 	global $site;
-	
+
 	$folder_path = trim($folder_path);
-	
+
 	// only public folders
 	if(strpos($folder_path, 'public/') === 0)
 	{
@@ -3303,26 +3303,26 @@ function create_folder_from_path($folder_path)
 		{
 			$folders[$folder['objekt_id']] = preg_replace('#^/#', '', $folder['relative_path']);
 		}
-		
+
 		$folders[$site->alias(array('key' => 'public', 'keel' => 1))] = 'public';
-		
+
 		$folder_id = (int)array_search($folder_path, $folders);
-		
+
 		// if folder id doesn't exist create folder
 		if(!$folder_id)
 		{
 			$folder_path_parts = explode('/', $folder_path);
 			$folders_to_create = array();
-			
+
 			while($folder = array_pop($folder_path_parts))
 			{
 				$folders_to_create[] = $folder;
 				$folder_id = (int)array_search(implode('/', $folder_path_parts), $folders);
 				if($folder_id) break;
 			}
-			
+
 			$folders_to_create = array_reverse($folders_to_create);
-			
+
 			if($folder_id)
 			{
 				foreach($folders_to_create as $folder)
@@ -3332,12 +3332,12 @@ function create_folder_from_path($folder_path)
 					{
 						return $folder_create_result;
 					}
-					else 
+					else
 					{
 						$folder_id = $folder_create_result;
 					}
 				}
-				
+
 				return $folder_id;
 			}
 			else
@@ -3345,12 +3345,12 @@ function create_folder_from_path($folder_path)
 				return 'cant_create_folder';
 			}
 		}
-		else 
+		else
 		{
 			return $folder_id;
 		}
 	}
-	else 
+	else
 	{
 		return 'no_such_folder';
 	}
@@ -3360,41 +3360,41 @@ function create_folder_from_path($folder_path)
 function add_image_to_album($file, $folder_path)
 {
 	global $site;
-	
+
 	$folder_path = trim($folder_path);
-	
+
 	// only public folders
 	if(strpos($folder_path, 'public/') === 0)
 	{
-			
+
 		$folder_id = create_folder_from_path($folder_path);
-		
+
 		if(is_int($folder_id))
 		{
 			// upload the file
 			$upload_result = upload_to_folder($file, $folder_id);
-			
+
 			if(is_int($upload_result))
 			{
 				global $site, $class_path;
-				
+
 				$folder = new Objekt(array('objekt_id' => $folder_id));
 				$conf = new CONFIG($folder->all['ttyyp_params']);
-				
+
 				include_once($class_path.'picture.inc.php');
-				
+
 				generate_images($site->absolute_path.$conf->get('path'), $conf->get('tn_size'), $conf->get('pic_size'));
 			}
-			
+
 			return $upload_result;
 		}
-		else 
+		else
 		{
 			// error message
 			return $folder_id;
 		}
 	}
-	else 
+	else
 	{
 		return 'no_such_folder';
 	}
@@ -3429,7 +3429,7 @@ function print_editor_toolbar()
 
 		include_once($class_path."adminpage.inc.php");
 		$menu_list=admin_menu_list();
-		
+
 ?><script type="text/javascript">
 	var noConflict = false;
 	if (typeof jQuery == 'undefined')
@@ -3440,36 +3440,36 @@ function print_editor_toolbar()
 </script>
 <script type="text/javascript">
 	if(noConflict) jQuery.noConflict();
-	
+
 	jQuery(document).ready(function ()
 	{
 		jQuery('ul.scms_editor_dropdown').children('li').hover(displaySubMenu, hideSubMenu);
-		
+
 		jQuery('a.boxit, a.dont_boxit').click(function ()
 		{
 			jQuery(this).parent('li').parent('ul').css('display', 'none');
 		});
-		
+
 		<?php if(0 || !$site->in_admin) { ?>jQuery('body').css('margin-top', '28px');<?php } ?>
 	});
-	
+
 	function displaySubMenu()
 	{
 		jQuery(this).addClass('onmouseover');
-		
+
 		jQuery(this).children('ul').each(function (i)
 		{
 			jQuery(this).css('display', 'block');
 		});
 	}
-	
+
 	function hideSubMenu()
 	{
 		jQuery(this).removeClass('onmouseover');
-		
+
 		jQuery(this).children('ul').css('display', 'none');
 	}
-	
+
 	var wwwroot = '<?php echo $site->CONF['wwwroot'];?>';
 	var styles_path = '<?php echo $site->CONF['styles_path'];?>';
 </script>
@@ -3477,7 +3477,7 @@ function print_editor_toolbar()
 
 <div id="scms_editor_toolbar">
 	<a href="javascript:void(0);" id="scms_editor_toolbar_logo"></a>
-	<ul id="scms_toolbar_menu" class="scms_editor_dropdown"><?php 
+	<ul id="scms_toolbar_menu" class="scms_editor_dropdown"><?php
 		foreach ((array)$menu_list as $main_menu) {
 			?><li><a href="javascript:void(0);"><?php echo $main_menu['translated_name'];?></a><ul><?php
 			foreach((array)$main_menu['submenus'] as $sub_menu) {
@@ -3485,15 +3485,15 @@ function print_editor_toolbar()
 				if(!$site->in_admin && strpos($sub_menu['fail'], 'javascript') !== 0)
 				{
 					$class = 'boxit';
-					
+
 					if(strpos($sub_menu['fail'], '?') !== false)
 						$sub_menu['fail'] .= '&';
 					else
 						$sub_menu['fail'] .= '?';
-					
+
 					$sub_menu['fail'] .= 'keepThis=true&TB_iframe=true&height=500&width=850';
 				}
-				else 
+				else
 				{
 					$class = 'dont_boxit';
 				}
@@ -3518,14 +3518,14 @@ function print_editor_toolbar()
 			$sql = "select nimi from keel where keel_id = ".(int)$_SESSION['keel']['keel_id'];
 			$l_result = new SQL($sql);
 			$active_site_name = $l_result->fetchsingle();
-						
+
 			?><ul id="site_links" class="scms_editor_dropdown"><li><a href="#"><?php echo (strlen($active_site_name) > 15 ? substr($active_site_name, 0 , 15).'..' : $active_site_name); ?></a><ul><?php
-			
+
 			while($row = $result->fetch('ASSOC'))
 			{
 				?><li><a href="<?php echo $site->CONF['wwwroot'].($site->in_editor ? '/editor' : '').'/?lang='.$row['extension']; ?>"><?php echo $row['nimi']; ?></a></li><?php
 			}
-			
+
 		?></ul></li></ul><?php
 		}
 	}
@@ -3538,7 +3538,7 @@ function print_editor_toolbar()
 function print_context_button_init()
 {
 	global $site;
-	
+
 		?>
 <script type="text/javascript">
 	var noConflict = false;
@@ -3585,7 +3585,7 @@ function print_context_button_init()
 	jQuery.fn.contextMenu.addAction({name: 'scms_delete_object', title: '<?php echo $site->sys_sona(array('sona' => 'kustuta', 'tyyp' => 'editor', 'lang_id' => $_SESSION['keel_admin']['glossary_id'])); ?>', bind: scmsDeleteObject});
 
 	jQuery.fn.contextMenu.settings.menuOpenEvent = '<?php echo ($site->CONF['context_menu_open_event'] ? $site->CONF['context_menu_open_event'] : 'click'); ?>';
-	
+
 	// attach buttons
 	jQuery(document).ready(function ()
 	{
@@ -3593,13 +3593,13 @@ function print_context_button_init()
 	});
 </script>
 		<?php
-	
+
 }
 
 function save_sub_site_settings($settings)
 {
 	global $site;
-	
+
 	if(is_numeric($settings['keel_id']))
 	{
 		if($settings['on_default'])
@@ -3607,7 +3607,7 @@ function save_sub_site_settings($settings)
 			$sql = "update keel set on_default = 0";
 			new SQL($sql);
 		}
-		
+
 		$sql = $site->db->prepare('update keel set nimi = ?, encoding = ?, glossary_id = ?, extension = ?, on_default = ?, site_url = ?, page_ttyyp_id = ?, ttyyp_id = ? where keel_id = ?',
 			$settings['nimi'],
 			$settings['encoding'],
@@ -3619,18 +3619,18 @@ function save_sub_site_settings($settings)
 			$settings['ttyyp_id'],
 			$settings['keel_id']
 		);
-		
+
 		new SQL($sql);
-		
+
 		// make sure glossary sys_words are present
-		copySiteGlossary($settings['glossary_id']);	
-		
+		copySiteGlossary($settings['glossary_id']);
+
 		new Log(array(
 			'action' => 'update',
 			'component' => 'Languages',
 			'message' => "Language '".$settings['nimi']."' was updated.",
 		));
-		
+
 		return true;
 	}
 	else
@@ -3642,8 +3642,8 @@ function save_sub_site_settings($settings)
 function get_sub_site_objects_count($keel_id)
 {
 	global $site, $class_path;
-	
-	
+
+
 	$obj_count = 0;
 	include_once($class_path."alampuu.class.php");
 
@@ -3683,25 +3683,25 @@ function get_sub_site_objects_count($keel_id)
 		));
 		$obj_count += $puu->size;
 	}
-	
+
 	return $obj_count;
 }
 
 function delete_sub_site($keel_id)
 {
 	global $site, $class_path;
-	
+
 	$sql = $site->db->prepare('select * from keel where keel_id = ?', $keel_id);
 	$result = new SQL($sql);
 	if($result->rows)
 	{
 		$site_data = $result->fetch('ASSOC');
 	}
-	else 
+	else
 	{
 		return 'no_such_site';
 	}
-	
+
 	$deleted_count = 0;
 
 	include_once($class_path.'alampuu.class.php');
@@ -3758,16 +3758,16 @@ function delete_sub_site($keel_id)
 	# 6. SET LANGUAGE => NOT ACTIVE
 	if($keel_id < 500)
 	{
-		$sql = $site->db->prepare('UPDATE keel SET on_kasutusel=?, extension=? WHERE keel_id=?', '', '', $keel_id); 
+		$sql = $site->db->prepare('UPDATE keel SET on_kasutusel=?, extension=? WHERE keel_id=?', '', '', $keel_id);
 	}
-	else 
+	else
 	{
 		// delete custom language
-		$sql = $site->db->prepare('delete from keel WHERE keel_id=?', $keel_id); 
+		$sql = $site->db->prepare('delete from keel WHERE keel_id=?', $keel_id);
 	}
 	$sth = new SQL($sql);
 	$site->debug->msg($sth->debug->get_msgs());
-	
+
 	##################
 	# WRITE LOG
 	new Log(array(
@@ -3775,34 +3775,34 @@ function delete_sub_site($keel_id)
 		'component' => 'Languages',
 		'message' => "Language '".$site_data['nimi']."' was deleted. Objects deleted: ".$deleted_count,
 	));
-	
+
 	return $deleted_count;
 }
 
 function create_sub_site($site_data)
 {
 	global $site;
-	
+
 	array_walk($site_data, 'trim');
-	
+
 	if($site_data['extension'])
 	{
 		$sql = $site->db->prepare('select keel_id from keel where extension = ?', $site_data['extension']);
 		$result = new SQL($sql);
-		
+
 		if($result->rows)
 		{
 			return  'extension_must_be_unique';
 		}
 	}
-	else 
+	else
 	{
 		return 'extension_must_be_given';
 	}
-	
+
 	######## 0. get first Saurus API page template ordered by template ID
 	$sql = $site->db->prepare(
-		"SELECT ttyyp_id FROM templ_tyyp WHERE on_page_templ=? AND ttyyp_id >=1000 ORDER BY ttyyp_id LIMIT 1", 
+		"SELECT ttyyp_id FROM templ_tyyp WHERE on_page_templ=? AND ttyyp_id >=1000 ORDER BY ttyyp_id LIMIT 1",
 		1
 	);
 	$sth = new SQL($sql);
@@ -3810,7 +3810,7 @@ function create_sub_site($site_data)
 
 	######## 1. set lang active + assign page template
 	$sql = $site->db->prepare(
-		"insert into keel SET nimi = ?, glossary_id = ?, encoding=?, extension=?, on_kasutusel='1', page_ttyyp_id=?, ttyyp_id = ?, site_url = ?", 
+		"insert into keel SET nimi = ?, glossary_id = ?, encoding=?, extension=?, on_kasutusel='1', page_ttyyp_id=?, ttyyp_id = ?, site_url = ?",
 			$site_data['name'],
 			$site_data['glossary_id'],
 			$site_data['encoding'],
@@ -3818,7 +3818,7 @@ function create_sub_site($site_data)
 			$site_data['page_template_id'] ? $site_data['page_template_id'] : $first_page_ttyyp_id,
 			$site_data['content_template_id'],
 			$site_data['site_url']
-		); 
+		);
 	$sth = new SQL($sql);
 	$site->debug->msg($sth->debug->get_msgs());
 	$new_keel_id = $sth->insert_id;
@@ -3835,14 +3835,14 @@ function create_sub_site($site_data)
 
 	foreach($aliased as $alias){
 		$alias_id = $site->alias(array('key' => $alias, 'keel'=>$new_keel_id));
-			
+
 		# alias ei eksisteeri, teeme uue objekti:
 		if (!$alias_id){
-			
+
 			#####################
 			# insert into objekt:
 			$sql = $site->db->prepare("
-				INSERT INTO objekt (tyyp_id, pealkiri, on_avaldatud, keel, sys_alias, aeg, check_in, created_user_id, created_user_name) 
+				INSERT INTO objekt (tyyp_id, pealkiri, on_avaldatud, keel, sys_alias, aeg, check_in, created_user_id, created_user_name)
 				VALUES (?, ?, ?, ?, ?, NOW(), ?, ?, ?)",
 				1,
 				$headline[$alias],
@@ -3853,12 +3853,12 @@ function create_sub_site($site_data)
 				$site->user->id,
 				$site->user->name
 			);
-			$sth = new SQL ($sql);		
+			$sth = new SQL ($sql);
 			$id = $sth->insert_id;
-			
+
 			if ($id){
 				#####################
-				# insert into objekt_objekt:	
+				# insert into objekt_objekt:
 				$sql = "SELECT MAX(sorteering) FROM objekt_objekt";
 				$sth = new SQL ($sql);
 				$sorteering=$sth->fetchsingle();
@@ -3869,33 +3869,33 @@ function create_sub_site($site_data)
 					$sorteering+1
 				);
 				$sth = new SQL($sql);
-					
+
 				$sql = $site->db->prepare("INSERT INTO obj_rubriik (objekt_id) VALUES (?)",	$id);
 				$sth = new SQL($sql);
-	
+
 			} # if new object successfully inserted
 
 		} # if sys_alias not found
 	} # / loop over aliases
 
 	########### / NEW LANGUAGE (set active + create system objects)
-	
+
 	new Log(array(
 		'action' => 'create',
 		'component' => 'Languages',
 		'message' => "Language '".$site_data['name']." (".$site_data['extension'].")' was created",
 	));
-	
+
 	// make sure glossary sys_words are present
 	copySiteGlossary($site_data['glossary_id']);
-	
+
 	return $new_keel_id;
 }
 
 function copySiteGlossary($glossary_id)
 {
 	global $site;
-	
+
 	# kui korras, kopeerime k�ik sys_sonad
 	# otsime k6ik sysonad, mis on tabelis 'sys_sonad_kirjeldus' ja ei ole tabelis 'sys_sona' vastava keeltega
 	$sql = "
@@ -3905,8 +3905,8 @@ function copySiteGlossary($glossary_id)
 		sys_sonad_kirjeldus.sst_id = sys_sonad.sst_id AND
 		sys_sonad_kirjeldus.sys_sona = sys_sonad.sys_sona
 		GROUP BY sys_sonad_kirjeldus.sst_id, sys_sonad_kirjeldus.sys_sona
-		HAVING cnt=0			
-	"; 
+		HAVING cnt=0
+	";
 	$sql = $site->db->prepare($sql, $glossary_id);
 	$sth = new SQL($sql);
 	$site->debug->msg($sth->debug->get_msgs());
@@ -3923,34 +3923,34 @@ function copySiteGlossary($glossary_id)
 function create_glossary($glossary)
 {
 	global $site;
-	
+
 	array_walk($glossary, 'trim');
-	
+
 	if(!is_numeric($glossary['keel_id']))
 	{
 		return 'no_such_glossary';
 	}
-	
+
 	$sql = $site->db->prepare('select keel_id, nimi from keel where keel_id = ?', $glossary['keel_id']);
 	$result = new SQL($sql);
 	if($result->rows == 1)
 	{
 		$glossary_data = $result->fetch('ASSOC');
-		
+
 		$sql = $site->db->prepare('update keel set encoding = ?, locale = ? where keel_id = ?', $glossary['encoding'], $glossary['locale'], $glossary['keel_id']);
 		$result = new SQL($sql);
-		
+
 		new Log(array(
 			'action' => 'create',
 			'component' => 'Languages',
 			'message' => 'Glossary "'.$glossary_data['nimi'].' has been created."',
 		));
-		
+
 		copySiteGlossary($glossary['keel_id']);
-		
+
 		return true;
 	}
-	else 
+	else
 	{
 		return 'no_such_glossary';
 	}
@@ -3959,33 +3959,33 @@ function create_glossary($glossary)
 function remove_glossary($glossary_id)
 {
 	global $site;
-	
+
 	$sql = $site->db->prepare('select keel_id, nimi from keel where keel_id = ?', $glossary_id);
 	$result = new SQL($sql);
 	if($result->rows == 1)
 	{
 		$glossary_data = $result->fetch('ASSOC');
-		
-		$sql = $site->db->prepare("DELETE FROM sys_sonad WHERE keel=?", $glossary_id); 
+
+		$sql = $site->db->prepare("DELETE FROM sys_sonad WHERE keel=?", $glossary_id);
 		$sth = new SQL($sql);
-		
+
 		$sql = $site->db->prepare('select glossary_id from keel where on_default = 1');
 		$result = new SQL($sql);
-		
+
 		$default_glossary_id = $result->fetchsingle();
-		
+
 		$sql = $site->db->prepare('update keel set glossary_id = ? where glossary_id = ?', $default_glossary_id, $glossary_id);
 		$result = new SQL($sql);
-				
+
 		new Log(array(
 			'action' => 'delete',
 			'component' => 'Languages',
 			'message' => 'Glossary "'.$glossary_data['nimi'].' has been removed."',
 		));
-		
+
 		return true;
 	}
-	else 
+	else
 	{
 		return 'no_such_glossary';
 	}
@@ -3994,31 +3994,31 @@ function remove_glossary($glossary_id)
 function edit_glossary($glossary_data)
 {
 	global $site;
-	
+
 	$sql = $site->db->prepare('select keel_id, nimi from keel where keel_id = ?', $glossary_data['glossary_id']);
 	$result = new SQL($sql);
 	if($result->rows == 1)
 	{
 		$glossary = $result->fetch('ASSOC');
-		
+
 		if($glossary_data['on_default_admin'])
 		{
 			$sql = $site->db->prepare('update keel set on_default_admin = 0');
 			$result = new SQL($sql);
 		}
-		
+
 		$sql = $site->db->prepare('update keel set locale = ?, encoding = ?, on_default_admin = ? where keel_id = ?', $glossary_data['locale'], $glossary_data['encoding'], $glossary_data['on_default_admin'], $glossary_data['glossary_id']);
 		$result = new SQL($sql);
-				
+
 		new Log(array(
 			'action' => 'edit',
 			'component' => 'Languages',
 			'message' => 'Glossary "'.$glossary['nimi'].' has been changed."',
 		));
-		
+
 		return true;
 	}
-	else 
+	else
 	{
 		return 'no_such_glossary';
 	}
@@ -4027,22 +4027,22 @@ function edit_glossary($glossary_data)
 function delete_system_word($word_id)
 {
 	global $site;
-	
+
 	########################
 	# get sys_sona
-	$sql = $site->db->prepare("SELECT sys_sona, sst_id FROM sys_sonad WHERE id=?", $word_id); 
+	$sql = $site->db->prepare("SELECT sys_sona, sst_id FROM sys_sonad WHERE id=?", $word_id);
 	$sth_s = new SQL($sql);
 	$site->debug->msg($sth_s->debug->get_msgs());
 	$delete_sysword = $sth_s->fetch();
 
 	########################
 	# delete FROM sys_sonad
-	$sql = $site->db->prepare("DELETE FROM sys_sonad WHERE sys_sona=? AND sst_id=?", $delete_sysword['sys_sona'],$delete_sysword['sst_id']); 
+	$sql = $site->db->prepare("DELETE FROM sys_sonad WHERE sys_sona=? AND sst_id=?", $delete_sysword['sys_sona'],$delete_sysword['sst_id']);
 	$sth = new SQL($sql);
 	$site->debug->msg($sth->debug->get_msgs());
 
 	# delete FROM sys_sonad
-	$sql = $site->db->prepare("DELETE FROM sys_sonad_kirjeldus WHERE sys_sona=? AND sst_id=?", $delete_sysword['sys_sona'],$delete_sysword['sst_id']); 
+	$sql = $site->db->prepare("DELETE FROM sys_sonad_kirjeldus WHERE sys_sona=? AND sst_id=?", $delete_sysword['sys_sona'],$delete_sysword['sst_id']);
 	$sth = new SQL($sql);
 	$site->debug->msg($sth->debug->get_msgs());
 
@@ -4053,6 +4053,6 @@ function delete_system_word($word_id)
 		'component' => 'Language',
 		'message' => 'Translations for "'.$delete_sysword['sys_sona'].'" deleted.',
 	));
-	
+
 	return true;
 }
