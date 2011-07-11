@@ -272,7 +272,7 @@ $url = site_url();
 
 $default_data_files = array();
 
-$install = 1; if (!$install)
+if (!$install)
 {
 	print '<font color=red>Error: Saurus CMS is already installed, to update run the <a href="update.php">update.php</a> script.</font>';
 	exit;
