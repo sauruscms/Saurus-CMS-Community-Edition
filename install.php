@@ -102,7 +102,7 @@ $current_ver = current_version(); # try to connect database and find which versi
 if(!$current_ver && php_sapi_name() == 'cli')
 {
 	$opts  = array(
-		'h::', // dbhost:dbport default localhost:3306
+		'h:', // dbhost:dbport default localhost:3306
 		'd:', // db
 		'u:', // dbuser
 		'p:', // dbpass
@@ -130,7 +130,7 @@ if(!$current_ver && php_sapi_name() == 'cli')
 		if($opt === false)
 		{
 			echo 'Value missing for '.$key."\n";
-			exit;
+			exit(1);
 		}
 		
 		switch ($key)
@@ -144,7 +144,7 @@ if(!$current_ver && php_sapi_name() == 'cli')
 			case 'H':
 				$opt = explode('/', $opt);
 				if($opt[0]) $options['cmshostname'] = $opt[0];
-				if($opt[1]) $options['cmswwwroot'] = '/'.$opt[1];
+				$options['cmswwwroot'] = $opt[1] ? '/'.$opt[1] : '';
 			break;
 			
 			case 'd': $options['db'] = $opt; break;
@@ -163,17 +163,17 @@ if(!$current_ver && php_sapi_name() == 'cli')
 	
 	foreach ($options as $key => $opt)
 	{
-		if(!$opt)
+		if(!$opt && $key != 'cmswwwroot')
 		{
 			echo 'Value missing for '.$key."\n";
-			exit;
+			exit(1);
 		}
 	}
 	
 	if($options['cmspasswd'] == 'saurus')
 	{
 		echo "The CMS password can't be 'saurus'.\n";
-		exit;
+		exit(1);
 	}
 	
 	//var_dump($options);
@@ -191,7 +191,7 @@ if(!$current_ver && php_sapi_name() == 'cli')
 	{
 		echo 'Could not connect to database.'."\n";
 		if($conn->error) echo $conn->error."\n";
-		exit;
+		exit(1);
 	}
 	
 	############# VERSION CHECK
@@ -200,7 +200,7 @@ if(!$current_ver && php_sapi_name() == 'cli')
 	if($current_ver)
 	{
 		echo 'CMS is already installed, to update run update.php'."\n";
-		exit;
+		exit(1);
 	}
 	
 	// create folders
@@ -252,12 +252,12 @@ if(!$current_ver && php_sapi_name() == 'cli')
 	echo '.'."\n";
 	
 	echo 'Done.'."\n";
-	exit;
+	exit(0);
 }
 elseif (php_sapi_name() == 'cli')
 {
 	echo 'CMS is already installed, to update run update.php'."\n";
-	exit;
+	exit(1);
 }
 
 # kui esileht ja current versiooni ei leitud, siis järelikult install
