@@ -76,13 +76,16 @@ function show_debug()
 
 function create_form_token_json($form_id)
 {
+	global $class_path;
+	include_once($class_path.'lgpl/Services_JSON.class.php');
+	
+	$json_encoder = new Services_JSON();
+	
 	$token = crypt(md5(time().rand(1, 1000)), rand(1, 2000));
-	
 	$form_id = $form_id.'-'.md5(time().rand(1, 30000));
-	
 	$_SESSION['scms_form_tokens'][$form_id] = $token;
 	
-	return json_encode(array('scms_form_id' => $form_id, 'scms_form_token' => $token));
+	return $json_encoder->encode(array('scms_form_id' => $form_id, 'scms_form_token' => $token));
 }
 
 function create_form_token($form_id)
