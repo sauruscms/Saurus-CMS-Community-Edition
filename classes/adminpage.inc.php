@@ -4056,3 +4056,111 @@ function delete_system_word($word_id)
 
 	return true;
 }
+
+function site_select_widget($id = 'site-select-widget', $selected_id = NULL)
+{
+	global $site;
+
+	$sql = 'SELECT keel_id, nimi, extension FROM keel WHERE on_kasutusel = 1';
+	$result = new SQL($sql);
+
+	echo '<select id="'.$id.'" class="site-select-widget"><option></option>';
+	while($row = $result->fetch('ASSOC'))
+	{
+		echo '<option value="'.$row['keel_id'].'"'.(isset($selected_id) && $row['keel_id'] == $selected_id ? ' selected="selected"' : NULL).'>'.$row['nimi'].' ('.$row['extension'].')</option>';
+	}
+	echo '</select>';
+}
+
+function user_select_widget($id = 'user-select-widget', $selected_id = NULL)
+{
+	global $site;
+
+	$sql = 'SELECT user_id, firstname, lastname, username FROM users';
+	$result = new SQL($sql);
+
+	echo '<select id="'.$id.'" class="user-select-widget"><option value="0"></option>';
+	while($row = $result->fetch('ASSOC'))
+	{
+		echo '<option value="'.$row['user_id'].'"'.(isset($selected_id) && $row['user_id'] == $selected_id ? ' selected="selected"' : NULL).'>'.$row['firstname'].' '.$row['lastname'].($row['username'] ? ' ('.$row['username'].')' : NULL).'</option>';
+	}
+	echo '</select>';
+}
+
+function group_role_select_widget($id = 'group-role-select-widget', $selected_gid = NULL, $selected_rid = NULL)
+{
+	global $site;
+
+	echo '<select id="'.$id.'" class="group-role-select-widget"><option value="0"></option>';
+	
+	echo '<optgroup data-type="group" label="'.$site->sys_sona(array('sona' => 'groups', 'tyyp' => 'kasutaja')).'">';
+	$groups = array();
+	$sql = 'SELECT group_id, name, parent_group_id FROM groups ORDER BY parent_group_id, name';
+	$result = new SQL($sql);
+	while($row = $result->fetch('ASSOC'))
+	{
+		if($row['name'] == 'Everybody')
+		{
+			$groups[$row['group_id']] = $row + array('level' => 0);
+		}
+		else
+		{
+			$groups[$row['parent_group_id']]['children'][] = $row['group_id'];
+			$groups[$row['group_id']] = $row + array('level' => $groups[$row['parent_group_id']]['level'] + 1);
+		}
+	}
+
+	reset($groups);
+	$group = current($groups);
+	$traverse = array($group['group_id']);
+
+	while($group_id = array_pop($traverse))
+	{
+		$group = $groups[$group_id];
+		echo '<option data-type="group" value="'.$group['group_id'].'"'.(isset($selected_gid) && $group['group_id'] == $selected_gid ? ' selected="selected"' : NULL).'>'.str_repeat('&nbsp;', $group['level'] * 4).$group['name'].'</option>';
+		if($group['children'])
+		{
+			foreach(array_reverse($group['children']) as $child_id)
+			{
+				$traverse[] = $child_id;
+			}
+		}
+	}
+	echo '</optgroup>';
+
+	echo '<optgroup data-type="role" label="'.$site->sys_sona(array('sona' => 'roles', 'tyyp' => 'kasutaja')).'">';
+	$sql = 'SELECT role_id, name FROM roles ORDER BY name';
+	$result = new SQL($sql);
+	while($row = $result->fetch('ASSOC'))
+	{
+		echo '<option data-type="role" value="'.$row['role_id'].'"'.(isset($selected_rid) && $row['role_id'] == $selected_rid ? ' selected="selected"' : NULL).'>'.$row['name'].'</option>';
+	}
+	echo '</optgroup>';
+
+	echo '</select>';
+}
+
+// html helper functions
+function print_js_variables()
+{
+	global $site, $class_path;
+	include_once($class_path.'lgpl/Services_JSON.class.php');
+
+	$json_encoder = new Services_JSON();
+	
+	$vars = add_js_variable('wwwroot', $site->CONF['wwwroot']);
+	
+	echo '<script>';
+	echo 'var SCMS = {};';
+	echo 'SCMS.variables = '.$json_encoder->encode($vars).';';
+	echo '</script>';
+}
+
+function add_js_variable($name, $value)
+{
+	static $vars;
+	
+	$vars[$name] = $value;
+	
+	return $vars;
+}
