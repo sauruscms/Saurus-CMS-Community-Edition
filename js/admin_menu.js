@@ -73,3 +73,95 @@ function close_menu() {
 	current_element.style.visibility='hidden';
 	current_element=null;
 }
+
+// adminpage functions
+if(typeof jQuery != 'undefined' && typeof SCMS != 'undefined') {
+	
+	$(function() {
+	
+		setMainDimensions();
+		$(window).resize(setMainDimensions);
+		
+		if(SCMS.variables.adminpage_names) make_breadcrumb(SCMS.variables.adminpage_names.parent_pagename, SCMS.variables.adminpage_names.pagename);
+		
+		messageBox.init();
+		alertBox.init();
+	});
+	
+	function setMainDimensions() {
+		$('#main').height($(window).height() - $('header').height() - $('footer').height() - 30);
+	}
+	
+	var pageCover = {
+		$cover: $('#page-cover'),
+		show: function () {
+			pageCover.$cover.removeClass('hidden');
+		},
+		hide: function () {
+			pageCover.$cover.addClass('hidden');
+		}
+	}
+	
+	var messageBox = {
+		
+		show: function (message) {
+			$('#message-box').html(message).removeClass('hidden');
+			
+			var delayTimer;
+			
+			if(delayTimer) {
+				clearTimeout(delayTimer);
+				delayTimer = null;
+			}
+			
+			delayTimer = setTimeout(messageBox.hide, 4000);	
+		},
+		
+		hide: function () {
+			$('#message-box').addClass('hidden');
+		},
+		
+		init: function() {
+			$('#message-box').click(messageBox.hide);
+		}
+	}
+	
+	var alertBox = {
+		showOK: function(message, callback) {
+			alertBox.show(message, callback, 'OK');
+		},
+		
+		showOKCancel: function(message, callback) {
+			alertBox.show(message, callback, 'OKCancel');
+		},
+		
+		show: function (message, callback, type) {
+			$('#alert-box-message').html(message);
+			
+			$('#alert-box-button-ok').click(function () {
+				alertBox.hide();
+				callback();
+			});
+			
+			if(type == 'OKCancel') {
+				$('#alert-box-button-cancel').removeClass('hidden');
+			}
+			
+			pageCover.show();
+			$('#alert-box').removeClass('hidden');
+		},
+		
+		hide: function () {
+			$('#alert-box-button-ok').unbind('click');
+			$('#alert-box-button-cancel').addClass('hidden');
+			$('#alert-box').addClass('hidden');
+			pageCover.hide();
+		},
+		
+		init: function() {
+			$('#alert-box-button-cancel').click(function () {
+				alertBox.hide();
+			});
+		}
+	}
+}
