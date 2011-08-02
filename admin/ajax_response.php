@@ -532,14 +532,11 @@ if($site->user->user_id && $site->fdat['op'] == 'add_image_to_album' && $site->f
 }
 
 // subsite (keel) setting edit
-if($site->user->user_id && $site->fdat['op'] == 'edit_site_settings')
+if($site->user->user_id && $site->fdat['op'] == 'edit_site_settings' && $site->user->allowed_adminpage(array('script_name' => 'sys_sonad_loetelu.php')))
 {
 	verify_form_token();
 	
 	include_once($class_path.'adminpage.inc.php');
-	//include_once($class_path.'lgpl/Services_JSON.class.php');
-	
-	//$json_encoder = new Services_JSON();
 	
 	$settings = array(
 		'keel_id' => $site->fdat['site_id'],
@@ -562,30 +559,23 @@ if($site->user->user_id && $site->fdat['op'] == 'edit_site_settings')
 		echo '{ error: 1}';
 	}
 	
-	//echo $json_encoder->encode($response);
-	
 	exit;
 }
 
 // subsite (keel) object count
-if($site->user->user_id && $site->fdat['op'] == 'get_site_objects_count' && is_numeric($site->fdat['site_id']))
+if($site->user->user_id && $site->fdat['op'] == 'get_site_objects_count' && is_numeric($site->fdat['site_id']) && $site->user->allowed_adminpage(array('script_name' => 'sys_sonad_loetelu.php')))
 {
 	verify_form_token();
 	
 	include_once($class_path.'adminpage.inc.php');
-	//include_once($class_path.'lgpl/Services_JSON.class.php');
-	
-	//$json_encoder = new Services_JSON();
 	
 	echo '{ count: '.get_sub_site_objects_count($site->fdat['site_id']).'}';
-	
-	//echo $json_encoder->encode($response);
 	
 	exit;
 }
 
 // subsite (keel) delete
-if($site->user->user_id && $site->fdat['op'] == 'delete_site' && is_numeric($site->fdat['site_id']))
+if($site->user->user_id && $site->fdat['op'] == 'delete_site' && is_numeric($site->fdat['site_id']) && $site->user->allowed_adminpage(array('script_name' => 'sys_sonad_loetelu.php')))
 {
 	verify_form_token();
 	
@@ -639,7 +629,7 @@ if($site->user->user_id && $site->fdat['op'] == 'delete_site' && is_numeric($sit
 }
 
 // subsite (keel) create
-if($site->user->user_id && $site->fdat['op'] == 'create_new_site')
+if($site->user->user_id && $site->fdat['op'] == 'create_new_site' && $site->user->allowed_adminpage(array('script_name' => 'sys_sonad_loetelu.php')))
 {
 	verify_form_token();
 	
@@ -685,7 +675,7 @@ if($site->user->user_id && $site->fdat['op'] == 'create_new_site')
 }
 
 // glossary create
-if($site->user->user_id && $site->fdat['op'] == 'create_glossary')
+if($site->user->user_id && $site->fdat['op'] == 'create_glossary' && $site->user->allowed_adminpage(array('script_name' => 'sys_sonad_loetelu.php')))
 {
 	verify_form_token();
 	
@@ -725,7 +715,7 @@ if($site->user->user_id && $site->fdat['op'] == 'create_glossary')
 }
 
 // glossary usage
-if($site->user->user_id && $site->fdat['op'] == 'get_glossary_usage' && is_numeric($site->fdat['glossary_id']))
+if($site->user->user_id && $site->fdat['op'] == 'get_glossary_usage' && is_numeric($site->fdat['glossary_id']) && $site->user->allowed_adminpage(array('script_name' => 'sys_sonad_loetelu.php')))
 {
 	verify_form_token();
 	
@@ -754,7 +744,7 @@ if($site->user->user_id && $site->fdat['op'] == 'get_glossary_usage' && is_numer
 }
 
 // glossary remove
-if($site->user->user_id && $site->fdat['op'] == 'remove_glossary' && is_numeric($site->fdat['glossary_id']))
+if($site->user->user_id && $site->fdat['op'] == 'remove_glossary' && is_numeric($site->fdat['glossary_id']) && $site->user->allowed_adminpage(array('script_name' => 'sys_sonad_loetelu.php')))
 {
 	verify_form_token();
 	
@@ -786,7 +776,7 @@ if($site->user->user_id && $site->fdat['op'] == 'remove_glossary' && is_numeric(
 }
 
 // glossary edit
-if($site->user->user_id && $site->fdat['op'] == 'edit_glossary_settings' && is_numeric($site->fdat['glossary_id']))
+if($site->user->user_id && $site->fdat['op'] == 'edit_glossary_settings' && is_numeric($site->fdat['glossary_id']) && $site->user->allowed_adminpage(array('script_name' => 'sys_sonad_loetelu.php')))
 {
 	verify_form_token();
 	
@@ -825,7 +815,7 @@ if($site->user->user_id && $site->fdat['op'] == 'edit_glossary_settings' && is_n
 }
 
 // system word delete
-if($site->user->user_id && $site->fdat['op'] == 'delete_sys_word' && is_numeric($site->fdat['word_id']))
+if($site->user->user_id && $site->fdat['op'] == 'delete_sys_word' && is_numeric($site->fdat['word_id']) && $site->user->allowed_adminpage(array('script_name' => 'sys_sonad_loetelu.php')))
 {
 	verify_form_token();
 	
