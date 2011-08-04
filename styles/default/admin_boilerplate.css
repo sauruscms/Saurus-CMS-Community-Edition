@@ -143,7 +143,7 @@ body {
     font-weight: bold;
     padding: 5px 25px;
 	background-repeat: no-repeat;
-	background-position: right 5px;
+	background-position: right 7px;
 	background-image: url(../../styles/default/gfx/filemanager/search_clear.gif);
 }
 
@@ -151,6 +151,45 @@ input.text {
     border: 1px solid #7E9FD2;
     width: 200px;
     padding: 3px 4px;
+	background-color: #FFF;
+}
+
+input.text.search {
+    border: 1px solid #E4E4E4;
+    border-right: none;
+}
+
+.search-widget {
+    width: 232px;
+}
+
+.search-widget-button {
+	background-color: #FFF;
+    border: 1px solid #E4E4E4;
+    border-left: none;
+    float: right;
+    width: 22px;
+	height: 22px;
+	background-repeat: no-repeat;
+	cursor: pointer;
+}
+
+.ie9 .search-widget-button {
+	height: 21px;
+}
+
+.ie7 .search-widget-button {
+	margin-top: 1px;
+}
+
+.search-widget-button.search {
+	background-image: url(gfx/filemanager/search_button.gif);
+	background-position: 5px 5px;
+}
+
+.search-widget-button.cancel {
+	background-image: url(gfx/filemanager/search_clear.gif);
+	background-position: 5px 5px;
 }
 
 input.button  {
@@ -160,6 +199,15 @@ input.button  {
 	color: #fff;
 	font-weight: bold;
 	min-width: 90px;
+}
+
+.ie7 input.button {
+	min-width: auto;
+	padding: 1px 0;
+}
+
+.ie9 input.button, .ie8 input.button {
+	padding: 4px 12px;
 }
 
 input.button.secondary {
