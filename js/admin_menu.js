@@ -140,7 +140,7 @@ if(typeof jQuery != 'undefined' && typeof SCMS != 'undefined') {
 			
 			$('#alert-box-button-ok').click(function () {
 				alertBox.hide();
-				callback();
+				if(callback) callback();
 			});
 			
 			if(type == 'OKCancel') {
@@ -162,6 +162,48 @@ if(typeof jQuery != 'undefined' && typeof SCMS != 'undefined') {
 			$('#alert-box-button-cancel').click(function () {
 				alertBox.hide();
 			});
+		}
+	}
+	
+	var searchBox = {
+		$box: {},
+		$input: {},
+		$search: {},
+		$cancel: {},
+		search: {},
+		cancel: {},
+		
+		cancelled: function () {
+			searchBox.$cancel.addClass('hidden');
+			searchBox.$search.removeClass('hidden');
+			searchBox.$input.val('');
+			searchBox.cancel();
+		},
+		
+		start: function () {
+ 			if(searchBox.$input.val().length > 0) {
+				searchBox.$search.addClass('hidden');
+				searchBox.$cancel.removeClass('hidden');
+				searchBox.search(); 				
+ 			}
+		},
+		
+		init: function(box, search, cancel) {
+			
+			searchBox.$box = $(box);
+			searchBox.$input = $('input.text.search', searchBox.$box);
+			searchBox.$search = $('.search-widget-button.search', searchBox.$box);
+			searchBox.$cancel = $('.search-widget-button.cancel', searchBox.$box);
+			searchBox.search = search;
+			searchBox.$search.click(searchBox.start);
+			searchBox.cancel = cancel;
+			searchBox.$cancel.click(searchBox.cancelled);
+			
+			searchBox.$input.keypress(function (event) {
+				if(event.which == 13) {
+					searchBox.start();
+				}
+			});			
 		}
 	}
 }
