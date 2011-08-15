@@ -467,11 +467,11 @@ if($site->user->user_id && $site->fdat['op'] == 'file_upload' && (int)$site->fda
 	
 	if(is_int($file_id))
 	{
-		echo "{file_id: '".$file_id."'}";
+		echo '{"file_id": '.$file_id.'}';
 	}
 	else 
 	{
-		echo "{error: '".$file_id."'}";
+		echo '{"error": "'.$file_id.'"}';
 	}
 	
 	exit;
