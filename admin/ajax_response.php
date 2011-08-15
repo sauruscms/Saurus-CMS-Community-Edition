@@ -44,7 +44,7 @@ if($site->user->user_id && $_REQUEST['op'] == 'generate_alias' && isset($_REQUES
 	
 	$alias = create_alias_for_object($_REQUEST['string'], $_REQUEST['language_id']);
 	
-	echo "{ alias: '".$alias."' }";
+	echo '{"alias": "'.$alias.'"}';
 	
 	exit;
 }
@@ -62,11 +62,11 @@ if($site->user->user_id && $_REQUEST['op'] == 'check_file' && $site->fdat['name'
 	
 	if(file_exists($site->absolute_path.$dirname.'/'.$filename))
 	{
-		echo '{ file_exists: 1 }';
+		echo '{"file_exists": 1}';
 	}
 	else 
 	{
-		echo '{ file_exists: 0 }';
+		echo '{"file_exists": 0}';
 	}
 	
 	exit;
@@ -467,11 +467,11 @@ if($site->user->user_id && $site->fdat['op'] == 'file_upload' && (int)$site->fda
 	
 	if(is_int($file_id))
 	{
-		echo "{ file_id: '".$file_id."'}";
+		echo "{file_id: '".$file_id."'}";
 	}
 	else 
 	{
-		echo "{ error: '".$file_id."'}";
+		echo "{error: '".$file_id."'}";
 	}
 	
 	exit;
@@ -552,11 +552,11 @@ if($site->user->user_id && $site->fdat['op'] == 'edit_site_settings' && $site->u
 	
 	if(save_sub_site_settings($settings))
 	{
-		echo '{ error: 0}';
+		echo '{"error": 0}';
 	}
 	else 
 	{
-		echo '{ error: 1}';
+		echo '{"error": 1}';
 	}
 	
 	exit;
@@ -569,7 +569,7 @@ if($site->user->user_id && $site->fdat['op'] == 'get_site_objects_count' && is_n
 	
 	include_once($class_path.'adminpage.inc.php');
 	
-	echo '{ count: '.get_sub_site_objects_count($site->fdat['site_id']).'}';
+	echo '{"count": '.get_sub_site_objects_count($site->fdat['site_id']).'}';
 	
 	exit;
 }
@@ -845,6 +845,6 @@ if($site->user->user_id && $site->fdat['op'] == 'delete_sys_word' && is_numeric(
 	exit;
 }
 
-echo '{ error: 404 }';
+echo '{"error": 404}';
 
-exit();
+exit;
