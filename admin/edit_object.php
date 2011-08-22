@@ -663,6 +663,8 @@ else {
 
 		$pealkiri_strip = strip_tags($pealkiri_strip);
 		$sisu_strip = strip_tags($sisu_strip);
+		// remove excess spaces
+		$sisu_strip = preg_replace('/\s+/', ' ',$foo);
 
 		// overwrite catch for files, this is here so when a new file is being uploaded but
 		// a file with a same name already exists
