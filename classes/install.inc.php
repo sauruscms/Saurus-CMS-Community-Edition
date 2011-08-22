@@ -515,6 +515,11 @@ function store_admin_data()
 	if ($FDAT["adminpasswd"] == 'saurus') {
 		return "Please go back and change default password for administrator login!";
 	}
+
+    if (empty($FDAT["adminemail"]) || !filter_var($FDAT["adminemail"], FILTER_VALIDATE_EMAIL)) {
+		return "Please go back and set correct e-mail address for administrator!";
+    }
+
 	// write admin user data db
 	if ($FDAT["adminpasswd"]) {
 		$pass_sql = $conn->prepare(", password=? ", crypt($FDAT["adminpasswd"], Chr(rand(65,91)).Chr(rand(65,91))));
@@ -529,17 +534,19 @@ function store_admin_data()
 
 	if ($exists) {
 		$sql = $conn->prepare(
-			"UPDATE users SET firstname=?, username=?, group_id=? $pass_sql where username='admin'",
+			"UPDATE users SET firstname=?, username=?, email=?, group_id=? $pass_sql where username='admin'",
 			$FDAT["adminname"],
 			$FDAT["admin"],
+            $FDAT["adminemail"],
 			1
 		);
 		$sth = new SQL($sql);
 	} else {
 		$sql = $conn->prepare(
-			"INSERT INTO users (firstname, username, group_id, password) VALUES (?, ?, ?, ?)",
+			"INSERT INTO users (firstname, username, email, group_id, password) VALUES (?, ?, ?, ?, ?)",
 			$FDAT["adminname"],
 			$FDAT["admin"],
+            $FDAT["adminemail"],
 			1,
 			$pass
 		);

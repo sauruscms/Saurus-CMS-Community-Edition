@@ -155,13 +155,19 @@ function smarty_function_sysword ($params, &$smarty) {
 						######### / sysword edit-link
                     //\Changed by Alexei
                     }
-                    
+                   
+                    # Fall back to English in browse mode (show English translated word instead
+                    # of the empty one, if the translation is missing for the selected language).
+                    $sys_sona = $site->sys_sona(array('sona' => $final_sys_sona, 'tyyp'=> $type_synonim_arr[$type], 'load_all' => $load_all, 'skip_convert' => $skip_convert));
+                    if(empty($sys_sona))
+                        $sys_sona = $site->sys_sona(array('sona' => $final_sys_sona, 'tyyp'=> $type_synonim_arr[$type], 'load_all' => $load_all, 'skip_convert' => $skip_convert, 'lang_id' => 1));
+ 
 					if ($name) { # assign word to template variable
 						$smarty->assign(array(
-							$name => $edit_link_start.$site->sys_sona(array('sona' => $final_sys_sona, 'tyyp'=> $type_synonim_arr[$type], 'load_all' => $load_all, 'skip_convert' => $skip_convert)).$edit_link_end
+							$name => $edit_link_start.$sys_sona.$edit_link_end
 						));
 					} else { # echo word
-						echo $edit_link_start.$site->sys_sona(array('sona' => $final_sys_sona, 'tyyp'=> $type_synonim_arr[$type], 'load_all' => $load_all, 'skip_convert' => $skip_convert)).$edit_link_end;
+						echo $edit_link_start.$sys_sona.$edit_link_end;
 					}
 					return; //1; Bug #1921
 				} 

@@ -1,18 +1,84 @@
-[CHECKSUM=1:18:1029]
-[DATE=2009-11-23 16:09:59]
+[CHECKSUM=1:20:1030]
+[DATE=2011-05-17 12:02:00]
 [ENCODING=ISO-8859-4]
 
 #
 #  Language file: English
 #  Supplier: www.saurus.info 
-#
+#  
 
 
 # SYSTEM STRING; DESCRIPTION; TRANSLATION;
 
 
 
-[system:1:System]
+[sample:100:Sample Extension]
+
+
+
+[saurus4:101:Saurus 4]
+add;Add;Add;
+add comment;Add comment;Add comment;
+advanced search;Advanced search;Advanced search;
+all the words;All the words;All the words;
+application name;Application;Application;
+applications login info;Applications;Applications;
+archive;Archive;Archive;
+author;Author;Author;
+by title;By title;By title;
+CAPTCHA failed;Entered text did not match text on the image;Entered text did not match text on the image;
+changed last;Changed last;Changed last;
+comment;Comment;Comment;
+comments;Comments;Comments;
+does not include;Does not include;Does not include;
+e-mail;E-mail;E-mail;
+enter_the_text_on_the_image;Enter the text on the image;Text on image;
+exact phrase;Exact phrase;Exact phrase;
+forums;Forums;Forums;
+from section;From section;From section;
+hide e-mail;Don't show e-mail;Don't show my e-mail;
+keyword_too_short;Keyword is too short;Please enter keyword at least 4 characters long;
+last 3 months;Last 3 months;Last 3 months;
+last 6 months;Last 6 months;Last 6 months;
+last month;Last month;Last month;
+last reply;Last reply;Last reply;
+last week;Last week;Last week;
+last year;Last year;Last year;
+latest posts;Latest posts;Latest posts;
+mailinglists;Subscribe to mailinglists;mailinglists;
+name;Name;Name;
+new comment;New comment;New comment;
+new message;New message;New message;
+new topic;New topic;New topic;
+newest first;Newest first;Newest first;
+one of the words;One of the words;One of the words;
+password;Password;Password;
+password expired message;Your password is expired, enter new password;Your password is expired, enter new password;
+please fill in;Please fill in;Please fill in;
+profile;Profile;Profile;
+register;Register;Register;
+replies;Replies;Replies;
+reply;Reply;Reply;
+rss entries;Entries;Entries;
+search;Search;Search;
+search_order_relevance;By relevance;By relevance;
+see also;See also;See also;
+send;Send;Send;
+send_replies;Send replies to e-mail;Send replies to my e-mail;
+sitemap;Sitemap;Sitemap;
+title;Title;Title;
+topics;Topics;Topics;
+username;Username;Username;
+whenever;Whenever;Whenever;
+yesterday;Yesterday;Yesterday;
+
+
+
+[saurus4_estidcard:102:Saurus 4 Estonian ID card]
+
+
+
+[system:103:System]
 404error;Error 404 - page not found;Error 404 - page not found;
 add_cart;The item has been added to the cart;The item has been added to the cart;
 Album;Album;Album;
@@ -67,7 +133,7 @@ your_IP_disabled;User IP blocked;User IP blocked;
 
 
 
-[editor:3:Editor]
+[editor:104:Editor]
 access denied;Access denied;Access denied;
 Address;Aadress;Address;
 add_images;add_images;add_images;
@@ -118,6 +184,7 @@ Faili nimi juba kinni;Filename already in use;Filename already in use;
 Faili salvestamisel tekkis viga;Error in saving file;Error in saving file;
 fieldname;fieldname;Field name;
 Filename;File name;Filename;
+fm_choose_file_for_link;Choose file for link;Choose file for link;
 fm_choose_file_into_article;Choose a file to insert file into article;Choose a file to insert file into article;
 fm_choose_file_into_profile_field;Choose a file;Choose a file;
 fm_choose_user_image;Choose an image as user image;Choose an image as user image;
@@ -267,7 +334,7 @@ Yes;Yes;Yes;
 
 
 
-[dokumendid:4:Documents]
+[dokumendid:105:Documents]
 Aeg;Time;;
 Autor;Author;Author;
 fail;File;File;
@@ -279,7 +346,7 @@ type;Type;type;
 
 
 
-[kalender:5:Calendar]
+[kalender:106:Calendar]
 clear;clear;clear;
 close;close;close;
 Daily;Daily;Daily;
@@ -327,7 +394,7 @@ yearly;Yearly;Yearly;
 
 
 
-[otsing:7:Search]
+[otsing:107:Search]
 Ei sisalda sonu;Doesn't include words;Does not include words;
 Eile;Yesterday;Yesterday;
 Koiki sonu;All words;All words;
@@ -366,7 +433,7 @@ yhte sonadest;One of the words;One of the words;
 
 
 
-[kujundus:9:Visual design]
+[kujundus:108:Visual design]
 Add;Add;Add;
 Arhiiv;Archive;Archive;
 Artiklil on;This article has;This article has;
@@ -408,7 +475,7 @@ Viga;Error;Error;
 
 
 
-[kasutaja:11:Users]
+[kasutaja:109:Users]
 Account;Account;Account;
 Account_nr;Account number;Account number;
 Additional info;Additional info;Additional info;
@@ -483,7 +550,7 @@ wrong email format;Incorrect e-mail format;Incorrect e-mail format;
 
 
 
-[admin:12:Admin]
+[admin:110:Admin]
 about;About;About;
 Actions;Actions;Actions;
 Active;Active;Active;
@@ -710,8 +777,6 @@ Site_styles;Site Styles;Site Styles;
 slogan;Slogan;Slogan;
 Spam;Spam;Spam;
 sso_applications;SSO applications;SSO applications;
-Static Content Export;Static Content Export;Static Content Export;
-Statistics;Statistics;Statistics;
 Status;Status;Status;
 Styles;Styles;Styles;
 subject_line;subject line;Subject;
@@ -758,7 +823,7 @@ XML;XML;XML;
 
 
 
-[e_commerce:17:E-Commerce]
+[e_commerce:111:E-Commerce]
 amount;Amount;Amount;
 cart;Cart;Cart;
 cart delete confirmation;Delete this shoppingcart?;Delete this shoppingcart?;
@@ -786,12 +851,12 @@ VAT;VAT;VAT;
 
 
 
-[sapi:19:Saurus API]
+[sapi:112:Saurus API]
 Clear cache;Clear cache;Clear cache;
 
 
 
-[xml:20:XML]
+[xml:113:XML]
 add date and time info to filename;add date and time info to filename;add date and time info to filename;
 CMS objects from Sections;CMS objects from Sections;CMS objects from Sections;
 Custom SQL;Custom SQL;Custom SQL;
@@ -828,7 +893,7 @@ XML Root End;XML Root End;XML Root End;
 
 
 
-[powertools:21:Power Tools]
+[powertools:114:Power Tools]
 any case;any case;Any case;
 Are you sure?;Are you sure?;Are you sure?;
 Article;Article;Article;
@@ -865,88 +930,7 @@ whole word;whole word;Whole word;
 
 
 
-[statistics:25:Statistics]
-activities;Activities;Activities;
-Agent Information;Agent Information;Agent Information;
-another pages;another pages;another pages;
-Average;Average;Average;
-Average pages per day;Average pages per day;Average pages per day;
-Average pages per month;Average pages per month;Average pages per month;
-Average visitors per day;Average visitors per day;Average visitors per day;
-Average visitors per month;Average visitors per month;Average visitors per month;
-Average visits per day;Average visits per day;Average visits per day;
-Average visits per month;Average visits per month;Average visits per month;
-Browsers;Browsers;Browsers;
-Daily stats;Daily stats;Daily stats;
-deleted;Deleted;Deleted;
-Detailed stats available since;Detailed stats available since;Detailed stats available since;
-Domains;Domains;Domains;
-downloads;Downloads;Downloads;
-entry time;entry time;entry time;
-First hit;First hit;First hit;
-first page;first page;first page;
-found page;found page;found page;
-Full referrers;Full referrers;Full referrers;
-host_ip;Host / IP;Host / IP;
-Last hit;Last hit;Last hit;
-last reload;last reload;last reload;
-Legend;Legend;Legend;
-link;link;link;
-logins;Log ins;Log ins;
-minutes;minutes;minutes;
-most_downloaded_files;TOP 20 downloaded files;TOP 20 downloaded files;
-no_files_found;No files found;No files found;
-One-time visitors;One-time visitors;One-time visitors;
-online;online;online;
-Online visitors;Online visitors;Online visitors;
-Page;Page;Page;
-Page views;Page views;Page views;
-Pages;Pages;Pages;
-page_back;Back;Back;
-page_browsers;Browsers;Browsers;
-page_clock;Clock;Clock;
-page_config;Config;Config;
-page_files;Files;Files;
-page_pages;Pages;Pages;
-page_referrers;Referrers;Referrers;
-page_searches;Searches;Searches;
-page_summary;Summary;Summary;
-page_users;Users;Users;
-page_visitors;Visitors;Visitors;
-percent;percent;percent;
-proxy;proxy;proxy;
-Recent visitors;Recent 15 visitors;recent visitors;
-refered page;refered page;refered page;
-REFERRED;REFERRED!;REFERRED!;
-referrer;referrer;referrer;
-Refresh;Refresh;Refresh;
-Reg.user;Reg.user;Reg.user;
-Search engine;Search engine;Search engine;
-searches;searches;searches;
-search_for_files;Search for files;Search for file;
-Server time now is;Server time now is;Server time now is;
-Show visitors for the last;Show visitors for the last;Show visitors for the last;
-Site tree;Site tree;Site tree;
-Statistics for;Statistics for;Statistics for;
-Stats;Stats;Stats;
-Stats available since;Stats available since;Stats available since;
-Stats for section;Stats for section;Stats for section;
-stats not available;Stats are not available for selected period.;Stats are not available for selected period;
-stats_for_file;Stats for file;Stats for file;
-Sum;Sum;Sum;
-Systems;Systems;Systems;
-TOP 20 visited pages;TOP 20 visited pages;TOP 20 visited pages;
-TOP 50 Search keywords;TOP 50 Search keywords;TOP 50 Search keywords;
-Totals;Totals;Totals;
-unique;Unique;Unique;
-user;User;User;
-users;Users;Users;
-Visitors;Visitors;Visitors;
-visits;visits;visits;
-
-
-
-[event:26:Event]
+[event:116:Event]
 Assign to;Assign to;Assign to;
 completed;Completed;Completed;
 Conflicts found!;Conflicts found!;Conflicts found!;
@@ -979,7 +963,7 @@ workday;Workday;workday;
 
 
 
-[files:27:Files]
+[files:117:Files]
 add_file_favorite;Add favorite;Add favorite;
 add_folder;Add folder;Add folder;
 add_folder_favorite;Add favorite;Add favorite;
@@ -1039,7 +1023,7 @@ view_file;View;View;
 
 
 
-[extensions:28:Extensions]
+[extensions:118:Extensions]
 Extension;Extension;Extension;
 icon_path;Icon path;Icon path;
 min_saurus_modules;Minimum Saurus modules required;Minimum Saurus modules required;
@@ -1049,64 +1033,6 @@ Version;Version;Version;
 
 
 
-[workflow:29:Workflow Manager]
+[workflow:119:Workflow Manager]
 Definitions;Definitions;Definitions;
 Processes;Processes;Processes;
-
-
-
-[saurus4:101:Saurus 4]
-add;Add;Add;
-add comment;Add comment;Add comment;
-advanced search;Advanced search;Advanced search;
-all the words;All the words;All the words;
-application name;Application;Application;
-applications login info;Applications;Applications;
-archive;Archive;Archive;
-author;Author;Author;
-by title;By title;By title;
-CAPTCHA failed;Entered text did not match text on the image;Entered text did not match text on the image;
-changed last;Changed last;Changed last;
-comment;Comment;Comment;
-comments;Comments;Comments;
-does not include;Does not include;Does not include;
-e-mail;E-mail;E-mail;
-enter_the_text_on_the_image;Enter the text on the image;Text on image;
-exact phrase;Exact phrase;Exact phrase;
-forums;Forums;Forums;
-from section;From section;From section;
-hide e-mail;Don't show e-mail;Don't show my e-mail;
-keyword_too_short;Keyword is too short;Please enter keyword at least 4 characters long;
-last 3 months;Last 3 months;Last 3 months;
-last 6 months;Last 6 months;Last 6 months;
-last month;Last month;Last month;
-last reply;Last reply;Last reply;
-last week;Last week;Last week;
-last year;Last year;Last year;
-latest posts;Latest posts;Latest posts;
-mailinglists;Subscribe to mailinglists;mailinglists;
-name;Name;Name;
-new comment;New comment;New comment;
-new message;New message;New message;
-new topic;New topic;New topic;
-newest first;Newest first;Newest first;
-one of the words;One of the words;One of the words;
-password;Password;Password;
-password expired message;Your password is expired, enter new password;Your password is expired, enter new password;
-please fill in;Please fill in;Please fill in;
-profile;Profile;Profile;
-register;Register;Register;
-replies;Replies;Replies;
-reply;Reply;Reply;
-rss entries;Entries;Entries;
-search;Search;Search;
-search_order_relevance;By relevance;By relevance;
-see also;See also;See also;
-send;Send;Send;
-send_replies;Send replies to e-mail;Send replies to my e-mail;
-sitemap;Sitemap;Sitemap;
-title;Title;Title;
-topics;Topics;Topics;
-username;Username;Username;
-whenever;Whenever;Whenever;
-yesterday;Yesterday;Yesterday;

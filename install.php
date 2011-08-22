@@ -102,13 +102,16 @@ $current_ver = current_version(); # try to connect database and find which versi
 if(!$current_ver && php_sapi_name() == 'cli')
 {
 	$opts  = array(
-		'h::', // dbhost:dbport default localhost:3306
+		'h:', // dbhost:dbport default localhost:3306
 		'd:', // db
 		'u:', // dbuser
 		'p:', // dbpass
 		'U:', // cms user
 		'P:', // cms pass
+		'E:', // cms user e-mail
 		'H:', // cms hostname/wwwroot
+		'L:', // cms default language and default admin language
+		'T:', // cms page template
 	);	
 	
 	$options = array(
@@ -119,8 +122,12 @@ if(!$current_ver && php_sapi_name() == 'cli')
 		'dbpasswd' => NULL,
 		'cmsuser' => NULL,
 		'cmspasswd' => NULL,
+		'cmsemail' => NULL,
 		'cmshostname' => NULL,
 		'cmswwwroot' => NULL,
+		'cmslanguage' => 1,
+		'cmsadminlanguage' => 1,
+		'cmspagetemplate' => NULL
 	);
 	
 	$opts = getopt(implode('', $opts));
@@ -130,7 +137,7 @@ if(!$current_ver && php_sapi_name() == 'cli')
 		if($opt === false)
 		{
 			echo 'Value missing for '.$key."\n";
-			exit;
+			exit(1);
 		}
 		
 		switch ($key)
@@ -147,6 +154,12 @@ if(!$current_ver && php_sapi_name() == 'cli')
 				if($opt[1]) $options['cmswwwroot'] = '/'.$opt[1];
 			break;
 			
+			case 'L':
+				$opt = explode(',', $opt);
+				if(is_numeric($opt[0])) $options['cmslanguage'] = (int) $opt[0];
+				if(is_numeric($opt[1])) $options['cmsadminlanguage'] = (int) $opt[1];
+			break;
+			
 			case 'd': $options['db'] = $opt; break;
 			
 			case 'u': $options['dbuser'] = $opt; break;
@@ -157,25 +170,32 @@ if(!$current_ver && php_sapi_name() == 'cli')
 			
 			case 'P': $options['cmspasswd'] = $opt; break;
 			
+			case 'E': $options['cmsemail'] = $opt; break;
+			
+			case 'T': $options['cmspagetemplate'] = $opt; break;
+			
 			default: break;
 		}
 	}
 	
 	foreach ($options as $key => $opt)
 	{
-		if(!$opt)
+		if(is_null($opt) && !in_array($key, array('cmswwwroot', 'cmspagetemplate')))
 		{
 			echo 'Value missing for '.$key."\n";
-			exit;
+			exit(1);
 		}
 	}
 	
 	if($options['cmspasswd'] == 'saurus')
 	{
 		echo "The CMS password can't be 'saurus'.\n";
-		exit;
+		exit(1);
 	}
-	
+    if (!filter_var($options['cmsemail'], FILTER_VALIDATE_EMAIL)) {
+        echo "Illegal administrator e-mail address.\n";
+        exit(1);
+    }
 	//var_dump($options);
 	
 	// write config 
@@ -191,7 +211,7 @@ if(!$current_ver && php_sapi_name() == 'cli')
 	{
 		echo 'Could not connect to database.'."\n";
 		if($conn->error) echo $conn->error."\n";
-		exit;
+		exit(1);
 	}
 	
 	############# VERSION CHECK
@@ -200,7 +220,7 @@ if(!$current_ver && php_sapi_name() == 'cli')
 	if($current_ver)
 	{
 		echo 'CMS is already installed, to update run update.php'."\n";
-		exit;
+		exit(1);
 	}
 	
 	// create folders
@@ -213,12 +233,18 @@ if(!$current_ver && php_sapi_name() == 'cli')
 	dump_full_database();
 	echo "\n";
 	
-	// set hostname and wwwroot 
+	// set hostname, wwwroot and default languages
 	# update database
 	new SQL("UPDATE config SET sisu='".$options['cmshostname']."' WHERE nimi='hostname'");
 
 	# update database
 	new SQL("UPDATE config SET sisu='".$options['cmswwwroot']."' WHERE nimi='wwwroot'");
+
+	# update database
+	new SQL('UPDATE keel SET on_default=0 WHERE on_default=1');
+	new SQL('UPDATE keel SET on_default_admin=0 WHERE on_default_admin=1');
+	new SQL('UPDATE keel SET on_default=1 WHERE keel_id = '.$options['cmslanguage']);
+	new SQL('UPDATE keel SET on_default_admin=1 WHERE keel_id = '.$options['cmsadminlanguage']);
 	
 	$site = new Site(array(
 		'on_debug' => ($_COOKIE['debug'] ? 1:0),
@@ -230,6 +256,7 @@ if(!$current_ver && php_sapi_name() == 'cli')
 	// create the user
 	$FDAT['adminname'] = $FDAT['admin'] = $options['cmsuser'];
 	$FDAT['adminpasswd'] = $FDAT['adminpasswd_check'] = $options['cmspasswd'];
+	$FDAT['adminemail'] = $options['cmsemail'];
 	
 	store_admin_data();
 	
@@ -250,14 +277,28 @@ if(!$current_ver && php_sapi_name() == 'cli')
 	echo 'Clearing caches';
 	$update->clearCaches();
 	echo '.'."\n";
-	
+
+    if(isset($options['cmspagetemplate']))
+    {
+        echo 'Setting default page template to '.$options['cmspagetemplate'];
+        $sql = $conn->prepare("SELECT ttyyp_id FROM templ_tyyp WHERE templ_fail LIKE ? LIMIT 1",'%'.$options['cmspagetemplate']);
+        $sth = new SQL($sql);
+        $template_id = $sth->fetchsingle();
+        if($template_id)
+        {
+            $sql = $conn->prepare("UPDATE keel SET page_ttyyp_id=? WHERE on_kasutusel=?",$template_id,1);
+            $sth = new SQL($sql);
+        }
+        echo 'done.'."\n";
+    }
+
 	echo 'Done.'."\n";
-	exit;
+	exit(0);
 }
 elseif (php_sapi_name() == 'cli')
 {
 	echo 'CMS is already installed, to update run update.php'."\n";
-	exit;
+	exit(1);
 }
 
 # kui esileht ja current versiooni ei leitud, siis järelikult install
