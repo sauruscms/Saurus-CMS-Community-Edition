@@ -384,6 +384,8 @@
 
 function get_images($path,$view_path,$get_type=null)
 {
+	global $site;
+	#echo $get_type;
     if(!is_dir($path) )
     {
     	//ei ole kataloog
@@ -399,18 +401,43 @@ function get_images($path,$view_path,$get_type=null)
         //ei ole piltide katalooma
         return false;
     }
+
+	//võta folder
+	$sql = $site->db->prepare('SELECT objekt_id FROM obj_folder WHERE relative_path LIKE ?', '/'.$view_path);
+    $result = new SQL($sql);
+	//folderi objekti id
+    $folder_objekt_id = $result->fetchsingle();
+	
+	//võta failid
+	if($get_type == 'time_first')
+	{
+		$result = new SQL('SELECT obj_file.filename 
+							FROM objekt_objekt, obj_file, objekt 
+							WHERE objekt_objekt.objekt_id = obj_file.objekt_id 
+								AND obj_file.objekt_id = objekt.objekt_id 
+								AND objekt_objekt.parent_id = '.(int)$folder_objekt_id.' 
+							ORDER BY objekt.aeg DESC');
+		$get_type = 'first';
+	}
+	else
+	{
+		$result = new SQL('SELECT obj_file.filename 
+							FROM objekt_objekt, obj_file 
+							WHERE objekt_objekt.objekt_id = obj_file.objekt_id 
+								AND objekt_objekt.parent_id = '.(int)$folder_objekt_id.' 
+							ORDER BY obj_file.filename DESC');
+	}
+
     //on kataloog ja .gallery_thumbnails ja .gallery_thumbnails on olemas
-    $filenames = glob($path.'/*.*');
-    
-    foreach($filenames as $i => $file)
+    $filenames = array();
+    while($row = $result->fetch('NUM'))
     {
-    	$filenames[$i] = str_replace($path.'/', '', $file);
-    }
-    
+		$filenames[] = $row[0];
+	}
+
     $images=array();
     $i=0;
     
-    natsort($filenames);
     
     foreach($filenames as $file)
     {
@@ -2891,3 +2918,4 @@ if (!function_exists("_")) {
     return $str;
   }
 } 
+
