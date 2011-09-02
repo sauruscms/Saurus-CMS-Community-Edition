@@ -153,21 +153,21 @@ function set_hostname_wwwroot($url)
 	#
 	# this->hostname: serveri nimi, nt dino.saurus.ee 
 	# this->wwwroot: URL ilma scriptinimega, nt /port
-	#    on tühistring kui saidil oma virtuaalhost ja dns-kirje.
+	#    on tï¿½histring kui saidil oma virtuaalhost ja dns-kirje.
 
 	$self = $_SERVER["REQUEST_URI"]; # kui apache
-	# failinimi lõpust maha
+	# failinimi lï¿½pust maha
 	if (preg_match("/^[^\?]*\//", $self, $matches)) {
 		$path = $matches[0];
 	} else {
 		$path = $self;
 	}
-	# slash lõppu!
+	# slash lï¿½ppu!
 	if (!preg_match("/\/$/",$path)) {$path .= "/"; }
 
 	$wwwroot = $path;
 
-	# slash lõpust maha!
+	# slash lï¿½pust maha!
 	$wwwroot = preg_replace("/\/$/","",$wwwroot);
 
 	# find hostname from url
@@ -516,7 +516,8 @@ function store_admin_data()
 		return "Please go back and change default password for administrator login!";
 	}
 
-    if (empty($FDAT["adminemail"]) || !filter_var($FDAT["adminemail"], FILTER_VALIDATE_EMAIL)) {
+    // TODO: add adminemail field to user creation form
+    if ($FDAT["adminemail"] && !filter_var($FDAT["adminemail"], FILTER_VALIDATE_EMAIL)) {
 		return "Please go back and set correct e-mail address for administrator!";
     }
 
@@ -763,7 +764,7 @@ function site_url() {
 
 	# leiame url-i ilma hostname'ta
 
-		##Kontrollime kas server jooksetab apachet või mitte
+		##Kontrollime kas server jooksetab apachet vï¿½i mitte
 		if(preg_match("/apache/i", $_SERVER["SERVER_SOFTWARE"]) || preg_match("/apache/i", $_SERVER["SERVER_SOFTWARE"])){
 			$self = $_SERVER["REQUEST_URI"]; # kui apache
 		} else {
@@ -774,14 +775,14 @@ function site_url() {
 		} else {
 			$path = $self;
 		}
-		# slash lõppu!
+		# slash lï¿½ppu!
 		if (!preg_match("/\/$/",$path)) {$path .= "/"; }
 
 	# Bug #2303: fixing port ($_SERVER["HTTP_HOST"] already includes port info):
 	### =>REMOVED: add port to the URL if it's not default http port (80) or https port (443)
 	#$port = ($_SERVER["SERVER_PORT"] && $_SERVER["SERVER_PORT"]!='80' && $_SERVER["SERVER_PORT"]!='443'?':'.$_SERVER["SERVER_PORT"]:'');
 
-	# Bug #2271: Tuumas ja installiskriptis leitakse hostname erinevate serveri muutujate põhjal	
+	# Bug #2271: Tuumas ja installiskriptis leitakse hostname erinevate serveri muutujate pï¿½hjal	
 	$url = $_SERVER["HTTP_HOST"].$path; 
 	return $url;
 }

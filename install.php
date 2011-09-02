@@ -136,7 +136,7 @@ if(!$current_ver && php_sapi_name() == 'cli')
 	{
 		if($opt === false)
 		{
-			echo 'Value missing for '.$key."\n";
+			echo 'Value missing for '.$key."\n"; echo 11;
 			exit(1);
 		}
 		
@@ -180,7 +180,7 @@ if(!$current_ver && php_sapi_name() == 'cli')
 	
 	foreach ($options as $key => $opt)
 	{
-		if(is_null($opt) && !in_array($key, array('cmswwwroot', 'cmspagetemplate')))
+		if(is_null($opt) && !in_array($key, array('cmswwwroot', 'cmspagetemplate', 'cmsemail')))
 		{
 			echo 'Value missing for '.$key."\n";
 			exit(1);
@@ -192,7 +192,8 @@ if(!$current_ver && php_sapi_name() == 'cli')
 		echo "The CMS password can't be 'saurus'.\n";
 		exit(1);
 	}
-    if (!filter_var($options['cmsemail'], FILTER_VALIDATE_EMAIL)) {
+	
+    if ($options['cmsemail'] && !filter_var($options['cmsemail'], FILTER_VALIDATE_EMAIL)) {
         echo "Illegal administrator e-mail address.\n";
         exit(1);
     }
@@ -301,7 +302,7 @@ elseif (php_sapi_name() == 'cli')
 	exit(1);
 }
 
-# kui esileht ja current versiooni ei leitud, siis järelikult install
+# kui esileht ja current versiooni ei leitud, siis jï¿½relikult install
 if (!$current_ver && !$install) {
 	$install = 1;
 }
@@ -815,12 +816,9 @@ if ($install) {
 			?>
 			<table width="580" border=0>
 			<?
-			echo 333;
 			include_once("admin/change_config.php");
-			echo 111;
 
 			print_config_table();
-			echo 222;
 
 			?>
 
