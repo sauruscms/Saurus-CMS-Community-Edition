@@ -24,6 +24,14 @@
 # : is independent script, not for including, new Site is generated
 ##############################
 
+function strpos_arr($haystack, $needle) {
+    if(!is_array($needle)) $needle = array($needle);
+    foreach($needle as $what) {
+        if(($pos = strpos($haystack, $what))!==false) return $pos;
+    }
+    return false;
+}
+
 global $site;
 
 preg_match('/\/(admin|editor)\//i', $_SERVER["REQUEST_URI"], $matches);
@@ -109,7 +117,7 @@ foreach ($fdat as $key=>$value) {
 		# ----------------------------------------
 		# required field
 		# ----------------------------------------
-		if(strlen($prefix) <= 3 && strpos(strtolower($prefix), array('a', 'b', 'c', 'd', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',)) === false)
+		if(strlen($prefix) <= 3 && strpos_arr(strtolower($prefix), array('a', 'b', 'c', 'd', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',)) === false)
 		{
 			if (preg_match("/r/i",$prefix) && $value==='') {
 				$site->debug->msg("error: required");
