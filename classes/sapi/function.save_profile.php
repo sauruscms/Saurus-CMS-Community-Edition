@@ -353,7 +353,7 @@ function smarty_function_save_profile($params, &$smarty)
 				$sql = 'update '.$profile['source_table'].' set '.$update_source_sql.' where '.$source_table_id_column.' = '.$id;
 				//printr($sql);
 				$result = new SQL($sql);
-				if($result->rows != -1)
+				if($result->error_no == 0)
 				{
 					// log values for new user
 					if($profile['source_table'] == 'users')
