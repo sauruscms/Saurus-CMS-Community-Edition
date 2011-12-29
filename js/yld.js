@@ -376,13 +376,10 @@ function safe_filename(name) {
 //max_date - the ID that contains the latest possible date  to select
 
 function init_datepicker(field_name,min_date,max_date){
-
-
-	if ( window.jQuery && $ && $.datepicker){
+	
+	if ( window.jQuery && $ && $.datepicker && load_datepicker_settings()){
 
 		jQuery(function($){
-
-			load_datepicker_settings();
 
 			if(min_date && max_date){
 

@@ -64,46 +64,45 @@ function checkForumFields(variant){
 
 }
 
-
-
-
 function load_datepicker_settings()
 {
-if(window.jQuery){
+	if(window.jQuery){
 
-	jQuery(function($){
+		jQuery(function($){
 
-		$.datepicker.regional['ee'] = {clearText: '<?=$site->sys_sona(array('sona' => 'clear', 'tyyp' =>'kalender'))?>', 
-			clearStatus: '',
-			closeText: '<?=$site->sys_sona(array('sona' => 'close', 'tyyp' =>'kalender'))?>', 
-			closeStatus: '',
-			prevText: '<?=$site->sys_sona(array('sona' => 'previous', 'tyyp' =>'kalender'))?>',  
-			prevStatus: '',
-			nextText: '<?=$site->sys_sona(array('sona' => 'next', 'tyyp' =>'kalender'))?>', 
-			nextStatus: '',
-			currentText: '<?=$site->sys_sona(array('sona' => 'today', 'tyyp' =>'kalender'))?>', 
-			currentStatus: '',
-			monthNames: ['<?=$site->sys_sona(array('sona' => 'month1', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'month2', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'month3', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'month4', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'month5', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'month6', 'tyyp' =>'kalender'))?>', 
-			'<?=$site->sys_sona(array('sona' => 'month7', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'month8', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'month9', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'month10', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'month11', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'month12', 'tyyp' =>'kalender'))?>'],
-			monthNamesShort: ['Jan','Feb','Mar','Apr','Maj','Jun', 
-			'Jul','Aug','Sep','Okt','Nov','Dec'],
-			monthStatus: '', 
-			yearStatus: '',
-			weekHeader: 'Ve', 
-			weekStatus: '',
-			dayNamesShort: ['<?=$site->sys_sona(array('sona' => 'weekday7', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'weekday1', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'weekday2', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'weekday3', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'weekday4', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'weekday5', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'weekday6', 'tyyp' =>'kalender'))?>'],
-			dayNames: ['<?=$site->sys_sona(array('sona' => 'weekday7_long', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'weekday1_long', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'weekday2_long', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'weekday3_long', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'weekday4_long', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'weekday5_long', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'weekday6_long', 'tyyp' =>'kalender'))?>'],
-			dayNamesMin: ['<?=$site->sys_sona(array('sona' => 'weekday7', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'weekday1', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'weekday2', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'weekday3', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'weekday4', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'weekday5', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'weekday6', 'tyyp' =>'kalender'))?>'],
-			dayStatus: 'DD', 
-			dateStatus: 'D, M d',
-			dateFormat: 'dd.mm.yy', 
-			firstDay: 1, 
-			initStatus: '', 
-			showOtherMonths: true,
-			speed: '',
-			isRTL: false};
+			$.datepicker.regional['ee'] = {clearText: '<?=$site->sys_sona(array('sona' => 'clear', 'tyyp' =>'kalender'))?>', 
+				clearStatus: '',
+				closeText: '<?=$site->sys_sona(array('sona' => 'close', 'tyyp' =>'kalender'))?>', 
+				closeStatus: '',
+				prevText: '<?=$site->sys_sona(array('sona' => 'previous', 'tyyp' =>'kalender'))?>',  
+				prevStatus: '',
+				nextText: '<?=$site->sys_sona(array('sona' => 'next', 'tyyp' =>'kalender'))?>', 
+				nextStatus: '',
+				currentText: '<?=$site->sys_sona(array('sona' => 'today', 'tyyp' =>'kalender'))?>', 
+				currentStatus: '',
+				monthNames: ['<?=$site->sys_sona(array('sona' => 'month1', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'month2', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'month3', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'month4', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'month5', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'month6', 'tyyp' =>'kalender'))?>', 
+				'<?=$site->sys_sona(array('sona' => 'month7', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'month8', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'month9', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'month10', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'month11', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'month12', 'tyyp' =>'kalender'))?>'],
+				monthNamesShort: ['Jan','Feb','Mar','Apr','Maj','Jun', 
+				'Jul','Aug','Sep','Okt','Nov','Dec'],
+				monthStatus: '', 
+				yearStatus: '',
+				weekHeader: 'Ve', 
+				weekStatus: '',
+				dayNamesShort: ['<?=$site->sys_sona(array('sona' => 'weekday7', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'weekday1', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'weekday2', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'weekday3', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'weekday4', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'weekday5', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'weekday6', 'tyyp' =>'kalender'))?>'],
+				dayNames: ['<?=$site->sys_sona(array('sona' => 'weekday7_long', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'weekday1_long', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'weekday2_long', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'weekday3_long', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'weekday4_long', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'weekday5_long', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'weekday6_long', 'tyyp' =>'kalender'))?>'],
+				dayNamesMin: ['<?=$site->sys_sona(array('sona' => 'weekday7', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'weekday1', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'weekday2', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'weekday3', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'weekday4', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'weekday5', 'tyyp' =>'kalender'))?>','<?=$site->sys_sona(array('sona' => 'weekday6', 'tyyp' =>'kalender'))?>'],
+				dayStatus: 'DD', 
+				dateStatus: 'D, M d',
+				dateFormat: 'dd.mm.yy', 
+				firstDay: 1, 
+				initStatus: '', 
+				showOtherMonths: true,
+				speed: '',
+				isRTL: false};
 
-				});
+			});
 		$.datepicker.setDefaults($.datepicker.regional['ee']);
 	}
+
+	return true;
 }
