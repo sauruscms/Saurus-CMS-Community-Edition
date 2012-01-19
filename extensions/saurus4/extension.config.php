@@ -190,6 +190,15 @@ $EXTENSION['templates'][] = array(
 );
 
 $EXTENSION['templates'][] = array(
+	'name' => 'Articles: feedback errors',
+	'file' => 'object_templates/feedback_error.html',
+	'is_page' => 0,
+ 	'is_visible' => 0,
+	'is_readonly' => 1,
+	'op' => 'error',
+);
+
+$EXTENSION['templates'][] = array(
 	'name' => 'Forum: topic view',
 	'file' => 'object_templates/forum_topic.html',
 	'is_page' => 0,

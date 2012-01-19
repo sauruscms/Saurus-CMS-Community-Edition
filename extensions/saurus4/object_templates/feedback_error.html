@@ -1,0 +1,133 @@
+{**
+ * The feedback errors
+ * Date: 19.01.12
+ *
+ * @package saurus4
+ * 
+ * @author Saurus <saurus@saurus.info>
+ *
+ *}
+
+<div id="ArticleContainer">
+
+{* Article *}
+{init_article name="article" id=$id buttons="new,edit,hide,delete"}
+
+{assign var="fields" value=$smarty.get.fields|@xss_clean|@htmlspecialchars}
+
+<h1>{$article->buttons}{if $article->show_headline}{$article->title}{/if}</h1>
+{if $article->lead}{$article->lead|replace:'[error]':$fields}{/if}
+{if $article->body}{$article->body|replace:'[error]':$fields}{/if}
+
+{* Article comments *}
+<a name="comments"></a>	
+{init_messages name="messages" parent=$id order="objekt_id asc"}
+{if $messages|@sizeof}<p class="separator">{sysword word="comments" type="saurus4"}</p>{/if}
+
+<table cellpadding="2" cellspacing="2" width="100%" class="ZebraTable">
+{foreach from=$messages item="message"}	
+	<tr class="{cycle values="dark, light"}">
+		<td>
+			{$message->buttons}{$message->author} <span class="Date">{$message->date}</span>
+			<p>{$message->body|parse_emoticons|parse_html}</p>
+		</td>
+	</tr>
+{/foreach}
+</table>
+{* /Article comments *}
+
+{if $conf.allow_commenting && $article->forum_allowed && !($conf.only_regusers_comment && !$user)}
+	{* New comment form *}
+	<a name="add_message"></a>
+
+	{literal}
+	<script type="text/javascript">
+	
+	function checkForumFields(form_id)
+	{
+		var submit_form = document.getElementById(form_id);
+		var len = 2;
+		
+		if(submit_form)
+		{
+			if (submit_form.nimi.value.length < len){
+				alert('{/literal}{sysword word="please fill in" type="saurus4"}{literal}: '+document.getElementById('for_'+submit_form.nimi.id).innerHTML);
+				submit_form.nimi.focus();
+				return false;
+			}
+			
+			if (submit_form.text.value.length < len){
+				alert('{/literal}{sysword word="please fill in" type="saurus4"}{literal}: '+document.getElementById('for_'+submit_form.text.id).innerHTML);
+				submit_form.text.focus();
+				return false;
+			}
+			
+			{/literal}{if $conf.check_for_captcha}{literal}
+			
+			if (submit_form.captcha_default.value.length < len){
+				alert('{/literal}{sysword word="please fill in" type="saurus4"}{literal}: '+document.getElementById('for_'+submit_form.captcha_default.id).innerHTML);
+				submit_form.captcha_default.focus();
+				return false;
+			}
+			
+			{/literal}{/if}{literal}
+			
+			submit_form.submit();
+		}
+	}
+	
+	</script>
+	{/literal}
+	
+	<p class="separator">{sysword word="new comment" type="saurus4"}</p>
+	
+	<form action="add_comment.php" method="POST" name="forumPostForm" id="forumPostForm">
+		<table cellpadding="0" cellspacing="0" class="FormTable">
+			<col class="FormTableLabels">
+			<tr> 
+				<td><label for="nimi" id="for_nimi">{sysword word="name" type="saurus4"}</label></td>
+				<td><input type="text" name="nimi" id="nimi" value="{if $smarty.session.scms_last_comment.nimi}{$smarty.session.scms_last_comment.nimi|xss_clean}{else}{$userdata->name}{/if}" class="FormText">*</td>
+			</tr>
+			<tr> 
+				<td><label for="email" id="for_email">{sysword word="e-mail" type="saurus4"}</label></td>
+				<td><input type="text" name="email" id="email" value="{if $smarty.session.scms_last_comment.email}{$smarty.session.scms_last_comment.email|xss_clean}{else}{$userdata->all.email}{/if}" class="FormText"></td>
+			</tr>
+			<tr> 
+				<td><label for="text" id="for_text">{sysword word="comment" type="saurus4"}</label></td>
+				<td><textarea name="text" id="text" class="FormTextArea">{if $smarty.session.scms_last_comment.text}{$smarty.session.scms_last_comment.text|xss_clean}{/if}</textarea></td>
+			</tr>
+			{*** CAPTCHA ***}
+			{if $conf.check_for_captcha}
+			<tr> 
+				<td></td>
+				<td><img src="{$wwwroot}/extensions/saurus4/captcha_image.php?name=default" width="{$saurus4.captchas.default.image_width}" height="{$saurus4.captchas.default.image_height}" alt="" title=""></td>
+			</tr>
+			<tr> 
+				<td><label for="captcha_default" id="for_captcha_default">{sysword word="enter the text on the image" type="saurus4"}</label></td>
+				<td><input type="text" name="captcha_default" id="captcha_default" class="FormText"></td>
+			</tr>
+			{/if}
+			{*** //CAPTCHA ***}
+			<tr> 
+				<td></td>
+				<td><input type="button" onclick="checkForumFields('forumPostForm');" value="{sysword word="send" type="saurus4"}"></td>
+			</tr>
+		</table>
+		<input type="hidden" name="id" value="{$id}">
+	</form>
+	{* /New comment form *}
+{/if}
+
+{* for CAPTCHA failure notice *}
+{if $smarty.get.lisa_alert == 2}
+<script type="text/javascript">
+	alert('{sysword word="CAPTCHA failed" type="saurus4"}');
+	var href = window.location.href + '#add_message';
+	window.location.href = href.replace('&lisa_alert=2', '');
+</script>
+{/if}
+{* /for CAPTCHA failure notice *}
+
+{if !$smarty.get.lisa_alert && session_unregister('scms_last_comment')}{/if}
+
+</div><!-- / ArticleContainer -->
