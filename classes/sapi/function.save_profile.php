@@ -192,8 +192,8 @@ function smarty_function_save_profile($params, &$smarty)
 			}
 			
 			$old_user_enc_password = $site->user->all['password'];
-			unset($site->user->all['password']);
-			
+			if (isset($site->user->all['password'])) unset($site->user->all['password']);
+
 			# if password expired, then check, if user inserted new password (check if this match with old one)
 			if($old_user_enc_password && $site->user->all['pass_expired'])
 			{
