@@ -19,9 +19,9 @@
 
 
 
-	//DEPRECATE!!
-	function picture_resize( $key, $data, $args=array()) {
-
+//DEPRECATE!!
+function picture_resize( $key, $data, $args=array()) {
+	set_time_limit(30);
 
 
 	global $site;
@@ -281,7 +281,8 @@
 				$site->debug->msg("Image created: $dst_img");
 				$site->debug->msg("image size: ".strlen($cs_image));
 
-				#imageDestroy ($dst_img); unset ($dst_img);
+				imagedestroy($dst_img);
+				imagedestroy($src_img);
 
 				############
 				# find thumb size
@@ -316,8 +317,8 @@
 
 
 				$site->debug->msg("thumb size: ".strlen($cs_thumb));
-				#imageDestroy ($dst_img);
-				#imageDestroy ($src_img);
+				imagedestroy($dst_img);
+				imagedestroy($src_img);
 			} 
 			###############################
 			# if image is smaller than thumb measures (will not resize)
@@ -1926,7 +1927,7 @@ class ImageShopper {
      * @param  string $server_path Path location of the uploaded file, with an ending slash
      */
     function process($server_path) {
-
+		set_time_limit(30);
         global $site;
     	
     	$this->error        = '';
@@ -2828,11 +2829,9 @@ class ImageShopper {
                             $this->processed = false;
                             $this->error = _("No convertion type defined");
                     }
-                    if ($this->processed) {
-                        if (is_resource($image_src)) imagedestroy($image_src);
-                        if (is_resource($image_dst)) imagedestroy($image_dst);
-                        $this->log .= '&nbsp;&nbsp;&nbsp;&nbsp;' . _("image objects destroyed") . '<br />';
-                    }
+                    if (is_resource($image_src)) imagedestroy($image_src);
+                    if (is_resource($image_dst)) imagedestroy($image_dst);
+                    $this->log .= '&nbsp;&nbsp;&nbsp;&nbsp;' . _("image objects destroyed") . '<br />';
                 }
 
             } else {
