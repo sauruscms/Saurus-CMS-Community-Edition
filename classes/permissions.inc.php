@@ -98,8 +98,8 @@ function get_copypermissions_url(acl,id){
 	if(document.getElementById(acl+"_C_"+id)) { 
 		if(document.getElementById(acl+"_C_"+id).checked) { crud = crud + '1'; } else { crud = crud + '0'; }
 	}
-	if(document.getElementById(acl+"_R_"+id)) { 
-		if(document.getElementById(acl+"_R_"+id).checked) { crud = crud + '1'; } else { crud = crud + '0'; }
+	if(document.getElementById(acl+"_R_"+id) || $("input[name="+acl+"_R_"+id+"]").length > 0) { 
+		if($("input[name="+acl+"_R_"+id+"]").val() == '1' || document.getElementById(acl+"_R_"+id).checked) { crud = crud + '1'; } else { crud = crud + '0'; }
 	}
 	if(document.getElementById(acl+"_U_"+id)) { 
 		if(document.getElementById(acl+"_U_"+id).checked) { crud = crud + '1'; } else { crud = crud + '0'; }
@@ -469,7 +469,7 @@ old checkbox-->
 				<?
 				### exception for public folder: Read is already ON and disabled (Bug #2216)
 				if($char == 'R' && $is_public_folder) {  ?>
-					<input type="hidden"	name="<?=$acl?>_<?=$char?>_<?=$id?>" value="1">
+					<input type="hidden" name="<?=$acl?>_<?=$char?>_<?=$id?>" value="1">
 					<input name="tmp" type="checkbox" value="1" checked disabled> 
 				<?}
 				### usual case
