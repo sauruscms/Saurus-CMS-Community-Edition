@@ -35,6 +35,14 @@ function obfuscate_email_preg_replace_callback($matches)
    
    global $site;
 
+   if(strtolower(substr($site->encoding, 0, 4)) == 'iso-') {
+		$decode_function = 'unescape';
+   }
+   else {
+		$decode_function = 'decodeURIComponent';
+   }
+
+
     // $matches[0] contains full matched string: <a href="...">...</a>
     // $matches[1] contains additional parameters
     // $matches[2] contains the email address which was specified as href
@@ -54,7 +62,7 @@ function obfuscate_email_preg_replace_callback($matches)
    for ($x=0; $x < strlen($string); $x++) {
       $js_encode .= '%' . bin2hex($string[$x]);
    }
-   $replace = '<a id="obfuscated_email_'.$obfuscated_email_count.$obfuscated_email_run.'" href="mailto:'.$obfuscated_address.'">'.$obfuscated_text.'</a><script type="text/javascript">eval(decodeURIComponent(\''.$js_encode.'\'))</script>';
+   $replace = '<a id="obfuscated_email_'.$obfuscated_email_count.$obfuscated_email_run.'" href="mailto:'.$obfuscated_address.'">'.$obfuscated_text.'</a><script type="text/javascript">eval('.$decode_function.'(\''.$js_encode.'\'))</script>';
    
    ++$obfuscated_email_count;
 
