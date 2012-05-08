@@ -36,22 +36,18 @@ function edit_objekt () {
 
 ?>
 	<script>
-	function setPealkiri (strPealkiri) {
-		var algus=0;
-		var saved_algus=0;
+	function setPealkiri (strPealkiri)
+	{
+		if (document.frmEdit.pealkiri.value=='')
+		{
+			// \ to /
+			strPealkiri = strPealkiri.replace(/\\/g, '/');
+			// strip out file extension
+			strPealkiri = strPealkiri.replace(/\.[^\.]*$/g, '');
+			// strip out file path
+			strPealkiri = strPealkiri.replace(/^(.*)\//g, '');
 
-		if (document.frmEdit.pealkiri.value=='') {
-			while (algus!=-1) {
-				saved_algus=algus;
-				algus=strPealkiri.indexOf('\\',algus+1);
-			}
-			algus=saved_algus;
-			while (algus!=-1) {
-				saved_lopp=algus;
-				algus=strPealkiri.indexOf('\.',algus+1);
-			}
-
-			document.frmEdit.pealkiri.value = strPealkiri.substr(saved_algus+1,saved_lopp-saved_algus-1);
+			document.frmEdit.pealkiri.value = strPealkiri;
 		}
 	}
 	</script>
@@ -132,9 +128,9 @@ function salvesta_objekt () {
 	#############################################
 	# download_type - default: 0
 	# kui download_type=1, 
-	# siis salvestame uploaditud file kõvaketas,
+	# siis salvestame uploaditud file kï¿½vaketas,
 	# mitte baasi
-	$download_type = $args['download_type'] ? 1 : 0;
+	$download_type = $args['download_type'] ? 1 : ((!empty($site->CONF['documents_in_filesystem']) && !empty($site->CONF['documents_directory']) && file_exists(str_replace('//', '/', $site->absolute_path.$site->CONF['documents_directory']))) ? 1 : 0);
 
 	if ($args["objekt"]) {
 		$objekt = $args["objekt"];
@@ -170,7 +166,7 @@ function salvesta_objekt () {
 		# -------------------------------
 		if($file_name){
 			$ft_tmp=explode(".",$file_name);
-			$fail_tyyp = $ft_tmp[sizeof($ft_tmp)-1];  # Bug #2509
+			$fail_tyyp = (sizeof($ft_tmp) == 1) ? '' : $ft_tmp[sizeof($ft_tmp)-1];  # Bug #2509
 		}
 
 		/*-------------------------------
@@ -181,7 +177,7 @@ function salvesta_objekt () {
 
 		if ($file_size >= $limit && !$download_type) {
 
-			#kustutame ära baasist vana fail
+			#kustutame ï¿½ra baasist vana fail
 			$sql = $site->db->prepare("
 				DELETE 
 				FROM document_parts 
@@ -310,8 +306,17 @@ function salvesta_objekt () {
 				#####################################################
 				# kui download_type=1, 
 				# siis salvestame uploaditud fail kataloogisse, 
-				# mis on määratud konfis CONF['documents_directory']
+				# mis on mï¿½ï¿½ratud konfis CONF['documents_directory']
 				if ($download_type) {
+					if (!empty($site->CONF['documents_in_filesystem']) && !empty($site->CONF['documents_directory']) && file_exists(str_replace('//', '/', $site->absolute_path.$site->CONF['documents_directory'])))
+					{
+						$doc_name = md5($objekt->objekt_id);
+						$dir_path = str_replace('//','/',$site->absolute_path.$site->CONF['documents_directory'].'/'.$doc_name[0]);
+						if (!file_exists($dir_path)) { mkdir($dir_path); chmod($dir_path, 0775); }
+						$doc_full_path = $dir_path.'/'.$doc_name;
+					}
+					else
+					{
 					$doc_full_path = $site->absolute_path.$site->CONF["documents_directory"]."/".$file_name;
 					
 					######################################
@@ -331,6 +336,7 @@ function salvesta_objekt () {
 						);
 						$sth = new SQL($sql);
 						$site->debug->msg($sth->debug->get_msgs());
+					}
 					}
 
 					$doc_uploaded = @move_uploaded_file($file['tmp_name'], $doc_full_path);

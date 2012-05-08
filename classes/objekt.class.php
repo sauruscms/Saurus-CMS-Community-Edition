@@ -252,12 +252,31 @@ class Objekt extends BaasObjekt {
 
 				if ($tabel == "obj_dokument") {
 					# DOKUMENT
-					$sql = $this->site->db->prepare("SELECT fail FROM obj_dokument WHERE objekt_id IN(". join(",",$alampuu).")");
-					$sth3 = new SQL($sql);
-					$this->debug->msg($sth3->debug->get_msgs());
-					while ($filename = $sth3->fetchsingle()) {
-						$this->debug->msg("Kustutan faili ".$this->site->CONF[documentsroot]."/$filename");
-						unlink($this->site->CONF[documentsroot]."/$filename");
+					if (!empty($this->site->CONF['documents_in_filesystem']) && !empty($this->site->CONF['documents_directory']) && file_exists(str_replace('//', '/', $this->site->absolute_path.$this->site->CONF['documents_directory'])))
+					{
+						$sql = $this->site->db->prepare('SELECT objekt_id FROM obj_dokument WHERE objekt_id IN('. join(',',$alampuu).')');
+						$sth3 = new SQL($sql);
+						$this->debug->msg($sth3->debug->get_msgs());
+						while ($oid = $sth3->fetchsingle())
+						{
+							$filename = md5($oid);
+							$filepath = str_replace('//','/',$this->site->absolute_path.$this->site->CONF['documents_directory'].'/'.$filename[0].'/'.$filename);
+							if (@file_exists($filepath))
+							{
+								$this->debug->msg('Kustutan faili '.$filepath);
+								unlink($filepath);
+							}
+						}
+					}
+					else
+					{
+  					$sql = $this->site->db->prepare("SELECT fail FROM obj_dokument WHERE objekt_id IN(". join(",",$alampuu).")");
+  					$sth3 = new SQL($sql);
+  					$this->debug->msg($sth3->debug->get_msgs());
+  					while ($filename = $sth3->fetchsingle()) {
+  						$this->debug->msg("Kustutan faili ".$this->site->CONF[documentsroot]."/$filename");
+  						unlink($this->site->CONF[documentsroot]."/$filename");
+  					}
 					}
 				} elseif ($tabel == "obj_gallup") {
 					# GALLUP

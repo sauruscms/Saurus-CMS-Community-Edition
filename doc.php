@@ -52,13 +52,37 @@ if($objekt->objekt_id && ($objekt->all['on_avaldatud'] == 1 || $site->in_editor)
 		$site->debug->msg($sth->debug->get_msgs());
 		$result = $sth->fetch();
 	
+		if (!empty($site->CONF['documents_in_filesystem']) && !empty($site->CONF['documents_directory']) && file_exists(str_replace('//', '/', $site->absolute_path.$site->CONF['documents_directory'])))
+		{
+			$download_filename = '';
+			if (!empty($_GET['filename']) && $_GET['filename'] == 'original' && !empty($result['fail'])) { $download_filename = preg_replace(array("/[<>:\"\/\\\?\|\*]+/", "/^[\s\.]+/", "/[\s\.]+$/"), '', $result['fail']); }
+			else
+			{
+				if (!empty($objekt->all['pealkiri'])) { $download_filename = preg_replace(array("/[<>:\"\/\\\?\|\*]+/", "/^[\s\.]+/", "/[\s\.]+$/"), '', $objekt->all['pealkiri']); }
+				if (!empty($result['tyyp'])) { $download_filename .= '.' . preg_replace(array("/[<>:\"\/\\\?\|\*]+/", "/^[\s\.]+/", "/[\s\.]+$/"), '', $result['tyyp']); }
+				if (!preg_replace("/\.".$result['tyyp']."$/", '', $download_filename) && !empty($result['fail'])) { $download_filename = preg_replace(array("/[<>:\"\/\\\?\|\*]+/", "/^[\s\.]+/", "/[\s\.]+$/"), '', $result['fail']); }
+			}
+			header("Content-Disposition: ".((!empty($_GET['disposition']) && $_GET['disposition'] == 'inline') ? 'inline' : 'attachment')."; filename=\"".safe_filename2($download_filename)."\"; filename*=UTF-8''".rawurlencode($download_filename)."");
+		}
+		else
+		{
 		header("Content-Disposition: attachment; filename=\"".$result['fail']."\"");
+		}
 		header("Content-Type: $ctype");
 		header("Cache-control: private");
 	    header("Pragma: public");
 	
 		if ($result['download_type']) {
+			if (!empty($site->CONF['documents_in_filesystem']) && !empty($site->CONF['documents_directory']) && file_exists(str_replace('//', '/', $site->absolute_path.$site->CONF['documents_directory'])))
+			{
+				$doc_name = md5($result['objekt_id']);
+				$doc_full_path = str_replace('//','/',$site->absolute_path.$site->CONF['documents_directory'].'/'.$doc_name[0].'/'.$doc_name);
+				if (!empty($site->CONF['documents_mod_xsendfile']) && in_array('mod_xsendfile', apache_get_modules())) { header('X-Sendfile: '.$doc_full_path); exit; }
+			}
+			else
+			{
 			$doc_full_path = $site->absolute_path.$site->CONF["documents_directory"]."/".$result['fail'];
+			}
 			if (@file_exists($doc_full_path)) {
 				$in = fopen($doc_full_path, "rb");
 				if ($in) {
@@ -74,11 +98,9 @@ if($objekt->objekt_id && ($objekt->all['on_avaldatud'] == 1 || $site->in_editor)
 			while ( $sisu = $sth->fetch()) {
 				$output .= $sisu['content'];
 			}
-		}
 		header("Content-Length: ".strlen($output));
 		echo $output;
-	
-	
+		}	
 	
 	} else if ($objekt->all['klass']=="file") {
 	
@@ -117,7 +139,7 @@ if($objekt->objekt_id && ($objekt->all['on_avaldatud'] == 1 || $site->in_editor)
 		header("Content-Disposition: attachment; filename=\"".$result['fail']."\"");
 		header("Content-Type: $ctype");
 		header("Cache-control: private");
-	    header("Pragma: public");
+	  header("Pragma: public");
 	
 		
 		$sql = $site->db->prepare("SELECT content FROM document_parts WHERE objekt_id = ? ORDER BY id ASC", $objekt->objekt_id);
