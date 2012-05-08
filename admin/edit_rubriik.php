@@ -218,7 +218,14 @@ function edit_objekt()
 			
 			function resizeWindow()
 			{
-				resizeWindowTo($('#size_wrapper').width(), $('#size_wrapper').height());
+				if(jQuery.browser.webkit)
+        {
+          window.resizeTo(580, 310);
+				}
+				else
+				{
+          resizeWindowTo($('#size_wrapper').width(), $('#size_wrapper').height());
+				}
 			}
 			
 			
