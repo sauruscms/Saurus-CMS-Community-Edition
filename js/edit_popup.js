@@ -1,4 +1,3 @@
-
 /* Set focus to headline in the edit-popups*/
 function setHeadlineFocus(){
 	eval('if(typeof(document.frmEdit)!="undefined"){if(typeof(document.frmEdit.pealkiri)!="undefined"){document.frmEdit.pealkiri.focus();};}');
@@ -13,6 +12,7 @@ function changeProfile(obj) {
 		}
 	}
 	if (obj.value) document.getElementById('profile_' + obj.value).style.display = 'block';
+	resizeWindow();
 }
 
 // section/album editor functions
