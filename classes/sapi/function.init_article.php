@@ -115,9 +115,17 @@ function smarty_function_init_article ($params,&$smarty) {
 	
 	##############
 	# luua objekt
-	$obj = new Objekt(array(
-		objekt_id => $id,
-	));
+
+	$objSettings = array();
+	$objSettings['objekt_id'] = $id;
+	$obj = new Objekt($objSettings);
+	
+	$allObjParents = $obj->get_obj_all_parents($objSettings['objekt_id']);
+	
+	if(in_array($leht->parents->list[0]->parent_id, $allObjParents)) {
+		$objSettings['parent_id'] = $leht->parents->list[0]->parent_id;
+		$obj = new Objekt($objSettings);
+	}
 
 	##############
 	# minna edasi vaid siis kui tegemist on artikliga
