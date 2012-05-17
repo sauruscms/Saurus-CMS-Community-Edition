@@ -85,9 +85,10 @@ class Objekt extends BaasObjekt {
 			$this->all = $this->get_obj_from_array($args[ary]);
 
 		}
-		# if trying to open not existing object (ID not found)
+		# if trying to open not existing object (ID not found) or if file is unpublished and
+		# user is not in editor or admin mode
 		# then show 404 error page
-		if (!$this->all && !$args[skip_sanity_check] ) {
+		if ((!$this->all && !$args[skip_sanity_check]) || (!$this->all["on_avaldatud"] && !$this->site->in_editor && !$this->site->in_admin)) {
 			$this->all = $this->get_obj_by_id($this->site->alias("404error"));
 			$this->on_404 = 1;
 		}
