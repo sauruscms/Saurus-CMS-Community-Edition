@@ -25,7 +25,7 @@ global $site;
 		if(!function_exists('smarty_function_init_section')){
 			require_once $smarty->_get_plugin_filepath('function', 'init_section');
 		}
-		smarty_function_init_section($params, &$smarty);
+		smarty_function_init_section($params, $smarty);
 
 
 }

@@ -26,7 +26,7 @@ global $site;
 			require_once $smarty->_get_plugin_filepath('function', 'init_favorites');
 		}
 
-		smarty_function_init_favorites($params, &$smarty);
+		smarty_function_init_favorites($params, $smarty);
 
 
 }

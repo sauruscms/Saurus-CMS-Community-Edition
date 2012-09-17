@@ -4,17 +4,17 @@
  * It is licensed under MPL 1.1 (http://www.opensource.org/licenses/mozilla1.1.php).
  * Copyright (C) 2000-2010 Saurused Ltd (http://www.saurus.info/).
  * Redistribution of this file must retain the above copyright notice.
- * 
+ *
  * Please note that the original authors never thought this would turn out
  * such a great piece of software when the work started using Perl in year 2000.
  * Due to organic growth, you may find parts of the software being
  * a bit (well maybe more than a bit) old fashioned and here's where you can help.
  * Good luck and keep your open source minds open!
- * 
+ *
  * @package		SaurusCMS
  * @copyright	2000-2010 Saurused Ltd (http://www.saurus.info/)
  * @license		Mozilla Public License 1.1 (http://www.opensource.org/licenses/mozilla1.1.php)
- * 
+ *
  */
 
 
@@ -24,28 +24,28 @@
 #	id => default: <current page id>
 #	name => default: "object"
 #	buttons => default: "new,edit,hide,move,delete"
-# 
+#
 # Returns general object, loads entire content
 
 function smarty_function_init_object ($params,&$smarty) {
 	global $site, $leht, $template, $class_path;
 
 	$content_template = &$leht->content_template;
-	
+
 	##############
 	# default values
 
 	extract($params);
-    if(!isset($id)) { 
-		$id = $leht->id;	
-	} 
+    if(!isset($id)) {
+		$id = $leht->id;
+	}
     if(!isset($name)) { $name = "object"; }
 
 	###############
 	# action-buttons
-	# by default show all 
+	# by default show all
 
-    if(!isset($buttons)) { 
+    if(!isset($buttons)) {
 		$buttons=array("new", "edit", "hide", "move", "delete");
 	} else {
 		$buttons = split(",",$buttons);
@@ -73,7 +73,7 @@ function smarty_function_init_object ($params,&$smarty) {
 		if (!$site->in_editor && $site->CONF['use_aliases'] && $site->CONF['replace_links_with_alias']) {
 			$objektUrl = convert_local_link_to_alias($objektUrl);
 		}
-		
+
 		/* eeldab et HTML'is on kasutusel " mitte ' */
 		($objektUrl && $obj->all['on_uusaken'] ? $obj->href = $objektUrl.'" target="_blank' : $obj->href = $objektUrl);
 	}
@@ -81,7 +81,7 @@ function smarty_function_init_object ($params,&$smarty) {
 	else
 	{
 		$obj->get_object_href();
-	} 
+	}
 
 	$obj->title = $obj->pealkiri;
 	$obj->buttons = $obj->get_edit_buttons(array(
@@ -121,7 +121,7 @@ function smarty_function_init_object ($params,&$smarty) {
 	if($profile_def[profile_id]) {
 
 		include_once($class_path.'profile.class.php');
-		
+
 		$obj_profile = new Profile(array("id"=>$obj->all['profile_id']));
 
 		#### 1. set profile fields as object attributes
@@ -142,20 +142,20 @@ function smarty_function_init_object ($params,&$smarty) {
 				"selectlist" => $obj_profile->selectlist
 			));
 
-			#printr($obj_profile->asset_names);			
+			#printr($obj_profile->asset_names);
 			#printr($obj_profile->change_fields);
 
 			### 3. save object rest of attributes
-			#print "<br>muuta ID: ".$obj->id;	
+			#print "<br>muuta ID: ".$obj->id;
 			$obj_profile->set_obj_selectlist_fields(array(
 				"obj" => &$obj,
 				"change_fields" => $obj_profile->change_fields
-			));					
-		} # if any selectvalue exist & need to change 
+			));
+		} # if any selectvalue exist & need to change
 		# / get selectlist values
 		###################
 	}
-	
+
 	################
 	# object CLASS specific parameters
 
@@ -165,7 +165,7 @@ function smarty_function_init_object ($params,&$smarty) {
 		if(!function_exists('smarty_function_init_article')){
 			require_once $smarty->_get_plugin_filepath('function', 'init_article');
 		}
-		smarty_function_init_article(array("id"=>$obj->id, 'name' => $name), &$smarty);
+		smarty_function_init_article(array("id"=>$obj->id, 'name' => $name), $smarty);
 		return;
 	}
 	########## DOCUMENT
@@ -173,7 +173,7 @@ function smarty_function_init_object ($params,&$smarty) {
 		if(!function_exists('smarty_function_init_document')){
 			require_once $smarty->_get_plugin_filepath('function', 'init_document');
 		}
-		$obj = smarty_function_init_document(array("id"=>$obj->id, 'name' => $name), &$smarty);
+		$obj = smarty_function_init_document(array("id"=>$obj->id, 'name' => $name), $smarty);
 		return;
 	}
 	########## IMAGE
@@ -181,7 +181,7 @@ function smarty_function_init_object ($params,&$smarty) {
 		if(!function_exists('smarty_function_init_picture')){
 			require_once $smarty->_get_plugin_filepath('function', 'init_picture');
 		}
-		$obj = smarty_function_init_picture(array("id"=>$obj->id, 'name' => $name), &$smarty);
+		$obj = smarty_function_init_picture(array("id"=>$obj->id, 'name' => $name), $smarty);
 		return;
 	}
 	########## SECTION
@@ -206,25 +206,25 @@ function smarty_function_init_object ($params,&$smarty) {
 			$sql = $site->db->prepare("SELECT COUNT(gi_id) FROM gallup_ip WHERE objekt_id=? AND ip LIKE ?",$obj->id, $_SERVER["REMOTE_ADDR"] );
 			$sth = new SQL($sql);
 			$count = $sth->fetchsingle();
-		} 
+		}
 		# 2) cookie based gallup
 		else if ($site->CONF[gallup_ip_check]==2 && $site->cookie["gallup"][$obj->id]==1){
 			$count = 1;
-		} 
+		}
 		# 3) user based gallup (only logged in users)
 		else if ($site->CONF[gallup_ip_check]==3){
 			$sql = $site->db->prepare("SELECT COUNT(gi_id) FROM gallup_ip WHERE objekt_id=? AND user_id=?",$obj->id,$site->user->user_id);
 			$sth = new SQL($sql);
 			# count=1: not logged in users are not allowed to vote:
 			$count = $site->user->user_id ? $sth->fetchsingle() : 1;
-		} else { 
+		} else {
 			$count = 0;
 		}
 		######### / CHECK voting
 
 		### is_voted: if user is voted this poll or not, 1/0
 		$obj->is_voted = $count; # not voted
-		
+
 		### answers
 		$sql = $site->db->prepare("SELECT * FROM gallup_vastus WHERE objekt_id=?", $obj->id);
 		$sth = new SQL($sql);
@@ -272,12 +272,12 @@ function smarty_function_init_object ($params,&$smarty) {
 
 
 		### / voters
-	} 
+	}
 	########## / POLL
 	########## ALBUM
 	elseif($obj->class=='album') {
         // add album config atributes
-		
+
 		$conf = new CONFIG($obj->all['ttyyp_params']);
 
         $obj->description=$conf->get('desc');
@@ -287,7 +287,7 @@ function smarty_function_init_object ($params,&$smarty) {
         $obj->folder_path = $conf->get('path'); # source folder path, eg "public/images"
 	}
 	########## / ALBUM
-	
+
 	##############
 	# assign to template variables
 	$smarty->assign($name,$obj);

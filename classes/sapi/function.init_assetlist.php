@@ -26,7 +26,7 @@ global $site;
 			require_once $smarty->_get_plugin_filepath('function', 'init_assets');
 		}
 
-		smarty_function_init_assets($params, &$smarty);
+		smarty_function_init_assets($params, $smarty);
 
 
 }

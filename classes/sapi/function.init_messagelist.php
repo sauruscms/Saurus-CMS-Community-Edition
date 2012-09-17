@@ -26,7 +26,7 @@ global $site;
 			require_once $smarty->_get_plugin_filepath('function', 'init_messages');
 		}
 
-		smarty_function_init_messages($params, &$smarty);
+		smarty_function_init_messages($params, $smarty);
 
 
 }

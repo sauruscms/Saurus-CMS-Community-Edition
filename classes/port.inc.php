@@ -4,20 +4,20 @@
  * It is licensed under MPL 1.1 (http://www.opensource.org/licenses/mozilla1.1.php).
  * Copyright (C) 2000-2010 Saurused Ltd (http://www.saurus.info/).
  * Redistribution of this file must retain the above copyright notice.
- * 
+ *
  * Please note that the original authors never thought this would turn out
  * such a great piece of software when the work started using Perl in year 2000.
  * Due to organic growth, you may find parts of the software being
  * a bit (well maybe more than a bit) old fashioned and here's where you can help.
  * Good luck and keep your open source minds open!
- * 
+ *
  * @package		SaurusCMS
  * @copyright	2000-2010 Saurused Ltd (http://www.saurus.info/)
  * @license		Mozilla Public License 1.1 (http://www.opensource.org/licenses/mozilla1.1.php)
- * 
+ *
  */
 
- 
+
 global $class_path;
 global $CMS_SETTINGS;
 global $CMS_PARAMS;
@@ -52,13 +52,13 @@ $debug = $_COOKIE["debug"] ? 1:0;
 function show_debug()
 {
 	static $ips;
-	
+
 	# constant DISPLAY_ERRORS_IP came from index.php. It was taken from config table in db.
 	if(DISPLAY_ERRORS_IP)
 	{
 		$ips = DISPLAY_ERRORS_IP;
 	}
-	
+
 	if ($ips)
 	{
 		$d_ips = explode(';', DISPLAY_ERRORS_IP);
@@ -70,18 +70,18 @@ function show_debug()
 			}
 		}
 	}
-	
+
 	return false;
 }
 
 function create_form_token_array($form_id)
 {
 	global $class_path;
-	
+
 	$token = crypt(md5(time().rand(1, 1000)), rand(1, 2000));
 	$form_id = $form_id.'-'.md5(time().rand(1, 30000));
 	$_SESSION['scms_form_tokens'][$form_id] = $token;
-	
+
 	return array('scms_form_id' => $form_id, 'scms_form_token' => $token);
 }
 
@@ -89,19 +89,19 @@ function create_form_token_json($form_id)
 {
 	global $class_path;
 	include_once($class_path.'lgpl/Services_JSON.class.php');
-	
+
 	$json_encoder = new Services_JSON();
-	
+
 	return $json_encoder->encode(create_form_token_array($form_id));
 }
 
 function create_form_token($form_id)
 {
 	$token_values = create_form_token_array($form_id);
-	
+
 	echo '<input type="hidden" name="scms_form_id" value="'.$token_values['scms_form_id'].'">';
 	echo '<input type="hidden" name="scms_form_token" value="'.$token_values['scms_form_token'].'">';
-	
+
 	return $token_values['scms_form_token'];
 }
 
@@ -109,17 +109,17 @@ function verify_form_token()
 {
 	$form_id = $_REQUEST['scms_form_id'];
 	$token = $_REQUEST['scms_form_token'];
-	
+
 	if(isset($_SESSION['scms_form_tokens'][$form_id]) && $_SESSION['scms_form_tokens'][$form_id] == $token)
 	{
 		return true;
 	}
-	
+
 	new Log(array(
 		'type' => 'ERROR',
 		'message' => 'Form tokens do not match! form ID: '.$form_id,
 	));
-	
+
 	exit();
 }
 
@@ -135,7 +135,7 @@ if ($debug && show_debug()){
 	if($is_installation_script){
 		ini_set('display_errors', 0);
 	}
-}	
+}
 
 /**
 * saurusErrorHandler
@@ -143,7 +143,7 @@ if ($debug && show_debug()){
 * parses php-errors and saves them into DataBase, if parameter save_error_log=1 in config table
 *
 * @package CMS
-* 
+*
 * @param - all params are set by defaults
 */
 
@@ -161,7 +161,7 @@ function saurusErrorHandler($errno, $errmsg, $filename, $linenum, $vars){
    if ($errno == E_WARNING){
 
 	if (ini_get('display_errors')){
-		echo "<font face=Verdana size=2><br><b>".$errortype.":</b> ".$errmsg." in <b>".$filename."</b> on line <b>".$linenum."</b><br></font>"; 
+		echo "<font face=Verdana size=2><br><b>".$errortype.":</b> ".$errmsg." in <b>".$filename."</b> on line <b>".$linenum."</b><br></font>";
 	}
 
 		$fdat = $_POST ? $_POST : $_GET;
@@ -263,7 +263,7 @@ $absolute_path = str_replace('\\','/',$absolute_path);
 $file = preg_replace('/extensions\/(.*)/', '', $absolute_path).'config.php';
 
 # check if file config.php exists at all
-if(!file_exists($file)) { 
+if(!file_exists($file)) {
 	print "<font color=red>Error: file \"$file\" not found!</font>";
 	exit;
 }
@@ -294,7 +294,7 @@ while ($tmpconf = $sth->fetch()){
 ##########################
 
 
-	# 19.06.2003 Evgeny: don't need to reload page every time. 
+	# 19.06.2003 Evgeny: don't need to reload page every time.
 	# Also if you submit any form, and after return back, all values in the fields are empty:
 	if ($use_browser_cache){
 		$max_age = 300;	# Cache expires max. after 5 minutes
@@ -323,7 +323,7 @@ $ldap_params = $_SESSION["ldap_params"];
 if ($_GET["op"] == 'logout' || $_POST["op"] == 'logout') {
 
 # in ver4 new ACL
-	session_unregister("user_id");
+	session_destroy("user_id");
 	unset($_SESSION["user_id"]);
 
 
@@ -359,8 +359,8 @@ if ($_GET["op"] == 'logout' || $_POST["op"] == 'logout') {
     }
 
 	setcookie("logged", "0", time()-36600);
-	
-	header("Location: ".$url); 
+
+	header("Location: ".$url);
 	exit;
 }
 
@@ -418,15 +418,15 @@ class HTML extends BaasObjekt {
 	ja tegid [nimi] t�ida
 */
 	var $source;
-	
+
 	function HTML() {
 		$this->BaasObjekt();
 		$this->source = func_num_args()>0 ? func_get_arg(0) : "";
 		$this->debug->msg("Uus HTML Objekt loodud, teksti suurus ".strlen($this->source)." symbs");
 	} #function HTML
 
-	function Fill ($data) {		
-		$this->source=preg_replace("/(\[)(.*?)(\])/e",'$data[\\2] ? $data[\\2] : "\\0"',$this->source);		
+	function Fill ($data) {
+		$this->source=preg_replace("/(\[)(.*?)(\])/e",'$data[\\2] ? $data[\\2] : "\\0"',$this->source);
 		$this->debug->msg("Filled: ".join(",",array_keys($data)));
 		return join(",",array_keys($data));
 	} #function Fill
@@ -450,7 +450,7 @@ class HTML extends BaasObjekt {
 		$this->source .= $html;
 	} #function add
 
-} 
+}
 # / HTML class
 #######################
 
@@ -468,15 +468,15 @@ include_once $class_path."config.class.php";
 
 	include_once $class_path."site.class.php";
 	include_once $class_path."objekt.class.php";
-	
+
 	include_once($class_path."user.class.php");
 	include_once($class_path."group.class.php");
 
-	include_once $class_path."template.class.php";	
+	include_once $class_path."template.class.php";
 	include_once $class_path."objekt_array.class.php";
 	include_once $class_path."html.inc.php";
 	include_once $class_path."leht.class.php";
-	
+
 	include_once($class_path.'Log.class.php');
 
 function detect_xss_in_string($string)
@@ -485,7 +485,7 @@ function detect_xss_in_string($string)
 	{
 		return true;
 	}
-	else 
+	else
 	{
 		return false;
 	}
@@ -494,7 +494,7 @@ function detect_xss_in_string($string)
 function detect_xss_in_saurus_params($variables)
 {
 	$checkable = array();
-	
+
 	if(!is_array($variables)) // params from url ex: op=muff&blah=156 or /saurus4/?op=muff&blah=156
 	{
 		if(strpos($variables, '?') !== false) $variables = substr($variables, strpos($variables, '?') + 1);
@@ -504,21 +504,21 @@ function detect_xss_in_saurus_params($variables)
 			if(strpos($variable, '=') !== false)
 			{
 				$variable = explode('=', $variable);
-				$checkable[$variable[0]] = $variable[1]; 
+				$checkable[$variable[0]] = $variable[1];
 			}
-			else 
+			else
 			{
 				$checkable[$variable] = null;
 			}
 		}
 	}
-	else 
+	else
 	{
 		$checkable = $variables;
 	}
-	
+
 	global $CMS_PARAMS;
-	
+
 	foreach($checkable as $key => $value)
 	{
 		//printr(htmlspecialchars($key.$value));
@@ -529,12 +529,12 @@ function detect_xss_in_saurus_params($variables)
 			return true;
 		}
 	}
-	
+
 	return false;
 }
 //echo (detect_xss_in_saurus_params($_SERVER['PHP_SELF']) ? 1 : 0);
 if(strstr($_SERVER['REQUEST_URI'], $CMS_SETTINGS['wwwroot'].'/admin/') === false && (
-	detect_xss_in_saurus_params($_SERVER['QUERY_STRING']) || 
+	detect_xss_in_saurus_params($_SERVER['QUERY_STRING']) ||
 	detect_xss_in_saurus_params($_SERVER['REQUEST_URI']) ||
 	detect_xss_in_string($_SERVER['PHP_SELF']) ||
 	detect_xss_in_saurus_params($_POST) ||

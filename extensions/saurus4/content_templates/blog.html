@@ -265,7 +265,7 @@
 		{/if}
 		{* /for CAPTCHA failure notice *}
 		
-		{if !$smarty.get.lisa_alert && session_unregister('scms_last_comment')}{/if}
+		{if !$smarty.get.lisa_alert && session_destroy('scms_last_comment')}{/if}
 	</div><!-- / BlogEntryCommentForm -->
 	
 	{/if}{*** comment form ****}

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This source file is is part of Saurus CMS content management software.
  * It is licensed under MPL 1.1 (http://www.opensource.org/licenses/mozilla1.1.php).
@@ -336,7 +337,7 @@ function convert_cyrillic($str,$target_encoding) {
 		if (!is_numeric($obj_id)) {
 			return 0;
 		}
-		$parents = get_parents(&$obj, $obj_id, 0);
+		$parents = get_parents($obj, $obj_id, 0);
 		if ($parents) {
 			$parents .= $obj_id;
 		} else {
@@ -346,12 +347,12 @@ function convert_cyrillic($str,$target_encoding) {
 		
 	}
 
-	function get_parents($obj, $obj_id, $level) {
+	function get_parents(&$obj, $obj_id, $level) {
 		if (is_array($obj[$obj_id])){
 			if ($level <= 10) {
 				foreach ($obj[$obj_id] as $parent_id) {
 					if ($parent_id > 0) {
-						$result = get_parents(&$obj, $parent_id, ++$level);
+						$result = get_parents($obj, $parent_id, ++$level);
 						if (!is_numeric($result)) {
 							$parents .= $result;
 							$parents .= $parent_id.",";

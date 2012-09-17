@@ -26,7 +26,7 @@ global $site;
 			require_once $smarty->_get_plugin_filepath('function', 'init_events');
 		}
 
-		smarty_function_init_events($params, &$smarty);
+		smarty_function_init_events($params, $smarty);
 
 
 }

@@ -28,5 +28,5 @@ function smarty_function_init_documentlist ($params, &$smarty) {
 		require_once $smarty->_get_plugin_filepath('function', 'init_documents');
 	}
 	
-	smarty_function_init_documents($params, &$smarty);
+	smarty_function_init_documents($params, $smarty);
 }
