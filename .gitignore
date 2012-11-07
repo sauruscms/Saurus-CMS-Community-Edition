@@ -1,0 +1,8 @@
+# Ignore Saurus site specific files
+config.php
+error.log
+classes/smarty/templates/
+classes/smarty/templates_c/
+public/
+shared/
+.htaccess
