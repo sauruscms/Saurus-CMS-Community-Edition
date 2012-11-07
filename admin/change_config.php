@@ -4,17 +4,17 @@
  * It is licensed under MPL 1.1 (http://www.opensource.org/licenses/mozilla1.1.php).
  * Copyright (C) 2000-2010 Saurused Ltd (http://www.saurus.info/).
  * Redistribution of this file must retain the above copyright notice.
- * 
+ *
  * Please note that the original authors never thought this would turn out
  * such a great piece of software when the work started using Perl in year 2000.
  * Due to organic growth, you may find parts of the software being
  * a bit (well maybe more than a bit) old fashioned and here's where you can help.
  * Good luck and keep your open source minds open!
- * 
+ *
  * @package		SaurusCMS
  * @copyright	2000-2010 Saurused Ltd (http://www.saurus.info/)
  * @license		Mozilla Public License 1.1 (http://www.opensource.org/licenses/mozilla1.1.php)
- * 
+ *
  */
 
 
@@ -64,7 +64,7 @@ if(!$called_from_install_script) {
 		on_debug=>0,
 		on_admin_keel => 1
 	));
-	
+
 	if (!$site->user->allowed_adminpage()) {
 		exit;
 	}
@@ -88,8 +88,8 @@ if(!$called_from_install_script) {
 		$sst_id = $site->fdat[sst_id];
 
 		######################
-		# leida valitud keele põhjal õige lehe encoding,
-		# admin-osa keel jääb samaks
+		# leida valitud keele pï¿½hjal ï¿½ige lehe encoding,
+		# admin-osa keel jï¿½ï¿½b samaks
 
 		$sql = "SELECT keel_id, encoding FROM keel where on_kasutusel = '1'";
 		$sth = new SQL($sql);
@@ -101,7 +101,7 @@ if(!$called_from_install_script) {
 				$page_encoding = $result['encoding'];
 				$keel_id = $result['keel_id'];
 			}
-			
+
 			if(isset($site->fdat['flt_keel']) && $site->fdat['flt_keel'] == $result['keel_id'])
 			{
 				$page_encoding = $result['encoding'];
@@ -113,7 +113,7 @@ if(!$called_from_install_script) {
 		$op = $site->fdat[op];
 		$site->debug->msg("OP = $op");
 
-		# ------------------------- 
+		# -------------------------
 		# otsime Home-rubriigid
 		# -------------------------
 			$curr_objekt = new Objekt(array(
@@ -124,8 +124,8 @@ if(!$called_from_install_script) {
 				parent_id => "0",
 				no_cache => 1
 			));
-			## BUG: juhul kui home objekti ei leidu, on $curr_objekt 404 vea objekt, ja sellele pole ju mõtet metadata-t salvestada. (Bug #1875)
-			# seepärast kontrolli üle, et sys_alias oleks õige e "home":
+			## BUG: juhul kui home objekti ei leidu, on $curr_objekt 404 vea objekt, ja sellele pole ju mï¿½tet metadata-t salvestada. (Bug #1875)
+			# seepï¿½rast kontrolli ï¿½le, et sys_alias oleks ï¿½ige e "home":
 			$conf = new CONFIG($curr_objekt->all['ttyyp_params']);
 			foreach ($conf->CONF as $k=>$v){
 				if($k=="page_end_html"){
@@ -155,12 +155,12 @@ if(!$called_from_install_script) {
 
 
 					$conf = new CONFIG($curr_objekt->all['ttyyp_params']);
-					$conf->put('site_name', $site->fdat['site_name']);	
-					$conf->put('slogan', $site->fdat['slogan']);	
-					$conf->put('page_end_html', eregi_replace("\n","XXYYZZ",str_replace("\r\n","XXYYZZ",$site->fdat['page_end_html'])));	
+					$conf->put('site_name', $site->fdat['site_name']);
+					$conf->put('slogan', $site->fdat['slogan']);
+					$conf->put('page_end_html', eregi_replace("\n","XXYYZZ",str_replace("\r\n","XXYYZZ",$site->fdat['page_end_html'])));
 
 					$sql = $site->db->prepare(
-						"UPDATE objekt SET meta_title=?, meta_keywords=?, meta_description=?, ttyyp_params=? WHERE objekt_id=?", 
+						"UPDATE objekt SET meta_title=?, meta_keywords=?, meta_description=?, ttyyp_params=? WHERE objekt_id=?",
 						$site->fdat['meta_title'], $site->fdat['meta_keywords'], $site->fdat['meta_description'], $conf->Export(), $curr_objekt->objekt_id
 					);
 
@@ -171,7 +171,7 @@ if(!$called_from_install_script) {
 					$curr_objekt = new Objekt(array(
 						objekt_id => $site->alias(array(
 								'key' => 'rub_home_id',
-								'keel' => $keel_id					
+								'keel' => $keel_id
 						)),
 						no_cache => 1
 					));
@@ -181,11 +181,11 @@ if(!$called_from_install_script) {
 					{
 						$editor_mode = true;
 					}
-					else 
+					else
 					{
 						$editor_mode = false;
 					}
-					
+
 					// if in editor mode refresh the original window and close the admin-popup
 					if($editor_mode && $site->fdat['op'] == 'saveclose')
 					{
@@ -201,10 +201,10 @@ if(!$called_from_install_script) {
 					########### redirect
 					header("Location: ".$site->self."?group=".$site->fdat['group']."&flt_keel=".$keel_id.($site->fdat['keepThis'] ? '&keepThis=true' : ''));
 					exit;
-				
+
 				}
 			} # sys_alias == 'home'
-			
+
 			## give error message
 			else {
 				echo "<font color=red>Error: Home section not found!</font>";
@@ -229,13 +229,13 @@ function print_config_row($tmp, $i) {
 	############ 1) boolean YES/NO fields
 	if (in_array($tmp[nimi],Array("only_regusers_comment", 'send_error_notifiations_to_superusers', 'fm_allow_multiple_upload', 'users_require_safe_password', 'feedbackform_check_for_captcha', 'force_https_for_editing', 'force_https_for_admin', 'check_for_captcha', 'allow_commenting', "default_comments", "users_can_register", "original_picture_saved", "alamartiklid_paises", "allow_autologin_from_ip", "enable_mailing_list",  "allow_change_position", "regusers_access_enabled", "allow_forgot_password", "notification_about_new_user_enabled","add_new_user_to_mailinglists","maillist_sending_after_publishing","save_error_log","users_can_delete_comment", 'use_aliases','redirect_to_alias','replace_links_with_alias','save_site_log',))) {
 		echo "
-		<tr> 
+		<tr>
 		<td style='width:331px' valign='top' align='left'>".$tmp[kirjeldus]."</td>
 		<td nowrap class='scms_table_row'><input type='radio' name='cff_".$tmp[nimi]."' id='cff_".$tmp[nimi]."_1' value='1' ".($tmp[sisu]=="1"?"CHECKED":"")."> <label for='cff_".$tmp[nimi]."_1'>".($tmp[nimi] == "alamartiklid_paises" ? "Top-right" : "Yes")."</label> <input type='radio' name='cff_".$tmp[nimi]."' id='cff_".$tmp[nimi]."_2' value='0' ".($tmp[sisu]=="0"?"CHECKED":"")."> <label for='cff_".$tmp[nimi]."_2'>".($tmp[nimi] == "alamartiklid_paises" ? "Below" : "No")."</label></td>
 
-		</tr>	
-		";	
-	} 
+		</tr>
+		";
+	}
 	elseif($tmp[nimi]=='gallup_ip_check'){
 
 
@@ -248,21 +248,21 @@ function print_config_row($tmp, $i) {
 		);
 
 		echo "
-		<tr> 
+		<tr>
 		<td class='scms_table_row' style='width:331px' valign='top' align='left'>".$tmp['kirjeldus']."</td>
 		<td nowrap class='scms_table_row'>
 			<select name='cff_".$tmp['nimi']."' id='cff_".$tmp['nimi']."_1' class='scms_flex_input' style='width:400px'>";
-			
+
 			foreach ($answers as $key => $value)
 			{
 				echo '<option value="'.$key.'"'.($tmp['sisu'] ==$key ? ' selected="selected"':'').'>'.$value.'</option>';
 			}
-			
+
 			echo "
 			</select>
-			
+
 			</td>
-		</tr>	
+		</tr>
 		";
 
 
@@ -283,18 +283,18 @@ function print_config_row($tmp, $i) {
 		closedir($dir);
 		sort($filelist);
 		foreach ($filelist as $file) {
-			if ('/styles/'.$file == $tmp['sisu']) { $sel = ' selected'; } 
+			if ('/styles/'.$file == $tmp['sisu']) { $sel = ' selected'; }
 			else { $sel = ''; }
 			$text .= "<option value=\"/styles/".$file."\"".$sel.">".$file."</option>";
 		}
 		echo "
-		<tr> 
+		<tr>
 		<td style='width:331px' valign='top' align='left'>".$tmp[kirjeldus]."</td>
 		<td nowrap class='scms_table_row'><select name='cff_".$tmp[nimi]."' id='cff_".$tmp[nimi]."' style='width:400px'> ";
 		echo $text;
 		echo "</select></td>
-		</tr>	
-		";	
+		</tr>
+		";
 	}
 	############ 3) IMAGE MODE selectbox - GD/Imagemagick
 	else if (in_array($tmp[nimi],Array("image_mode"))){
@@ -304,23 +304,23 @@ function print_config_row($tmp, $i) {
 		$answers = array ("Imagemagick", "GD lib");
 
 		echo "
-		<tr> 
+		<tr>
 		<td class='scms_table_row' style='width:331px' valign='top' align='left'>".$tmp[kirjeldus]."</td>
 		<td nowrap class='scms_table_row'>
 			<select name='cff_".$tmp[nimi]."' id='cff_".$tmp[nimi]."_1' class='scms_flex_input' style='width:400px'>";
-			
+
 			foreach ($answers as $key => $value){
-			
+
 				echo "
 				<OPTION value='".strtolower($value)."' ".($tmp[sisu]==strtolower($value)?"SELECTED":"").">$value</OPTION>
 				";
 			}
-			
+
 			echo "
 			</select>
-			
+
 			</td>
-		</tr>	
+		</tr>
 		";
 	}
 	############  Form method selectbox
@@ -331,22 +331,22 @@ function print_config_row($tmp, $i) {
 		$answers = array ('POST', 'GET');
 
 		echo "
-		<tr> 
+		<tr>
 		<td class='scms_table_row' style='width:331px' valign='top' align='left'>".$tmp['kirjeldus']."</td>
 		<td nowrap class='scms_table_row'>
 			<select name='cff_".$tmp['nimi']."' id='cff_".$tmp['nimi']."_1' class='scms_flex_input' style='width:400px'>";
-			
+
 			foreach ($answers as $key => $value)
 			{
 				echo '<option value="'.strtolower($value).'"'.($tmp['sisu'] == strtolower($value) ? ' selected="selected"':'').'>'.$value.'</option>';
 			}
-			
+
 			echo "
 			</select>
-			
+
 			</td>
 
-		</tr>	
+		</tr>
 		";
 	}
 	############  error notifications selection
@@ -361,21 +361,21 @@ function print_config_row($tmp, $i) {
 		);
 
 		echo "
-		<tr> 
+		<tr>
 		<td class='scms_table_row' style='width:331px' valign='top' align='left'>".$tmp['kirjeldus']."</td>
 		<td nowrap class='scms_table_row'>
 			<select name='cff_".$tmp['nimi']."' id='cff_".$tmp['nimi']."_1' class='scms_flex_input' style='width:400px'>";
-			
+
 			foreach ($answers as $key => $value)
 			{
 				echo '<option value="'.$key.'"'.($tmp['sisu'] ==$key ? ' selected="selected"':'').'>'.$value.'</option>';
 			}
-			
+
 			echo "
 			</select>
-			
+
 			</td>
-		</tr>	
+		</tr>
 		";
 	}
 	else if ($tmp['nimi'] == 'maillist_format'){
@@ -389,21 +389,21 @@ function print_config_row($tmp, $i) {
 		);
 
 		echo "
-		<tr> 
+		<tr>
 		<td class='scms_table_row' style='width:331px' valign='top' align='left'>".$tmp['kirjeldus']."</td>
 		<td nowrap class='scms_table_row'>
 			<select name='cff_".$tmp['nimi']."' id='cff_".$tmp['nimi']."_1' class='scms_flex_input' style='width:400px'>";
-			
+
 			foreach ($answers as $key => $value)
 			{
 				echo '<option value="'.$key.'"'.($tmp['sisu'] ==$key ? ' selected="selected"':'').'>'.$value.'</option>';
 			}
-			
+
 			echo "
 			</select>
-			
+
 			</td>
-		</tr>	
+		</tr>
 		";
 	}
 	else if ($tmp['nimi'] == 'mailinglist_sending_option'){
@@ -417,22 +417,22 @@ function print_config_row($tmp, $i) {
 		);
 
 		echo "
-		<tr> 
+		<tr>
 		<td class='scms_table_row' style='width:331px' valign='top' align='left'>".$tmp['kirjeldus']."</td>
 		<td nowrap class='scms_table_row'>
 
 			<select name='cff_".$tmp['nimi']."' id='cff_".$tmp['nimi']."_1' class='scms_flex_input' style='width:400px'>";
-			
+
 			foreach ($answers as $key => $value)
 			{
 				echo '<option value="'.$key.'"'.($tmp['sisu'] ==$key ? ' selected="selected"':'').'>'.$value.'</option>';
 			}
-			
+
 			echo "
 			</select>
-			
+
 			</td>
-		</tr>	
+		</tr>
 		";
 	}
 
@@ -448,21 +448,21 @@ function print_config_row($tmp, $i) {
 		);
 
 		echo "
-		<tr> 
+		<tr>
 		<td class='scms_table_row' style='width:331px' valign='top' align='left'>".$tmp['kirjeldus']."</td>
 		<td nowrap class='scms_table_row'>
 			<select name='cff_".$tmp['nimi']."' id='cff_".$tmp['nimi']."_1' class='scms_flex_input' style='width:400px'>";
-			
+
 			foreach ($answers as $key => $value)
 			{
 				echo '<option value="'.$key.'"'.($tmp['sisu'] ==$key ? ' selected="selected"':'').'>'.$value.'</option>';
 			}
-			
+
 			echo "
 			</select>
-			
+
 			</td>
-		</tr>	
+		</tr>
 		";
 	}
 	else if ($tmp['nimi'] == 'maillist_article_title'){
@@ -475,22 +475,22 @@ function print_config_row($tmp, $i) {
 		);
 
 		echo "
-		<tr> 
+		<tr>
 		<td class='scms_table_row' style='width:331px' valign='top' align='left'>".$tmp['kirjeldus']."</td>
 		<td nowrap class='scms_table_row'>
 			<select name='cff_".$tmp['nimi']."' id='cff_".$tmp['nimi']."_1' class='scms_flex_input' style='width:400px'>";
-			
+
 			foreach ($answers as $key => $value)
 			{
 				echo '<option value="'.$key.'"'.($tmp['sisu'] ==$key ? ' selected="selected"':'').'>'.$value.'</option>';
 			}
-			
+
 			echo "
 			</select>
-			
+
 			</td>
 
-		</tr>	
+		</tr>
 		";
 	}
 	else if ($tmp['nimi'] == 'maillist_article_content'){
@@ -503,22 +503,22 @@ function print_config_row($tmp, $i) {
 		);
 
 		echo "
-		<tr> 
+		<tr>
 		<td class='scms_table_row' style='width:331px' valign='top' align='left'>".$tmp['kirjeldus']."</td>
 		<td nowrap class='scms_table_row'>
 			<select name='cff_".$tmp['nimi']."' id='cff_".$tmp['nimi']."_1' class='scms_flex_input' style='width:400px'>";
-			
+
 			foreach ($answers as $key => $value)
 			{
 				echo '<option value="'.$key.'"'.($tmp['sisu'] ==$key ? ' selected="selected"':'').'>'.$value.'</option>';
 			}
-			
+
 			echo "
 			</select>
-			
+
 			</td>
 
-		</tr>	
+		</tr>
 		";
 	}
 	else if ($tmp['nimi'] == 'time_zone'){
@@ -534,7 +534,7 @@ function print_config_row($tmp, $i) {
 			}
 #printr($answers);
 		echo "
-		<tr> 
+		<tr>
 		<td class='scms_table_row' style='width:331px' valign='top' align='left'>".$tmp['kirjeldus']."</td>
 		<td nowrap class='scms_table_row'>
 			<select name='cff_".$tmp['nimi']."' id='cff_".$tmp['nimi']."_1' class='scms_flex_input' style='width:400px'>";
@@ -543,13 +543,13 @@ function print_config_row($tmp, $i) {
 			{
 				echo '<option value="'.$key.'"'.($tmp['sisu'] ==$key ? ' selected="selected"':'').'>'.$value.'</option>';
 			}
-			
+
 			echo "
 			</select>
-			
+
 			</td>
 
-		</tr>	
+		</tr>
 		";
 	}
 	else if ($tmp['nimi'] == 'alias_trail_format'){
@@ -561,7 +561,7 @@ function print_config_row($tmp, $i) {
 		);
 
 		echo "
-		<tr> 
+		<tr>
 		<td class='scms_table_row' style='width:331px' valign='top' align='left'>".$tmp['kirjeldus']."</td>
 		<td nowrap class='scms_table_row'>
 			<select name='cff_".$tmp['nimi']."' id='cff_".$tmp['nimi']."_1' class='scms_flex_input' style='width:400px'>";
@@ -569,13 +569,13 @@ function print_config_row($tmp, $i) {
 			{
 				echo '<option value="'.$key.'"'.($tmp['sisu'] ==$key ? ' selected="selected"':'').'>'.$value.'</option>';
 			}
-			
+
 			echo "
 			</select>
-			
+
 			</td>
 
-		</tr>	
+		</tr>
 		";
 	}
 	else if ($tmp['nimi'] == 'alias_language_format'){
@@ -588,7 +588,7 @@ function print_config_row($tmp, $i) {
 		);
 
 		echo "
-		<tr> 
+		<tr>
 		<td class='scms_table_row' style='width:331px' valign='top' align='left'>".$tmp['kirjeldus']."</td>
 		<td nowrap class='scms_table_row'>
 			<select name='cff_".$tmp['nimi']."' id='cff_".$tmp['nimi']."_1' class='scms_flex_input' style='width:400px'>";
@@ -596,13 +596,13 @@ function print_config_row($tmp, $i) {
 			{
 				echo '<option value="'.$key.'"'.($tmp['sisu'] ==$key ? ' selected="selected"':'').'>'.$value.'</option>';
 			}
-			
+
 			echo "
 			</select>
-			
+
 			</td>
 
-		</tr>	
+		</tr>
 		";
 	}
 	else if ($tmp['nimi'] == 'context_menu_open_event'){
@@ -614,7 +614,7 @@ function print_config_row($tmp, $i) {
 		);
 
 		echo "
-		<tr> 
+		<tr>
 		<td class='scms_table_row' style='width:331px' valign='top' align='left'>".$tmp['kirjeldus']."</td>
 		<td nowrap class='scms_table_row'>
 			<select name='cff_".$tmp['nimi']."' id='cff_".$tmp['nimi']."_1' class='scms_flex_input' style='width:400px'>";
@@ -622,20 +622,20 @@ function print_config_row($tmp, $i) {
 			{
 				echo '<option value="'.$key.'"'.($tmp['sisu'] ==$key ? ' selected="selected"':'').'>'.$value.'</option>';
 			}
-			
+
 			echo "
 			</select>
-			
+
 			</td>
 
-		</tr>	
+		</tr>
 		";
 	}
 	############ 4) TEXTAREA fields
 	else if ($tmp['nimi'] == 'maillist_header' || $tmp['nimi'] == 'maillist_footer'){
 
 		echo "
-		<tr> 
+		<tr>
 			<td style='width:331px' valign='top' align='left' style=\"padding-left: 3px;\">".$tmp['kirjeldus']."</td>
 			<td nowrap class='scms_table_row'><textarea name=\"cff_".$tmp[nimi]."\" class='scms_flex_input' style=\"width:400px;height:30px\" cols='5'>".$tmp['sisu']."</textarea></td>
 
@@ -649,11 +649,11 @@ function print_config_row($tmp, $i) {
 	############ 5) TEXT fields
 	else {
 		echo "
-		<tr> 
+		<tr>
 			<td style='width:331px' valign='top' align='left'>".$tmp[kirjeldus]."</td>
 			<td nowrap class='scms_table_row'><input class='scms_flex_input' style='width:400px' type='text' name='cff_".$tmp[nimi]."' value='".$tmp[sisu]."'></td>
 
-		</tr>	
+		</tr>
 		";
 	}
 
@@ -840,33 +840,33 @@ function print_config_table() {
 		"Gallup" =>'<IMG SRC="'.($called_from_install_script? 'styles/default/' : $site->CONF['wwwroot'].$site->CONF['styles_path'].'/').'gfx/icons/16x16/mime/sysinfo.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" align=absmiddle>',
 
 		"recycle_bin" =>'<IMG SRC="'.($called_from_install_script? 'styles/default/' : $site->CONF['wwwroot'].$site->CONF['styles_path'].'/').'gfx/icons/16x16/mime/sysinfo.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" align=absmiddle>',
-		
+
 		"time_zones" =>'<IMG SRC="'.($called_from_install_script? 'styles/default/' : $site->CONF['wwwroot'].$site->CONF['styles_path'].'/').'gfx/icons/16x16/mime/html.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" align=absmiddle>',
 
 		"gallery" =>'<IMG SRC="'.($called_from_install_script? 'styles/default/' : $site->CONF['wwwroot'].$site->CONF['styles_path'].'/').'gfx/icons/16x16/mime/images.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" align=absmiddle>',
 
 		"content_editing" =>'<IMG SRC="'.($called_from_install_script? 'styles/default/' : $site->CONF['wwwroot'].$site->CONF['styles_path'].'/').'gfx/icons/16x16/mime/html.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" align=absmiddle>',
 
-			
-		
+
+
 		"counter" =>'<IMG SRC="'.($called_from_install_script? 'styles/default/' : $site->CONF['wwwroot'].$site->CONF['styles_path'].'/').'gfx/icons/16x16/mime/counter.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" align=absmiddle>',
-		
+
 		"users" =>'<IMG SRC="'.($called_from_install_script? 'styles/default/' : $site->CONF['wwwroot'].$site->CONF['styles_path'].'/').'gfx/icons/16x16/users/group.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" align=absmiddle>',
 
 		"users_login" =>'<IMG SRC="'.($called_from_install_script? 'styles/default/' : $site->CONF['wwwroot'].$site->CONF['styles_path'].'/').'gfx/icons/16x16/users/group.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" align=absmiddle>',
-		
+
 		"cache" =>'<IMG SRC="'.($called_from_install_script? 'styles/default/' : $site->CONF['wwwroot'].$site->CONF['styles_path'].'/').'gfx/icons/16x16/mime/cache.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" align=absmiddle>',
-		
+
 		"mailing_list" => '<IMG SRC="'.($called_from_install_script? 'styles/default/' : $site->CONF['wwwroot'].$site->CONF['styles_path'].'/').'gfx/icons/16x16/actions/mail_send.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" align=absmiddle>',
 
 		"mailinglist_format" => '<IMG SRC="'.($called_from_install_script? 'styles/default/' : $site->CONF['wwwroot'].$site->CONF['styles_path'].'/').'gfx/icons/16x16/actions/mail_send.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" align=absmiddle>',
-			
-		
+
+
 		"Gallup" =>'<IMG SRC="'.($called_from_install_script? 'styles/default/' : $site->CONF['wwwroot'].$site->CONF['styles_path'].'/').'gfx/icons/16x16/mime/poll.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" align=absmiddle>',
 	);
 
 
-	$group_one = array_keys ($site_properties_group);
+	$group_one = array_keys ($site_properties_group ? $site_properties_group : array());
 	$group_two = array_keys ($configuration_group);
 
 	# put all config values into one array
@@ -874,11 +874,11 @@ function print_config_table() {
 
 	if ($site->fdat['group'] == '1') {
 		//$group = &$site_properties_group;
-	} 
+	}
 	else {
 		$group = &$configuration_group;
 	}
-	
+
 	if (!is_array($group)) {
 		$group = array();
 	}
@@ -890,12 +890,12 @@ function print_config_table() {
 
 		# if this file is included from "install.php" then put real hostname & wwwroot values
 		if($called_from_install_script && $tmp[nimi] == "hostname" && $_POST["install"]) {
-			$tmp[sisu] = $site->hostname; 
+			$tmp[sisu] = $site->hostname;
 		}
 		if($called_from_install_script && $tmp[nimi] == "wwwroot" && $_POST["install"]) {
-			$tmp[sisu] = $site->wwwroot; 
+			$tmp[sisu] = $site->wwwroot;
 		}
-		
+
 		$v_config[$tmp[nimi]] = $tmp;
 	}
 	if ($site->fdat['group'] || $called_from_install_script) {
@@ -907,7 +907,7 @@ function print_config_table() {
 			if (is_array($values)) {
 				$i = 0;
 				echo "
-				<tr class='scms_pane_header'> 
+				<tr class='scms_pane_header'>
 					<td nowrap colspan=\"2\">".$icons[$grupp_name]."&nbsp;&nbsp;".$site->sys_sona(array(sona => $grupp_name , tyyp=>"admin"))."</td>
 				</tr>
 				";
@@ -941,7 +941,7 @@ function print_config_table() {
 
 		if (!$called_from_install_script) {
 			echo "
-				<tr class='scms_pane_header'> 
+				<tr class='scms_pane_header'>
 					<td  nowrap colspan=\"2\">Advanced</td>
 				</tr>
 				";
@@ -964,7 +964,7 @@ if($site->fdat['keepThis'])
 {
 	$editor_mode = true;
 }
-else 
+else
 {
 	$editor_mode = false;
 }
@@ -979,9 +979,9 @@ if(!$called_from_install_script) {
 	# SAVE
 	if ($site->fdat[salvesta]==1) {
 		foreach ($site->fdat as $key=>$value) {
-			
-			if ( substr ($key, 0, 4) == "cff_" ) {			
-				$sql = $site->db->prepare("UPDATE config SET sisu=? WHERE nimi=?", $value, substr ($key, 4)); 
+
+			if ( substr ($key, 0, 4) == "cff_" ) {
+				$sql = $site->db->prepare("UPDATE config SET sisu=? WHERE nimi=?", $value, substr ($key, 4));
 				$sth = new SQL($sql);
 				$site->debug->msg($sth->debug->get_msgs());
 			}
@@ -989,16 +989,16 @@ if(!$called_from_install_script) {
 
 		# special processing
 		if ($site->fdat['cff_trash_expires']){
-			$sql = $site->db->prepare("UPDATE config SET sisu=? WHERE nimi=?", time(), 'next_empty_trash'); 
+			$sql = $site->db->prepare("UPDATE config SET sisu=? WHERE nimi=?", time(), 'next_empty_trash');
 			$sth = new SQL($sql);
-			$site->debug->msg($sth->debug->get_msgs());	
+			$site->debug->msg($sth->debug->get_msgs());
 		}
-		
+
 		#################################################
 		# Special processing for object counting
 		# if 'start_date_of_objects_counting' was changed
-		# then delete all counters and restart 
-		# counting from that date 
+		# then delete all counters and restart
+		# counting from that date
 		if (isset($site->fdat['objects_counting'])) {
 			if (strcmp($site->fdat['cff_start_date_of_objects_counting'],$site->fdat['objects_counting'])) {
 				$sql = "UPDATE objekt SET count='0'";
@@ -1017,8 +1017,8 @@ if(!$called_from_install_script) {
 	}
 	# / SAVE
 	##################
-	
-########### IF NEEDED ???: 
+
+########### IF NEEDED ???:
 	######### get adminpage name
 	$adminpage_names = get_adminpage_name(array("script_name" => $site->script_name));
 	$parent_pagename = $adminpage_names['parent_pagename'];
@@ -1026,7 +1026,7 @@ if(!$called_from_install_script) {
 
 	if ($site->fdat['group'] == '1') {
 		$page_title = $site->sys_sona(array(sona => "Site_properties", tyyp=>"admin"));
-	} 
+	}
 	else {
 		$page_title = $site->sys_sona(array(sona => "Configuration", tyyp=>"admin"));
 	}
@@ -1061,8 +1061,8 @@ if(!$called_from_install_script) {
  ##############
  # FUNCTION BAR
  ?>
-  <tr> 
-    <td class="scms_toolbar">  
+  <tr>
+    <td class="scms_toolbar">
       <table width="100%" border="0" cellpadding="0" cellspacing="0">
 		<tr>
 		<?############ save button ###########?>
@@ -1080,7 +1080,7 @@ if(!$called_from_install_script) {
 		<td style="padding-right: 10px">
 		<? print_language_selectbox(); ?>
 		</td>
-		<?######  / language ######?>	
+		<?######  / language ######?>
 	<?}?>
 
 		</tr>
@@ -1091,18 +1091,18 @@ if(!$called_from_install_script) {
  # / FUNCTION BAR
  ################
  ?>
-<?	
+<?
 if($site->fdat['group']==1){
 ?>
 
 
 <tr>
-  <td valign="top" height="100%"> 
+  <td valign="top" height="100%">
 	<div id=listing class="scms_middle_div" style="min-height: 440px">
 	<?
 	################
 	# DATA TABLE
-	?>  
+	?>
      <table width="100%" border="0" class="scms_table" cellspacing="10" cellpadding="0">
 	<form action="<?=$site->self ?>" name="dataform" method=post>
 	<?php create_form_token('change-config'); ?>
@@ -1118,13 +1118,13 @@ if($site->fdat['group']==1){
 	<tr class="scms_pane_header">
 		<td><!--<img src="<?=$site->CONF[wwwroot].$site->CONF[styles_path]?>/gfx/icons/16x16/mime/metainfo.png" border="0" align=absmiddle>&nbsp; --><?=$site->sys_sona(array(sona => "Site_properties", tyyp=>"admin"))?></td>
 	</tr>
-	
+
 	<?
 	#################
 	# DATA ROWS
-	?>	  
+	?>
 	  <tr>
-      <td height="100%" valign="top"> 
+      <td height="100%" valign="top">
 
 		  <table width="50%" border="0" cellspacing="0" cellpadding="3">
 
@@ -1156,11 +1156,11 @@ if($site->fdat['group']==1){
 	<?
 	# / DATA ROWS
 	#################
-	?>	
+	?>
 	<?
 	################
 	# DATA TABLE
-	?>  
+	?>
      <table width="100%" border="0" class="scms_table" cellspacing="10" cellpadding="0">
 	<?
 	################
@@ -1170,13 +1170,13 @@ if($site->fdat['group']==1){
 
 		<td><!--<img src="<?=$site->CONF[wwwroot].$site->CONF[styles_path]?>/gfx/icons/16x16/mime/metainfo.png" border="0" align=absmiddle>&nbsp; --><?=$site->sys_sona(array(sona => "meta-info", tyyp=>"admin"))?></td>
 	</tr>
-	
+
 	<?
 	#################
 	# DATA ROWS
-	?>	  
+	?>
 	  <tr>
-      <td height="100%" valign="top"> 
+      <td height="100%" valign="top">
 
 		  <table width="50%" border="0" cellspacing="0" cellpadding="3">
 
@@ -1202,7 +1202,7 @@ if($site->fdat['group']==1){
 	</td>
 	</tr>
 	<tr>
-	
+
 	<tr>
 	<td class="scms_table_row">Meta-keywords</td>
 	</tr>
@@ -1212,7 +1212,7 @@ if($site->fdat['group']==1){
       <textarea name="meta_keywords" class="scms_flex_input" rows="2" style="width:98%; height: 30px;"><?=$curr_objekt->all[meta_keywords]?></textarea>
 	</td>
 	</tr>
-  
+
 	<td class="scms_table_row">
 	<input type=hidden name=save value=1>
 	<input type=hidden name=flt_keel value="<?=$site->fdat['flt_keel']?>">
@@ -1227,12 +1227,12 @@ if($site->fdat['group']==1){
 	<?
 	# / DATA ROWS
 	#################
-	?>	 
+	?>
 	</table>
 	<?
 	################
 	# DATA TABLE
-	?>  
+	?>
      <table width="100%" border="0" class="scms_table" cellspacing="10" cellpadding="0">
 	<?
 	################
@@ -1241,13 +1241,13 @@ if($site->fdat['group']==1){
 	<tr class="scms_pane_header">
 		<td><?=$site->sys_sona(array(sona => "page_end_html", tyyp=>"admin"))?></td>
 	</tr>
-	
+
 	<?
 	#################
 	# DATA ROWS
-	?>	  
+	?>
 	  <tr>
-      <td height="100%" valign="top"> 
+      <td height="100%" valign="top">
 
 		  <table width="50%" border="0" cellspacing="0" cellpadding="3">
 
@@ -1264,13 +1264,13 @@ if($site->fdat['group']==1){
 	<?
 	# / DATA ROWS
 	#################
-	?>	 
+	?>
 
 	</table>
 	<?
 	################
 	# DATA TABLE
-	?>  
+	?>
      <table width="100%" border="0" class="scms_table" cellspacing="10" cellpadding="0">
 	<?
 	################
@@ -1279,7 +1279,7 @@ if($site->fdat['group']==1){
 	<tr class="scms_pane_header">
 		<td><!--<img src="<?=$site->CONF[wwwroot].$site->CONF[styles_path]?>/gfx/icons/16x16/mime/metainfo.png" border="0" align=absmiddle>&nbsp;--> <?=$site->sys_sona(array(sona => "timezone", tyyp=>"admin"))?></td>
 	</tr>
-	
+
 	<?
 	#################
 	# DATA ROWS
@@ -1290,9 +1290,9 @@ if($site->fdat['group']==1){
 				$answers[$data['id']]=$data['name'];
 
 			}
-	?>	  
+	?>
 	  <tr>
-      <td height="100%" valign="top"> 
+      <td height="100%" valign="top">
 
 	  <table width="50%" border="0" cellspacing="0" cellpadding="3">
 			<tr>
@@ -1315,14 +1315,14 @@ if($site->fdat['group']==1){
 	<?
 	# / DATA ROWS
 	#################
-	?>	 
+	?>
 
 	</table>
 	</form>
 	<?
 	# / DATA TABLE
 	################
-	?>    
+	?>
 
 
 </td>
@@ -1332,26 +1332,26 @@ if($site->fdat['group']==1){
 <?}else{?>
 
  <tr>
-  <td width="100%" valign="top" class="scms_pane_area" height="100%"> 
+  <td width="100%" valign="top" class="scms_pane_area" height="100%">
 	<?
 	################
 	# DATA TABLE
-	?>  
-    <div id=listing class="scms_middle_div" style="min-height: 440px"> 
+	?>
+    <div id=listing class="scms_middle_div" style="min-height: 440px">
 	<table width="100%" border="0" cellspacing="10" cellpadding="0" style="height:100%;">
 	<form action="<?=$site->self ?>" name="dataform" method=post>
 	<?php create_form_token('change-config'); ?>
 	<?
 	#################
 	# DATA ROWS
-	?>	  
+	?>
 		<tr>
-			<td height="100%" valign="top"> 
-      
+			<td height="100%" valign="top">
+
 			<table class="scms_table" width="100%"  border="0" cellspacing="0" cellpadding="4" id="contenttable">
 
 				<?
-				print_config_table(); 
+				print_config_table();
 				?>
 
 			<tr><td></td></tr>
@@ -1362,7 +1362,7 @@ if($site->fdat['group']==1){
 	<?
 	# / DATA ROWS
 	#################
-	?>	  
+	?>
 
 	<input type=hidden name=salvesta value=1>
 	<input type="hidden" name="group" value="<?=$site->fdat['group']?>">
@@ -1372,7 +1372,7 @@ if($site->fdat['group']==1){
 	<?
 	# / DATA TABLE
 	################
-	?>    
+	?>
 
 
 </td>
@@ -1382,13 +1382,13 @@ if($site->fdat['group']==1){
 <?
 # / CONTENT TABLE
 ################
-?>	
+?>
 	</body>
 	</html>
 
 	<?
-	$site->debug->msg("SQL päringute arv = ".$site->db->sql_count."; aeg = ".$site->db->sql_aeg);
-	$site->debug->msg("TÖÖAEG = ".$site->timer->get_aeg());
+	$site->debug->msg("SQL pï¿½ringute arv = ".$site->db->sql_count."; aeg = ".$site->db->sql_aeg);
+	$site->debug->msg("Tï¿½ï¿½AEG = ".$site->timer->get_aeg());
 	$site->debug->print_msg();
-} 
+}
 # IF INSTALL
