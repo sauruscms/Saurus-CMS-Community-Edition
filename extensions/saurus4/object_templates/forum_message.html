@@ -194,6 +194,6 @@ function checkForumFields(form_id)
 </form>
 {* /new reply form *}
 
-{if !$smarty.get.lisa_alert && unset($_SESSION['scms_last_comment']}{/if}
+{if !$smarty.get.lisa_alert}{php} unset($_SESSION['scms_last_comment']); {/php}{/if}
 
 </div><!-- / ForumMessageContainer -->
