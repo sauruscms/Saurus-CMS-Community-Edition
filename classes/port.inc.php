@@ -47,7 +47,7 @@ $CMS_PARAMS = array(
 );
 
 #Get debug cookie muutuja
-$debug = $_COOKIE["debug"] ? 1:0;
+$debug = isset($_COOKIE["debug"]) &&  $_COOKIE["debug"] ? 1 : 0;
 
 function show_debug()
 {
@@ -323,7 +323,7 @@ $ldap_params = $_SESSION["ldap_params"];
 if ($_GET["op"] == 'logout' || $_POST["op"] == 'logout') {
 
 # in ver4 new ACL
-	session_destroy("user_id");
+	session_destroy();
 	unset($_SESSION["user_id"]);
 
 

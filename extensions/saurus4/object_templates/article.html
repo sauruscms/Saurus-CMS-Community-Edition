@@ -3,7 +3,7 @@
  * Date: 30.06.08
  *
  * @package saurus4
- * 
+ *
  * @author Saurus <saurus@saurus.info>
  *
  *}
@@ -18,12 +18,12 @@
 {if $article->body}{$article->body}{/if}
 
 {* Article comments *}
-<a name="comments"></a>	
+<a name="comments"></a>
 {init_messages name="messages" parent=$id order="objekt_id asc"}
 {if $messages|@sizeof}<p class="separator">{sysword word="comments" type="saurus4"}</p>{/if}
 
 <table cellpadding="2" cellspacing="2" width="100%" class="ZebraTable">
-{foreach from=$messages item="message"}	
+{foreach from=$messages item="message"}
 	<tr class="{cycle values="dark, light"}">
 		<td>
 			{$message->buttons}{$message->author} <span class="Date">{$message->date}</span>
@@ -40,12 +40,12 @@
 
 	{literal}
 	<script type="text/javascript">
-	
+
 	function checkForumFields(form_id)
 	{
 		var submit_form = document.getElementById(form_id);
 		var len = 2;
-		
+
 		if(submit_form)
 		{
 			if (submit_form.nimi.value.length < len){
@@ -53,60 +53,60 @@
 				submit_form.nimi.focus();
 				return false;
 			}
-			
+
 			if (submit_form.text.value.length < len){
 				alert('{/literal}{sysword word="please fill in" type="saurus4"}{literal}: '+document.getElementById('for_'+submit_form.text.id).innerHTML);
 				submit_form.text.focus();
 				return false;
 			}
-			
+
 			{/literal}{if $conf.check_for_captcha}{literal}
-			
+
 			if (submit_form.captcha_default.value.length < len){
 				alert('{/literal}{sysword word="please fill in" type="saurus4"}{literal}: '+document.getElementById('for_'+submit_form.captcha_default.id).innerHTML);
 				submit_form.captcha_default.focus();
 				return false;
 			}
-			
+
 			{/literal}{/if}{literal}
-			
+
 			submit_form.submit();
 		}
 	}
-	
+
 	</script>
 	{/literal}
-	
+
 	<p class="separator">{sysword word="new comment" type="saurus4"}</p>
-	
+
 	<form action="add_comment.php" method="POST" name="forumPostForm" id="forumPostForm">
 		<table cellpadding="0" cellspacing="0" class="FormTable">
 			<col class="FormTableLabels">
-			<tr> 
+			<tr>
 				<td><label for="nimi" id="for_nimi">{sysword word="name" type="saurus4"}</label></td>
 				<td><input type="text" name="nimi" id="nimi" value="{if $smarty.session.scms_last_comment.nimi}{$smarty.session.scms_last_comment.nimi|xss_clean}{else}{$userdata->name}{/if}" class="FormText">*</td>
 			</tr>
-			<tr> 
+			<tr>
 				<td><label for="email" id="for_email">{sysword word="e-mail" type="saurus4"}</label></td>
 				<td><input type="text" name="email" id="email" value="{if $smarty.session.scms_last_comment.email}{$smarty.session.scms_last_comment.email|xss_clean}{else}{$userdata->all.email}{/if}" class="FormText"></td>
 			</tr>
-			<tr> 
+			<tr>
 				<td><label for="text" id="for_text">{sysword word="comment" type="saurus4"}</label></td>
 				<td><textarea name="text" id="text" class="FormTextArea">{if $smarty.session.scms_last_comment.text}{$smarty.session.scms_last_comment.text|xss_clean}{/if}</textarea></td>
 			</tr>
 			{*** CAPTCHA ***}
 			{if $conf.check_for_captcha}
-			<tr> 
+			<tr>
 				<td></td>
 				<td><img src="{$wwwroot}/extensions/saurus4/captcha_image.php?name=default" width="{$saurus4.captchas.default.image_width}" height="{$saurus4.captchas.default.image_height}" alt="" title=""></td>
 			</tr>
-			<tr> 
+			<tr>
 				<td><label for="captcha_default" id="for_captcha_default">{sysword word="enter the text on the image" type="saurus4"}</label></td>
 				<td><input type="text" name="captcha_default" id="captcha_default" class="FormText"></td>
 			</tr>
 			{/if}
 			{*** //CAPTCHA ***}
-			<tr> 
+			<tr>
 				<td></td>
 				<td><input type="button" onclick="checkForumFields('forumPostForm');" value="{sysword word="send" type="saurus4"}"></td>
 			</tr>
@@ -126,6 +126,6 @@
 {/if}
 {* /for CAPTCHA failure notice *}
 
-{if !$smarty.get.lisa_alert && session_destroy('scms_last_comment')}{/if}
+{if !$smarty.get.lisa_alert && unset($_SESSION['scms_last_comment'])}{/if}
 
 </div><!-- / ArticleContainer -->

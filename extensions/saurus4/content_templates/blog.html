@@ -3,11 +3,11 @@
  * Date: 10.10.08
  *
  * @package saurus4
- * 
+ *
  * @author Saurus <saurus@saurus.info>
  *
  *}
- 
+
 <div id="BlogContainer">
 
 {if $current_class == 'section'}
@@ -16,7 +16,7 @@
 		{* from request *}
 		{assign var="year" value=$smarty.get.year|@intval}
 	{/if}
-	
+
 	{if $smarty.get.month}
 		{* from request *}
 		{assign var="month" value=$smarty.get.month|@intval}
@@ -38,10 +38,10 @@
 
 	{******* blog sidebar *********}
 	<div id="BlogAddOns">
-		
+
 		<div id="BlogLatestLinks">
 			{init_articles name="articles" order="date desc" start=0 limit=5 parent=$blog_parent_id}
-			
+
 			{if sizeof($articles)}<h3>{sysword word="latest posts" type="saurus4"}</h3>
 			{strip}<ul class="BlogLatestLinks">
 				{foreach from=$articles item="article"}
@@ -49,10 +49,10 @@
 				{/foreach}
 			</ul>{/strip}{/if}
 		</div><!-- / BlogLatestLinks -->
-		
+
 		<div id="BlogArchiveLinks">
 			{init_objects name="years" parent=$blog_parent_id select="year(aeg) as y" where="year(aeg) BETWEEN 1 AND 2998" order="y desc" group="y" classes="article"}
-			
+
 			{if sizeof($years)}<h3>{sysword word="archive" type="saurus4"}</h3>
 			{strip}<ul class="BlogArchiveLinks">
 			{foreach from=$years item="looping_year"}
@@ -63,7 +63,7 @@
 						<a href="{$blog_href}{if strpos($blog_href, '?')}&amp;{else}?{/if}year={$looping_year->all.y}">{$looping_year->all.y}</a>
 					{/if}
 				</li>
-				
+
 				{* the months in the year containing articles *}
 				{init_objects parent=$blog_parent_id name="months" select="year(aeg) as y, month(aeg) as m" where="year(aeg) = `$looping_year->all.y`" order="m desc" group="m" classes="article"}
 				{if sizeof($months)}<ul>
@@ -81,24 +81,24 @@
 			</ul>{/strip}{/if}
 		</div><!-- / BlogArchiveLinks -->
 
-		
+
 		<div id="BlogMetaLinks">
 			{if sizeof($articles)}
 				<h3>RSS</h3>
 				<a href="{if $in_editor}{$wwwroot}/?id={$blog_parent_id}&amp;{else}{$blog_href}{if strpos($blog_href, '?')}&amp;{else}?{/if}{/if}op=rss">{sysword word="rss entries" type="saurus4"}</a>
 			{/if}
 		</div><!-- / BlogMetaLinks -->
-		
+
 	</div><!-- / BlogAddons -->
 	{********** / blog side bar *********}
 
 	{******** Blog list *********}
 	{if $current_class == 'section'}
-	
+
 	<div id="BlogEntries">
-		
+
 		<div class="BlogEntry">
-			
+
 			{if $month || $year}
 				{if $month}
 					{init_articles name="articles" parent=$blog_parent_id where="year(aeg) = '`$year`' and month(aeg) = '`$month`'" order="date desc" on_create="allow_comments" buttons="new,edit,hide,delete"}
@@ -108,55 +108,55 @@
 			{else}
 				{init_articles name="articles" parent=$blog_parent_id start=0 limit=10 order="date desc" on_create="allow_comments" buttons="new,edit,hide,delete"}
 			{/if}
-			
+
 			{$articles_newbutton}
-			
+
 			{foreach from=$articles item="article" name="articles_loop"}
-						
+
 				<h1>{$article->buttons}<a href="{$article->href}{if strpos($article->href, '?')}&amp;{else}?{/if}c_tpl={$c_tpl}">{if $article->show_headline}{$article->title}{/if}</a></h1>
 				<div class="BlogDetails">{$article->fdate|mysql_date_to_string}{if $article->author} | {$article->author}{/if}{if $article->comment_count} | <a href="{$article->href}{if strpos($article->href, '?')}&amp;{else}?{/if}c_tpl={$c_tpl}#comments">{sysword word="comments" type="saurus4"} ({$article->comment_count})</a>{/if}{if $conf.allow_commenting && $article->forum_allowed && !($conf.only_regusers_comment && !$user)} | <a href="{$article->href}{if strpos($article->href, '?')}&amp;{else}?{/if}c_tpl={$c_tpl}#add_message">{sysword word="add comment" type="saurus4"}</a>{/if}</div>
-				
+
 				{init_article name="art" id=$article->id}
-				
+
 				{if $art->lead && $art->body}
 					{$art->lead}
-					
+
 					{* Read More link *}
 					<a href="{$art->href}{if strpos($art->href, '?')}&amp;{else}?{/if}c_tpl={$c_tpl}">{sysword word="More" type="Visual Design"}</a>
 				{else}
 					{$art->lead} {$art->body}
 				{/if}
-				
-		{/foreach}	
+
+		{/foreach}
 		</div><!-- / BlogEntry -->
-	
+
 	</div><!-- / BlogEntries -->
-	
+
 	{else}
 	{******** single entry *********}
-	
+
 	<div class="BlogEntry">
-	
+
 		{init_article name="article" id=$id buttons="new,edit,hide,delete"}
-	
+
 		<h1>{$article->buttons}<a href="{$article->href}{if strpos($article->href, '?')}&amp;{else}?{/if}c_tpl={$c_tpl}">{if $article->show_headline}{$article->title}{/if}</a></h1>
-		
+
 		<div class="BlogDetails">{$article->fdate|mysql_date_to_string}{if $article->author} | {$article->author}{/if}{if $article->comment_count} | <a href="#comments">{sysword word="comments" type="saurus4"} ({$article->comment_count})</a>{/if}{if $conf.allow_commenting && $article->forum_allowed && !($conf.only_regusers_comment && !$user)} | <a href="#add_message">{sysword word="add comment" type="saurus4"}</a>{/if}</div>
-		
+
 		<p>{if $article->lead}{$article->lead} {/if}{$article->body}</p>
 	</div><!-- / BlogEntry -->
-	
+
 	<div id="BlogEntryCommentsContainer">
-	
+
 		{* Article comments *}
 		<a name="comments"></a>
-		
-		<div class="BlogEntryComment">	
+
+		<div class="BlogEntryComment">
 			{init_messages name="messages" parent=$id order="objekt_id asc"}
 			{if $messages|@sizeof}<p class="separator">{sysword word="comments" type="saurus4"}</p>{/if}
-			
+
 			<table cellpadding="2" cellspacing="2" width="100%" class="ZebraTable">
-			{foreach from=$messages item="message"}	
+			{foreach from=$messages item="message"}
 				<tr class="{cycle values="dark, light"}">
 					<td>
 						{$message->buttons}{$message->author} <span class="Date">{$message->date}</span>
@@ -166,23 +166,23 @@
 			{/foreach}
 			</table>
 		</div><!-- / BlogEntryComment -->
-		
+
 	</div><!-- / BlogEntryCommentsContainer -->
-	
+
 	{if $conf.allow_commenting && $article->forum_allowed && !($conf.only_regusers_comment && !$user)}
 	<div id="BlogEntryCommentForm">
-	
+
 		{* New comment form *}
 		<a name="add_message"></a>
-	
+
 		{literal}
 		<script type="text/javascript">
-		
+
 		function checkForumFields(form_id)
 		{
 			var submit_form = document.getElementById(form_id);
 			var len = 2;
-			
+
 			if(submit_form)
 			{
 				if (submit_form.nimi.value.length < len){
@@ -190,71 +190,71 @@
 					submit_form.nimi.focus();
 					return false;
 				}
-				
+
 				if (submit_form.text.value.length < len){
 					alert('{/literal}{sysword word="please fill in" type="saurus4"}{literal}: '+document.getElementById('for_'+submit_form.text.id).innerHTML);
 					submit_form.text.focus();
 					return false;
 				}
-				
+
 				{/literal}{if $conf.check_for_captcha}{literal}
-				
+
 				if (submit_form.captcha_default.value.length < len){
 					alert('{/literal}{sysword word="please fill in" type="saurus4"}{literal}: '+document.getElementById('for_'+submit_form.captcha_default.id).innerHTML);
 					submit_form.captcha_default.focus();
 					return false;
 				}
-				
+
 				{/literal}{/if}{literal}
-				
+
 				submit_form.submit();
 			}
 		}
-		
+
 		</script>
 		{/literal}
-		
+
 		<p class="separator">{sysword word="new comment" type="saurus4"}</p>
-		
+
 		<form action="add_comment.php" method="POST" name="forumPostForm" id="forumPostForm">
 			<table cellpadding="0" cellspacing="0" class="FormTable">
 				<col class="FormTableLabels">
-				<tr> 
+				<tr>
 					<td><label for="nimi" id="for_nimi">{sysword word="name" type="saurus4"}</label></td>
 					<td><input type="text" name="nimi" id="nimi" value="{if $smarty.session.scms_last_comment.nimi}{$smarty.session.scms_last_comment.nimi|xss_clean}{else}{$userdata->name}{/if}" class="FormText">*</td>
 				</tr>
-				<tr> 
+				<tr>
 					<td><label for="email" id="for_email">{sysword word="e-mail" type="saurus4"}</label></td>
 					<td><input type="text" name="email" id="email" value="{if $smarty.session.scms_last_comment.email}{$smarty.session.scms_last_comment.email|xss_clean}{else}{$userdata->all.email}{/if}" class="FormText"></td>
 				</tr>
-				<tr> 
+				<tr>
 					<td><label for="text" id="for_text">{sysword word="comment" type="saurus4"}</label></td>
 					<td><textarea name="text" id="text" class="FormTextArea">{if $smarty.session.scms_last_comment.text}{$smarty.session.scms_last_comment.text|xss_clean}{/if}</textarea></td>
 				</tr>
 				{*** CAPTCHA ***}
 				{if $conf.check_for_captcha}
-				<tr> 
+				<tr>
 					<td></td>
 					<td><img src="{$wwwroot}/extensions/saurus4/captcha_image.php?name=default" width="{$saurus4.captchas.default.image_width}" height="{$saurus4.captchas.default.image_height}" alt="" title=""></td>
 				</tr>
-				<tr> 
+				<tr>
 					<td><label for="captcha_default" id="for_captcha_default">{sysword word="enter the text on the image" type="saurus4"}</label></td>
 					<td><input type="text" name="captcha_default" id="captcha_default" class="FormText"></td>
 				</tr>
 				{/if}
 				{*** //CAPTCHA ***}
-				<tr> 
+				<tr>
 					<td></td>
 					<td><input type="button" onclick="checkForumFields('forumPostForm');" value="{sysword word="send" type="saurus4"}"></td>
 				</tr>
 			</table>
-			
+
 			<input type="hidden" name="c_tpl" value="{$c_tpl}">
 			<input type="hidden" name="id" value="{$id}">
-			
+
 		</form>
 		{* /New comment form *}
-		
+
 		{* for CAPTCHA failure notice *}
 		{if $smarty.get.lisa_alert == 2}
 		<script type="text/javascript">
@@ -264,13 +264,13 @@
 		</script>
 		{/if}
 		{* /for CAPTCHA failure notice *}
-		
-		{if !$smarty.get.lisa_alert && session_destroy('scms_last_comment')}{/if}
+
+		{if !$smarty.get.lisa_alert && unset($_SESSION['scms_last_comment'])}{/if}
 	</div><!-- / BlogEntryCommentForm -->
-	
+
 	{/if}{*** comment form ****}
-	
-	
+
+
 	{/if}{*** end single entry ****}
 
 </div><!-- / BlogContainer -->
