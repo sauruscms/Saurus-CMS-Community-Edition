@@ -227,7 +227,7 @@ function print_config_row($tmp, $i) {
 	global $selected_group;
 
 	############ 1) boolean YES/NO fields
-	if (in_array($tmp[nimi],Array("only_regusers_comment", 'send_error_notifiations_to_superusers', 'fm_allow_multiple_upload', 'users_require_safe_password', 'feedbackform_check_for_captcha', 'force_https_for_editing', 'force_https_for_admin', 'check_for_captcha', 'allow_commenting', "default_comments", "users_can_register", "original_picture_saved", "alamartiklid_paises", "allow_autologin_from_ip", "enable_mailing_list",  "allow_change_position", "regusers_access_enabled", "allow_forgot_password", "notification_about_new_user_enabled","add_new_user_to_mailinglists","maillist_sending_after_publishing","save_error_log","users_can_delete_comment", 'use_aliases','redirect_to_alias','replace_links_with_alias','save_site_log',))) {
+	if (in_array($tmp[nimi],Array("only_regusers_comment", 'send_error_notifiations_to_superusers', 'fm_allow_multiple_upload', 'users_require_safe_password', 'feedbackform_check_for_captcha', 'force_https_for_editing', 'force_https_for_admin', 'check_for_captcha', 'allow_commenting', "default_comments", "users_can_register", "original_picture_saved", "alamartiklid_paises", "allow_autologin_from_ip", "enable_mailing_list",  "allow_change_position", "regusers_access_enabled", "allow_forgot_password", "notification_about_new_user_enabled","add_new_user_to_mailinglists","maillist_sending_after_publishing","save_error_log","users_can_delete_comment", 'use_aliases','redirect_to_alias','replace_links_with_alias','save_site_log','disable_form_based_login'))) {
 		echo "
 		<tr>
 		<td style='width:331px' valign='top' align='left'>".$tmp[kirjeldus]."</td>
@@ -725,6 +725,8 @@ function print_config_table() {
 				'login_duration_time',
 				'lock_inactive_user_after_x_days',
 				'allow_forgot_password',
+				'custom_login_url',
+				'disable_form_based_login',
 			),
 			'forums_and_comments' => array(
 				'allow_commenting',
