@@ -474,11 +474,12 @@ class SQL {
 			$this->result = @mysql_query($this->sql);
 		}
 		ini_set('display_errors', $errdsp);
-	
 
-		$this->site->db->sql_count++;
 		$aeg = $this->timer->get_aeg();
-		$this->site->db->sql_aeg += $aeg;
+		if (!empty($this->site->db)) {
+			$this->site->db->sql_count++;
+			$this->site->db->sql_aeg += $aeg;
+		}
 
 		if ($this->site->db->debug) {
 			$this->site->db->debug->msg($this->site->db->sql_count.". ".$this->sql);
