@@ -36,7 +36,7 @@ new SQL("CREATE TABLE `admin_osa` (
   PRIMARY KEY  (`id`),
   UNIQUE KEY `id` (`id`,`parent_id`),
   KEY `id_2` (`id`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `admin_osa`
 
@@ -98,7 +98,7 @@ new SQL("CREATE TABLE `allowed_mails` (
   `mail` varchar(255) default '0',
   `objekt_id_list` text,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `allowed_mails`
 
@@ -119,7 +119,7 @@ new SQL("CREATE TABLE `cache` (
   PRIMARY KEY  (`id`),
   KEY `objekt_id` (`objekt_id`),
   KEY `url` (`url`(200))
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `cache`
 
@@ -133,7 +133,7 @@ new SQL("CREATE TABLE `config` (
   `kirjeldus` text,
   `on_nahtav` enum('0','1') NOT NULL default '0',
   PRIMARY KEY  (`nimi`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `config`
 
@@ -299,7 +299,7 @@ new SQL("CREATE TABLE `config_images` (
   `name` text,
   `value` text,
   PRIMARY KEY  (`definition_id`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `config_images`
 
@@ -316,7 +316,7 @@ new SQL("CREATE TABLE `css` (
   `is_active` tinyint(1) unsigned NOT NULL default '0',
   PRIMARY KEY  (`css_id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `css`
 
@@ -333,7 +333,7 @@ new SQL("CREATE TABLE `document_parts` (
   `content` longblob NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `id_objekt_id` (`objekt_id`,`id`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `document_parts`
 
@@ -354,7 +354,7 @@ new SQL("CREATE TABLE `error_log` (
   `remote_user` varchar(255) NOT NULL default '',
   PRIMARY KEY  (`id`),
   KEY `err_type` (`err_type`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `error_log`
 
@@ -368,7 +368,7 @@ new SQL("CREATE TABLE `ext_country` (
   `name` varchar(255) default NULL,
   PRIMARY KEY  (`id`),
   KEY `profile_id` (`profile_id`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `ext_country`
 
@@ -616,7 +616,7 @@ new SQL("CREATE TABLE `ext_timezones` (
   `UTC_dif` float(7,2) default NULL,
   `php_variable` varchar(255) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `ext_timezones`
 
@@ -712,7 +712,7 @@ new SQL("CREATE TABLE `extensions` (
   `is_downloadable` tinyint(1) unsigned NOT NULL default '0',
   PRIMARY KEY  (`extension_id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `extensions`
 
@@ -732,7 +732,7 @@ new SQL("CREATE TABLE `favorites` (
   PRIMARY KEY  (`id`),
   UNIQUE KEY `id` (`id`),
   KEY `id_2` (`id`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `favorites`
 
@@ -746,7 +746,7 @@ new SQL("CREATE TABLE `forms` (
   `profile_id` int(10) unsigned default '0',
   `source_table` varchar(50) default NULL,
   PRIMARY KEY  (`form_id`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `forms`
 
@@ -763,7 +763,7 @@ new SQL("CREATE TABLE `gallup_ip` (
   `gv_id` bigint(21) unsigned NOT NULL default '0',
   PRIMARY KEY  (`gi_id`),
   KEY `gallup_id` (`objekt_id`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `gallup_ip`
 
@@ -778,7 +778,7 @@ new SQL("CREATE TABLE `gallup_vastus` (
   `count` int(10) default '0',
   PRIMARY KEY  (`gv_id`),
   KEY `gallup_id` (`objekt_id`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `gallup_vastus`
 
@@ -814,7 +814,7 @@ new SQL("CREATE TABLE `groups` (
   KEY `parent_group_id` (`parent_group_id`),
   KEY `profile_id` (`profile_id`),
   KEY `name` (`name`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `groups`
 
@@ -831,7 +831,7 @@ new SQL("CREATE TABLE `ip_filter` (
   UNIQUE KEY `id` (`id`),
   KEY `id_2` (`id`),
   KEY `ip` (`ip`,`type`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `ip_filter`
 
@@ -846,7 +846,7 @@ new SQL("CREATE TABLE `kasutaja_sso` (
   `user_value` varchar(100) default NULL,
   `pwd_value` varchar(100) default NULL,
   UNIQUE KEY `kasutaja` (`kasutaja_id`,`sso_id`,`kgrupp_id`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `kasutaja_sso`
 
@@ -870,7 +870,7 @@ new SQL("CREATE TABLE `keel` (
   PRIMARY KEY  (`keel_id`),
   KEY `on_kasutusel` (`on_kasutusel`),
   KEY `nimi` (`nimi`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `keel`
 
@@ -1055,7 +1055,7 @@ new SQL("CREATE TABLE `ldap_map` (
   PRIMARY KEY  (`id`),
   UNIQUE KEY `id` (`id`),
   KEY `id_2` (`id`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `ldap_map`
 
@@ -1075,7 +1075,7 @@ new SQL("CREATE TABLE `ldap_servers` (
   PRIMARY KEY  (`id`),
   UNIQUE KEY `id` (`id`),
   KEY `id_2` (`id`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `ldap_servers`
 
@@ -1092,7 +1092,7 @@ new SQL("CREATE TABLE `license` (
   `status` varchar(255) NOT NULL default 'not verified',
   `type` blob,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `license`
 
@@ -1109,7 +1109,7 @@ new SQL("CREATE TABLE `moodulid` (
   PRIMARY KEY  (`moodul_id`),
   UNIQUE KEY `moodul_id` (`moodul_id`,`nimi`),
   KEY `moodul_id_2` (`moodul_id`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `moodulid`
 
@@ -1123,7 +1123,7 @@ new SQL("CREATE TABLE `notifications` (
   `value` varchar(255) default '0',
   `value_type` enum('active','run','send','misc','mails') default NULL,
   PRIMARY KEY  (`notification_id`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `notifications`
 
@@ -1142,7 +1142,7 @@ new SQL("CREATE TABLE `obj_artikkel` (
   `endtime` datetime default NULL,
   PRIMARY KEY  (`objekt_id`),
   KEY `profile_id` (`profile_id`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `obj_artikkel`
 
@@ -1218,7 +1218,7 @@ new SQL("CREATE TABLE `obj_asset` (
   PRIMARY KEY  (`objekt_id`),
   UNIQUE KEY `objekt_profile` (`objekt_id`,`profile_id`),
   KEY `profile_id` (`profile_id`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `obj_asset`
 
@@ -1241,7 +1241,7 @@ new SQL("CREATE TABLE `obj_dokument` (
   PRIMARY KEY  (`objekt_id`),
   KEY `autor` (`autor`),
   KEY `profile_id` (`profile_id`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `obj_dokument`
 
@@ -1265,7 +1265,7 @@ new SQL("CREATE TABLE `obj_file` (
   PRIMARY KEY  (`objekt_id`),
   UNIQUE KEY `objekt_id` (`objekt_id`),
   KEY `objekt_id_2` (`objekt_id`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `obj_file`
 
@@ -1280,7 +1280,7 @@ new SQL("CREATE TABLE `obj_folder` (
   PRIMARY KEY  (`objekt_id`),
   UNIQUE KEY `id` (`objekt_id`),
   KEY `id_2` (`objekt_id`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `obj_folder`
 
@@ -1298,7 +1298,7 @@ new SQL("CREATE TABLE `obj_gallup` (
   `is_anonymous` tinyint(1) unsigned NOT NULL default '0',
   PRIMARY KEY  (`objekt_id`),
   KEY `on_avatud` (`on_avatud`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `obj_gallup`
 
@@ -1319,7 +1319,7 @@ new SQL("CREATE TABLE `obj_kommentaar` (
   `kasutaja_id` bigint(20) default NULL,
   `url` varchar(100) default NULL,
   PRIMARY KEY  (`objekt_id`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `obj_kommentaar`
 
@@ -1367,7 +1367,7 @@ new SQL("CREATE TABLE `obj_link` (
   `tiitel` text,
   `objekt_id` bigint(20) unsigned NOT NULL default '0',
   PRIMARY KEY  (`objekt_id`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `obj_link`
 
@@ -1391,7 +1391,7 @@ new SQL("CREATE TABLE `obj_pilt` (
   `vaike_blob` blob,
   PRIMARY KEY  (`objekt_id`),
   KEY `autor` (`autor`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `obj_pilt`
 
@@ -1409,7 +1409,7 @@ new SQL("CREATE TABLE `obj_rubriik` (
   `on_meilinglist` enum('0','1') NOT NULL default '0',
   `on_alamartiklid` enum('0','1') NOT NULL default '0',
   PRIMARY KEY  (`objekt_id`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `obj_rubriik`
 
@@ -1454,7 +1454,7 @@ new SQL("CREATE TABLE `object_profiles` (
   PRIMARY KEY  (`profile_id`),
   UNIQUE KEY `name` (`name`),
   KEY `source_table` (`source_table`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `object_profiles`
 
@@ -1673,7 +1673,7 @@ new SQL("CREATE TABLE `objekt_objekt` (
   KEY `sorteering` (`sorteering`),
   KEY `parent_id` (`parent_id`),
   KEY `objekt_id` (`objekt_id`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `objekt_objekt`
 
@@ -1828,7 +1828,7 @@ new SQL("CREATE TABLE `permissions` (
   PRIMARY KEY  (`id`),
   UNIQUE KEY `uni_perm` (`group_id`,`source_id`,`user_id`,`type`,`role_id`),
   KEY `permission` (`type`,`source_id`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `permissions`
 
@@ -1854,7 +1854,7 @@ new SQL("CREATE TABLE `preferences` (
   `data` text NOT NULL,
   PRIMARY KEY  (`pref_id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `preferences`
 
@@ -1903,7 +1903,7 @@ new SQL("CREATE TABLE `replicator` (
   KEY `is_active` (`is_active`),
   KEY `on_lukus` (`on_lukus`),
   KEY `jrk_nr` (`jrk_nr`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `replicator`
 
@@ -1916,7 +1916,7 @@ new SQL("CREATE TABLE `roles` (
   `name` varchar(255) NOT NULL default '',
   PRIMARY KEY  (`role_id`),
   KEY `name` (`name`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `roles`
 
@@ -1933,7 +1933,7 @@ new SQL("CREATE TABLE `session` (
   PRIMARY KEY  (`sess_id`),
   KEY `update_time` (`update_time`),
   KEY `user_id` (`user_id`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `session`
 
@@ -1954,7 +1954,7 @@ new SQL("CREATE TABLE `sitelog` (
   PRIMARY KEY  (`site_log_id`),
   KEY `user_id` (`user_id`),
   KEY `objekt_id` (`objekt_id`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `sitelog`
 
@@ -1974,7 +1974,7 @@ new SQL("CREATE TABLE `sso` (
   PRIMARY KEY  (`sso_id`),
   KEY `app_name` (`app_name`),
   KEY `keel` (`keel`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `sso`
 
@@ -1991,7 +1991,7 @@ new SQL("CREATE TABLE `sys_sona_tyyp` (
   PRIMARY KEY  (`sst_id`),
   UNIQUE KEY `voti` (`voti`),
   KEY `moodul_id` (`moodul_id`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `sys_sona_tyyp`
 
@@ -2011,7 +2011,7 @@ new SQL("CREATE TABLE `sys_sonad` (
   UNIQUE KEY `sona` (`sys_sona`,`keel`,`sst_id`),
   KEY `sys_sona` (`sys_sona`),
   KEY `keel` (`keel`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `sys_sonad`
 
@@ -2132,7 +2132,7 @@ new SQL("CREATE TABLE `sys_sonad_kirjeldus` (
   `sona` varchar(255) default NULL,
   `last_update` datetime NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`sst_id`,`sys_sona`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `sys_sonad_kirjeldus`
 
@@ -2189,7 +2189,7 @@ new SQL("CREATE TABLE `tbl` (
   `pp_dok_liik` text NOT NULL,
   PRIMARY KEY  (`tbl_id`),
   KEY `kompl` (`field`,`tbl`,`ttyyp_id`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `tbl`
 
@@ -2251,7 +2251,7 @@ new SQL("CREATE TABLE `templ_tyyp` (
   `preview_thumb` text,
   PRIMARY KEY  (`ttyyp_id`),
   KEY `nimi` (`nimi`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `templ_tyyp`
 
@@ -2293,7 +2293,7 @@ new SQL("CREATE TABLE `tyyp` (
   PRIMARY KEY  (`tyyp_id`),
   UNIQUE KEY `nimi` (`nimi`),
   KEY `klass` (`klass`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `tyyp`
 
@@ -2323,7 +2323,7 @@ new SQL("CREATE TABLE `user_mailinglist` (
   `objekt_id` bigint(20) unsigned NOT NULL default '0',
   KEY `user_id` (`user_id`),
   KEY `objekt_id` (`objekt_id`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `user_mailinglist`
 
@@ -2335,7 +2335,7 @@ new SQL("CREATE TABLE `user_roles` (
   `user_id` bigint(20) unsigned NOT NULL default '0',
   `role_id` bigint(20) unsigned NOT NULL default '0',
   PRIMARY KEY  (`user_id`,`role_id`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `user_roles`
 
@@ -2390,7 +2390,7 @@ new SQL("CREATE TABLE `users` (
   KEY `group_id` (`group_id`),
   KEY `email` (`email`),
   KEY `profile_id` (`profile_id`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `users`
 
@@ -2406,7 +2406,7 @@ new SQL("CREATE TABLE `version` (
   `description` text,
   PRIMARY KEY  (`version_nr`),
   UNIQUE KEY `version_nr` (`version_nr`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `version`
 
@@ -2447,7 +2447,7 @@ new SQL("CREATE TABLE `xml` (
   PRIMARY KEY  (`id`),
   KEY `keel` (`keel`),
   KEY `dtd` (`dtd_id`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `xml`
 
@@ -2459,7 +2459,7 @@ new SQL("CREATE TABLE `xml_dtd` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `dtd_name` varchar(100) NOT NULL default '',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `xml_dtd`
 
@@ -2480,7 +2480,7 @@ new SQL("CREATE TABLE `xml_map` (
   `xml_id` int(10) unsigned NOT NULL default '0',
   PRIMARY KEY  (`id`),
   KEY `dtd_name` (`dtd_id`)
-) ENGINE=MyISAM"); echo '. '; flush();
+)"); echo '. '; flush();
 
 // Dumping data for table `xml_map`
 
