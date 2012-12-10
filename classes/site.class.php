@@ -535,7 +535,7 @@ class Site {
 			}
 		}
 
-		if($this->fdat["op"] == 'login' && $this->fdat["url"]) {
+		if($this->fdat["op"] == 'login' && $this->fdat["url"] && $this->CONF['disable_form_based_login'] != "1") {
 			$this->user = new User(array(
 				user => $this->fdat["user"],
 				pass => $this->fdat["pass"],
@@ -575,6 +575,7 @@ class Site {
 
 				# veateade: kui ollakse admin-osas siis n???idatakse seda admin login vormis				
 				if($this->in_admin || $this->in_editor) {
+					$this->custom_login_redirect();
 					include_once($class_path."login_html.inc.php");
 					admin_login_form(array("site" => $this, "auth_error" => ($this->user->is_locked ? 2 : 1)));
 				}
@@ -604,6 +605,7 @@ class Site {
 		######## ADMIN are login form
 		# if attempt to admin/ area but user doesn't exist then show login form
 		if(($this->in_admin || $this->in_editor)&& !$this->user->user_id) {
+			$this->custom_login_redirect();
 			include_once($class_path."login_html.inc.php");
 			admin_login_form(array("site" => $this, "auth_error" => 0));
 		}
@@ -1475,6 +1477,29 @@ class Site {
 		return $gpcList;		
 	}
 	# FUNCTION transcribe
+	#####################
+
+	#####################
+	# FUNCTION custom_login_redirect
+	# Will check custom login url isdefined and redirects to it taking note if you 
+	# redirecting from editor or admin page.
+
+	function custom_login_redirect(){
+
+		if(filter_var($this->CONF['custom_login_url'], FILTER_VALIDATE_URL)){
+			if($this->in_admin){
+				$_SESSION['saurus']['custom_url_redirect']="admin";
+			}
+			if($this->in_editor){
+				$_SESSION['saurus']['custom_url_redirect']="editor";
+			}
+			Header("Location: ".$this->CONF['custom_login_url']);
+			exit;
+		}
+		return true;
+	}
+
+	# FUNCTION custom_login_redirect
 	#####################
 
 }
