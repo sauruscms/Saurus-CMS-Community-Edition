@@ -28,48 +28,50 @@
 
 global $site;
 
-preg_match('/\/(admin|editor)\//i', $_SERVER["REQUEST_URI"], $matches);
+preg_match( '/\/(admin|editor)\//i', $_SERVER["REQUEST_URI"], $matches );
 $class_path = $matches[1] == "editor" ? "../classes/" : "./classes/";
-include($class_path."port.inc.php");
-
+include( $class_path . "port.inc.php" );
 
 # otsitakse id-d enne "t"-d
 # nt image.php?555t => id = 555
-if (preg_match("/^(\d+)(t)?.*?$/", $_SERVER['QUERY_STRING'], $matches)) {
+if ( preg_match( "/^(\d+)(t)?.*?$/", $_SERVER['QUERY_STRING'], $matches ) ) {
 	$id = $matches[1];
 	$is_thumb = $matches[2];
+	$_GET['id'] = $id;
+} elseif ( $_GET['id'] ) {
+	$id = $_GET['id'];
 }
-$_GET[id] = $id;
 
-$site = new Site(array(
-	on_debug=>0
+$site = new Site( array(
+	'on_debug' => 0
 ));
 
-$objekt = new Objekt(array(
-	objekt_id => $id,
-	on_sisu=>1,
+$objekt = new Objekt( array(
+	'objekt_id' => $id,
+	'on_sisu' => 1,
 ));
 
-if (($objekt->all[klass]=="pilt" && ($objekt->on_avaldatud || $site->admin!=0) && ($ipAccess>0))) {
+if ( ( $objekt->all['klass'] == "pilt" && ( $objekt->on_avaldatud || $site->admin != 0 ) ) ) {
 
-	$ctype = $objekt->all[mime_tyyp] ? $objekt->all[mime_tyyp] : "application/saurus";
+	$ctype = $objekt->all['mime_tyyp'] ? $objekt->all['mime_tyyp'] : "application/saurus";
 
 	header("Content-Type: $ctype");
 
-	$sql = $site->db->prepare("select * from obj_pilt WHERE objekt_id = ?",$objekt->objekt_id);
-	$sth = new SQL($sql);
+	$sql = $site->db->prepare( "select * from obj_pilt WHERE objekt_id = ?", $objekt->objekt_id );
+
+	$sth = new SQL( $sql );
 	$data = $sth->fetch();
-	$site->debug->msg($sth->debug->get_msgs());
+	$site->debug->msg( $sth->debug->get_msgs() );
 
 	if ($is_thumb) {
-		$body = $data[vaike_blob];
+		$body = $data['vaike_blob'];
 		
 	} else {
-		$body = $data[sisu_blob];
+		$body = $data['sisu_blob'];
 	}
 	print $body;
 
 } else {
-	header("Location: ".(empty($_SERVER['HTTPS']) ? 'http://': 'https://').$site->CONF[hostname].$site->CONF[wwwroot].($site->admin?"/editor":"")."/?op=error&error_id=404");
+	header("Location: " . ( empty($_SERVER['HTTPS'] ) ? 'http://': 'https://') . $site->CONF['hostname'] . $site->CONF['wwwroot'] . ( $site->admin ? "/editor": "" ) . "/?op=error&error_id=404" );
 }
 $site->debug->print_msg();
