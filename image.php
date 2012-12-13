@@ -11,9 +11,9 @@
  * a bit (well maybe more than a bit) old fashioned and here's where you can help.
  * Good luck and keep your open source minds open!
  * 
- * @package		SaurusCMS
- * @copyright	2000-2010 Saurused Ltd (http://www.saurus.info/)
- * @license		Mozilla Public License 1.1 (http://www.opensource.org/licenses/mozilla1.1.php)
+ * @package   SaurusCMS
+ * @copyright 2000-2010 Saurused Ltd (http://www.saurus.info/)
+ * @license   Mozilla Public License 1.1 (http://www.opensource.org/licenses/mozilla1.1.php)
  * 
  */
 
@@ -38,8 +38,10 @@ include($class_path."port.inc.php");
 if (preg_match("/^(\d+)(t)?.*?$/", $_SERVER['QUERY_STRING'], $matches)) {
 	$id = $matches[1];
 	$is_thumb = $matches[2];
+	$_GET['id'] = $id;
+} elseif ( $_GET['id'] ) {
+	$id = $_GET['id'];
 }
-$_GET[id] = $id;
 
 $site = new Site(array(
 	on_debug=>0
@@ -50,7 +52,7 @@ $objekt = new Objekt(array(
 	on_sisu=>1,
 ));
 
-if (($objekt->all[klass]=="pilt" && ($objekt->on_avaldatud || $site->admin!=0) && ($ipAccess>0))) {
+if (($objekt->all[klass]=="pilt" && ($objekt->on_avaldatud || $site->admin!=0) )) {
 
 	$ctype = $objekt->all[mime_tyyp] ? $objekt->all[mime_tyyp] : "application/saurus";
 
