@@ -89,8 +89,7 @@ CREATE TABLE ext_timezones (
   UTC_dif float(7,2) default NULL,
   php_variable varchar(255) default NULL,
   PRIMARY KEY  (id)
-) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=latin1
-";
+)";
 $create_result = new SQL($create_sql);
 
 //Now we check if there is no Timezones profile in the CMS, if there is, time to fail again. 
