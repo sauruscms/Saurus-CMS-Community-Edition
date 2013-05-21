@@ -637,7 +637,9 @@ $_SESSION['current_article_parent_selection']['display_fields'] = array('select_
 <head>
 
 	<title><?=$site->title;?> <?=$site->cms_version;?></title>
-
+	
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+	
 	<meta http-equiv="Content-Type" content="text/html; charset=<?=($encoding ? $encoding : $site->encoding);?>">
 	<meta http-equiv="Cache-Control" content="no-cache">
 	<link rel="stylesheet" href="<?=$site->CONF['wwwroot'].$site->CONF['styles_path'].'/article_editor.css';?>" media="screen">
