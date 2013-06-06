@@ -221,7 +221,7 @@ $folder_tree = array();
 
 foreach($folders as $objekt_id => $path)
 {
-	$folder_tree[$objekt_id] = $temp_folder_tree[$objekt_id];
+	$folder_tree['_'.$objekt_id] = $temp_folder_tree[$objekt_id];
 }
 
 // mark open folders
@@ -231,8 +231,8 @@ $objekt_id = $open_folder_id;
 
 while($objekt_id)
 {
-	$folder_tree[$objekt_id]['open'] = 1;
-	$objekt_id = $folder_tree[$objekt_id]['parent_id'];
+	$folder_tree['_'.$objekt_id]['open'] = 1;
+	$objekt_id = $folder_tree['_'.$objekt_id]['parent_id'];
 }
 
 $folder_tree[1] = array(
