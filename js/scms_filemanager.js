@@ -1618,8 +1618,13 @@ function initFolders(folder_tree)
 {
 	for(var objekt_id in folder_tree) if(objekt_id != 1)
 	{
-		$('table#scms_folder_tree_table').append(getFolderHTML(folder_tree[objekt_id]));
-		toggleFolderStateIcon(folder_tree[objekt_id]);
+		var folder = folder_tree[objekt_id];
+
+		$('table#scms_folder_tree_table').append(getFolderHTML(folder));
+		toggleFolderStateIcon(folder);
+
+		folder_tree[objekt_id.substring(1)] = folder;
+		delete folder_tree['_' + objekt_id];
 	}
 	
 	addFolderHovers();
