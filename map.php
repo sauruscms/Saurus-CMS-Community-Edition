@@ -66,26 +66,12 @@ $folder_name=$fn[sizeof($fn)-2];
 $process=0;
 foreach($tmp_cmd as $t){
 
-	// if the there is a .php in the URL then don't use aliases go directly to that file
-	if(preg_match('/\.php$/i', $t) && file_exists($t) && !preg_match("#^\.\./#", $t))
-	{
-		$_SERVER['SCRIPT_NAME'] = str_replace('map.php', $t, $_SERVER['SCRIPT_NAME']);
-		
-		// if alias redirecting is on, force redirecting in index.php
-		$forceRedirect = true;
-	
-		include($t);
-		exit;
-	}
-	
 	if($process == 1&&!empty($t)){
 		$ncmd[]=$t;
 	}
 	if($t==$folder_name){
 		$process=1;
-
 	}
-
 }
 
 //Now if we found no folder name, then the case is that they are all aliases. (web page is located in a xxx.domain.yyy)

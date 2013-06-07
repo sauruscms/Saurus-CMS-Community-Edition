@@ -848,8 +848,6 @@ $_SESSION['current_article_parent_selection']['display_fields'] = array('select_
 
         <input type="hidden" name="sorting" value="<?=$site->fdat['sorting'];?>">
 
-		<input type="hidden" name="extension_path" value="<?=$site->fdat['extension_path'];?>">
-		
 		<input type="hidden" name="publish" value="<?php echo ($site->fdat['publish'] || $objekt->all['on_avaldatud'] ? 1 : 0); ?>">
 
 	<table cellpadding="0" cellspacing="0" class="layout" border="0">

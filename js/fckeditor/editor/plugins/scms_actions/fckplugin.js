@@ -218,7 +218,7 @@ function SCMSImageFileInsert(data)
 		// image
 		if(/gif$/i.test(path) || /jpg$/i.test(path) || /jpeg$/i.test(path) || /png$/i.test(path) )
 		{
-			FCKDialog.OpenDialog( 'Image', FCKLang.DlgImgTitle, BaseURL + 'admin/fckeditor_dialog_image.php?dialog=dialog/scms_image.php&file_id=' + data.files[0].objekt_id, 450, 400);
+			FCKDialog.OpenDialog( 'Image', FCKLang.DlgImgTitle, BaseURL + 'admin/fckeditor_dialog_image.php?file_id=' + data.files[0].objekt_id, 450, 400);
 		}
 		// flash
 		else if(/swf$/i.test(path))

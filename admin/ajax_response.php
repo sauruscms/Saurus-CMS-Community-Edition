@@ -53,19 +53,22 @@ if($site->user->user_id && $_REQUEST['op'] == 'generate_alias' && isset($_REQUES
 if($site->user->user_id && $_REQUEST['op'] == 'check_file' && $site->fdat['name'])
 {
 	include_once($class_path.'adminpage.inc.php');
-	
-	$pathinfo = str_replace(array('../', './', '..\\', '.\\'), '', $site->fdat['name']);
-	$pathinfo = explode('/', $pathinfo);
-	$filename = create_alias_from_string($pathinfo[count($pathinfo) - 1],true);
-	unset($pathinfo[count($pathinfo) - 1]);
-	$dirname = implode('/', $pathinfo);
-	
-	if(file_exists($site->absolute_path.$dirname.'/'.$filename))
-	{
-		echo '{"file_exists": 1}';
+	if($pathinfo = path_clean($site->fdat['name'])) {
+		$pathinfo = explode('/', $pathinfo);
+		$filename = create_alias_from_string($pathinfo[count($pathinfo) - 1],true);
+		unset($pathinfo[count($pathinfo) - 1]);
+		$dirname = implode('/', $pathinfo);
+		
+		if(file_exists($site->absolute_path.$dirname.'/'.$filename))
+		{
+			echo '{"file_exists": 1}';
+		}
+		else 
+		{
+			echo '{"file_exists": 0}';
+		}
 	}
-	else 
-	{
+	else {
 		echo '{"file_exists": 0}';
 	}
 	

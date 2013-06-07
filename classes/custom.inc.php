@@ -1227,3 +1227,18 @@ function convert_local_link_to_alias($link) {
 
 	return $objektUrl;
 }
+
+/**
+ * Check path for anomalies.
+ */
+function path_clean($path) {
+	if (strpos($path, '../') !== false ||
+    strpos($path, "..\\") !== false ||
+    strpos($path, '/..') !== false ||
+    strpos($path, '\..') !== false)	{
+	    return FALSE;
+	}
+	else {
+		return $path;
+	}
+}

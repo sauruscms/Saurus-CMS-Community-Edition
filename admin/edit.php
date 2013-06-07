@@ -71,13 +71,8 @@ $site = new Site(array(
 $op = $site->fdat['op'];
 $op2 = $site->fdat['op2'];
 
-# include global actions file (if extention path not set) OR extention actions file
-
-if($site->fdat['extension_path'])
-{
-	$actions_file = '..'.$site->fdat['extension_path'].'/actions.inc.php';
-}
-elseif(file_exists('../extensions/actions_custom.inc.php'))
+# include global actions file
+if(file_exists('../extensions/actions_custom.inc.php'))
 {
 	$actions_file = '../extensions/actions_custom.inc.php';
 }
@@ -85,7 +80,7 @@ else
 {
 	$actions_file = '../extensions/actions.inc.php';
 }
-$site->debug->msg('extension_path: '.$site->fdat['extension_path']. '; actions_file = '.$actions_file);	
+$site->debug->msg('actions_file = '.$actions_file);	
 
 if (file_exists($actions_file)){
 	include_once($actions_file);

@@ -273,8 +273,6 @@ $pearubriik = $par_obj->all[sys_alias]=="home" ? 1 : 0;
 
 <input type="hidden" name="sorting" value="<?=$site->fdat['sorting'];?>">
 
-<input type="hidden" name="extension_path" value="<?=$site->fdat['extension_path']?>">
-
 <input type="hidden" name="opener_location" value="">
 <input type="hidden" name="publish" value="<?php echo ($site->fdat['publish'] || $objekt->all['on_avaldatud'] ? 1 : 0); ?>">
 	<script>

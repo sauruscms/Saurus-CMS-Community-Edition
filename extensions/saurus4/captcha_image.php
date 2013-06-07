@@ -23,6 +23,8 @@ include_once('extension.config.php');
 //name of the captcha definition
 $name = (string)$_GET['name'];
 
+$captcha = array();
+
 foreach($EXTENSION['captchas'] as $cap_name => $cap_def	)
 {
 	$captcha_def = false;
@@ -33,7 +35,7 @@ foreach($EXTENSION['captchas'] as $cap_name => $cap_def	)
 	}
 }
 
-if(!$captcha)
+if(empty($captcha))
 {
 	//unknown defintion, exit
 	exit;

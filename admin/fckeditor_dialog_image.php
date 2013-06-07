@@ -99,7 +99,7 @@ if($object->objekt_id && $object->all['fullpath'])
 		$default_image = current($definitions);
 	}
 	
-	include_once('../js/fckeditor/editor/'.$site->fdat['dialog']);
+	include_once('../js/fckeditor/editor/dialog/scms_image.php');
 	exit;
 }
 else 
