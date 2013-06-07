@@ -105,7 +105,7 @@ while($row = $result->fetch('ASSOC'))
 	$all_glossaries[$row['keel_id']] = $row;
 }
 
-# Sys sõnade tüübid
+# Sys sï¿½nade tï¿½ï¿½bid
 $sql = $site->db->prepare("SELECT sys_sona_tyyp.sst_id, sys_sona_tyyp.nimi 
 	FROM sys_sona_tyyp
 	ORDER BY sys_sona_tyyp.nimi"
@@ -120,7 +120,7 @@ while ($sst = $sth->fetch('ASSOC'))
 	$glossary_word_types[] = $sst;
 }
 
-$sst_id = ($site->fdat['sst_id'] ? $site->fdat['sst_id'] : $glossary_word_types[0]['sst_id']);
+$sst_id = (int)($site->fdat['sst_id'] ? $site->fdat['sst_id'] : $glossary_word_types[0]['sst_id']);
 
 if(is_numeric($site->fdat['flt_keel']))
 {
@@ -1029,10 +1029,10 @@ function hideConfirmDialog()
 					$mysona[sys_sona] = '<b>!!! - </b>'.$mysona[sys_sona];
 				}
 			
-				# bold: tee sõna, mida kasutatakse bold-iks
-				# kui tõlge on erinev kui tõlge tootes, siis tee tõlge bold-iks
+				# bold: tee sï¿½na, mida kasutatakse bold-iks
+				# kui tï¿½lge on erinev kui tï¿½lge tootes, siis tee tï¿½lge bold-iks
 				if(trim($mysona[sona]) != trim($mysona[origin_sona])) { $bold = 1;}
-				# kui tõlge puudub üldse (tühistring), siis tee tõlge tootes bold-iks
+				# kui tï¿½lge puudub ï¿½ldse (tï¿½histring), siis tee tï¿½lge tootes bold-iks
 				if(trim($mysona[sona]) == '') { $bold_orig = 1;}
 				
 				if ($keel_id=='2' && $site->CONF['cyr_convert_encoding']){

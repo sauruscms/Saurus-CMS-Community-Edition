@@ -310,7 +310,8 @@ if($args['is_browse']) { $site->fdat['view']='overview_false'; }
 	# users list
 
 	########### ORDER
-	$order = " ORDER BY ".$site->fdat['sortby']." ".$site->fdat['sort'];
+	$site->fdat['sort'] = $site->fdat['sort'] == 'asc' ? 'asc': 'desc';
+	$order = " ORDER BY `".mysql_real_escape_string($site->fdat['sortby'])."` ".$site->fdat['sort'];
 
 	########### SQL
 

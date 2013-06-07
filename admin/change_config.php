@@ -150,7 +150,7 @@ if(!$called_from_install_script) {
 					));
 
 
-					$q="update config set sisu='".$site->fdat['timezone']."' where nimi='time_zone'";
+					$q="update config set sisu='".(int)$site->fdat['timezone']."' where nimi='time_zone'";
 					new SQL($q);
 
 

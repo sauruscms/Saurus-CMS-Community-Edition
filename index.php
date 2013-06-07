@@ -295,23 +295,6 @@ if ($CMS_SETTINGS['cache_enabled']) { # if we are using cache => go on
 	} # we try to use cache
 }  // if ($CMS_SETTINGS['cache_enabled'])
 
-# Check (at the start of cms-engine) language of the given object and send it forward into $fdat[keel]
-# -if cached data not found
-# -if parameter "lang" or "keel" not found
-# -if parameter "id" or "pg" found (GRR FIX IT - IT's BUG! 'pg' is in configuration and changable)
-
-if ($CMS_SETTINGS['switch_lang_enabled'] && !$cache_data && !$_GET['lang'] && !$_GET['keel'] && (is_numeric($_GET['id']) || is_numeric($_GET['pg']))){
-	$myid = $_GET['id'] ? $_GET['id'] : $_GET['pg'];
-	$sql = "SELECT keel.extension FROM objekt LEFT JOIN keel ON keel.keel_id=objekt.keel WHERE objekt_id='".$myid."'";
-	$sth = new SQL($sql);
-	$mykeel = $sth->fetchsingle();
-	if ($mykeel){
-# merle kommenteeris v�lja bug #2398:
-#		$_GET['keel'] = $mykeel;
-	}
-}
-
-
 ##########################
 # SHOW cached page or START SAVING cache info
 

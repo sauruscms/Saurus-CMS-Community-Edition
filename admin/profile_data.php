@@ -59,7 +59,7 @@ if($site->fdat['profile_id']) {
 	$profile_def = $site->get_profile(array(id=>$site->fdat['profile_id'])); 
 	$breadcrumb_focus_str = ",'".$site->sys_sona(array(sona => $profile_def['name'], tyyp=>"custom"))."'";
 
-	# sanity check: kui ei leitud sellise nimega profiili, anda toimetajale veateade ja väljuda:
+	# sanity check: kui ei leitud sellise nimega profiili, anda toimetajale veateade ja vï¿½ljuda:
 	if(!$profile_def['profile_id']) {
 		if($site->in_admin && $site->fdat['profile_id']) {
 			print "<font color=red><b>Profile '".$site->fdat['profile_id']."' not found!</b></font>";
@@ -440,7 +440,7 @@ if($site->fdat['profile_id']) {
 	#################
 	# table column names
 
-	# set sort base link, viska vana parameeter lingist välja:
+	# set sort base link, viska vana parameeter lingist vï¿½lja:
 	$sort_baselink = $site->URI;
 	$sort_baselink = preg_replace("/\&sortby=(\w+)/i","",$sort_baselink); # field to sort by
 	$sort_baselink = preg_replace("/\&sort=(\w+)/i","",$sort_baselink); # sort direction: desc/asc
@@ -456,6 +456,7 @@ if($site->fdat['profile_id']) {
 			$site->fdat['sort'] = 'desc';
 		}
 	}
+	$site->fdat['sort'] = $site->fdat['sort'] == 'asc' ? 'asc': 'desc';
 	##### td width: calculate percents
 	if( is_array($profile_data) && sizeof(array_keys($profile_data)) > 0 ) {
 		$td_width = intval((100/(sizeof(array_keys($profile_data))+1))).'%';
@@ -519,7 +520,7 @@ if($site->fdat['profile_id']) {
 
 	########### ORDER
 	if($site->fdat['sortby']){
-		$order = " ORDER BY ".$site->fdat['sortby']." ".$site->fdat['sort'];
+		$order = " ORDER BY `".mysql_real_escape_string($site->fdat['sortby'])."` ".$site->fdat['sort'];
 	}
 
 	########### SQL
@@ -594,7 +595,7 @@ if($site->fdat['profile_id']) {
 					if (strlen($field_value)>50) { #  strip if necessary
 						$field_value = substr($field_value,0,50)."...";
 					}
-				# Bug #2567: FILE väli ajab html-i katki
+				# Bug #2567: FILE vï¿½li ajab html-i katki
 			?>
 				<td  width="<?=$td_width?>" class="scms_table_row"><a href="<?=$href?>"><?=( $field_value ? htmlspecialchars($field_value) : '&nbsp;') ?></a></td>
 			<? 

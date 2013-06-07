@@ -41,16 +41,6 @@ if (!$site->user->allowed_adminpage()) {
 	exit;
 }
 
-/* bug #2877 Why only superusers?
-# show this page only to superuser:
-if (!$site->user->is_superuser) {
-	####### print error html
-	print_error_html(array(
-		"message" => $site->sys_sona(array(sona => "Permission denied", tyyp=>"editor"))
-	));
-}
-*/
-
 ######### get adminpage name
 $adminpage_names = get_adminpage_name(array("script_name" => $site->script_name));
 $parent_pagename = $adminpage_names['parent_pagename'];
@@ -206,18 +196,18 @@ $lopp_aeg = $site->fdat['lopp']? $site->fdat['lopp'] : date("d.m.Y");
 	
 	###### search string
 	if ($site->fdat['filter'] && $site->fdat['filter']!=$site->sys_sona(array(sona => "otsi", tyyp=>"editor")).':' ) {
-		$otsi = AddSlashes($site->fdat['filter']);
+		$otsi = mysql_real_escape_string($site->fdat['filter']);
 		$otsi = preg_replace("/%/", "\\%", $otsi);
 		$where_sql[] = " (error_log.err_text LIKE '%".$otsi."%' OR error_log.referrer LIKE '%".$otsi."%') ";
 	}
 	if ($algus_aeg) {
-		$where_sql[] = " error_log.time_of_error>='".$site->db->ee_MySQL($algus_aeg)." 00:00' "; 
+		$where_sql[] = " error_log.time_of_error>='".mysql_real_escape_string($site->db->ee_MySQL($algus_aeg))." 00:00' "; 
 	}
 	if ($lopp_aeg) {
-		$where_sql[] = " error_log.time_of_error<='".$site->db->ee_MySQL($lopp_aeg)." 23:59' "; 
+		$where_sql[] = " error_log.time_of_error<='".mysql_real_escape_string($site->db->ee_MySQL($lopp_aeg))." 23:59' "; 
 	}
 	if ($site->fdat['err_type']) {
-		$where_sql[] = " error_log.err_type = '".$site->fdat['err_type']."' ";
+		$where_sql[] = " error_log.err_type = '".mysql_real_escape_string($site->fdat['err_type'])."' ";
 	}
 
 	$where_str = sizeof($where_sql)>0 ? " WHERE ".join(" AND ",$where_sql) : '';
@@ -286,13 +276,10 @@ $lopp_aeg = $site->fdat['lopp']? $site->fdat['lopp'] : date("d.m.Y");
 				<table width="100%" border="0" cellspacing="0" cellpadding="0" class="scms_table">
 <? 
 	# default values:
-	$site->fdat['sortby'] = $site->fdat['sortby'] ? $site->fdat['sortby'] : 'time_of_error';
-	$site->fdat['sort'] = $site->fdat['sort'] ? $site->fdat['sort'] : 'DESC';
+	$site->fdat['sort'] = $site->fdat['sort'] == 'ASC' ? 'ASC' : 'DESC';
 
 	########### ORDER
-	if($site->fdat['sortby']){
-		$order = " ORDER BY ".$site->fdat['sortby']." ".$site->fdat['sort'];
-	}
+	$order = " ORDER BY 'time_of_error' ".$site->fdat['sort'];
 
 	########### SQL
 
@@ -301,8 +288,7 @@ $lopp_aeg = $site->fdat['lopp']? $site->fdat['lopp'] : date("d.m.Y");
 	$sql .= $where_str;
 	$sql .= $order;
 	$sql .= $pagenumbers['limit_sql'];
-
-#print $sql;
+	
 	$sth = new SQL($sql);
 	$site->debug->msg($sth->debug->get_msgs());
 

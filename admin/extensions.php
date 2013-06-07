@@ -293,23 +293,11 @@ if($ext->error()){
 	########## FROM
 	$from_sql = "FROM extensions ";
 
-	# default values:
-	$site->fdat['sortby'] = $site->fdat['sortby'] ? $site->fdat['sortby'] : 'name';
-	$site->fdat['sort'] = $site->fdat['sort'] ? $site->fdat['sort'] : 'ASC';
-
-	########### ORDER
-	if($site->fdat['sortby']){
-		$order = " ORDER BY ".$site->fdat['sortby']." ".$site->fdat['sort'];
-	}
-
 	########### SQL
 
 	$sql = $site->db->prepare("SELECT DATE_FORMAT(version_date,'%d.%m.%Y') AS fversion_date, extensions.*");
 	$sql .= $from_sql;
-	$sql .= $order;
-#	$sql .= $pagenumbers['limit_sql'];
 
-#print $sql;
 	$sth = new SQL($sql);
 	$site->debug->msg($sth->debug->get_msgs());
 

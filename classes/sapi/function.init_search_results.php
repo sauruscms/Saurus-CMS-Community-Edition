@@ -46,10 +46,9 @@ function smarty_function_init_search_results($params,&$smarty) {
 		}else{
 			$pre_search_explode=explode(",",strtolower(trim($sites)));
 			foreach($pre_search_explode as $k=>$v){
-				$pre_search_explode[$k]=trim($v);
+				$pre_search_explode[$k]=$site->db->prepare('?', trim($v));
 			}
-			$sql_keel = "SELECT keel_id FROM keel WHERE on_kasutusel=1 AND extension IN ('".implode("','",$pre_search_explode)."')";
-			echo $sql;
+			$sql_keel = 'SELECT keel_id FROM keel WHERE on_kasutusel=1 AND extension IN ('.implode(',',$pre_search_explode).')';
 		}
 
 		$sth = new SQL($sql_keel);
