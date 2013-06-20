@@ -115,7 +115,8 @@ else {
 		clear_cache("ALL");
 
 		if (!$site->on_debug) {
-			header("Location: ".(empty($_SERVER['HTTPS']) ? 'http://' : 'https://').$site->CONF[hostname].$site->fdat[url]);
+			$url = preg_replace("!\r|\n.*!s", "", (empty($_SERVER['HTTPS']) ? 'http://' : 'https://').$site->CONF[hostname].$site->fdat[url]);
+			header("Location: ".$url);
 		}
 
 		new Log(array(

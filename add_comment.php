@@ -135,8 +135,8 @@ if($capthca_check_failed)
 	}
 	else
 	{
-		//protocol check ...
-		header('Location: '.(empty($_SERVER['HTTPS']) ? 'http://': 'https://').$site->CONF['hostname'].$site->CONF['wwwroot'].($site->in_editor?'/editor':'').'/?'.(($site->fdat['tpl'] || $site->fdat['c_tpl'])&&!$site->fdat['inserted_id']&&!$site->fdat['jump_to_parent']?'tpl='.$site->fdat['tpl'].'&c_tpl='.$site->fdat['c_tpl'].'&':'').'id='.$site->fdat['id'].'&lisa_alert=2');
+		$url = preg_replace("!\r|\n.*!s", "", (empty($_SERVER['HTTPS']) ? 'http://': 'https://').$site->CONF['hostname'].$site->CONF['wwwroot'].($site->in_editor?'/editor':'').'/?'.(($site->fdat['tpl'] || $site->fdat['c_tpl'])&&!$site->fdat['inserted_id']&&!$site->fdat['jump_to_parent']?'tpl='.$site->fdat['tpl'].'&c_tpl='.$site->fdat['c_tpl'].'&':'').'id='.$site->fdat['id'].'&lisa_alert=2');
+		header('Location: '.$url);
 		exit;
 	}
 }
@@ -379,9 +379,10 @@ if (($objekt->all[klass] == "artikkel" && $objekt->all['on_foorum']) || $objekt-
 			if ($faq_mode && !$site->in_editor){$tmp_lisa_alert="&lisa_alert=1";}  # Bug #2133
 
 		if ($site->fdat['redirect_url']){
-			header("Location: ".urldecode($site->fdat['redirect_url']));
+			header("Location: ".urldecode(preg_replace("!\r|\n.*!s", "", $site->fdat['redirect_url'])));
 		} else { # Bug #1953
-			header("Location: ".(empty($_SERVER['HTTPS']) ? 'http://': 'https://').$site->CONF[hostname].$site->CONF[wwwroot].($site->in_editor?"/editor":"")."/?".(($site->fdat[tpl] || $site->fdat[c_tpl])&&!$site->fdat['inserted_id']&&!$site->fdat['jump_to_parent']?"tpl=".$site->fdat[tpl]."&c_tpl=".$site->fdat[c_tpl]."&":"")."id=".($site->fdat['jump_to_parent'] ? $objekt->parent_id : $objekt->objekt_id).$tmp_lisa_alert);
+			$url = preg_replace("!\r|\n.*!s", "", (empty($_SERVER['HTTPS']) ? 'http://': 'https://').$site->CONF[hostname].$site->CONF[wwwroot].($site->in_editor?"/editor":"")."/?".(($site->fdat[tpl] || $site->fdat[c_tpl])&&!$site->fdat['inserted_id']&&!$site->fdat['jump_to_parent']?"tpl=".$site->fdat[tpl]."&c_tpl=".$site->fdat[c_tpl]."&":"")."id=".($site->fdat['jump_to_parent'] ? $objekt->parent_id : $objekt->objekt_id).$tmp_lisa_alert);
+			header("Location: ".$url);
 		}
 		} # not debug
 	}
@@ -405,5 +406,6 @@ function myRedirect($url) {
 	header("Cache-Control: no-store, no-cache, must-revalidate");
 	header("Cache-Control: post-check=0, pre-check=0", false);
 	header("Pragma: no-cache");
+	$url = preg_replace("!\r|\n.*!s", "", $url);
 	header("Location: " . urldecode($url));
 }
