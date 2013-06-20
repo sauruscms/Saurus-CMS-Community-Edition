@@ -47,7 +47,7 @@ $op2 = $site->fdat['op2'];
 
 
 
-$site->fdat['group_id'] = $site->fdat['group_id'] ? $site->fdat['group_id'] : get_topparent_group(array("site"=>$site));
+$site->fdat['group_id'] = (int)($site->fdat['group_id'] ? $site->fdat['group_id'] : get_topparent_group(array("site"=>$site)));
 
 
 #################
@@ -441,6 +441,8 @@ if ($site->fdat['show_checkboxes'] && !$site->fdat['selgroups']){
 ######## gather all fdat values into hidden fields
 foreach($site->fdat as $fdat_field=>$fdat_value) { 
 	if($fdat_field != 'selected_devices'){
+		$fdat_value = htmlspecialchars(xss_clean($fdat_value));
+		$fdat_field = htmlspecialchars(xss_clean($fdat_field)); 
 		echo '<input type=hidden id="selectform_'.$fdat_field.'" name="'.$fdat_field.'" value="'.$fdat_value.'">
 		';
 	} 

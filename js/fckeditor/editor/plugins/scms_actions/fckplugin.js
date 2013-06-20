@@ -254,7 +254,7 @@ function SCMSImageFileInsert(data)
 		}
 		else if(/html$/i.test(path) || /htm$/i.test(path))
 		{
-			file_source_window = parent.openpopup(BaseURL + 'admin/file_source.php?callback=window.opener.frames[0].insert_template&file=' + path, 'file_source', 1, 1);
+			file_source_window = parent.openpopup(BaseURL + 'admin/file_source.php?file=' + path, 'file_source', 1, 1);
 		}
 		// file
 		else

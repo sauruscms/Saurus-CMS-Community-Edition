@@ -38,10 +38,10 @@ if (!$site->user->allowed_adminpage()) {
 }
 
 ######################
-# leida valitud keele põhjal õige lehe encoding,
-# admin-osa keel jääb samaks
+# leida valitud keele pï¿½hjal ï¿½ige lehe encoding,
+# admin-osa keel jï¿½ï¿½b samaks
 
-$keel_id = isset($site->fdat[flt_keel]) ? $site->fdat[flt_keel] : $site->fdat[keel_id];
+$keel_id = (int)(isset($site->fdat[flt_keel]) ? $site->fdat[flt_keel] : $site->fdat[keel_id]);
 if (!strlen($keel_id)) { $keel_id = $site->glossary_id; }
 
 $sql = "SELECT * FROM keel where keel_id = ?";
@@ -333,9 +333,9 @@ elseif($site->fdat['op'] == 'export') { ?>
 
 
 
-$site->debug->msg("SQL päringute arv = ".$site->db->sql_count."; aeg = ".$site->db->sql_aeg);
+$site->debug->msg("SQL pï¿½ringute arv = ".$site->db->sql_count."; aeg = ".$site->db->sql_aeg);
 
-$site->debug->msg("TÖÖAEG = ".$site->timer->get_aeg());
+$site->debug->msg("Tï¿½ï¿½AEG = ".$site->timer->get_aeg());
 
 $site->debug->print_msg();
 

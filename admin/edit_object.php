@@ -98,7 +98,7 @@ if ($site->fdat['op'] == "new" && $tyyp['tyyp_id']=='20' && sizeof($profile_idli
 		# sanity check: kui ei leitud sellise nimega profiili, anda toimetajale veateade ja v�ljuda:
 		if(!$profile_def[profile_id]) {
 			if($site->in_admin || $site->in_editor) {
-				print "<font color=red><b>Profile '".$profile_id."' not found!</b></font>";
+				print "<font color=red><b>Profile '".htmlspecialchars(xss_clean($profile_id))."' not found!</b></font>";
 			}
 		}
 		# k�ik OK

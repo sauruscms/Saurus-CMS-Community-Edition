@@ -69,6 +69,8 @@ $top_group = get_topparent_group(array("site" => $site));
 ########### find user_id & group_id & role_id (what was selected in selectbox)
 if($site->fdat['selected_group']) {
 	list($type,$sel_id) = split(":",$site->fdat['selected_group']);
+	$sel_id = (int)$sel_id;
+	$site->fdat['selected_group'] = htmlspecialchars(xss_clean($type)).':'.$sel_id;
 	$site->fdat['user_id'] = $type=='user_id' ? $sel_id : '';
 	$site->fdat['group_id'] = $type=='group_id' ? $sel_id : '';
 	$site->fdat['role_id'] = $type=='role_id' ? $sel_id : '';
@@ -77,9 +79,12 @@ if($site->fdat['selected_group']) {
 	}
 }
 else {
-	$site->fdat['selected_group'] = 'group_id:'.$site->fdat['group_id'];
+	$site->fdat['selected_group'] = 'group_id:'.(int)$site->fdat['group_id'];
 }
-#echo $site->fdat['selected_group']. " gr:".$site->fdat['group_id'];
+
+$site->fdat['user_id'] = (int)$site->fdat['user_id'];
+$site->fdat['group_id'] = (int)$site->fdat['group_id'];
+$site->fdat['role_id'] = (int)$site->fdat['role_id'];
 
 ########### find ALL GROUPS as TREE
 # push all groups to level array
@@ -216,15 +221,9 @@ function checkIt(string)
 
 <?############ FORM #########?>
 <form name="selectform" action="<?=$site->self?>" method="POST">
+
 <?php create_form_token('edit-permissions'); ?>
-<?
-######## gather all fdat values into hidden fields
-#foreach($site->fdat as $fdat_field=>$fdat_value) { 
-#	if($fdat_field != 'op' && substr($fdat_field,0,4) != 'tmp_'){
-#		echo '<input type=hidden id="selectform_'.$fdat_field.'" name="'.$fdat_field.'" value="'.$fdat_value.'">';
-#	} 
-#} 
-?>
+
 <input type=hidden id="selectform_op" name="op" value="">
 <input type=hidden id="selectform_selected_group" name="selected_group" value="<?=$site->fdat['selected_group']?>">
 <input type=hidden id="selectform_user_id" name="user_id" value="<?=$site->fdat['user_id']?>">
@@ -391,7 +390,7 @@ $idx = 0;
 				"tyyp_id" => $obj['tyyp_id'],
 				"parent_id" => $obj['parent_id'],
 			));
-			# kas useril on õigus objekti näha? 1/0
+			# kas useril on ï¿½igus objekti nï¿½ha? 1/0
 			if($permtmp['is_visible'] ) { $is_access = 1; }
 			else { $is_access = 0; }
 			
@@ -1043,7 +1042,7 @@ function get_adminpages_arr(){
 
 	$alamlipikud = array();
 
-	# 1. küsi kõik admin-lehed
+	# 1. kï¿½si kï¿½ik admin-lehed
 	$sql = $site->db->prepare("SELECT admin_osa.id
 	FROM admin_osa
 	WHERE admin_osa.parent_id!=1 ");
@@ -1057,16 +1056,16 @@ function get_adminpages_arr(){
 			adminpage_id => $adminpage['id'],
 			site => $site
 		));
-		# kas useril on selle admin-lehe kohta Read õigus?
+		# kas useril on selle admin-lehe kohta Read ï¿½igus?
 		if(!$perm['R']){
 			# if forbidden, go to next adminpage
 			continue;
 		}
-		# 4. kui kõik lubatud, siis pane lõpp-massiivi
+		# 4. kui kï¿½ik lubatud, siis pane lï¿½pp-massiivi
 		array_push($alamlipikud,$adminpage['id']);
 	}
 
-	# see on nüüd kõigi vaatamiseks lubatud adminlehtede massiiv:
+	# see on nï¿½ï¿½d kï¿½igi vaatamiseks lubatud adminlehtede massiiv:
 	$alamlipikud_joined = join("','",$alamlipikud);
 
 	############## Alamlipiku id jargi otsime pealipikud

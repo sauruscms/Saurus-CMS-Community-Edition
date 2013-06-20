@@ -47,57 +47,57 @@ $site = new Site(array(
 <script type="text/javascript" src="<?=$site->CONF['wwwroot'].$site->CONF['js_path'] ?>/datepicker.js"></script>
 <script type="text/javascript" src="<?=$site->CONF['wwwroot'];?>/common.js.php"></script>
 
- <script type="text/javascript">
-//<!--
+<script type="text/javascript">
 // Handle click of OK link 
 function handleOK(selected_date) {
 	if (opener && !opener.closed) {
-		opener.document.<?if(isset($site->fdat['form'])){echo $site->fdat['form'];}else{ echo $site->fdat['vorm'];}?>.<?if(isset($site->fdat['form_field'])){echo $site->fdat['form_field'];}else{ echo $site->fdat['lahter'];}?>.value=selected_date; 
-		opener.document.<?if(isset($site->fdat['form'])){echo $site->fdat['form'];}else{ echo $site->fdat['vorm'];}?>.<?if(isset($site->fdat['form_field'])){echo $site->fdat['form_field'];}else{ echo $site->fdat['lahter'];}?>.focus(); 
+		opener.document.<?php echo htmlspecialchars(xss_clean((isset($site->fdat['form']) ? $site->fdat['form'] : $site->fdat['vorm']))) ?>.<?php echo htmlspecialchars(xss_clean((isset($site->fdat['form_field']) ? $site->fdat['form_field'] : $site->fdat['lahter']))); ?>.value=selected_date; 
+		opener.document.<?php echo htmlspecialchars(xss_clean((isset($site->fdat['form']) ? $site->fdat['form'] : $site->fdat['vorm']))) ?>.<?php echo htmlspecialchars(xss_clean((isset($site->fdat['form_field']) ? $site->fdat['form_field'] : $site->fdat['lahter']))); ?>.focus(); 
 	} else {
 		alert('You have closed the main window.\n\nNo action will be taken on the choices in this dialog box.');
 	}
 	window.close();
 	return false;
 }
-
-//-->
 </script>
 
 </head>
 
 <body onLoad="if (opener) opener.blockEvents()" onUnload="if (opener) opener.unblockEvents()">
-<?
-if($site->fdat['month']>=1&&$site->fdat['month']<=12)
+<?php
+
+if(is_numeric($site->fdat['month']) && ($site->fdat['month'] >=1 && $site->fdat['month'] <= 12))
 {
 	$month = $site->fdat['month'];
 }else{
 	$month = date("m");
 }
-	if(is_numeric($site->fdat['year'])){
+
+if(is_numeric($site->fdat['year'])){
 	$year = $site->fdat['year'];
-	}else{ 
+}else{ 
 	$year = date("Y");
+}
 
-	}
-	if(is_numeric($site->fdat['day'])){
+if(is_numeric($site->fdat['day'])){
 	$day = $site->fdat['day'];
-	}else{
+}else{
 	$day = date("d");
-	}
-		?>
+}
 
-		<script type="text/javascript">
-			jQuery(function($){
-				load_datepicker_settings();
-				$('#inlinekalender').datepicker({
-					defaultDate: new Date(<?=$year;?>, <?=$month;?> - 1, <?=$day;?>),
-					onSelect: function(date) {
-						handleOK(date)
-					}
-				});
- 			});
-		</script>
+?>
+<script type="text/javascript">
+	jQuery(function($){
+		load_datepicker_settings();
+		$('#inlinekalender').datepicker({
+			defaultDate: new Date(<?=$year;?>, <?=$month;?> - 1, <?=$day;?>),
+			onSelect: function(date) {
+				handleOK(date)
+			}
+		});
+	});
+</script>
+
 <table align="center" border="0">
 	<tr>
 	<td>

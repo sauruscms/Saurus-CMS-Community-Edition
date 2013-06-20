@@ -303,7 +303,7 @@ $lopp_aeg = $site->fdat['lopp']? $site->fdat['lopp'] : date("d.m.Y");
 				<?############# err_type ?>
 				  <td width="5%" nowrap><?= $log['err_type'] ?></td>
 				<?############# err_text ?>
-				  <td width="60%"><?= $log['err_text'] ?></td>
+				  <td width="60%"><?php echo htmlspecialchars(xss_clean($log['err_text'])); ?></td>
 				<?############# referrer ?>
 				  <td width="20%"><?= $log['source'] ?></td>
 

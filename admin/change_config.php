@@ -64,6 +64,8 @@ if(!$called_from_install_script) {
 		on_debug=>0,
 		on_admin_keel => 1
 	));
+	$site->fdat['flt_keel'] = (int)$site->fdat['flt_keel'];
+	$site->fdat['group'] = (int)$site->fdat['group'];
 
 	if (!$site->user->allowed_adminpage()) {
 		exit;
@@ -678,6 +680,8 @@ function print_config_table() {
 		));
 		# force language to english when called from installation script:
 		$site->keel = 1;
+		$site->fdat['flt_keel'] = (int)$site->fdat['flt_keel'];
+		$site->fdat['group'] = (int)$site->fdat['group'];
 	}
 	###########################
 	# Define groups here - different for install.php and admin-pages

@@ -53,6 +53,7 @@ if (!$site->user->allowed_adminpage(array('adminpage_id' => 74,))) { # adminpage
 $op = $site->fdat['op'];
 $op2 = $site->fdat['op2'];
 
+$site->fdat['pid'] = (int)$site->fdat['pid'];
 
 ######################
 # leida valitud keele p�hjal �ige lehe encoding,

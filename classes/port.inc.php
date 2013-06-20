@@ -17,7 +17,6 @@
  *
  */
 
-
 global $class_path;
 global $CMS_SETTINGS;
 global $CMS_PARAMS;
@@ -529,7 +528,8 @@ function detect_xss_in_saurus_params($variables)
 
 	return false;
 }
-if(strstr($_SERVER['REQUEST_URI'], $CMS_SETTINGS['wwwroot'].'/admin/') === false && (
+
+if(strpos(str_replace('\\','/',getcwd()), $absolute_path.'admin') !== 0 && (
 	detect_xss_in_saurus_params($_SERVER['QUERY_STRING']) ||
 	detect_xss_in_saurus_params($_SERVER['REQUEST_URI']) ||
 	detect_xss_in_string($_SERVER['PHP_SELF']) ||

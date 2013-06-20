@@ -53,9 +53,12 @@ $pagename = $adminpage_names['pagename'];
 #temporary:
 error_reporting(7);
 
+$site->fdat['profile_id'] = (int)$site->fdat['profile_id'];
+
 #################
 # GET profile INFO
 if($site->fdat['profile_id']) {
+	$site->fdat['profile_id'] = (int)$site->fdat['profile_id'];
 	$profile_def = $site->get_profile(array(id=>$site->fdat['profile_id'])); 
 	$breadcrumb_focus_str = ",'".$site->sys_sona(array(sona => $profile_def['name'], tyyp=>"custom"))."'";
 
@@ -73,7 +76,6 @@ if($site->fdat['profile_id']) {
 	}
 
 }
-
 
 #################
 # GET objekt INFO

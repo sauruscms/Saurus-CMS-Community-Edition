@@ -49,6 +49,7 @@ $adminpage_names = get_adminpage_name(array("script_name" => $site->script_name)
 $parent_pagename = $adminpage_names['parent_pagename'];
 $pagename = $adminpage_names['pagename'];
 
+$site->fdat['form_id'] = (int)$site->fdat['form_id'];
 
 ################ get selected  FORM data
 if($site->fdat['form_id']) {
@@ -547,7 +548,7 @@ while($value = $sth->fetch()){
 	$profile_def = $site->get_profile(array(id=>$value['profile_id'])); 
 
 	$label = $site->sys_sona(array(sona => $profile_def['name'], tyyp=>"custom", lang_id=>$site->keel));
-	$label = $label != '['.$form_info["name"].']' ? $label : '';	# kui süsteemisõna puudub
+	$label = $label != '['.$form_info["name"].']' ? $label : '';	# kui sï¿½steemisï¿½na puudub
 
 	$profile_href = "javascript:void(openpopup('profiles.php?profile_id=".$value['profile_id']."','profiles','700','500'))";
 

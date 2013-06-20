@@ -22,8 +22,6 @@
  * Retrieves file source and calls callback function with source as an argunment
  *
  * @param	file		the file, has to be sync'ed file
- * @param	callback	javascript function name
- *
  */
 
 global $class_path;
@@ -40,12 +38,6 @@ $site = new Site(array(
 
 $file = (string)$_GET['file'];
 if(!$file)
-{
-	exit;
-}
-
-$callback = (string)$_GET['callback'];
-if(!$callback)
 {
 	exit;
 }
@@ -79,7 +71,7 @@ if($objekt->objekt_id && $objekt->all['tyyp_id'] == 21)
 				fclose($fp);
 				?>
 				<script type="text/javascript">
-					<?=$callback;?>("<?=str_replace(array('"', "\n", "\r"), array('\"', '\n', '\r'), $fcontent);?>");
+					window.opener.frames[0].insert_template("<?=str_replace(array('"', "\n", "\r"), array('\"', '\n', '\r'), $fcontent);?>");
 				</script>
 				<?php
 				exit;

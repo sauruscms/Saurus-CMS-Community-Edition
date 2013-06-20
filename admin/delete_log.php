@@ -156,7 +156,7 @@ $sql = $site->db->prepare("
 $sth = new SQL($sql);
 
 	############################
-	# tsükkel üle kuude
+	# tsï¿½kkel ï¿½le kuude
 	while ($log = $sth->fetch()) {
 		list($year, $month) = split("\.",$log[mname]);
 ?>
@@ -169,11 +169,11 @@ $sth = new SQL($sql);
 <?
 	}
 
-	# / tsükkel üle kuude
+	# / tsï¿½kkel ï¿½le kuude
 	############################
 ?>
 		<input type="hidden" name="kustuta" value="1">
-		<input type="hidden" name="tbl" value="<?=$site->fdat['tbl']?>">
+		<input type="hidden" name="tbl" value="<?php echo htmlspecialchars(xss_clean($site->fdat['tbl'])); ?>">
 		</table>
 		<?###### / 3. Content table ?>		
         

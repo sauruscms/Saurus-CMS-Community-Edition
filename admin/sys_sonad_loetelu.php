@@ -165,6 +165,10 @@ if(is_numeric($site->fdat['flt_keel']))
 		$words[] = $mysona;
 	}
 }
+else
+{
+	$site->fdat['flt_keel'] = NULL;
+}
 
 function can_user_change_translation($sst_id)
 {

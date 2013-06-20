@@ -50,6 +50,9 @@ if($op2 && !$site->fdat['refresh'] && $site->fdat['tab'] == 'permissions') {
 	$site->fdat['group_id'] = $site->fdat['id'];
 }
 
+$site->fdat['group_id'] = (int)$site->fdat['group_id'];
+$site->fdat['id'] = (int)$site->fdat['id'];
+
 #################
 # GET GROUP INFO
 
@@ -71,7 +74,7 @@ $permission = get_user_permission(array(
 	group_id => $site->fdat['group_id']
  ));
 #echo printr($permission);
-$site->debug->msg("Grupi ".$site->fdat['group_id']." õigused käes");
+$site->debug->msg("Grupi ".$site->fdat['group_id']." ï¿½igused kï¿½es");
 
 ###########################
 # ACCESS allowed/denied
@@ -184,16 +187,16 @@ if($op2 && !$site->fdat['refresh']) {
 			
 			########################
 			# INSERT PERMISSIONS
-			# lisame uuele grupile täpselt samad õigused nagu on tema parent grupil:
-			# leia kõik parenti õigused userite/gruppide kohta:
+			# lisame uuele grupile tï¿½pselt samad ï¿½igused nagu on tema parent grupil:
+			# leia kï¿½ik parenti ï¿½igused userite/gruppide kohta:
 			$sql = $site->db->prepare("SELECT * FROM permissions WHERE type=? AND source_id=?",
 				'ACL',
 				 $parent_id
 			);
 			$sth = new SQL ($sql);
-			# tsükkel üle parenti õiguste
+			# tsï¿½kkel ï¿½le parenti ï¿½iguste
 			while($perm = $sth->fetch()){
-				# lisa õigus uuele objektile
+				# lisa ï¿½igus uuele objektile
 					$sql2 = $site->db->prepare("INSERT INTO permissions (type,source_id,group_id,user_id,C,R,U,P,D) VALUES (?,?,?,?,?,?,?,?,?)", 	
 						'ACL', 
 						$site->fdat['group_id'], 
@@ -206,7 +209,7 @@ if($op2 && !$site->fdat['refresh']) {
 						$perm['D']
 					);
 					$sth2 = new SQL($sql2);
-			} # tsükkel üle parenti õiguste
+			} # tsï¿½kkel ï¿½le parenti ï¿½iguste
 			# / INSERT PERMISSIONS
 			########################
 

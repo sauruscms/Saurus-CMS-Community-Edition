@@ -160,7 +160,6 @@ $adminpage_names = get_adminpage_name(array('script_name' => $site->script_name)
 			{
 				contentDimController('s_Content_container');
 				make_breadcrumb('<?=$adminpage_names['parent_pagename'];?>','<?=$adminpage_names['pagename'];?>');
-
 			}
 			
 			window.onresize = function()
@@ -184,8 +183,6 @@ $adminpage_names = get_adminpage_name(array('script_name' => $site->script_name)
 					form.submit();
 				}
 			}
-
-
 		</script>
 	</head>
 
@@ -266,7 +263,7 @@ $adminpage_names = get_adminpage_name(array('script_name' => $site->script_name)
 							<tr <?=($log_record['type'] == 'ERROR' ? 'class="red"' : '');?>>
 								<td><?=$log_record['date'];?></td>
 								<td><?=($log_record['username'] ? $log_record['username'] : '&nbsp;');?></td>
-								<td><?=$log_record['message'];?></td>
+								<td><?php echo htmlspecialchars(xss_clean($log_record['message'])); ?></td>
 								<td><?=($log_record['objekt_id'] ? $log_record['objekt_id'] : '&nbsp;');?></td>
 							</tr>
 						<?php } ?>

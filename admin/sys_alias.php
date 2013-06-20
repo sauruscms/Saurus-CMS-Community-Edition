@@ -42,10 +42,10 @@ if (!$site->user->allowed_adminpage()) {
 }
 
 ######################
-# leida valitud keele põhjal õige lehe encoding,
-# admin-osa keel jääb samaks
+# leida valitud keele pï¿½hjal ï¿½ige lehe encoding,
+# admin-osa keel jï¿½ï¿½b samaks
 
-$keel_id = isset($site->fdat[flt_keel]) ? $site->fdat[flt_keel] : $site->fdat[keel_id];
+$keel_id = (int)(isset($site->fdat[flt_keel]) ? $site->fdat[flt_keel] : $site->fdat[keel_id]);
 if (!strlen($keel_id)) { $keel_id = $site->keel; }
 
 $sql = "SELECT encoding FROM keel where keel_id = ?";
@@ -185,7 +185,7 @@ $sysalias_groups = array(
 		  
 			<?
 			################################		
-			# süsaliasega objektid
+			# sï¿½saliasega objektid
 			################################		
 
 					####################
@@ -337,7 +337,7 @@ else {
 							$i++;
 							}
 
-							# kui pole artikleid, näidata new-nuppu
+							# kui pole artikleid, nï¿½idata new-nuppu
 							if(!$alamlist->rows) { 
 					?>
 								<tr> 

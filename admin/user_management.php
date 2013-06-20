@@ -135,7 +135,9 @@ $site->user->load_favorites(true);
 <form name="selectform" action="<?=$site->self?>" method="GET">
 <?
 ######## gather all fdat values into hidden fields
-foreach($site->fdat as $fdat_field=>$fdat_value) { 
+foreach($site->fdat as $fdat_field=>$fdat_value) {
+	$fdat_value = htmlspecialchars(xss_clean($fdat_value));
+	$fdat_field = htmlspecialchars(xss_clean($fdat_field)); 
 	if($fdat_field != 'selected_devices'){
 		echo '<input type=hidden id="selectform_'.$fdat_field.'" name="'.$fdat_field.'" value="'.$fdat_value.'">';
 	} 
