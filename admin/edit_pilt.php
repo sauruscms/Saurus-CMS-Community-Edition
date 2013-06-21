@@ -18,7 +18,6 @@
  */
 
  
-$timer = new Timer();
 $class_path = "../classes/";
 
 include_once $class_path."picture.inc.php";
@@ -365,7 +364,6 @@ function save_objekts () {
 	global $site;
 	global $objekt;
 	global $keel;
-	global $timer;
 	
 	# sort array in reverse order
 	$_FILES = array_reverse($_FILES);
@@ -373,7 +371,6 @@ function save_objekts () {
 	$args = func_get_arg(0);
 
 
-#print "<br>time in save_objekts begin:".$timer->get_aeg()." <br>";
 	$thumb_width = $site->CONF[thumb_width];
 	$image_width = $site->CONF[image_width];
 
@@ -396,8 +393,6 @@ function save_objekts () {
 			$cs_image = $resized["image"];
 			$cs_thumb = $resized["thumb"];
 			$cs_orig = $resized["orig"];
-
-			#print "<br>time after picter resize:".$timer->get_aeg()." <br>";
 
 			// insert into objekt:
 			$sql = $site->db->prepare("insert into objekt (pealkiri, tyyp_id, on_avaldatud, keel, kesk, pealkiri_strip, on_foorum, aeg, check_in, created_user_id, created_user_name) values (?, ?, 1, ?, ?, ?, ?, ".$site->db->unix2db_datetime(time()).", ?, ?, ?)",
@@ -442,8 +437,6 @@ function save_objekts () {
 			$sth = new SQL($sql);
 			$site->debug->msg($sth->debug->get_msgs());
 
-#print "<br>time after insert  to db:".$timer->get_aeg()." <br>";
-
 			if ($cs_thumb || $cs_image) {
 				$site->debug->msg("Updateing...");
 				$c_thumb = $cs_thumb;
@@ -472,9 +465,6 @@ function save_objekts () {
 
 	# / loop over uploaded pictures
 	#############################
-
-
-#print "time end: ".$timer->get_aeg()."<br>";
 
 	if ($site->on_debug != 1) {
 

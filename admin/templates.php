@@ -20,6 +20,10 @@
 #################################
 # query 1 template
 
+global $site;
+
+if(empty($site)) exit;
+
 if ($site->fdat[id]) {
 	$sql = $site->db->prepare(
 		"SELECT templ_tyyp.*
@@ -76,7 +80,7 @@ if($site->fdat['op2'] && !$site->fdat['refresh']) {
 #	}
 
 	###############################
-	# nõutud väärtuste olemasolu kontroll
+	# nï¿½utud vï¿½ï¿½rtuste olemasolu kontroll
 	if ($site->fdat["nimi"] == '') {
 		$error = "<br><br><font face=verdana size=2>Name is missing!</font>";
 	}
@@ -154,7 +158,7 @@ if($site->fdat['op2'] && !$site->fdat['refresh']) {
 
 
 	###############################
-	# tee malli faili füüs.nimi malli nime põhjal
+	# tee malli faili fï¿½ï¿½s.nimi malli nime pï¿½hjal
 	if (!$error && ($site->fdat['op'] == "edit" || $site->fdat['op'] == "new")) {	
 		if ($site->fdat['op'] == "edit") {	
 			$filename = $ttyyp[templ_fail];
@@ -190,8 +194,8 @@ if($site->fdat['op2'] && !$site->fdat['refresh']) {
 				$site->debug->msg("Template file safe name = $filename");
 
 				############################
-				# topelt kontroll: ega pole füüsiliselt sellist faili olemas
-				# kui on, pane number lõppu
+				# topelt kontroll: ega pole fï¿½ï¿½siliselt sellist faili olemas
+				# kui on, pane number lï¿½ppu
 
 				$filename_original = $filename;
 				$i=1;
@@ -206,7 +210,7 @@ if($site->fdat['op2'] && !$site->fdat['refresh']) {
 		}
 		$site->debug->msg("Template file final name = $filename");
 	}
-	# / tee malli faili füüs.nimi malli nime põhjal
+	# / tee malli faili fï¿½ï¿½s.nimi malli nime pï¿½hjal
 	###############################
 
 	###############################
@@ -755,8 +759,8 @@ else { # mallide list
 
 	########### SQL
 
-	#- näidata ainult html-malle: ID >= 1000
-	#- kui ID >= 2000 (e default mall), siis arvestada välja "on_nahtav" väärtust, muidu mitte
+	#- nï¿½idata ainult html-malle: ID >= 1000
+	#- kui ID >= 2000 (e default mall), siis arvestada vï¿½lja "on_nahtav" vï¿½ï¿½rtust, muidu mitte
 
 	$sql = "SELECT templ_tyyp.* ";
 	$sql .= $from_sql;

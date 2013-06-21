@@ -31,6 +31,9 @@
 # GENERAL ACTIONS for both saving and editing
 
 	global $site;
+	
+if(empty($site)) exit;
+	
 	global $objekt;
 	global $par_obj;
 	global $class_path;
