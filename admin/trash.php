@@ -84,6 +84,8 @@ switch ($site->fdat['sort_dir'])
 
 if($site->fdat['delete_all'] && count($site->fdat['objects']))
 {
+	verify_form_token();
+	
 	//empty trash
 	for($i = count($site->fdat['objects']) - 1; $i >= 0; $i--)
 	{
@@ -221,6 +223,7 @@ $adminpage_names = get_adminpage_name(array('script_name' => $site->script_name)
 		            	<div class="s_Toolbar_container">
 		            		<div class="s_Toolbar_content">
 				        		<form name="toolbar_form" id="toolbar_form" method="POST" action="<?=$_SERVER['PHP_SELF'];?>">
+			        				<?php create_form_token('trash-toolbar'); ?>
 					    			<table cellpadding="0" cellspacing="0" width="100%">
 					    				<tr>
 					    					<td>
@@ -260,6 +263,7 @@ $adminpage_names = get_adminpage_name(array('script_name' => $site->script_name)
 	            <td class="s_Page_container">
 	                <div id="s_Content_container">
 					<form name="actionForm" id="actionForm" method="POST">
+       				<?php create_form_token('trash-actions'); ?>
 
 					<input type="hidden" name="delete_all" value="0">
 

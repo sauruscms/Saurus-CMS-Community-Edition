@@ -984,6 +984,9 @@ if(!$called_from_install_script) {
 	##################
 	# SAVE
 	if ($site->fdat[salvesta]==1) {
+			
+		verify_form_token();
+		
 		foreach ($site->fdat as $key=>$value) {
 
 			if ( substr ($key, 0, 4) == "cff_" ) {

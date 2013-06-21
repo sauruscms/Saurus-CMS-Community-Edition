@@ -136,6 +136,8 @@ if($site->fdat['op2'] == 'save' || $site->fdat['op2'] == 'saveclose') {
 # DELETE form 
 
 if($site->fdat['op2'] == 'deleteconfirmed' && $site->fdat['form_id']) {
+		
+	verify_form_token();
 
 	# delete form
 	$sql = $site->db->prepare("DELETE FROM forms WHERE form_id=?",$site->fdat['form_id']);
