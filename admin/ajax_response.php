@@ -23,13 +23,6 @@ header('Content-type: text/javascript');
 
 $class_path = '../classes/';
 
-// for multi-upload session, the flash does not send cookie values
-if(isset($_POST['PHPSESSID']))
-{
-	session_id($_POST['PHPSESSID']);
-	session_start();
-}
-
 include($class_path.'port.inc.php');
 
 $site = new Site(array());
