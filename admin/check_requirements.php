@@ -48,6 +48,17 @@ if (!isset($path)) { $path = ""; }
 # HTML: if this file is not included from another script then print html 
 
 if(!$called_from_another_script) {
+	
+	include('../classes/port.inc.php');
+	
+	$site = new Site(array(
+		'on_admin_keel' => 1,
+	));
+	
+	if (!$site->user->allowed_adminpage(array('script_name' => 'sys_info.php'))) {
+		exit;
+	}
+	
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
