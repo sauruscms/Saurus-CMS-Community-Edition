@@ -197,9 +197,12 @@ if($site->fdat['op'] == "sync" && is_numeric($site->fdat['profile_id']) ) {
 	header("Location: ".(empty($_SERVER['HTTPS']) ? 'http://' : 'https://').$site->CONF['hostname'].$site->self."?profile_id=".$site->fdat['profile_id']);
 
 }
-
 # / SYNC with real TABLE in database
 ##################
+
+$site->fdat['profile_id'] = (int)$site->fdat['profile_id'];
+$site->fdat['source_table'] = htmlspecialchars(xss_clean($site->fdat['source_table']));
+$site->fdat['did'] = htmlspecialchars(xss_clean($site->fdat['did']));
 
 ################ get profile data
 $profile_def = $site->get_profile(array(id=>$site->fdat['profile_id'])); 
