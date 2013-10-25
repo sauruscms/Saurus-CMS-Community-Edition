@@ -246,7 +246,7 @@ if ($objekt) {
 } else {
 ?>
 Wrong ID
-<?
+<?php 
 }
 if($site->user) { $site->user->debug->print_msg(); }
 if($site->guest) { 	$site->guest->debug->print_msg(); }

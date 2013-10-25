@@ -90,21 +90,21 @@ if($op2) {
 	?>
 	<SCRIPT language="javascript"><!--
 	
-<?
+<?php 
 	// 0) If we choose multiple values of groups and if 'paste2box' parameter was given then past result into that input box:
 		if($site->fdat['paste2box'] && $site->fdat['show_checkboxes']) {
 ?>
 			if(window.opener.document.getElementById('<?= $site->fdat[paste2box] ?>')) {
 				window.opener.document.getElementById('<?= $site->fdat[paste2box] ?>').value= '<?=$site->fdat['selgroups']?>';
 
-				<? if ($site->fdat['run_opener_function']){ ?>
+				<?php if ($site->fdat['run_opener_function']){ ?>
 					window.opener.<?=$site->fdat['run_opener_function']?>();	
-				<? } ?>
+				<?php } ?>
 				window.close();
 			}
 			//-->
 			<?="</scr"."ipt>" ?>
-<? exit; } ?>
+<?php exit; } ?>
 
 
 
@@ -116,7 +116,7 @@ if($op2) {
 
 	// 1) if 'paste2box' parameter was given then past result into that input box
 	if('<?=$site->fdat[paste2box]?>'!='') {
-		<?
+		<?php 
 		if (is_numeric($site->fdat['user_id'])){
 			$user = new User(array(
 				user_id => $site->fdat['user_id'],
@@ -137,11 +137,11 @@ if($op2) {
 
 
 		//If we need to return person's parent group
-		<? if ($site->fdat['pasteparent2box']) { ?>
+		<?php if ($site->fdat['pasteparent2box']) { ?>
 
 			//  if person selected:
-			<? if ($site->fdat['user_id']){ ?>
-			<?
+			<?php if ($site->fdat['user_id']){ ?>
+			<?php 
 				$parent_group = new Group(array(
 					group_id => $user->all['group_id'],
 				));
@@ -158,7 +158,7 @@ if($op2) {
 					if (path_contactnameobj.value=='') {path_contactnameobj.value = '<?=$user->name?>';}
 				}
 				
-<?
+<?php 
 
 ###################
 # If contact fields came in url, fill in contact info:
@@ -200,14 +200,14 @@ if ($contact_info){ ?>
 					if (path_contactinfoobj.value=='') {path_contactinfoobj.value = '<?=$contact_info?>';}
 				}
 
-<? } //if ($contact_info)  ?>
+<?php } //if ($contact_info)  ?>
 
 
 				
 
 
 			//  if group selected:
-			<? } else { ?>
+			<?php } else { ?>
 
 
 				if(path_obj) {
@@ -227,10 +227,10 @@ Not need for groups:
 				}
 */
 
-			<? } ?>
+			<?php } ?>
 
 
-		<? } else { ?>
+		<?php } else { ?>
 
 				if(path_obj) {
 					// group is selected
@@ -245,7 +245,7 @@ Not need for groups:
 					else { path_nameobj.value = '<?=$user->name?>'; }
 				}
 
-		<? } ?>
+		<?php } ?>
 
 
 
@@ -256,16 +256,16 @@ Not need for groups:
 		var userframe = opener.window.top.window.document.getElementById('profile');
 		if(userframe) {
 			/* This has been added */
-			<? 
+			<?php 
 				if($site->fdat[user_id] > 0) {
 			?>
 			userframe.src = userframe.src + '&add=1&user=<?=$site->fdat[user_id]?>';
-			<?
+			<?php 
 				} else 
 				if($site->fdat[group_id] > 0) {
 			?>
 			userframe.src = userframe.src + '&add=1&group=<?=$site->fdat[group_id]?>';
-			<?
+			<?php 
 				}
 			?>
 		} else {
@@ -327,7 +327,7 @@ Not need for groups:
 
 	window.close();
 	// --></SCRIPT>
-	<?
+	<?php 
 	exit;
 
 }
@@ -428,7 +428,7 @@ function send_box_values() {
   </tr>
 
 <form name="selectform" action="<?=$site->self?>" method="GET">
-<?
+<?php 
 # op2 must exist!
 $site->fdat['op2'] = isset($site->fdat['op2']) ? $site->fdat['op2'] : "";
 
@@ -450,14 +450,14 @@ foreach($site->fdat as $fdat_field=>$fdat_value) {
 ?>
 </form>
 
-  <? 
+  <?php 
   ######### TOOLBAR
   print_users_toolbar(); ?>
 
   <!-- Content area -->
   <tr valign="top" height=100%> 
     <td>
-		<?
+		<?php 
 		###################
 		# USERS TABLE
 		print_users_table(array(
@@ -473,6 +473,6 @@ foreach($site->fdat as $fdat_field=>$fdat_value) {
 </table>
 
 
-<?	$site->debug->print_msg(); ?>
+<?php $site->debug->print_msg(); ?>
 </body>
 </html>

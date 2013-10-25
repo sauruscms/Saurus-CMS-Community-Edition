@@ -180,7 +180,7 @@ while ($tmp = $sth->fetch()){
 	<?php create_form_token('edit-styles'); ?>
 	<input type="hidden" name="save" value="1">
 
- <?
+ <?php 
  ##############
  # FUNCTION BAR
  ?>
@@ -189,18 +189,18 @@ while ($tmp = $sth->fetch()){
 	<td class="scms_toolbar">
 		<TABLE cellpadding=0 cellspacing=0 border=0>
 			<TR>	
-				<?############ save button ###########?>
+				<?php ############ save button ###########?>
 				 <td nowrap><a href="javascript:document.forms['dataform'].submit();"><img src="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/filesave.png" border="0" id="pt"> <?=$site->sys_sona(array(sona => "salvesta", tyyp=>"editor"))?></a>
 				 </td>
 
-				<?###### wide middle cell ######?>
+				<?php ###### wide middle cell ######?>
 				<td width="100%"></td>				
 			</TR>
 			</TABLE>
 	</td>
   </tr>
   <!-- //Toolbar -->
-<?
+<?php 
  # / FUNCTION BAR
  ################
 ?>
@@ -214,7 +214,7 @@ while ($tmp = $sth->fetch()){
 	<TR>
 		<!-- Middle column -->
 		<TD class="scms_middle_dialogwindow" style="padding-left:10px">
-			<?
+			<?php 
 			################
 			# DATA TABLE
 			?>  
@@ -230,7 +230,7 @@ while ($tmp = $sth->fetch()){
               </tr>
 			<tr>
 				<td valign=top height="100%" width="50%" style="padding-right: 7px;">
-					<?
+					<?php 
 					#################
 					# CUSTOM CSS
 					?>	  
@@ -242,7 +242,7 @@ while ($tmp = $sth->fetch()){
 					<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
 						<tr>
 							<td height="50%">
-								<?
+								<?php 
 								#################
 								# WYSIWYG Dropdown Fonts CSS
 								?>	  
@@ -263,7 +263,7 @@ while ($tmp = $sth->fetch()){
 						</tr>
 						<tr>
 							<td height="50%" style="padding-bottom: 4px;">
-								<?
+								<?php 
 								#################
 								# WYSIWYG General CSS
 								?>	  
@@ -276,7 +276,7 @@ while ($tmp = $sth->fetch()){
                 </td>
               </tr>
             </table>
-			<?
+			<?php 
 			# / DATA TABLE
 			################
 			?> 
@@ -291,7 +291,7 @@ while ($tmp = $sth->fetch()){
   <!-- // Content area -->
 </table>
 
-<?
+<?php 
 # / CONTENT TABLE
 ################
 $site->debug->print_msg(); 

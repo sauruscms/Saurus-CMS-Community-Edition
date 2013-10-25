@@ -342,7 +342,7 @@ if( ! $skip_html) { # display HTML output
 
 <body>
 <center>
-<?
+<?php 
 ######################
 # header tabel, logo
 
@@ -358,7 +358,7 @@ $step_nr = substr(strtolower($op?$op:"step1"),-1);
 	</table>
 </div>
 
-<?
+<?php 
 ######################
 # wizard
 ?>
@@ -366,7 +366,7 @@ $step_nr = substr(strtolower($op?$op:"step1"),-1);
 <!-- Scrollable area -->
 <div id="listing" class="scms_scroll_div">
 
-<?
+<?php 
 } # if display HTML output
 
 /***********************************/
@@ -388,13 +388,13 @@ INSTALL:
   <tr>
     <td><font class="txt">
 
-<?
+<?php 
 #########################
 # if INSTALL  step2
 
 if ($install) {
 ?>
-<?
+<?php 
 ######################
 # sisutabel
 ?>
@@ -439,7 +439,7 @@ if ($install) {
 	<?php $_SESSION['install'] = 1; ?>
 	</center>
 	</form>
-<?
+<?php 
 }
 # / if INSTALL step2
 #########################
@@ -450,7 +450,7 @@ if ($install) {
   </tr>
   </table>
 
-<?   break;
+<?php   break;
 
     case "Step3":
 /**************************
@@ -467,7 +467,7 @@ INSTALL:
   <table width="750" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td><font class="txt">
-<?
+<?php 
 
 #########################
 # if INSTALL  step3
@@ -478,9 +478,9 @@ if ($install) {
 
 	<form action="install.php" method="POST" name="form" enctype="multipart/form-data">
 
-	<?/*** write db connect data into config file ***/?>
+	<?php /*** write db connect data into config file ***/?>
 	Database connection parameters were saved into file:
-	<?
+	<?php 
 
 	$conf_update_result = update_config_php($FDAT["dbhost"], $FDAT["dbport"], $FDAT["db"], $FDAT["user"], $FDAT["passwd"]);
 
@@ -492,7 +492,7 @@ if ($install) {
 		?>
 		<br /><br />
 		<INPUT type="button" value="Back" onclick="javascript:document.getElementById('op').value='Step2';document.form.submit();" class="redbutton">
-		<?
+		<?php 
 	}
 	else {
 		echo($conf_update_result);
@@ -505,10 +505,10 @@ if ($install) {
 	?>
 	<br />
 	<br />
-	<?/*** show db connect data ***/?>
-	<? print_dbdata_text() ?>
+	<?php /*** show db connect data ***/?>
+	<?php print_dbdata_text() ?>
 	<br />
-<?
+<?php 
 	/*** end: show db connect data ***/
 
 	######################
@@ -533,7 +533,7 @@ if ($install) {
 		<INPUT type="button" value="Back" onclick="javascript:document.getElementById('op').value='Step2';document.form.submit();" class="redbutton">
 		<INPUT type="hidden" name="mysql_root" value="<?=$FDAT["mysql_root"] ?>">
 		<br />
-		<?
+		<?php 
 
 	}
 	######################
@@ -550,9 +550,9 @@ if ($install) {
 
 			if ($db_created) { ?>
 				Database "<?=$CONF["db"] ?>" is created.
-			<? } else { ?>
+			<?php } else { ?>
 				Database "<?=$CONF["db"] ?>" already exists. Database has not been created.
-			<? }
+			<?php }
 
 			##################
 			# if create user
@@ -563,11 +563,11 @@ if ($install) {
 				if ($user_created) { ?>
 					<br />
 					User "<?=$CONF["user"] ?>" for database "<?=$CONF["db"] ?>" is created.
-				<? } else { ?>
+				<?php } else { ?>
 					<br />
 					User "<?=$CONF["user"] ?>" already exists. User has not been created. Be sure that this user has access to database "<?=$CONF["db"] ?>"!
-				<? } ?>
-			<? }
+				<?php } ?>
+			<?php }
 		######################
 		# if no root access to database
 		} else {
@@ -579,13 +579,13 @@ if ($install) {
 					<INPUT type="button" value="Back" onclick="javascript:document.getElementById('op').value='Step2';document.form.submit();" class="redbutton">
 					<INPUT type="hidden" name="mysql_root" value="<?=$FDAT["mysql_root"] ?>">
 					<br />
-				<?
+				<?php 
 			}
 			# 2. db found, all OK
 			else if ($db_found) {
 				?>
 				Database "<?=$CONF["db"] ?>" found.
-				<?
+				<?php 
 
 			# 3. db not found, error, diplay back button
 			} else {
@@ -596,7 +596,7 @@ if ($install) {
 					<INPUT type="button" value="Back" onclick="javascript:document.getElementById('op').value='Step2';document.form.submit();" class="redbutton">
 					<INPUT type="hidden" name="mysql_root" value="<?=$FDAT["mysql_root"] ?>">
 					<br />
-				<?
+				<?php 
 			} # conn
 		}
 		/*** end: if root access to database ***/
@@ -614,7 +614,7 @@ if ($install) {
 		<INPUT type="submit" value="Next" class="redbutton">
 		</center>
 
-		<?
+		<?php 
 
 		} # OK message
 	}
@@ -632,7 +632,7 @@ if ($install) {
 	</form>
 
 	<br />
-<?
+<?php 
 }
 # / if INSTALL  step3
 #########################
@@ -642,7 +642,7 @@ if ($install) {
 	</td>
   </tr>
   </table>
-<?
+<?php 
 
 	break;
 
@@ -662,7 +662,7 @@ if ($install) {
 	<h2>Updating Database</h2>
 
 	<form action="install.php" method="post" name="form">
-	<?
+	<?php 
 
 	if (!$FDAT["dont_make_db"]) {
 		if ($_POST["update_user"] != '' || $_POST["update_passwd"] != '') {
@@ -684,7 +684,7 @@ if ($install) {
 	}
 
 	?>
-	<?
+	<?php 
 
 	if ($tbl_error != '') {
 	?>
@@ -692,19 +692,19 @@ if ($install) {
 		<?=$tbl_error?>
 		<br />Error, tables have not been created.</font>
 		<INPUT type="button" value="Previous" onclick="javascript:document.getElementById('op').value='Step3';document.form.submit();" class="redbutton">
-		<?
+		<?php 
 		print_dbdata_hidden();
 
 	} else if ($FDAT["dont_make_db"]) {
 		?>
 		<font color="red">
 		<br />Tables have not been created.</font>
-	<?
+	<?php 
 	} else {
 
 	?>
 			<p>Done.</p>
-	<?
+	<?php 
 	} # tbl error
 
 	?>
@@ -718,7 +718,7 @@ if ($install) {
 
 	</form>
 
-	<?
+	<?php 
 }
 # / if INSTALL  step4
 #########################
@@ -737,7 +737,7 @@ INSTALL
   <table width="580" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td><font class="txt">
-<?
+<?php 
 #########################
 # if INSTALL step5
 
@@ -745,7 +745,7 @@ if ($install) {
 ?>
 
 	<form action="install.php" method="post" name="form">
-	<?
+	<?php 
 	// connect to database
 	if (!$conn) { dbconnect(0, '', '', ''); }
 
@@ -759,7 +759,7 @@ if ($install) {
 			Table "config" not found!
 			<INPUT type="button" value="Previous" onclick="javascript:document.getElementById('op').value='Step4';document.form.submit();" class="redbutton">
 
-<?		}
+<?php 	}
 		###################
 		# go on
 		else {
@@ -811,12 +811,12 @@ if ($install) {
 				</tr>
 			</table>
 			<br />
-			<?
+			<?php 
 			#####################
 			# print config rows
 			?>
 			<table width="580" border=0>
-			<?
+			<?php 
 			include_once("admin/change_config.php");
 
 			print_config_table();
@@ -832,7 +832,7 @@ if ($install) {
 			<INPUT type="button" value="Previous" onclick="javascript:document.getElementById('op').value='Step4';document.form.submit();" class="redbutton">
 			<INPUT type="submit" value="Next" class="redbutton">
 
- 	<?
+ 	<?php 
 	} # if config tabelit pole olemas
 	?>
 		<INPUT type="hidden" name="op" id="op" value="Step6">
@@ -840,7 +840,7 @@ if ($install) {
 		<INPUT type="hidden" name="dont_make_db" value="1">
 		</form>
 		</center>
-<?
+<?php 
 }
 # / if INSTALL  step5
 #########################
@@ -850,7 +850,7 @@ if ($install) {
 	</td>
   </tr>
   </table>
-<?
+<?php 
 
 	break;
 /**************************
@@ -866,7 +866,7 @@ INSTALL
     <td><font class="txt">
 
 	<form action="install.php" method="post" name="form">
-<?
+<?php 
 #########################
 # if INSTALL step6
 
@@ -890,13 +890,13 @@ if ($install) {
 			<br />
 			<INPUT type="button" value="Back" class="redbutton" onclick="javascript:history.back();">
 
-<?		}
+<?php 	}
 		###################
 		# go on
 		else { ?>
 			<h2>Installation Finished</h2>
 
-<?			store_config_data();
+<?php 		store_config_data();
 ?>
 			<p>Congratulations, we hope you enjoy your new copy of Saurus CMS!</p>
 			<p>Please write down your login and password. If you lose it, the password cannot be recovered.</p>
@@ -906,7 +906,7 @@ if ($install) {
 			</p>
 
 			<p>&nbsp;</p>
-<?
+<?php 
 		} # if OK
 }
 # / if INSTALL  step6
@@ -922,7 +922,7 @@ if (!$error) {
 <li><a href="http://www.saurus.info/">Visit Saurus CMS homepage for docs and downloads</a></li>
 <br />
 <br />
-<?
+<?php 
 }
 ?>
 <input type="hidden" name="op" id="op" value="Step6">
@@ -932,7 +932,7 @@ if (!$error) {
 	</td>
   </tr>
   </table>
-<?
+<?php 
 
     break;
 
@@ -949,7 +949,7 @@ INSTALL:
   <table width="730" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td><font class="txt">
-<?
+<?php 
 #########################
 # if INSTALL step1
 //$install = 1;
@@ -960,7 +960,7 @@ if ($install) {
 	<p>This will install a fresh copy of Saurus CMS Community Edition.</p>
 	<p>You will be taken through a number of pages, each configuring a different portion of your site. <br />We estimate that the entire process will take about 5 minutes.</p>
 
-	<?
+	<?php 
 
 	#########################
 	# check if file config.php is writable
@@ -984,7 +984,7 @@ if ($install) {
 		</script>
 		<p><input id="eula_agree_check" type="checkbox" onclick="toggle_next(this);"><label for="eula_agree_check">I agree with the <a href="eula_en.html" target="_blank">license agreement</a></label></p>
 
-	<?
+	<?php 
 	#####################
 	# print requirements table
 	?>
@@ -993,7 +993,7 @@ if ($install) {
 	<p>
 		Please scroll down to check the system requirements and press Next to continue. Incompatibilities between required values and your system are marked red.
 	</p>
-	<?
+	<?php 
 	files_folders_permissions();
 	$called_from_another_script = 1;
 	include_once("admin/check_requirements.php");
@@ -1010,7 +1010,7 @@ if ($install) {
 			</form>
 			<br />
 
-	<?
+	<?php 
 
 }
 # / if INSTALL step1
@@ -1023,7 +1023,7 @@ if ($install) {
 	</td>
   </tr>
   </table>
-<?
+<?php 
 	} # if display HTML output
 
  break;
@@ -1034,7 +1034,7 @@ if( ! $skip_html) { # display HTML output
 		</div>
 			<!-- //Scrollable area -->
 
-<?
+<?php 
 ######################
 # footer
 ?>
@@ -1046,7 +1046,7 @@ if( ! $skip_html) { # display HTML output
 </center>
 </body>
 </html>
-<?
+<?php 
 } # if display HTML output
 /**************************
 END HTML
@@ -1127,7 +1127,7 @@ function print_dbdata_text()
             <td align="left"><?=$CONF[dbtype];?></td>
 			</tr>
     </table>
-<?
+<?php 
 }
 /***********************************/
 /* PRINT_DBDATA_HIDDEN               */
@@ -1145,5 +1145,5 @@ function print_dbdata_hidden()
 <input type="hidden" NAME="passwd" SIZE=30 maxlength=80 value="<?=$CONF[passwd];?>">
 <input type="hidden" NAME="dbtype" SIZE=30 maxlength=80 value="<?=$CONF[dbtype];?>">
 
-<?
+<?php 
 }

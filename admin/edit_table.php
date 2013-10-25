@@ -73,7 +73,7 @@ if( $site->fdat['tab'] == 'edit'){
 		));
 		?>
 		<center><b><?=$site->sys_sona(array(sona => "access denied", tyyp=>"editor"))?></b>
-		<?
+		<?php 
 		if($site->user) { $site->user->debug->print_msg(); }
 		if($site->guest) { 	$site->guest->debug->print_msg(); }
 		$site->debug->print_msg();
@@ -204,7 +204,7 @@ if($op2) {
 			window.close();
 		// -->
 		</SCRIPT>
-		<?
+		<?php 
 		exit;
 	}
 }
@@ -228,7 +228,7 @@ if($op2) {
 <script type="text/javascript" src="<?=$site->CONF['wwwroot'];?>/common.js.php"></script>
 </head>
 
-<?
+<?php 
 ######################
 # DELETE CONFIRMATION WINDOW
 if($op == 'delete') {
@@ -243,7 +243,7 @@ if($op == 'delete') {
 <table border="0" cellpadding="0" cellspacing="0" style="width:100%; height:100%">
   <tr> 
 	<td valign="top" width="100%" class="scms_confirm_delete_cell" height="100%">
-<?
+<?php 
 	# show confirmation
 	echo $site->sys_sona(array(sona => "kustuta", tyyp=>"editor"))."? ";
 	echo $site->sys_sona(array(sona => "are you sure?", tyyp=>"admin"));
@@ -253,15 +253,15 @@ if($op == 'delete') {
   </tr>
   <tr align="right"> 
     <td valign="top" colspan=2 > 
-			<?if($allow_delete){?>
+			<?php if($allow_delete){?>
             <input type="button" value="<?=$site->sys_sona(array(sona => "kustuta", tyyp=>"editor")) ?>" onclick="javascript:frmEdit.op2.value='deleteconfirmed';frmEdit.submit();">
-			<?}?>
+			<?php }?>
 			<input type="button" value="<?=$site->sys_sona(array(sona => "close", tyyp=>"editor")) ?>" onclick="javascript:window.close();"> 
     </td>
   </tr>
 </table>
 </form>
-<?
+<?php 
 }	
 # / DELETE CONFIRMATION WINDOW
 ######################
@@ -275,7 +275,7 @@ elseif($site->fdat['tab'] == 'edit') {
 ?>
 <body class="popup_body">
 <table border="0" cellpadding="0" cellspacing="0" style="width:100%; height:100%">
-<?
+<?php 
 	########### tabs
 	print_tabs();
 ?>
@@ -292,7 +292,7 @@ elseif($site->fdat['tab'] == 'edit') {
 	<input type=hidden name=op2 value="">
 	<input type=hidden id=external_table name=external_table value="<?=$site->fdat['external_table']?>">
 	<?php if($site->fdat['callback']) { ?><input type="hidden" id="callback" name="callback" value="<?=$site->fdat['callback']?>"><?php } ?>
-<?
+<?php 
 $sql = $site->db->prepare("SELECT * FROM ".$site->fdat['external_table']." WHERE id=?",$site->fdat['id']);
 $sth = new SQL($sql);
 $data = array();
@@ -309,7 +309,7 @@ foreach($data as $arr){
 ?>
 	<tr><td>ID</td><td><?=$rec_data['id']?></td></tr>
 	<tr><td nowrap>Profile ID</td><td><input type="text" name="profile_id" class="scms_flex_input" value="<?=$site->fdat['profile_id']?>"></td></tr>
-<?	
+<?php 
 	####################
 	# Additional info: attributes list
 
@@ -331,7 +331,7 @@ foreach($data as $arr){
 		</div>
     </td>
   </tr>
-	<?#################### BUTTONS ###########?>
+	<?php #################### BUTTONS ###########?>
 	<tr> 
     <td align="right" valign="top" class="scms_dialog_area_bottom"> 
      <input type="button" value="<?=$site->sys_sona(array(sona => "apply", tyyp=>"editor")) ?>" onclick="actionButtonClick(1);">
@@ -362,7 +362,7 @@ foreach($data as $arr){
 
 </form>
 
-<?
+<?php 
 }
 # / 1. tab EDIT
 ######################
@@ -370,7 +370,7 @@ foreach($data as $arr){
 			  
 </table>
 
-<?
+<?php 
 
 $site->debug->print_hash($site->fdat,1,"FORM DATA");
 # user debug:
@@ -386,7 +386,7 @@ $site->debug->print_msg();
 
 
 
-<?
+<?php 
 ######################
 # FUNCTION PRINT_TABS()
 
@@ -399,7 +399,7 @@ function print_tabs() {
      <table border="0" cellspacing="0" cellpadding="0" width="100%" style="height:21px">
       <tr>
        <td class="scms_tabs_empty">&nbsp;&nbsp;&nbsp;</td>
-		<?
+		<?php 
 		# set all tabs: array[tab name] = tab translated name 
 		$tab_arr = array();
 		$tab_arr['edit'] = $site->fdat['external_table'];
@@ -407,19 +407,19 @@ function print_tabs() {
 		foreach ($tab_arr as $tab=>$tab_title) {
 		?>
         <td class="scms_<?=$site->fdat['tab']==$tab?'':'in'?>active_tab" nowrap>
-		<?########## tab title #######?>
-		<?	
+		<?php ########## tab title #######?>
+		<?php 
 		$tab_title = "<a href=".$site->self."?tab=".$tab."&op=".$site->fdat['op']."&external_table=".$site->fdat['external_table']."&id=".$site->fdat['id']."&profile_id=".$site->fdat['profile_id'].">".$tab_title."</a>";
 		?>
 		<?=$tab_title?></td>
-		<? } # loop over tabs ?>
+		<?php } # loop over tabs ?>
 
           <td width="100%" class="scms_tabs_empty">&nbsp;</td>
       </tr>
     </table>
     </td>
   </tr>
-<?
+<?php 
 }
 # / FUNCTION PRINT_TABS()
 ######################

@@ -102,7 +102,7 @@ if ($objekt->all['klass']=="file" && $objekt->permission['R']) {
 </table>
 </body>
 </html>
-<?
+<?php 
 	} else {
 
 

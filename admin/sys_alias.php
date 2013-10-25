@@ -175,7 +175,7 @@ $sysalias_groups = array(
 			</table>
 		</div><!-- / contentAreaTitle -->
 		<div class="contentAreaContent withTitleBar">
-					<? 
+					<?php 
 					#########################
 					# FORM
 					?>
@@ -183,7 +183,7 @@ $sysalias_groups = array(
 
 					<table cellpadding="0" cellspacing="0" class="data_table">
 		  
-			<?
+			<?php 
 			################################		
 			# s�saliasega objektid
 			################################		
@@ -234,7 +234,7 @@ $sysalias_groups = array(
 						</tr>
 					</thead>
 
-				<?
+				<?php 
 						######################
 						# 1. loop over sys_aliases
 						foreach($values as $alias) {
@@ -242,7 +242,7 @@ $sysalias_groups = array(
 							<tr> 
 							  <td nowrap>
 								
-							<?  #####################
+							<?php  #####################
 								# button
 							# if objekt.sys_alias <> ''print EDIT-button
 							if (is_object($leitud_aliased[$alias])) {
@@ -282,13 +282,13 @@ else {
 
 							} 
 							?>
-							<? ##################### name ?>
+							<?php ##################### name ?>
 							<?=$site->sys_sona(array(sona => $alias, tyyp=>"system"))?>								
 							</td>
-							<? ##################### headline ?>
+							<?php ##################### headline ?>
 							  <td colspan="2" nowrap><?=$leitud_aliased[$alias] ? $leitud_aliased[$alias]->pealkiri : "-" ?></td>
 							</tr>
-				<?
+				<?php 
 							$i++;
 						} 
 						# / 1. loop over sys_aliases
@@ -320,7 +320,7 @@ else {
 						?>
 							<tr> 
 							  <td nowrap>
-							<?
+							<?php 
 							$obj->edit_buttons(array(
 								nupud => array("new","edit","hide","delete"),
 								tyyp_idlist => "2",
@@ -333,7 +333,7 @@ else {
 							</tr>
 
 
-						<?
+						<?php 
 							$i++;
 							}
 
@@ -341,13 +341,13 @@ else {
 							if(!$alamlist->rows) { 
 					?>
 								<tr> 
-								  <td nowrap colspan=2><?
+								  <td nowrap colspan=2><?php 
 								$alamlist->edit_buttons(array(
 									tyyp_idlist => "2",
 									keel => $keel_id,
 								));?></td>
 								</tr>
-							<? 
+							<?php 
 						
 							echo '<tr><td>
 							<IMG SRC="'.(empty($_SERVER['HTTPS']) ? 'http://' : 'https://').$site->CONF['hostname'].$site->CONF['wwwroot'].'/px/px.gif" WIDTH="13" HEIGHT="13" BORDER=0 ALT="">	
@@ -376,7 +376,7 @@ else {
 					</form><!-- / actionForm -->
 
 
-					<? $site->debug->print_msg(); ?>
+					<?php $site->debug->print_msg(); ?>
 		</div><!-- / contentAreaContent -->
 	</div><!-- / contentArea -->
 	

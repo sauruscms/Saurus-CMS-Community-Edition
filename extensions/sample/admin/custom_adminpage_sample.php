@@ -1,4 +1,4 @@
-<?
+<?php 
 # This is a sample admin-page file for the extension "sample" that ships with Saurus CMS installation.
 
 

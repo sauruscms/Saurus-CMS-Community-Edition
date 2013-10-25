@@ -125,7 +125,7 @@ if($site->fdat['op2'] == 'save' || $site->fdat['op2'] == 'saveclose') {
 		window.close();
 	// --></SCRIPT>
 	</HTML>
-	<?
+	<?php 
 	exit;
 	}
 }
@@ -157,7 +157,7 @@ if($site->fdat['op2'] == 'deleteconfirmed' && $site->fdat['form_id']) {
 		window.close();
 	// --></SCRIPT>
 	</HTML>
-	<?
+	<?php 
 	exit;
 }
 # / DELETE 
@@ -185,14 +185,14 @@ if($site->fdat['op'] == 'preview') {
 <!-- Scrollable area -->
 <div id=listing class="scms_scroll_div">
 
-<?	if($form_def['profile_id']){ ?>
+<?php if($form_def['profile_id']){ ?>
 
 <table width="100%"  border="0" cellspacing="3" cellpadding="0" class="scms_table">
 <tr class="scms_pane_header">
 <td colspan=2><?=$form_def['name']?></td>
 </tr>
 
-<?		# get profile
+<?php 	# get profile
 		$profile_def = $site->get_profile(array("id"=>$form_def['profile_id'])); 
 		$profile_fields = unserialize($profile_def['data']);	# profile_fields is now array of ALL fields, indexes are fieldnames
 
@@ -204,7 +204,7 @@ if($site->fdat['op'] == 'preview') {
 		));
 ?>
 	</table>
-<?	}
+<?php }
 	### error: no profile id
 	else {
 		echo "Error! no profile found";
@@ -215,7 +215,7 @@ if($site->fdat['op'] == 'preview') {
 
 	</body>
 	</html>
-<?	exit;
+<?php exit;
 }
 # / OP = PREVIEW
 ###############################
@@ -244,7 +244,7 @@ if($site->fdat['op'] == 'delete' && $site->fdat['form_id']) {
 <table border="0" cellpadding="0" cellspacing="0" style="width:100%; height:100px">
   <tr> 
 	<td valign="top" width="100%" class="scms_confirm_delete_cell" height="100%">
-<?
+<?php 
 	# check if allowed to delete
 	# 1. if exists any data row with that form, then don't allow to delete
 
@@ -271,9 +271,9 @@ if($site->fdat['op'] == 'delete' && $site->fdat['form_id']) {
   </tr>
   <tr align="right"> 
     <td valign="top" colspan=2 > 
-		<?if($allow_delete){?>
+		<?php if($allow_delete){?>
             <input type="button" value="<?=$site->sys_sona(array(sona => "kustuta", tyyp=>"editor")) ?>" onclick="javascript:frmEdit.op2.value='deleteconfirmed';frmEdit.submit();">
-			<?}?>
+			<?php }?>
 			<input type="button" value="<?=$site->sys_sona(array(sona => "close", tyyp=>"editor")) ?>" onclick="javascript:window.close();"> 
     </td>
   </tr>
@@ -282,7 +282,7 @@ if($site->fdat['op'] == 'delete' && $site->fdat['form_id']) {
 </form>
 </body>
 </html>
-<?
+<?php 
 	############ debug
 	# user debug:
 	if($site->user) { $site->user->debug->print_msg(); }
@@ -321,7 +321,7 @@ if($site->fdat['op'] == "new" || ($site->fdat['op'] == "edit" && is_numeric($sit
 <tr> 
     <td valign="top" width="100%" class="scms_dialog_area_top"  height="100%">
 	  <table width="100%"   border="0" cellspacing="0" cellpadding="2">
-	  <?############ name #########
+	  <?php ############ name #########
 		if($form_error['name']){
 			$name = $site->fdat['name'];
 		} else {
@@ -335,8 +335,8 @@ if($site->fdat['op'] == "new" || ($site->fdat['op'] == "edit" && is_numeric($sit
 		<?=($form_error['name']? '<br><font color=red>'.$form_error['name'].'</font>':'')?>
 		</td>
 	  </tr>
-	<?############### profile selectbox #######?>
-	<?
+	<?php ############### profile selectbox #######?>
+	<?php 
 	# get all profiles having the source_table form_*:
   		$sql = $site->db->prepare("SELECT profile_id AS id, source_table, name FROM object_profiles WHERE source_table LIKE ? ORDER BY name",
 		'form_%');
@@ -344,20 +344,20 @@ if($site->fdat['op'] == "new" || ($site->fdat['op'] == "edit" && is_numeric($sit
 	?>
 		<SCRIPT language="javascript"><!--
 			var source_tables = new Array();
-			<? while ($tmp_profile = $sth->fetch('ASSOC')){ ?>
+			<?php while ($tmp_profile = $sth->fetch('ASSOC')){ ?>
 			source_tables[<?=$tmp_profile['id']?>] = '<?=$tmp_profile['source_table']?>';
-			<?}?>
+			<?php }?>
 		--></SCRIPT>
 	<tr>
 		<td><?=$site->sys_sona(array(sona => "profile", tyyp=>"editor"))?>: </td>
 		<td width="95%" STYLE="padding-bottom:5px">
 		<select name="profile_id" style="width:99%" onclick="document.getElementById('source').innerHTML=source_tables[this.options[this.options.selectedIndex].value]; document.getElementById('source_table').value=source_tables[this.options[this.options.selectedIndex].value]">
 			<option value=""></option>
-		<? 
+		<?php 
 		$sth = new SQL($sql);	
 		while ($tmp_profile = $sth->fetch('ASSOC')){ ?>
 			<option value="<?=$tmp_profile['id']?>" <?= ($form_def['profile_id'] == $tmp_profile['id'])?"selected":""; ?>><?=$site->sys_sona(array(sona => $tmp_profile['name'], tyyp=>"custom"))?></option>
-		<? 
+		<?php 
 		
 			# remember table names for source table div
 			if($form_def['profile_id']==$tmp_profile['id']){
@@ -369,7 +369,7 @@ if($site->fdat['op'] == "new" || ($site->fdat['op'] == "edit" && is_numeric($sit
 	</td>
 	</tr>
 
-	<?############### source table text #######?>
+	<?php ############### source table text #######?>
 	<tr>
 		<td nowrap><?=$site->sys_sona(array(sona => "DB Table", tyyp=>"xml"))?>: </td>
 		<td width="100%">
@@ -380,7 +380,7 @@ if($site->fdat['op'] == "new" || ($site->fdat['op'] == "edit" && is_numeric($sit
 	</td>
 	</tr>
 
-	<?############### description #######?>
+	<?php ############### description #######?>
 	<tr>
 		<td valign=top><?=$site->sys_sona(array(sona => "kirjeldus", tyyp=>"editor"))?>: </td>
 		<td width="100%">
@@ -392,7 +392,7 @@ if($site->fdat['op'] == "new" || ($site->fdat['op'] == "edit" && is_numeric($sit
 	  </table>
 	</td>
 </tr>
-	<?############ buttons #########?>
+	<?php ############ buttons #########?>
 	<tr> 
 	  <td align="right" valign="top" class="scms_dialog_area_bottom"> 
          <input type="button" value="<?=$site->sys_sona(array(sona => "Apply", tyyp=>"editor")) ?>" onclick="javascript: document.forms['vorm'].op2.value='save';this.form.submit();">
@@ -402,14 +402,14 @@ if($site->fdat['op'] == "new" || ($site->fdat['op'] == "edit" && is_numeric($sit
   </tr>
 </table>
 
-<?########### hidden ########?>
+<?php ########### hidden ########?>
 <INPUT TYPE="hidden" name="form_id" value="<?= $site->fdat['form_id'] ?>">
 <INPUT TYPE="hidden" name="op" value="<?=$site->fdat['op']?>">
 <INPUT TYPE="hidden" name="op2" value="save">
 </form>
 </body>
 </html>
-<?
+<?php 
 ############ debug
 # user debug:
 if($site->user) { $site->user->debug->print_msg(); }
@@ -447,7 +447,7 @@ else {
 <body style="overflow-y: auto; overflow-x: auto;">
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" height="100%">
-<?
+<?php 
 ################################
 # FUNCTION BAR
 ?>
@@ -455,17 +455,17 @@ else {
 <TR>
 <TD class="scms_toolbar">
 
-	<?######### form FUNCTION BAR ############?>
+	<?php ######### form FUNCTION BAR ############?>
       <table border="0" cellpadding="0" cellspacing="0">
         <tr> 
-			<?############ new dropdown ###########?>
+			<?php ############ new dropdown ###########?>
 				<TD nowrap><a href="javascript:void(openpopup('forms.php?op=new','form','366','450'))" id="top4" ><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/filenew.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" id=pt> <?=$site->sys_sona(array(sona => "new", tyyp=>"editor"))?></a>
 				</TD>
-		  <?############ edit form button ###########?>
-				<TD nowrap><?if($site->fdat['form_id']){?><a href="javascript:void(openpopup('forms.php?op=edit&form_id=<?= $site->fdat['form_id']?>','form','366','450'))"><?}?><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/edit<?=(!$site->fdat['form_id'] ? '_inactive' : '')?>.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" align=absmiddle> <?=$site->sys_sona(array(sona => "muuda", tyyp=>"editor"))?><?if($site->fdat['form_id']){?></a><?}?></TD>
+		  <?php ############ edit form button ###########?>
+				<TD nowrap><?php if($site->fdat['form_id']){?><a href="javascript:void(openpopup('forms.php?op=edit&form_id=<?= $site->fdat['form_id']?>','form','366','450'))"><?php }?><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/edit<?=(!$site->fdat['form_id'] ? '_inactive' : '')?>.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" align=absmiddle> <?=$site->sys_sona(array(sona => "muuda", tyyp=>"editor"))?><?php if($site->fdat['form_id']){?></a><?php }?></TD>
 
-		  <?############ delete form button ###########?>
-				<TD><?if($site->fdat['form_id']){?><a href="javascript:void(openpopup('forms.php?op=delete&form_id=<?= $site->fdat['form_id']?>','form','413','108'))"><?}?><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/delete<?=(!$site->fdat['form_id'] ? '_inactive' : '')?>.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" align=absmiddle><?if($site->fdat['form_id']){?></a><?}?></TD>
+		  <?php ############ delete form button ###########?>
+				<TD><?php if($site->fdat['form_id']){?><a href="javascript:void(openpopup('forms.php?op=delete&form_id=<?= $site->fdat['form_id']?>','form','413','108'))"><?php }?><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/delete<?=(!$site->fdat['form_id'] ? '_inactive' : '')?>.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" align=absmiddle><?php if($site->fdat['form_id']){?></a><?php }?></TD>
 
 		  
         </tr>
@@ -473,7 +473,7 @@ else {
 </TD>
 </TR>
 
-<?
+<?php 
 # / FUNCTION BAR
 ################################
 ?>
@@ -481,7 +481,7 @@ else {
   <!-- Content area -->
 
   <tr valign="top"> 
-<?
+<?php 
 ############################
 # MIDDLE LIST
 ?>
@@ -504,7 +504,7 @@ else {
 		   <!-- Table header -->	
 			  <tr height=10> 
                 <td valign="top" class="scms_tableheader">
-<?
+<?php 
 #######################
 # COLUMN HEADERS
 ?>
@@ -533,7 +533,7 @@ else {
 
 				<table width="100%" border="0" cellspacing="0" cellpadding="0" class="scms_table">
 
-				<?
+				<?php 
 
 ################ get selected  form data
 $sql = $site->db->prepare("SELECT * FROM forms ORDER BY form_id DESC ");
@@ -556,25 +556,25 @@ while($value = $sth->fetch()){
 
 ?>
 				<tr <?=($value['form_id'] == $site->fdat['form_id'] ? ' class="scms_activerow"' : '')?>> 
-				<?############# active (visible) ?>
-				<td width="20"><img src="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/mime/<?if($value[is_active]){?>visible<?}else{?>hidden<?}?>.png" width="16" height="16" alt="">
+				<?php ############# active (visible) ?>
+				<td width="20"><img src="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/mime/<?php if($value[is_active]){?>visible<?php }else{?>hidden<?php }?>.png" width="16" height="16" alt="">
 
-				<?############# name ?>
+				<?php ############# name ?>
                   <td width="25%" nowrap><a href="<?=$href?>" ondblclick="<?=$dblclick?>"><?= $value['name'] ?></a></td>
 				
-				  <?############# Profile name ?>
+				  <?php ############# Profile name ?>
 				  <td width="20%" nowrap><a href="<?=$href?>" ondblclick="<?=$dblclick?>"><?=$label?></a></td>
 
-				  <?############# Profile fields button ?>
+				  <?php ############# Profile fields button ?>
 				  <td width="20%" nowrap><a href="<?=$profile_href?>"><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/edit.png" BORDER="0" ALT=""></a></td>
 
-				  <?############# source table ?>
+				  <?php ############# source table ?>
 				  <td width="20%" nowrap><a href="<?=$href?>" ondblclick="<?=$dblclick?>"><?= $profile_def['source_table'] ?></a></td>
-				<?############# preview  ?>
+				<?php ############# preview  ?>
 
 				  <td width="16" align="right"><a href="javascript:void(avaaken('forms.php?op=preview&form_id=<?= $value['form_id'] ?>','600','500','preview'))"><img alt="" src="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/viewmag.png" width="16" height="16"  border=0></a></td>
                 </tr>
-<?
+<?php 
 }
 # / loop over forms
 ##################
@@ -601,7 +601,7 @@ while($value = $sth->fetch()){
 
 </body>
 </html>
-<?
+<?php 
 }
 # / LIST
 ##################

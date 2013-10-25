@@ -80,7 +80,7 @@ $lopp_aeg = $site->fdat['lopp']? $site->fdat['lopp'] : date("d.m.Y");
 
 <body>
 <table width="100%" border="0" cellspacing="0" cellpadding="0" height="100%">
-<?
+<?php 
 ################################
 # FUNCTION BAR
 ?>
@@ -88,35 +88,35 @@ $lopp_aeg = $site->fdat['lopp']? $site->fdat['lopp'] : date("d.m.Y");
 <TR>
 <TD class="scms_toolbar">
 
-	<?######### FUNCTION BAR ############?>
+	<?php ######### FUNCTION BAR ############?>
       <table width="100%" border="0" cellpadding="0" cellspacing="0">
         <tr> 
-		  <?############ delete  ###########?>
+		  <?php ############ delete  ###########?>
 				<TD nowrap><a href="javascript:void(avaaken('delete_log.php?tbl=error_log','366','450','log'))"><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/delete.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" align=absmiddle> <?=$site->sys_sona(array(sona => 'kustuta' , tyyp=>"editor"))?></a></TD>
-		<?###### refresh button ######?>
+		<?php ###### refresh button ######?>
 				<TD nowrap><a href="javascript:document.forms['searchform'].submit();" class="scms_button_img"><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/refresh.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" align=absmiddle> <?=$site->sys_sona(array(sona => 'refresh' , tyyp=>"admin"))?></a></TD>
 
 		
-		<?###### wide middle cell ######?>
+		<?php ###### wide middle cell ######?>
         <td width="100%"></td>
 
 
-		<?###### search box ######?>
+		<?php ###### search box ######?>
 		<form id="searchform" name="searchform" action="<?=$site->self?>" method="GET">
-	<? foreach($site->fdat as $fdat_field=>$fdat_value) { ?>
+	<?php foreach($site->fdat as $fdat_field=>$fdat_value) { ?>
 		<input type=hidden name="<?=$fdat_field?>" value="<?=$fdat_value?>">
-	<? } ?>
+	<?php } ?>
 		<input type="hidden" name="otsi" value=1>
-		<input type="hidden" name="page" value=""><?# if search smth => reset page number to 1 (Bug #1697)?>
+		<input type="hidden" name="page" value=""><?php # if search smth => reset page number to 1 (Bug #1697)?>
 
 		
 		<td style="padding-right: 10px">
-			<? $search_str = $site->sys_sona(array(sona => "otsi", tyyp=>"editor")); ?>
+			<?php $search_str = $site->sys_sona(array(sona => "otsi", tyyp=>"editor")); ?>
 	          <input name="filter" type="text" class="scms_flex_input" style="width:150px" value="<?=$site->fdat['filter']? $site->fdat['filter'] : $search_str.':'?>" onFocus="if(this.value=='<?=$search_str?>:') this.value='';" onBlur="if(this.value=='')this.value='<?=$search_str?>:';" onkeyup="javascript: if(event.keyCode==13){this.form.submit();}">
 
 		</td>
 
-		<?########## starting + cal ?>
+		<?php ########## starting + cal ?>
 
         <td><?=$site->sys_sona(array(sona => "Alates", tyyp=>"editor"))?>:</td>
         <td> 
@@ -125,7 +125,7 @@ $lopp_aeg = $site->fdat['lopp']? $site->fdat['lopp'] : date("d.m.Y");
         <td><a href="#" onclick="init_datepicker('algus');"><img src="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/calendar/cal.gif" width="16" height="15" title="Choose from calendar" alt="Choose from calendar" border="0"></a>
         </td>
 
-		<?########## until + cal ?>
+		<?php ########## until + cal ?>
 
 		<td>&nbsp;<?=$site->sys_sona(array(sona => "Kuni", tyyp=>"editor"))?>:&nbsp; </td>
         <td>
@@ -136,21 +136,21 @@ $lopp_aeg = $site->fdat['lopp']? $site->fdat['lopp'] : date("d.m.Y");
 
 
 		<td style="padding-right: 10px">
-			<?########## user dropdown ?>
+			<?php ########## user dropdown ?>
 					<table border="0" cellspacing="0" cellpadding="1">
 					  <tr> 
 						<td width="15"> 
        <select name="err_type" onchange="javascript:<?=$set_page?>this.form.submit();">
          <option value="" <?=($site->fdat['err_type']?'':'selected')?>>- <?=$site->sys_sona(array(sona => "koik", tyyp=>"editor"))?> -</option>
-<?
+<?php 
 		foreach(array('PHP','SQL') as $type) { ?>
 			<option value="<?=$type?>" <?=($site->fdat['err_type']==$type?'selected':'')?>><?=$type?></option>
-		<?	 }	?>
+		<?php  }	?>
        </select>
 						</td>
 					  </tr>
 					</table>
-			<?########## / type dropdown ?>
+			<?php ########## / type dropdown ?>
 		</td>
 		</form>
 	  
@@ -160,7 +160,7 @@ $lopp_aeg = $site->fdat['lopp']? $site->fdat['lopp'] : date("d.m.Y");
 </TD>
 </TR>
 
-<?
+<?php 
 # / FUNCTION BAR
 ################################
 ?>
@@ -170,7 +170,7 @@ $lopp_aeg = $site->fdat['lopp']? $site->fdat['lopp'] : date("d.m.Y");
   <tr valign="top"> 
 
 
-<?
+<?php 
 ############################
 # CONTENT TABLE
 
@@ -181,16 +181,16 @@ $lopp_aeg = $site->fdat['lopp']? $site->fdat['lopp'] : date("d.m.Y");
 		<TD class="scms_middle_dialogwindow">
 				<table width="100%" border="0" cellspacing="0" cellpadding="0">
                     <tr class="scms_pane_header"> 
-					<?###### icon + headline ######?>
+					<?php ###### icon + headline ######?>
 					<td nowrap>
 					<IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/history.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" align=absmiddle>
 					&nbsp;
 					<?=$site->sys_sona(array(sona => "Error log", tyyp=>"admin"))?>
 					 </td>
-					<?###### wide middle cell ######?>
+					<?php ###### wide middle cell ######?>
 					<td width="100%"></td>
 
-<?	########### WHERE SQL (NB! must be done before pagenumbers AND after type dropdown)
+<?php ########### WHERE SQL (NB! must be done before pagenumbers AND after type dropdown)
 
 	$where_sql = array();
 	
@@ -214,9 +214,9 @@ $lopp_aeg = $site->fdat['lopp']? $site->fdat['lopp'] : date("d.m.Y");
 #	print $where_str;
 	########### / WHERE SQL
 ?>
-		<?######  pagenumbers ######?>
+		<?php ######  pagenumbers ######?>
 	   <td>
-		<?
+		<?php 
 		# get records total count
 		$sql = "SELECT COUNT(*) ".$from_sql.$where_str;
 		$sth = new SQL($sql);
@@ -229,14 +229,14 @@ $lopp_aeg = $site->fdat['lopp']? $site->fdat['lopp'] : date("d.m.Y");
 		));
 		?>
 		</td>
-		<?######  / pagenumbers ######?>	
+		<?php ######  / pagenumbers ######?>	
 
                     </tr>
                  </table>
 				
 			<table width="100%" height="95%" border="0" cellspacing="0" cellpadding="0">
 		   <!-- Table header -->	
-	<?
+	<?php 
 	#################
 	# COLUMN NAMES
 	?>
@@ -259,7 +259,7 @@ $lopp_aeg = $site->fdat['lopp']? $site->fdat['lopp'] : date("d.m.Y");
 				</td>
 			</tr>
 			<!-- // Table header -->
-	<?
+	<?php 
 	# / COLUMN NAMES
 	#################
 
@@ -274,7 +274,7 @@ $lopp_aeg = $site->fdat['lopp']? $site->fdat['lopp'] : date("d.m.Y");
 
 
 				<table width="100%" border="0" cellspacing="0" cellpadding="0" class="scms_table">
-<? 
+<?php 
 	# default values:
 	$site->fdat['sort'] = $site->fdat['sort'] == 'ASC' ? 'ASC' : 'DESC';
 
@@ -298,19 +298,19 @@ $lopp_aeg = $site->fdat['lopp']? $site->fdat['lopp'] : date("d.m.Y");
 ?>
 				<tr> 
 
-				<?############# time_of_error ?>
+				<?php ############# time_of_error ?>
                   <td width="15%" nowrap ><?= $log['time_of_errorf'] ?></td>
-				<?############# err_type ?>
+				<?php ############# err_type ?>
 				  <td width="5%" nowrap><?= $log['err_type'] ?></td>
-				<?############# err_text ?>
+				<?php ############# err_text ?>
 				  <td width="60%"><?php echo htmlspecialchars(xss_clean($log['err_text'])); ?></td>
-				<?############# referrer ?>
+				<?php ############# referrer ?>
 				  <td width="20%"><?= $log['source'] ?></td>
 
 			<td width="16"><img src="<?=$site->CONF['wwwroot'].$site->CONF['img_path']?>/px.gif" width="11" height="18" border="0"  hspace="3"></td>
 
                 </tr>
-<?
+<?php 
 		}
 		# / loop over rows
 		##################
@@ -337,5 +337,5 @@ $lopp_aeg = $site->fdat['lopp']? $site->fdat['lopp'] : date("d.m.Y");
 
 </body>
 </html>
-<?
+<?php 
 $site->debug->print_msg();

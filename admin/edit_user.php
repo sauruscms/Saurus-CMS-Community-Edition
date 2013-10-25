@@ -520,7 +520,7 @@ if(!$site->fdat['refresh'] && ($op2 == 'save' || $op2 == 'saveclose' || $op2 == 
 			window.close();
 		// -->
 		</SCRIPT>
-		<?
+		<?php 
 		exit;
 	}
 
@@ -564,7 +564,7 @@ if ($site->fdat[refresh]) {
 </head>
 
 <body class="popup_body" onLoad="this.focus()">
-<?
+<?php 
 ######################
 # DELETE CONFIRMATION WINDOW
 if($op == 'delete') {
@@ -577,7 +577,7 @@ if($op == 'delete') {
 <table border="0" cellpadding="0" cellspacing="0" style="width:100%; height:100px">
   <tr> 
 	<td valign="top" width="100%" class="scms_confirm_delete_cell" height="100%">
-<?
+<?php 
 	### don't allow delete if this user is a LAST SUPERUSER (Bug #2211)
 	$sql = $site->db->prepare("SELECT user_id FROM users WHERE is_predefined=? AND is_locked<>? AND user_id<>?",1,1,$user->user_id);
 	$sth = new SQL($sql);
@@ -600,16 +600,16 @@ if($op == 'delete') {
   </tr>
   <tr align="right"> 
     <td valign="top" colspan=2 > 
-		<?if($allow_delete){?>
+		<?php if($allow_delete){?>
             <input type="button" value="<?=$site->sys_sona(array(sona => "kustuta", tyyp=>"editor")) ?>" onclick="javascript:document.forms['frmEdit'].op2.value='deleteconfirmed';this.form.submit();">
-			<?}?>
+			<?php }?>
 			<input type="button" value="<?=$site->sys_sona(array(sona => "close", tyyp=>"editor")) ?>" onclick="javascript:window.close();"> 
     </td>
   </tr>
 </table>
 
 </form>
-<?
+<?php 
 }	
 # / DELETE CONFIRMATION WINDOW
 ######################
@@ -628,7 +628,7 @@ elseif($op == 'lock') {
   <tr> 
 	<td valign=top>&nbsp;</td>
 	<td valign="top" width="100%" class="scms_confirm_delete_cell" height="100%">
-<?
+<?php 
 	# show confirmation
 	echo $site->sys_sona(array(sona => ($user->all['is_locked']?'unlock':'lock'), tyyp=>"kasutaja"))." \"<b>".$user->name."</b>\"? ";
 	echo $site->sys_sona(array(sona => "are you sure?", tyyp=>"admin"));
@@ -638,16 +638,16 @@ elseif($op == 'lock') {
   </tr>
   <tr align="right"> 
     <td valign="top" colspan=2 > 
-			<?if($allow_lock){?>
+			<?php if($allow_lock){?>
             <input type="button" value="<?=$site->sys_sona(array(sona => ($user->all['is_locked']?'unlock':'lock'), tyyp=>"kasutaja")) ?>" onclick="javascript:document.forms['frmEdit'].op2.value='lockconfirmed';this.form.submit();">
-			<?}?>
+			<?php }?>
 			<input type="button" value="<?=$site->sys_sona(array(sona => "close", tyyp=>"editor")) ?>" onclick="javascript:window.close();"> 
     </td>
   </tr>
 </table>
 
 </form>
-<?
+<?php 
 }	
 # / LOCK CONFIRMATION WINDOW
 ######################
@@ -657,7 +657,7 @@ elseif($op == 'lock') {
 else {
 ?>
 <table border="0" cellpadding="0" cellspacing="0" style="width:100%; height:100%">
-<?
+<?php 
 ######################
 # TABS
 ?>
@@ -666,7 +666,7 @@ else {
      <table border="0" cellspacing="0" cellpadding="0" width="100%" style="height:21px">
       <tr>
        <td class="scms_tabs_empty">&nbsp;&nbsp;&nbsp;</td>
-		<?
+		<?php 
 		# set all tabs: array[tab name] = tab translated name 
 		$tab_arr = array();
 		$tab_arr['user'] = $site->sys_sona(array(sona => "user", tyyp=>"kasutaja"));
@@ -681,8 +681,8 @@ else {
 		foreach ($tab_arr as $tab=>$tab_title) {
 		?>
         <td class="scms_<?=$site->fdat['tab']==$tab?'':'in'?>active_tab" nowrap>
-		<?########## tab title #######?>
-		<? # show link if not current tab AND NOT new user
+		<?php ########## tab title #######?>
+		<?php # show link if not current tab AND NOT new user
 			if (1 || $tab != $site->fdat['tab'] && !($op=='new') ) {
 				# remove email check: bug #1218
 				if (0 && $tab=='mailinglist' && !trim($user->all['email'])){
@@ -693,19 +693,19 @@ else {
 			} 		
 		?>
 		<?=$tab_title?></td>
-		<? } # loop over tabs ?>
+		<?php } # loop over tabs ?>
 
           <td width="100%" class="scms_tabs_empty">&nbsp;</td>
       </tr>
     </table>
     </td>
   </tr>
-<?
+<?php 
 # / TABS
 ######################
 ?>
 
-<?
+<?php 
 ######################
 # 1. CONTENT: tab user
 # op = new/edit/print
@@ -757,7 +757,7 @@ if($site->fdat['tab'] == 'user') {
 	<!-- Scrollable area -->
 <!--	<div id=listing class="scms_middle_div">-->
 
-<?################# CONTENT - SURROUNDING SCROLL TABLE ################?>
+<?php ################# CONTENT - SURROUNDING SCROLL TABLE ################?>
 <!--
 <table width="100%"  border="0" cellspacing="3" cellpadding="0" class="scms_table">
 <tr>
@@ -772,11 +772,11 @@ if($site->fdat['tab'] == 'user') {
 	<input type=hidden name=op value="<?=$site->fdat['op']?>">
 	<input type=hidden name=op2 value="">
 	<input type=hidden name=refresh value="">
-			<?
+			<?php 
 			###################
 			# General info
 			?>		  
-			<?########### page title #########?>
+			<?php ########### page title #########?>
         <tr> 
           <td colspan="3"> 
             <div style="position:relative"> 
@@ -784,32 +784,32 @@ if($site->fdat['tab'] == 'user') {
             </div>
           </td>
         </tr>
-			<?########### firstname #########?>
+			<?php ########### firstname #########?>
             <tr>
               <td width="20%" nowrap><?=$site->sys_sona(array(sona => "Eesnimi", tyyp=>"kasutaja"))?>:</td>
-              <td width="100%"><input name="firstname" style="width:160px" type="text" class="scms_flex_input" <?if($user->all['is_readonly']==1){?>disabled<?}?> value="<?=($op=='copy'?'Copy of ':'').($site->fdat['refresh']?$site->fdat['firstname']:$user->all[firstname])?>"></td>
-			<?########### image #########?>
+              <td width="100%"><input name="firstname" style="width:160px" type="text" class="scms_flex_input" <?php if($user->all['is_readonly']==1){?>disabled<?php }?> value="<?=($op=='copy'?'Copy of ':'').($site->fdat['refresh']?$site->fdat['firstname']:$user->all[firstname])?>"></td>
+			<?php ########### image #########?>
 				<input type="hidden" name="image" id="image" value="<?= $user->all['image'] ?>">
 				<td rowspan="3" align="center" valign="middle" style="padding-right:15px"><img id="userimage" src="<?= $user->all['image']?$user->all['image']:$site->CONF['wwwroot'].$site->CONF['img_path'].'/icons/picture_big.gif' ?>" alt=""><br>
-            <?if($user->all['is_readonly']!=1){?><a onclick="fm_window = openpopup('filemanager.php?setup=scms_user_image','filemanager',980, 600);" href="javascript:void(0);"><?=$site->sys_sona(array(sona => "Muuda", tyyp=>"editor"))?></a>
-			<?}?>
+            <?php if($user->all['is_readonly']!=1){?><a onclick="fm_window = openpopup('filemanager.php?setup=scms_user_image','filemanager',980, 600);" href="javascript:void(0);"><?=$site->sys_sona(array(sona => "Muuda", tyyp=>"editor"))?></a>
+			<?php }?>
 			</td>
             </tr>
-			<?########### name #########?>
+			<?php ########### name #########?>
             <tr>
               <td width="20%" nowrap><?=$site->sys_sona(array(sona => "Perekonnanimi", tyyp=>"kasutaja"))?>:</td>
-              <td width="100%"><input name="lastname" <?if($user->all['is_readonly']==1){?>disabled<?}?> style="width:160px" type="text" class="scms_flex_input" value="<?=($site->fdat['refresh']?$site->fdat['lastname']:$user->all[lastname])?>"></td>
+              <td width="100%"><input name="lastname" <?php if($user->all['is_readonly']==1){?>disabled<?php }?> style="width:160px" type="text" class="scms_flex_input" value="<?=($site->fdat['refresh']?$site->fdat['lastname']:$user->all[lastname])?>"></td>
             </tr>
-			<?########### email #########?>
+			<?php ########### email #########?>
             <tr>
               <td width="20%" nowrap><?=$site->sys_sona(array(sona => "Email", tyyp=>"kasutaja"))?>:</td>
-              <td width="100%"><input style="width:160px" name="email" type="text" <?if($user->all['is_readonly']==1){?>disabled<?}?> class="scms_flex_input" value="<?=$form_error['email'] || $site->fdat['refresh']?$site->fdat['email']:$user->all[email]?>"><?=($form_error['email']?'<br><font color=red><b>'.$form_error['email'].'</b></font>':'')?></td>
+              <td width="100%"><input style="width:160px" name="email" type="text" <?php if($user->all['is_readonly']==1){?>disabled<?php }?> class="scms_flex_input" value="<?=$form_error['email'] || $site->fdat['refresh']?$site->fdat['email']:$user->all[email]?>"><?=($form_error['email']?'<br><font color=red><b>'.$form_error['email'].'</b></font>':'')?></td>
             </tr>
-			<?########### parent group #########?>
+			<?php ########### parent group #########?>
             <tr>
               <td width="20%" nowrap><?=$site->sys_sona(array(sona => "Parent group", tyyp=>"kasutaja"))?>:</td>
               <td colspan=2  width="100%">
-<?
+<?php 
 
 				$sql = "SELECT group_id AS id, parent_group_id AS parent, name FROM groups ORDER BY name";
 				$sth = new SQL($sql);
@@ -818,8 +818,8 @@ if($site->fdat['tab'] == 'user') {
 					$temp_tree[] = $data;		
 				}
 				?>
-				<select name="group_id" class="scms_flex_input" <?if($is_moz){?>style="width:260px"<?}?> <?if($user->all['is_readonly']==1){?>disabled<?}?>>
-			<?	foreach (get_array_tree($temp_tree) as $key=>$value) {
+				<select name="group_id" class="scms_flex_input" <?php if($is_moz){?>style="width:260px"<?php }?> <?php if($user->all['is_readonly']==1){?>disabled<?php }?>>
+			<?php foreach (get_array_tree($temp_tree) as $key=>$value) {
 				$name = str_repeat("&nbsp;&nbsp;", $value['level']).$value['name'];
 				print "<option value='".$value['id']."' ".($value['id']==$parent_group_id  || ($site->fdat['refresh'] && $value['id']==$site->fdat['parent_group_id'])? '  selected':'').">".$name."</option>";
 			} ?>				
@@ -828,7 +828,7 @@ if($site->fdat['tab'] == 'user') {
 		</td>
             </tr>
 
-		<?	
+		<?php 
 	################# type (profile_id) ########
 	$profile_id = ($site->fdat['refresh'] ? $site->fdat['profile_id'] : $user->all['profile_id']);	
 
@@ -848,9 +848,9 @@ if($site->fdat['tab'] == 'user') {
               <td width="20%" nowrap><?=$site->sys_sona(array(sona => "Type", tyyp=>"admin"))?>:</td>
               <td  colspan=2 width="100%">
 
-		<select name="profile_id" class="scms_flex_input" <?if($user->all['is_readonly']==1){?>disabled<?}?> onchange="javascript:document.forms['frmEdit'].refresh.value='1';document.forms['frmEdit'].submit();" <?if($is_moz){?>style="width:260px"<?}?>>
+		<select name="profile_id" class="scms_flex_input" <?php if($user->all['is_readonly']==1){?>disabled<?php }?> onchange="javascript:document.forms['frmEdit'].refresh.value='1';document.forms['frmEdit'].submit();" <?php if($is_moz){?>style="width:260px"<?php }?>>
 		<option value=""></option>
-		<? while ($data = $sth->fetch()){
+		<?php while ($data = $sth->fetch()){
 			### change technical profile name to translation in current language:
 			$data['name'] = $site->sys_sona(array(sona => $data['name'], tyyp=>"custom"));
 			print "<option value='".$data['id']."' ".($data['id']==$profile_id? '  selected':'').">".$data['name']."</option>";
@@ -863,13 +863,13 @@ if($site->fdat['tab'] == 'user') {
 	</table>
       <br>
       <br>
-	<?
+	<?php 
 	###################
 	# Profile info: attributes list
 
 		?>		
 	
-	<?
+	<?php 
 	#read only user cannot see this	
 	if($user->all['is_readonly']!=1){?>
 			<table width="100%"  border="0" cellspacing="3" cellpadding="0" class="scms_borderbox">
@@ -880,14 +880,14 @@ if($site->fdat['tab'] == 'user') {
             </div>
           </td>
         </tr>
-	<?###### profile fields row ?>
+	<?php ###### profile fields row ?>
 
         <tr> 
           <td valign=top colspan="2" style="height:140px"> 
 			<!-- Scrollable area -->
 			<div id=listing class="scms_scroll_div">
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" class="scms_table">
-				<?
+				<?php 
 				###################
 				# print profile fields rows
 				print_profile_fields(array(
@@ -902,10 +902,10 @@ if($site->fdat['tab'] == 'user') {
           </td>
         </tr>	
 
-	<?###### / profile fields row ?>
+	<?php ###### / profile fields row ?>
 	</table>
-		<?}?>
-	<?
+		<?php }?>
+	<?php 
 	# / Profile info: attributes list
 	###################
 	?>
@@ -915,7 +915,7 @@ if($site->fdat['tab'] == 'user') {
 </tr>
 </table>
 -->
-<?################# / CONTENT - SURROUNDING SCROLL TABLE ################?>
+<?php ################# / CONTENT - SURROUNDING SCROLL TABLE ################?>
 <!--	</div>  -->
 	<!-- //Scrollable area -->
 
@@ -923,22 +923,22 @@ if($site->fdat['tab'] == 'user') {
 
     </td>
   </tr>
-	  <?
+	  <?php 
 		###################
 		# buttons
 		?>
 	<tr> 
     <td align="right" valign="top" class="scms_dialog_area_bottom">
-			<?if($user->all['is_readonly']!=1){?>
+			<?php if($user->all['is_readonly']!=1){?>
             <input type="button" value="<?=$site->sys_sona(array(sona => "Apply", tyyp=>"editor")) ?>" onclick="javascript:document.forms['frmEdit'].op2.value='save';this.form.submit();">
             <input type="button" value="<?=$site->sys_sona(array(sona => "Salvesta", tyyp=>"editor")) ?>" onclick="javascript:document.forms['frmEdit'].op2.value='saveclose';this.form.submit();">
-			<?}?>
+			<?php }?>
 			<input type="button" value="<?=$site->sys_sona(array(sona => "Close", tyyp=>"editor")) ?>" onclick="javascript:window.close();"> &nbsp;&nbsp;&nbsp;&nbsp;
     </td>
   </tr>
 
 
-<?
+<?php 
 }
 # / 1. CONTENT: tab user
 ######################
@@ -950,7 +950,7 @@ elseif($site->fdat['tab'] == 'permissions') {
 ?>
 
 
-<?
+<?php 
 }
 # / 3. CONTENT: tab PERMISSIONS
 ######################
@@ -985,43 +985,43 @@ elseif($site->fdat['tab'] == 'account') {
         <tr> 
           <td nowrap><?=$site->sys_sona(array(sona => "Kasutajanimi", tyyp=>"editor")) ?>:</td>
           <td>
-            <input name="username" type="text" <?if($user->all['is_readonly']==1){?>disabled<?}?> class="scms_flex_input" style="width:160px" value="<?=$form_error['username']?$site->fdat['username']:$user->all[username]?>"><?=($form_error['username']?'<br><font color=red><b>'.$form_error['username'].'</b></font>':'')?>
+            <input name="username" type="text" <?php if($user->all['is_readonly']==1){?>disabled<?php }?> class="scms_flex_input" style="width:160px" value="<?=$form_error['username']?$site->fdat['username']:$user->all[username]?>"><?=($form_error['username']?'<br><font color=red><b>'.$form_error['username'].'</b></font>':'')?>
           </td>
         </tr>
         <tr> 
           <td nowrap><?=$site->sys_sona(array(sona => "Password", tyyp=>"kasutaja")) ?>:</td>
           <td colspan=2> 
-            <input name="password" type="password" <?if($user->all['is_readonly']==1){?>disabled<?}?> class="scms_flex_input" style="width:160px" value="<?=($user->all['password'] ? '********' : '')?>">
+            <input name="password" type="password" <?php if($user->all['is_readonly']==1){?>disabled<?php }?> class="scms_flex_input" style="width:160px" value="<?=($user->all['password'] ? '********' : '')?>">
           </td>
         </tr>
         <tr> 
           <td nowrap><?=$site->sys_sona(array(sona => "Parool uuesti", tyyp=>"editor")) ?>: </td>
           <td colspan=2> 
-            <input name="password_confirmation" <?if($user->all['is_readonly']==1){?>disabled<?}?> type="password" class="scms_flex_input" style="width:160px" value="<?=($user->all['password'] ? '********' : '')?>"><?=($form_error['password']?'<br><font color=red><b>'.$form_error['password'].'</b></font>':'')?>
+            <input name="password_confirmation" <?php if($user->all['is_readonly']==1){?>disabled<?php }?> type="password" class="scms_flex_input" style="width:160px" value="<?=($user->all['password'] ? '********' : '')?>"><?=($form_error['password']?'<br><font color=red><b>'.$form_error['password'].'</b></font>':'')?>
           </td>
         </tr>
         <tr> 
           <td nowrap><?=$site->sys_sona(array(sona => "Password expires", tyyp=>"kasutaja")) ?>:</td>
-          <td valign=bottom><input name="pass_expires" <?if($user->all['is_readonly']==1){?>disabled<?}?> id="pass_expires" type="text" class="scms_flex_input"  style="width:160px" value="<?=$form_error['pass_expires']?$site->fdat['pass_expires']:($user->all['pass_expires'] ? $site->db->MySQL_ee($user->all['pass_expires']) : date('d.m.Y', time() + 60 * 60 * 24 * 365 * 5)); // 5 years from now?>"></td>
-		  <td style="width:100%" align="left"><?if($user->all['is_readonly']!=1){?><a href="#" onclick="init_datepicker('pass_expires');"><img src="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/calendar/cal.gif" width="16" height="15" title="Choose from calendar" alt="Choose from calendar" border="0"></a><?}?></td>
+          <td valign=bottom><input name="pass_expires" <?php if($user->all['is_readonly']==1){?>disabled<?php }?> id="pass_expires" type="text" class="scms_flex_input"  style="width:160px" value="<?=$form_error['pass_expires']?$site->fdat['pass_expires']:($user->all['pass_expires'] ? $site->db->MySQL_ee($user->all['pass_expires']) : date('d.m.Y', time() + 60 * 60 * 24 * 365 * 5)); // 5 years from now?>"></td>
+		  <td style="width:100%" align="left"><?php if($user->all['is_readonly']!=1){?><a href="#" onclick="init_datepicker('pass_expires');"><img src="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/calendar/cal.gif" width="16" height="15" title="Choose from calendar" alt="Choose from calendar" border="0"></a><?php }?></td>
         </tr>
-<?
+<?php 
 #############################
 # password expires
 ?>  
 		<tr> 
 			<td colspan=2>
 				<table border=0 cellpadding="0" cellspacing="0" style="width:100%">
-				<? $yesterday  = date ("d.m.Y",mktime (0,0,0,date("m")  ,date("d")-1,date("Y"))); ?>
+				<?php $yesterday  = date ("d.m.Y",mktime (0,0,0,date("m")  ,date("d")-1,date("Y"))); ?>
 				<tr>
-				<td><input type=checkbox id="change_pass" <?if($user->all['is_readonly']==1){?>disabled<?}?> name="change_pass" value="1"
+				<td><input type=checkbox id="change_pass" <?php if($user->all['is_readonly']==1){?>disabled<?php }?> name="change_pass" value="1"
 					onclick="javascript:if(this.checked){document.forms['frmEdit'].pass_expires.value='<?=$yesterday?>'} else {document.forms['frmEdit'].pass_expires.value='<?=$site->db->MySQL_ee($user->all[pass_expires])?>'}"></td>
 				<td width="100%"><label for="change_pass"><?=$site->sys_sona(array(sona => "Change password", tyyp=>"admin")) ?></label></td>
 				</tr>
 				</table>
 			</td>
 		</tr>
-<?
+<?php 
 #############################
 # is predefined (superuser): enabled only for another superuser
 
@@ -1046,10 +1046,10 @@ if(!$disabled){
 			<td colspan=2>
 				<table border=0 cellpadding="0" cellspacing="0" style="width:100%">
 				<tr>
-				<td><input id="is_predefined" name="is_predefined" type="checkbox" <?if($user->all['is_readonly']==1){?>disabled<?}?> value="1"<?=($user->all['is_predefined'] ? ' checked' : '')?><?=($disabled? ' disabled':'')?>></td>
+				<td><input id="is_predefined" name="is_predefined" type="checkbox" <?php if($user->all['is_readonly']==1){?>disabled<?php }?> value="1"<?=($user->all['is_predefined'] ? ' checked' : '')?><?=($disabled? ' disabled':'')?>></td>
 				<td width="50%"><label for="is_predefined"><?=$site->sys_sona(array(sona => "Superuser", tyyp=>"kasutaja")) ?></label></td>
 
-			<?######## locked ?>
+			<?php ######## locked ?>
 				<td><input id="is_locked" name="is_locked" type="checkbox" value="1"<?=($user->all['is_locked'] ? ' checked' : '')?><?=($user->all['is_readonly'] == 1 ? ' disabled' : '');?>></td>
 
 				<td width="50%"><label for="is_locked"><?=$site->sys_sona(array(sona => "lukus", tyyp=>"editor")) ?></label></td>
@@ -1059,7 +1059,7 @@ if(!$disabled){
 			</td>
 			</tr>
 
-<?
+<?php 
 #############################
 # last login
 ?>  
@@ -1071,7 +1071,7 @@ if(!$disabled){
 			<?=$user->all['last_ip'] ?>
           </td>
         </tr>
-<?
+<?php 
 #############################
 # Role
 
@@ -1082,14 +1082,14 @@ if(!$disabled){
 		  <tr> 
           <td valign="top"><?=$site->sys_sona(array(sona => "Roles", tyyp=>"kasutaja"))?>:</td>
           <td colspan=2>
-		<SELECT NAME="roles[]" multiple style="WIDTH: 99%; height: 46px" size=3 <?if($user->all['is_readonly']==1){?>disabled<?}?>>
-<?
+		<SELECT NAME="roles[]" multiple style="WIDTH: 99%; height: 46px" size=3 <?php if($user->all['is_readonly']==1){?>disabled<?php }?>>
+<?php 
 		$sqltmp = $site->db->prepare("SELECT * FROM roles ORDER BY name");
 		$sthtmp = new SQL($sqltmp);
 
 		while($role = $sthtmp->fetch() ){ ?>
 			<option value="<?=$role['role_id']?>" <?=(in_array($role['role_id'],$user_roles)?' selected':'')?>><?=$role['name']?></option>
-		<? } ?>
+		<?php } ?>
 		</select>
           </td>
         </tr>
@@ -1103,7 +1103,7 @@ if(!$disabled){
     </td>
   </tr>
 
-	  <?
+	  <?php 
 		###################
 		# buttons
 		?>
@@ -1116,7 +1116,7 @@ if(!$disabled){
   </tr>
 
 
-<?
+<?php 
 }
 # / 4. CONTENT: tab ACCOUNT
 ######################
@@ -1162,7 +1162,7 @@ elseif($site->fdat['tab'] == 'mailinglist') {
 				<td valign=top>
 					<div class="scms_middle_div" style="overflow: auto; height:100%; max-height:350px;">
 					<table width=100% cellpadding=0 cellspacing=0 border=0>
-<?
+<?php 
 
 
 #############################
@@ -1226,7 +1226,7 @@ elseif($site->fdat['tab'] == 'mailinglist') {
 			<td><input type=checkbox name="rubriik[]" value="<?=$obj_id?>" <?=$meilinglistid[$obj_id]?>></td>
 			<td> <a href="<?=(empty($_SERVER['HTTPS']) ? 'http://' : 'https://').$site->hostname.$site->wwwroot."/?id=".$obj_id?>" target="_new"><?=$obj_name?></a></td>
 		</tr>
-	<?
+	<?php 
 			$on_ml=true; // used in the button section with read-only users to verify the existance of a mailinglist
 			} # if
 		} # foreach section id
@@ -1250,7 +1250,7 @@ elseif($site->fdat['tab'] == 'mailinglist') {
 </td>
         </tr>
 
-	  <?
+	  <?php 
 		###################
 		# buttons
 		?>
@@ -1263,7 +1263,7 @@ elseif($site->fdat['tab'] == 'mailinglist') {
   </tr>
 
 
-<?
+<?php 
 }	
 
 # / 5. CONTENT: tab mailinglist
@@ -1277,13 +1277,13 @@ elseif($site->fdat['tab'] == 'mailinglist') {
 
 </table>
 
-<?
+<?php 
 }
 # EDIT WINDOW
 ######################
 ?>
 
-<?	$site->debug->print_msg(); ?>
+<?php $site->debug->print_msg(); ?>
 </body>
 
 </html>

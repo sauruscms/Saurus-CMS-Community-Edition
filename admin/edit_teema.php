@@ -29,7 +29,7 @@ function edit_objekt () {
       <td nowrap><?=$site->sys_sona(array(sona => "Email", tyyp=>"kasutaja"))?>:</td>
       <td width="100%"><input name="email" class="scms_flex_input" value="<?=$email?>"></td>
 	</tr>
-<?
+<?php 
 }
 
 function save_tyyp_params (){
@@ -87,7 +87,7 @@ function salvesta_objekt () {
 				variableFromEditRubriik_id='<?=$objekt->objekt_id ?>';
 			//-->
 			</script>
-<?		
+<?php 	
 		}
 
 		$site->debug->msg("sisu on salvestatud, objekt_id = ".$objekt->objekt_id);

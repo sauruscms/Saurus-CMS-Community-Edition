@@ -410,7 +410,7 @@ if($op2 && !$site->fdat[refresh]) {
 				newurl += "id=<?=$objekt->objekt_id?>";
 			}
 			window.opener.location = newurl.replace(/#$/, '');;
-		<?}
+		<?php }
 		# 2) if saving new article => open parent section
 		elseif($is_new && ( $objekt->all['klass']=="artikkel" ) ){ ?>
 			var oldurl = window.opener.location.toString();
@@ -424,7 +424,7 @@ if($op2 && !$site->fdat[refresh]) {
 				newurl += "id=<?=$objekt->parent_id?>";
 			}
 			window.opener.location = newurl.replace(/#$/, '');;
-		<?}
+		<?php }
 		# 4) if saving new file and opener is WYSIWYG editor, then insert file directly
         elseif($is_new && $objekt->all['klass'] == 'file' && $site->fdat['in_wysiwyg'] == '1' && $save_in_wysiwyg_filename /* very ugly workaround for bug #2269 */)
         { 
@@ -451,7 +451,7 @@ if($op2 && !$site->fdat[refresh]) {
 		} else {
 			alert('No file selected!')
 		}
-		<? }
+		<?php }
         elseif($objekt->all['klass'] == 'file' && $site->fdat['callback']) 
         {
        	?>
@@ -484,7 +484,7 @@ if($op2 && !$site->fdat[refresh]) {
 			var href = window.opener.location.href.replace(/#$/, '');
 			
 			window.opener.location.href = href;
-		<? } ?>
+		<?php } ?>
 		</script>
 		<?php
 		
@@ -495,7 +495,7 @@ if($op2 && !$site->fdat[refresh]) {
 			<script type="text/javascript">
 				window.close();
 			</script>
-			<?
+			<?php 
 			exit;
 		}
 	} # refresh opener
@@ -579,7 +579,7 @@ if(($tyyp['klass'] == 'album' && $site->fdat['tab'] == 'object')) {
 <script type="text/javascript" src="<?=$site->CONF['wwwroot'];?>/common.js.php"></script>
 </head>
 
-<?
+<?php 
 
 ######################
 # get type name for object TABNAME
@@ -613,14 +613,14 @@ if($site->fdat['tab'] == 'object') {
 <body class="popup_body" onLoad="this.focus();<?=$body_par ?>">
 
 <table border="0" cellpadding="0" cellspacing="0" style="width:100%; height:100%">
-<?
+<?php 
 
 ########### tabs : print tabs olny if it's not type list
 if(!$idlist_output){
 	print_tabs(array("object_type" => $typename));
 }
 ?>
-<?
+<?php 
 ###########################
 # a. PRINT OBJECT TYPE LIST	
 if($idlist_output) { ?>
@@ -661,23 +661,23 @@ if($idlist_output) { ?>
 
 </td>
 </tr>
-	<?#################### BUTTONS ###########?>
+	<?php #################### BUTTONS ###########?>
 	  <tr> 
 	  <td align="right" valign="top" class="scms_dialog_area_bottom"> 
 	   <input type="button" value="<?=$site->sys_sona(array(sona => "Close", tyyp=>"editor")) ?>" onclick="javascript:window.close();">
     </td>
   </tr>
 </table>
-<?
+<?php 
 }
 #######################
 # b. NEW/EDIT FORM
 else {
 ?>
 <tr> 
-<?## changed: scms_dialog_area => scms_table ?>
+<?php ## changed: scms_dialog_area => scms_table ?>
 	<TD valign="top" width="100%" class="scms_table"  height="100%">
-<?
+<?php 
 # -tavaline NEW
 # -NOT asseti new list
 # -edit
@@ -716,7 +716,7 @@ elseif($site->fdat['tab'] == 'permissions') {
 ?>
 <body>
 <table border="0" cellpadding="0" cellspacing="0" style="width:100%; height:100%">
-<?
+<?php 
 
 	include_once($class_path."permissions.inc.php");
 	## action "Copy permissions to subtree"
@@ -740,7 +740,7 @@ elseif($site->fdat['tab'] == 'permissions') {
 	}
 ?>
 	</table>
-<?
+<?php 
 }
 # / 2. tab PERMISSIONS
 ######################
@@ -753,7 +753,7 @@ elseif($site->fdat['tab'] == 'seo') {
 ?>
 <body>
 <table border="0" cellpadding="0" cellspacing="0" style="width:100%; height:100%">
-<?
+<?php 
 
 	########### tabs
 	print_tabs(array("object_type" => $typename));
@@ -765,7 +765,7 @@ elseif($site->fdat['tab'] == 'seo') {
 	}
 ?>
 	</table>
-<?
+<?php 
 }
 # / 2. tab SEO
 ######################
@@ -792,7 +792,7 @@ else { # browseri kontroll, agent=Netscape
 </TABLE>
 </center>
 </body>
-<?
+<?php 
 } # browser check
 
 $site->debug->print_hash($site->fdat,1,"FORM DATA");
@@ -809,7 +809,7 @@ $site->debug->print_msg();
 
 
 
-<?
+<?php 
 ######################
 # FUNCTION PRINT_TABS()
 
@@ -825,7 +825,7 @@ function print_tabs($args) {
      <table border="0" cellspacing="0" cellpadding="0" width="100%" style="height:21px">
       <tr>
        <td class="scms_tabs_empty">&nbsp;&nbsp;&nbsp;</td>
-		<?
+		<?php 
 		# set all tabs: array[tab name] = tab translated name 
 		$tab_arr = array();
 		if($args['object_type']){ # if object name was fiven as paremter use this
@@ -847,8 +847,8 @@ function print_tabs($args) {
 
 		?>
         <td class="scms_<?=$site->fdat['tab']==$tab?'':'in'?>active_tab" nowrap>
-		<?########## tab title #######?>
-		<?	
+		<?php ########## tab title #######?>
+		<?php 
 		# if new object: disable tab
 		if (!$objekt) {
 			$tab_title = "<a href='#'>".$tab_title."</a>";	
@@ -858,14 +858,14 @@ function print_tabs($args) {
 		}
 		?>
 		<?=$tab_title?></td>
-		<? } # loop over tabs ?>
+		<?php } # loop over tabs ?>
 
           <td width="100%" class="scms_tabs_empty">&nbsp;</td>
       </tr>
     </table>
     </td>
   </tr>
-<?
+<?php 
 }
 # / FUNCTION PRINT_TABS()
 ######################

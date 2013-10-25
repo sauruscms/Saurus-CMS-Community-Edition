@@ -300,4 +300,4 @@ else
 </center>
 </body>
 </html>
-<? }
+<?php }

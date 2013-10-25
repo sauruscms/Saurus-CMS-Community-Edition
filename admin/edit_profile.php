@@ -347,7 +347,7 @@ if($site->fdat['op2'] == 'save_profile_name' || $site->fdat['op2'] == 'saveclose
 		window.close();
 	// --></SCRIPT>
 	</HTML>
-	<?
+	<?php 
 	exit;
 	}
 	################
@@ -421,7 +421,7 @@ if($op2 == 'deleteconfirmed' && is_numeric($site->fdat['pid']) && !$site->fdat['
 		window.close();
 	// --></SCRIPT>
 	</HTML>
-	<?
+	<?php 
 	}
 	exit;
 }
@@ -473,7 +473,7 @@ if($site->fdat['op2'] == "deleteconfirmed" && is_numeric($site->fdat['profile_id
 			window.close();
 		// --></SCRIPT>
 		</HTML>
-		<?
+		<?php 
 		} # if successfully deleted
 		exit;
 
@@ -658,7 +658,7 @@ if($op2=='save_profile_definition' || $op2=='saveclose_profile_definition') {
 		window.close();
 	// --></SCRIPT>
 	</HTML>
-	<?
+	<?php 
 	exit;
 	}
 }
@@ -692,7 +692,7 @@ if($op == 'delete' && $site->fdat['pid']) {
 <table border="0" cellpadding="0" cellspacing="0" style="width:100%; height:100px">
   <tr> 
 	<td valign="top" width="100%" class="scms_confirm_delete_cell" height="100%">
-<?
+<?php 
 	# check if allowed to delete
 	# 1. if exist any object / user / group/ document with that profile, then don't allow to delete
 	$data_count = 0;
@@ -742,7 +742,7 @@ if($op == 'delete' && $site->fdat['pid']) {
 			<br><br>
 			<input type=checkbox id="delete_source_table" name="delete_source_table" value=1 <?=$disabled?>><input type=hidden name=source_table value="<?=$profile_def['source_table']?>">
 			<label for="delete_source_table"><?=$site->sys_sona(array(sona => "delete_table", tyyp=>"editor"))?> "<b><?=$profile_def['source_table']?></b>"</label>
-			<?
+			<?php 
 		}
 		$allow_delete = 1;
 	}
@@ -751,9 +751,9 @@ if($op == 'delete' && $site->fdat['pid']) {
   </tr>
   <tr align="right"> 
     <td valign="top" colspan=2 > 
-		<?if($allow_delete){?>
+		<?php if($allow_delete){?>
             <input type="button" value="<?=$site->sys_sona(array(sona => "kustuta", tyyp=>"editor")) ?>" onclick="javascript:frmEdit.op2.value='deleteconfirmed';frmEdit.submit();">
-			<?}?>
+			<?php }?>
 			<input type="button" value="<?=$site->sys_sona(array(sona => "close", tyyp=>"editor")) ?>" onclick="javascript:window.close();"> 
     </td>
   </tr>
@@ -762,7 +762,7 @@ if($op == 'delete' && $site->fdat['pid']) {
 </form>
 </body>
 </html>
-<?
+<?php 
 	############ debug
 	# user debug:
 	if($site->user) { $site->user->debug->print_msg(); }
@@ -802,7 +802,7 @@ if($op == 'delete' && is_numeric($site->fdat['profile_id']) && $site->fdat['did'
 <table border="0" cellpadding="0" cellspacing="0" style="width:100%; height:100px">
   <tr> 
 	<td valign="top" width="100%" class="scms_confirm_delete_cell" height="100%">
-<?
+<?php 
 	# show confirmation
 		echo $site->sys_sona(array(sona => "kustuta", tyyp=>"editor"))." \"<b>".$profile_info['name']."</b>\"? ";
 		echo $site->sys_sona(array(sona => "are you sure?", tyyp=>"admin"));
@@ -812,9 +812,9 @@ if($op == 'delete' && is_numeric($site->fdat['profile_id']) && $site->fdat['did'
   </tr>
   <tr align="right"> 
     <td valign="top" colspan=2 > 
-		<?if($allow_delete){?>
+		<?php if($allow_delete){?>
             <input type="button" value="<?=$site->sys_sona(array(sona => "kustuta", tyyp=>"editor")) ?>" onclick="javascript:frmEdit.op2.value='deleteconfirmed';frmEdit.submit();">
-			<?}?>
+			<?php }?>
 			<input type="button" value="<?=$site->sys_sona(array(sona => "close", tyyp=>"editor")) ?>" onclick="javascript:window.close();"> 
     </td>
   </tr>
@@ -823,7 +823,7 @@ if($op == 'delete' && is_numeric($site->fdat['profile_id']) && $site->fdat['did'
 </form>
 </body>
 </html>
-<?
+<?php 
 	############ debug
 	# user debug:
 	if($site->user) { $site->user->debug->print_msg(); }
@@ -870,7 +870,7 @@ if($site->fdat['pid']) {
 <tr> 
     <td valign="top" width="100%" class="scms_dialog_area_top"  height="100%">
 	  <table width="100%" border="0" cellspacing="0" cellpadding="2">
-		<?############### keel ############?>
+		<?php ############### keel ############?>
 		<tr> 
           <td align="right" colspan="2" style="padding:3px" bgcolor="#F1F1EC"> 
             <table width="100" cellspacing="0" cellpadding="0">
@@ -878,7 +878,7 @@ if($site->fdat['pid']) {
                 <td><?=$site->sys_sona(array(sona => "keel", tyyp=>"editor"))?>:</td>
                 <td style="padding-left:3px"> 
                   <select name="flt_keel" onchange="document.forms['vorm'].keel_changed.value='1';document.forms['vorm'].submit()">
-				<?	# Keeled
+				<?php # Keeled
 				$sql = "select distinct b.glossary_id as keel_id, a.nimi as nimi from keel as a left join keel as b on a.keel_id = b.glossary_id where b.on_kasutusel = '1'";
 				$sth = new SQL($sql);
 				$site->debug->msg($sth->debug->get_msgs());		
@@ -895,7 +895,7 @@ if($site->fdat['pid']) {
             </table>				
 		</td>
         </tr>
-	  <?############ name #########
+	  <?php ############ name #########
 		if($form_error['profile_name']){
 			$profile_name = $site->fdat['profile_name'];
 		}
@@ -907,8 +907,8 @@ if($site->fdat['pid']) {
 		<?=($form_error['profile_name']? '<br><font color=red>'.$form_error['profile_name'].'</font>':'')?>
 		</td>
 	  </tr>
-	<?############### label/translation + hidden keele v�li #######?>
-	<? 
+	<?php ############### label/translation + hidden keele v�li #######?>
+	<?php 
 	if($site->fdat['op'] != 'new'){
 		$label = $site->sys_sona(array(sona => $profile_name, tyyp=>"custom", lang_id=>$word_keel_id));
 		# kui s�steemis�na puudub:
@@ -920,13 +920,13 @@ if($site->fdat['pid']) {
 		<td width="95%" STYLE="padding-bottom:5px"><input type=text name="profile_label" value="<?=$label ?>" class="scms_flex_input"><input type=hidden name="word_keel_id" value="<?=$word_keel_id?>"></td>
 	</tr>
 
-	<?############### source table #######?>
+	<?php ############### source table #######?>
 	<tr>
 		<td nowrap><?=$site->sys_sona(array(sona => "DB Table", tyyp=>"xml"))?>: </td>
 		<td width="95%" STYLE="padding-bottom:5px"><INPUT TYPE="text" name="source_table" value="<?=($profile_def['source_table']?$profile_def['source_table']:($site->fdat['source_table']?$site->fdat['source_table']:'obj_asset'))?>" class="scms_flex_input" onchange="this.value = this.value.toLowerCase();" onblur="this.value = this.value.toLowerCase();"></td>
 	</tr>
 
-	<?############### is_default #######?>
+	<?php ############### is_default #######?>
 	<tr>
 		<td nowrap></td>
 		<td width="95%"><INPUT TYPE="checkbox" name="is_default" id="is_default" value="1" <?=($site->fdat['op']!='new' && $profile_def['is_default']==1?"checked":"")?>><label for="is_default"><?=$site->sys_sona(array(sona => "Default", tyyp=>"admin"))?></label></td>
@@ -937,7 +937,7 @@ if($site->fdat['pid']) {
 	  </table>
 	</td>
 </tr>
-	<?############ buttons #########?>
+	<?php ############ buttons #########?>
 	<tr> 
 	  <td align="right" valign="top" class="scms_dialog_area_bottom"> 
          <input type="button" value="<?=$site->sys_sona(array(sona => "Apply", tyyp=>"editor")) ?>" onclick="javascript: document.forms['vorm'].op2.value='save_profile_name';this.form.submit();">
@@ -947,7 +947,7 @@ if($site->fdat['pid']) {
   </tr>
 </table>
 
-<?########### hidden ########?>
+<?php ########### hidden ########?>
 <INPUT TYPE="hidden" name="pid" value="<?= $site->fdat['pid'] ?>">
 <INPUT TYPE="hidden" name="op" value="<?=$site->fdat['op']?>">
 <INPUT TYPE="hidden" name="op2" value="save_profile_name">
@@ -955,7 +955,7 @@ if($site->fdat['pid']) {
 </form>
 </body>
 </html>
-<?
+<?php 
 ############ debug
 # user debug:
 if($site->user) { $site->user->debug->print_msg(); }
@@ -985,7 +985,7 @@ if($site->fdat['op'] == "newdef" ||
 <meta http-equiv="Cache-Control" content="no-cache">
 <link rel="stylesheet" href="<?=$site->CONF['wwwroot'].$site->CONF[styles_path]?>/scms_general.css">
 <SCRIPT LANGUAGE="JavaScript" SRC="<?=$site->CONF['wwwroot'].$site->CONF[js_path]?>/yld.js"></SCRIPT>
-<?
+<?php 
 		################
 		# Get PROFILE INFO
 		if($site->fdat['pid']) {
@@ -1053,21 +1053,21 @@ if($site->fdat['op'] == "newdef" ||
 <SCRIPT LANGUAGE="JavaScript"><!--
 
 	var existing_fields = new Array();
-	<? if(is_array($existing_fields)) {
+	<?php if(is_array($existing_fields)) {
 		foreach($existing_fields as $key=>$field){ ?>
 		existing_fields[<?=$key?>] = '<?=$field?>';
-	<? } } ?>
+	<?php } } ?>
 
 	var existing_names = new Array();
-	<? if(is_array($existing_names)) {
+	<?php if(is_array($existing_names)) {
 		foreach($existing_names as $key=>$field){ ?>
 		existing_names[<?=$key?>] = '<?=$field?>';
-	<? } } ?>
+	<?php } } ?>
 
 
 	function change_profile_map_value1(db_type) {
-	<? # 1. if obj_asset, then paramter is db_type, take first value from available fields: ?>
-	<? if($profile_def['source_table'] == 'obj_asset' && $site->fdat['op'] == "newdef") { ?>
+	<?php # 1. if obj_asset, then paramter is db_type, take first value from available fields: ?>
+	<?php if($profile_def['source_table'] == 'obj_asset' && $site->fdat['op'] == "newdef") { ?>
 		if(db_type=="varchar") {
 			document.forms['vorm'].profile_map.value='<?=$available_fields_bytype["varchar"][0]?>';	
 		}
@@ -1095,13 +1095,13 @@ if($site->fdat['op'] == "newdef" ||
 			document.forms['vorm'].profile_map.value= safe_filename(document.forms['vorm'].definition_name.value.toLowerCase());
 		}
 		document.forms['vorm'].profile_map_show.value='<?= $profile_def['source_table'] ?>.'+document.forms['vorm'].profile_map.value.toLowerCase();
-	<? }?>
+	<?php }?>
 	}
 	function change_profile_map_value2(definition_name) {
-	<? # 2.  (users, etc), then parameter is already fieldvalue, just copy-paste it 
+	<?php # 2.  (users, etc), then parameter is already fieldvalue, just copy-paste it 
 		# fixed bug in 4.0.0 full versions: table obj_asset doesnt contain all these predefined fields anymore
 	?>
-	<? if ( ($profile_def['source_table'] != 'obj_asset' || !sizeof($available_fields_bytype["varchar"])) && ($site->fdat['op'] == "newdef" || $site->fdat['op'] == "duplicate")) { ?>
+	<?php if ( ($profile_def['source_table'] != 'obj_asset' || !sizeof($available_fields_bytype["varchar"])) && ($site->fdat['op'] == "newdef" || $site->fdat['op'] == "duplicate")) { ?>
 
 	definition_name = definition_name!=''?definition_name:'undefined';
 	// convert to safe format
@@ -1122,7 +1122,7 @@ if($site->fdat['op'] == "newdef" ||
 	} // new or duplicate
 		document.forms['vorm'].profile_map.value=safevalue.toLowerCase();
 		document.forms['vorm'].profile_map_show.value='<?= $profile_def['source_table'] ?>.'+safevalue.toLowerCase();
-	<? } ?>
+	<?php } ?>
 	}
 	function refresh_source_object(type) {
 		if(type=="SELECT" || type=="MULTIPLE SELECT" || type=="RADIO" || type=="CHECKBOX" || type=="BROWSE") {
@@ -1184,13 +1184,13 @@ if($site->fdat['op'] == "newdef" ||
 	}
 //--></SCRIPT>
 </head>
-<body class="popup_body" onload="refresh_source_object('<?=$profile_info["type"]?>'); <?
+<body class="popup_body" onload="refresh_source_object('<?=$profile_info["type"]?>'); <?php 
 ###### initialize table field value: 1) if asset => db-type 2) else => fieldname or 'undefined'
-if($profile_def['source_table'] == 'obj_asset'){?>change_profile_map_value1(document.forms['vorm'].profile_type.options[document.forms['vorm'].profile_type.options.selectedIndex].value);<?}else{?>change_profile_map_value2(document.forms['vorm'].definition_name.value);<?}?>">
+if($profile_def['source_table'] == 'obj_asset'){?>change_profile_map_value1(document.forms['vorm'].profile_type.options[document.forms['vorm'].profile_type.options.selectedIndex].value);<?php }else{?>change_profile_map_value2(document.forms['vorm'].definition_name.value);<?php }?>">
 
 <FORM action="<?=$site->self ?>" method="post" name="vorm">
 	<?php create_form_token('edit-profile-field'); ?>
-<?
+<?php 
 ###################
 # luba profiili MUUTA ja nime muuta ainult siis kui andmeid SELLE KONKREETSE V�LJA KOHTA pole veel sisestatud:
 # otsi, kas leidub selle profiiliga andmeid kus antud v�li ei ole t�hi (aga ignoreeri default pealkirja v�lja, sest see asub objekt tabelis Bug #2818)
@@ -1211,7 +1211,7 @@ if($site->fdat['op'] == "edit" && $site->fdat['did'] && !$profile_info["is_gener
   <tr> 
     <td valign="top" width="100%" class="scms_dialog_area_top" height="100%"> 
       <table width="100%"  border="0" cellspacing="0" cellpadding="2">
-		<?############### keel ############?>
+		<?php ############### keel ############?>
 		<tr> 
           <td bgcolor="#F1F1EC"><?=$profile_def['name']?></td>
           <td align="right" colspan="2" style="padding:3px" bgcolor="#F1F1EC"> 
@@ -1220,7 +1220,7 @@ if($site->fdat['op'] == "edit" && $site->fdat['did'] && !$profile_info["is_gener
                 <td><?=$site->sys_sona(array(sona => "keel", tyyp=>"editor"))?>:</td>
                 <td style="padding-left:3px"> 
                   <select name="flt_keel" onchange="document.forms['vorm'].keel_changed.value='1';document.forms['vorm'].profile_map.disabled=false;document.forms['vorm'].submit()">
-				<?	# Keeled
+				<?php # Keeled
 				//$sql = "SELECT nimi,keel_id FROM keel WHERE on_kasutusel = '1' ORDER BY nimi";
 				$sql = "select distinct b.glossary_id as keel_id, a.nimi as nimi from keel as a left join keel as b on a.keel_id = b.glossary_id where b.on_kasutusel = '1'";
 				$sth = new SQL($sql);
@@ -1238,12 +1238,12 @@ if($site->fdat['op'] == "edit" && $site->fdat['did'] && !$profile_info["is_gener
             </table>				
 		</td>
         </tr>
-<?############### DUPLICATE: destination profiles selectbox  ################?>
-<?	if($site->fdat['op'] == "duplicate") { ?>
+<?php ############### DUPLICATE: destination profiles selectbox  ################?>
+<?php if($site->fdat['op'] == "duplicate") { ?>
 <tr>
 	<td nowrap><?=$site->sys_sona(array(sona => "profile", tyyp=>"editor"))?>: </td>
 	<td>
-	<?
+	<?php 
 #	printr($site->fdat['pid']);
 	# get all profiles having the same source_table:
   		$sql = $site->db->prepare("SELECT profile_id AS id, source_table AS parent, name FROM object_profiles WHERE source_table=? ORDER BY name",
@@ -1251,17 +1251,17 @@ if($site->fdat['op'] == "edit" && $site->fdat['did'] && !$profile_info["is_gener
 		$sth = new SQL($sql);
 	?>
 		<select name="dest_pid" style="width:99%" onchange="javascript: change_profile_map_value2(document.forms['vorm'].definition_name.value);">
-		<? while ($tmp_profile = $sth->fetch('ASSOC')){ ?>
+		<?php while ($tmp_profile = $sth->fetch('ASSOC')){ ?>
 			<option value="<?=$tmp_profile['id']?>" <?= ($site->fdat['pid'] == $tmp_profile['id'])?"selected":""; ?>><?=$site->sys_sona(array(sona => $tmp_profile['name'], tyyp=>"custom"))?></option>
-		<? } ?>
+		<?php } ?>
 		</select>
 		</td>
 </tr>
-<?
+<?php 
 	} # if duplicate
 ?>
-<?############### name ################?>
-<?
+<?php ############### name ################?>
+<?php 
 	if($site->fdat['op'] == "duplicate") {
 #		$profile_info["name"] = 'Copy of '.$profile_info["name"];
 	}
@@ -1269,10 +1269,10 @@ if($site->fdat['op'] == "edit" && $site->fdat['did'] && !$profile_info["is_gener
 ?>
 <tr>
 	<td><?=$site->sys_sona(array(sona => "Fieldname", tyyp=>"editor"))?>: </td>
-	<td width="95%" style="padding-top:4px"><?if($locked){?><?= $profile_info["name"] ?><input type=hidden name="definition_name" value="<?= $profile_info["name"] ?>"><?} else {?><input type=text name="definition_name" value="<?= $profile_info["name"] ?>" class="scms_flex_input" onchange="javascript:this.value = this.value.toLowerCase(); check_name(this.value); change_label(this.value); change_profile_map_value2(this.value);"><?}?></td>
+	<td width="95%" style="padding-top:4px"><?php if($locked){?><?= $profile_info["name"] ?><input type=hidden name="definition_name" value="<?= $profile_info["name"] ?>"><?php } else {?><input type=text name="definition_name" value="<?= $profile_info["name"] ?>" class="scms_flex_input" onchange="javascript:this.value = this.value.toLowerCase(); check_name(this.value); change_label(this.value); change_profile_map_value2(this.value);"><?php }?></td>
 </tr>
-<?############### label/translation + hidden keele v�li #######?>
-<? $label = $site->sys_sona(array(sona => $profile_info["name"], tyyp=>"custom", lang_id=>$word_keel_id));
+<?php ############### label/translation + hidden keele v�li #######?>
+<?php $label = $site->sys_sona(array(sona => $profile_info["name"], tyyp=>"custom", lang_id=>$word_keel_id));
 # kui s�steemis�na puudub:
 $label = $label != '['.$profile_info["name"].']' ? $label : '';
 ?>
@@ -1280,7 +1280,7 @@ $label = $label != '['.$profile_info["name"].']' ? $label : '';
 	<td><?=$site->sys_sona(array(sona => "Tolkimine", tyyp=>"admin"))?>: </td>
 	<td width="95%" STYLE="padding-bottom:5px"><input type=text name="definition_label" value="<?=$label ?>" class="scms_flex_input"><input type=hidden name="word_keel_id" value="<?=$word_keel_id?>"></td>
 </tr>
-<?############### display_type selectbox => valitud v��rtus m�jub "db type" v�ljale (enables/disables)  ################?>
+<?php ############### display_type selectbox => valitud v��rtus m�jub "db type" v�ljale (enables/disables)  ################?>
 <tr>
 	<td nowrap><?=$site->sys_sona(array(sona => "input type", tyyp=>"admin"))?>: </td>
 	<td>
@@ -1299,11 +1299,11 @@ $label = $label != '['.$profile_info["name"].']' ? $label : '';
 		</select>
 		</td>
 </tr>
-<?############### db_type selectbox => valitud v��rtus m�jub "profile map" v�ljale ################?>
+<?php ############### db_type selectbox => valitud v��rtus m�jub "profile map" v�ljale ################?>
 <tr>
 	<td nowrap><?=$site->sys_sona(array(sona => "Data type", tyyp=>"admin"))?>: </td>
 	<td>
-	<? # selectbox is disabled when :
+	<?php # selectbox is disabled when :
 		# - edit existing field (you can't change type of created field. at least now)
 		# - selected input type is SELECT/MULTIPLE SELECT/RADIO/CHECKBOX/FILE, then force it to varchar
 	?>
@@ -1318,15 +1318,15 @@ $label = $label != '['.$profile_info["name"].']' ? $label : '';
 		</select>
 	</td>
 </tr>
-<?############### source_object selectbox ################?>
-<?
+<?php ############### source_object selectbox ################?>
+<?php 
 $sql = "SELECT profile_id, name, source_table FROM object_profiles ";
 $sth = new SQL($sql);
 ?>
 <tr>
 	<td nowrap><?=$site->sys_sona(array(sona => "get values from", tyyp=>"admin"))?>: </td>
 	<td>
-	<?
+	<?php 
 	# pane selectbox lukku uue v�lja puhul v�i kui valitud on mitte m�tet omav t��p
 	if($site->fdat['op']=='newdef' ||
 	($profile_info && ($profile_info["type"]=="TEXT" || $profile_info["type"]=="TEXTAREA"))  ) {
@@ -1335,16 +1335,16 @@ $sth = new SQL($sql);
 	?>
 		<select id="source_object" name="source_object" style="width:99%" <?=($locked || $cms_locked?'disabled':'')?>>
 		<option value=""></option>
-		<?while( $asset = $sth->fetch() ){?>
+		<?php while( $asset = $sth->fetch() ){?>
 			<option value="<?=$asset['profile_id']?>" <?= ($profile_info["source_object"] == $asset['profile_id'] )?"selected":""; ?>><?=$site->sys_sona(array(sona => $asset['name'], tyyp=>"custom"))?></option>
 			<?php if($profile_info["source_object"] == $asset['profile_id']) $get_values_from_source_table = $asset['source_table']; ?>
-		<?}?>
+		<?php }?>
 		</select>
 	</td>
 </tr>
 
-<?############### default_value selectbox ################?>
-<?
+<?php ############### default_value selectbox ################?>
+<?php 
 if($profile_info["source_object"] || $profile_info["type"] == "BOOLEAN") {
 
 	if($get_values_from_source_table == 'obj_asset')
@@ -1385,32 +1385,32 @@ if($profile_info["source_object"] || $profile_info["type"] == "BOOLEAN") {
 <tr>
 	<td nowrap><?=$site->sys_sona(array(sona => "default_value", tyyp=>"admin"))?>: </td>
 	<td>
-	<?
+	<?php 
 	if($profile_info["type"] == "BOOLEAN") { ###### YES checkbox ?>
 		<input type=checkbox id="tmptmp_default_value" name="tmptmp_default_value" value="1" <?=($profile_info["default_value"]?"checked":"") ?> onclick="if(this.checked){document.getElementById('default_value').value='1';}else {document.getElementById('default_value').value='0';}">
 		<input type=hidden id="default_value" name="default_value" value="<?=($profile_info["default_value"]?"1":"0")?>">
 
 		<label for="tmptmp_default_value"><?= $site->sys_sona(array(sona => "yes", tyyp=>"editor"))?></label>
-	<?	
+	<?php 
 	} elseif($profile_info["source_object"]) { ###### values selectbox
 	?>
 		<select id="default_value" name="default_value" style="width:99%">
 		<option value=""></option>
-		<?while( $data = $sth->fetch() ){?>
+		<?php while( $data = $sth->fetch() ){?>
 			<option value="<?=$data['id']?>" <?= ($profile_info["default_value"] == $data['id'] )?"selected":""; ?>><?=$data['pealkiri']?></option>
-		<?}?>
+		<?php }?>
 		</select>
-	<?  
+	<?php  
 	} else { ###### free TEXT ?>
 		<input type=text id="default_value" name="default_value" class="scms_flex_input" value="<?= $profile_info["default_value"]?>">
-<?	}
+<?php }
 	?>
 	</td>
 </tr>
 
-<?############### profile_map ( table fieldname in database) 
+<?php ############### profile_map ( table fieldname in database) 
 # <= v��rtust m�jutab slectboxi "db_type" valitud v��rtus ################?>
-<?
+<?php 
 # NB! v�li on userile disabled, aga muutub ise s�ltuvalt "db_type" valikust
 
 ########## generate new fieldname or use existing
@@ -1434,7 +1434,7 @@ if($site->fdat['did']){ # siia alla l�hevad ka predefined, neid ei saa samuti 
 	</td>
 </tr>
 
-<?############### is_required ################?>
+<?php ############### is_required ################?>
 
         <tr> 
           <td nowrap><?=$site->sys_sona(array(sona => "on noutud", tyyp=>"editor"))?>:</td>
@@ -1442,7 +1442,7 @@ if($site->fdat['did']){ # siia alla l�hevad ka predefined, neid ei saa samuti 
             <input type="checkbox" name="is_required" value="1" <?=($profile_info["is_required"]?"checked":"")?>>
           </td>
         </tr>
-<?############### is_active ################?>
+<?php ############### is_active ################?>
 
 		<tr> 
           <td nowrap><?=$site->sys_sona(array(sona => "Active", tyyp=>"admin"))?>:</td>
@@ -1450,7 +1450,7 @@ if($site->fdat['did']){ # siia alla l�hevad ka predefined, neid ei saa samuti 
             <input type="checkbox" name="is_active" value="1" <?=($profile_info["is_active"] || $site->fdat['op'] == "newdef"?"checked":"")?>>
           </td>
         </tr>
-<?############### is_predefined ################?>
+<?php ############### is_predefined ################?>
 		<tr> 
           <td nowrap>Predefined:</td>
           <td width="95%"> 
@@ -1458,7 +1458,7 @@ if($site->fdat['did']){ # siia alla l�hevad ka predefined, neid ei saa samuti 
 			(advanced)
           </td>
         </tr>
-<?############### is_general ################?>
+<?php ############### is_general ################?>
 		<tr> 
           <td nowrap>General object field:</td>
           <td width="95%"> 
@@ -1470,7 +1470,7 @@ if($site->fdat['did']){ # siia alla l�hevad ka predefined, neid ei saa samuti 
 		</table>
     </td>
   </tr>
-	<?############ buttons #########?>
+	<?php ############ buttons #########?>
 	<tr> 
 	  <td align="right" valign="top" class="scms_dialog_area_bottom"> 
          <input type="button" value="<?=$site->sys_sona(array(sona => "Apply", tyyp=>"editor")) ?>" onclick="javascript:enable_input_fields(); document.forms['vorm'].op2.value='save_profile_definition';this.form.submit();">
@@ -1489,7 +1489,7 @@ if($site->fdat['did']){ # siia alla l�hevad ka predefined, neid ei saa samuti 
 
 </body>
 </html>
-<?
+<?php 
 ############ debug
 # user debug:
 if($site->user) { $site->user->debug->print_msg(); }
@@ -1503,7 +1503,7 @@ exit;
 ?>
 
 
-<? 
+<?php 
 ############ debug
 # user debug:
 if($site->user) { $site->user->debug->print_msg(); }

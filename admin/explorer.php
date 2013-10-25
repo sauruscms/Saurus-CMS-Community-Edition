@@ -269,7 +269,7 @@ $adminpage_names = get_adminpage_name(array('script_name' => $site->script_name)
 				<?php if($callback) { ?>
 				var selection = new GetSelected();
 				tree.traverseLoaded(selection)
-				<?=$callback;?>(selection.nodes<?if($pre_selected){echo ",'".$pre_selected[0]."'";}?>);
+				<?=$callback;?>(selection.nodes<?php if($pre_selected){echo ",'".$pre_selected[0]."'";}?>);
 				<?php } ?>
 			}
 			
@@ -329,7 +329,7 @@ $adminpage_names = get_adminpage_name(array('script_name' => $site->script_name)
 	            			<table cellpadding="0" cellspacing="0" align="right">
 	            				<tr>
 	            					<td>
-									<?if(is_array($languages) && sizeof($languages) > 1){?>
+									<?php if(is_array($languages) && sizeof($languages) > 1){?>
 					            		<ul class="s_Buttons_container">
 					            			<li><span><select name="lang" class="select" onchange="changeLang(this.value);">
 					            				<?php foreach($languages as $language) { ?>
@@ -337,9 +337,9 @@ $adminpage_names = get_adminpage_name(array('script_name' => $site->script_name)
 					            				<?php } ?>
  					            				</select></span></li>
 					            		</ul>
-									<?}else{?>
+									<?php }else{?>
 										<input type="hidden" name="lang" id="lang" value="<?=$language_id;?>">
-									<?}?>
+									<?php }?>
 	            					</td>
 	            				</tr>
 	            			</table>

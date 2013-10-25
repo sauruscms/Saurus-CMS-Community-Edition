@@ -172,11 +172,11 @@ function print_requirements_table() {
 	<?php############ / styles?>
 
 	<?php##################### HTML START #################?>
-	<? if(!$called_from_another_script) {?>
+	<?php if(!$called_from_another_script) {?>
 	<font class="plk">Server requirements</font>
 	<br>
 	<br>
-	<?}?>
+	<?php }?>
 
 	<table border="0" cellspacing="0" cellpadding="3" width="<?=($called_from_another_script?'580':'100%')?>">
 	<tr class="scms_tableheader"> 

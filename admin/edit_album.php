@@ -636,9 +636,9 @@ function edit_objekt ()
 	
 	<body>
 		
-		<? if ($site->fdat['op']=='edit') {?>
+		<?php if ($site->fdat['op']=='edit') {?>
 			<iframe src="checkin.php?objekt_id=<?php echo $objekt->objekt_id ?>" style="width: 0; height: 0; display: none; visibility: hidden;"></iframe>
-		<? } ?>
+		<?php } ?>
 		
 		<form action="edit.php" name="editForm" id="editForm" method="POST"  enctype="multipart/form-data">
 		
@@ -923,7 +923,7 @@ function salvesta_objekt () {
 			<script language=javascript><!--		
 				variableFromEditRubriik_id='<?php echo $objekt->objekt_id ?>';
 			//--></script>
-<?		
+<?php 	
 		}
 
 		$site->debug->msg("sisu on salvestatud, objekt_id = ".$objekt->objekt_id);

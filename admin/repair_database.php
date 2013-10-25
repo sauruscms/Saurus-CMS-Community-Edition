@@ -78,7 +78,7 @@ else {
 </head>
 
 <body style="overflow:auto">
-<?######## FORM ?>
+<?php ######## FORM ?>
 <form id="repair" name="repair" method="get">
 <input type="hidden" id="run" name="run" value="0">
 
@@ -86,13 +86,13 @@ else {
 <TD class="scms_toolbar">
       <table width="100%" border="0" cellpadding="0" cellspacing="0">
 		<tr> 
-		<?###### repair database button ######?>
-				<TD nowrap><a href="javascript:document.getElementById('run').value='<?=(!$site->fdat['run']?'1':'0')?>';document.forms['repair'].submit();"><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/exec.png" WIDTH="16" HEIGHT="16" BORDER="0" align=absmiddle><?if(!$site->fdat['run']){ echo  '&nbsp;Repair database'?></a><?} else { echo '&nbsp;Database repaired'; }?></a></TD>	
-		<?###### refreshe button ######?>
+		<?php ###### repair database button ######?>
+				<TD nowrap><a href="javascript:document.getElementById('run').value='<?=(!$site->fdat['run']?'1':'0')?>';document.forms['repair'].submit();"><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/exec.png" WIDTH="16" HEIGHT="16" BORDER="0" align=absmiddle><?php if(!$site->fdat['run']){ echo  '&nbsp;Repair database'?></a><?php } else { echo '&nbsp;Database repaired'; }?></a></TD>	
+		<?php ###### refreshe button ######?>
 				<TD nowrap><a href="javascript:document.getElementById('run').value='0';document.forms['repair'].submit();" class="scms_button_img"><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/refresh.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" align=absmiddle>&nbsp;Refresh</a></TD>
 
 				
-				<?###### wide middle cell ######?>
+				<?php ###### wide middle cell ######?>
 		<td width="100%"></td>
 
 		</tr>
@@ -127,11 +127,11 @@ else {
 <?php
 #################################### OBJECTS ######################################
 ?>
-	<? $type = 'objects'; ?>
+	<?php $type = 'objects'; ?>
 	<tr class='scms_pane_header'> 	
 	<td colspan=4><a name='<?=$type?>'></a><input type="checkbox" id="type_<?=$type?>" name="type[]" value="<?=$type?>" <?=(in_array($type,$types_arr)?'checked':'')?>><label for="type_<?=$type?>"><?=ucfirst($type)?></label></td>
 	</tr>
-<?
+<?php 
 # if type selected
 if(in_array($type,$types_arr)){
 
@@ -555,11 +555,11 @@ while ($tmp = $sthdel->fetch() ) {
 
 #################################### PERMISSIONS ######################################
 ?>
-	<? $type = 'permissions'; ?>
+	<?php $type = 'permissions'; ?>
 	<tr class='scms_pane_header'> 	
 	<td colspan=4><a name='<?=$type?>'></a><input type="checkbox" id="type_<?=$type?>" name="type[]" value="<?=$type?>" <?=(in_array($type,$types_arr)?'checked':'')?>><label for="type_<?=$type?>"><?=ucfirst($type)?></label></td>
 	</tr>
-<?
+<?php 
 # if type selected
 if(in_array($type,$types_arr)){
 
@@ -914,11 +914,11 @@ foreach($puu->objektid as $folder_id){
 } # perm
 #################################### USERS ######################################
 ?>
-	<? $type = 'users'; ?>
+	<?php $type = 'users'; ?>
 	<tr class='scms_pane_header'> 	
 	<td colspan=4><a name='<?=$type?>'></a><input type="checkbox" id="type_<?=$type?>" name="type[]" value="<?=$type?>" <?=(in_array($type,$types_arr)?'checked':'')?>><label for="type_<?=$type?>"><?=ucfirst($type)?></label></td>
 	</tr>
-<?
+<?php 
 # if type selected
 if(in_array($type,$types_arr)){
 
@@ -1205,11 +1205,11 @@ while ($tmp = $sth->fetch() ) {
 }
 #################################### MAILINGLISTS ######################################
 ?>
-	<? $type = 'mailinglists'; ?>
+	<?php $type = 'mailinglists'; ?>
 	<tr class='scms_pane_header'> 	
 	<td colspan=4><a name='<?=$type?>'></a><input type="checkbox" id="type_<?=$type?>" name="type[]" value="<?=$type?>" <?=(in_array($type,$types_arr)?'checked':'')?>><label for="type_<?=$type?>"><?=ucfirst($type)?></label></td>
 	</tr>
-<?
+<?php 
 # if type selected
 if(in_array($type,$types_arr)){
 
@@ -1306,11 +1306,11 @@ while ($tmp = $sth->fetch() ) {
 }
 #################################### POLLS ######################################
 ?>
-	<? $type = 'polls'; ?>
+	<?php $type = 'polls'; ?>
 	<tr class='scms_pane_header'> 	
 	<td colspan=4><a name='<?=$type?>'></a><input type="checkbox" id="type_<?=$type?>" name="type[]" value="<?=$type?>" <?=(in_array($type,$types_arr)?'checked':'')?>><label for="type_<?=$type?>"><?=ucfirst($type)?></label></td>
 	</tr>
-<?
+<?php 
 # if type selected
 if(in_array($type,$types_arr)){
 
@@ -1409,11 +1409,11 @@ while ($tmp = $sth->fetch() ) {
 
 #################################### FAVORITES ######################################
 ?>
-	<? $type = 'favorites'; ?>
+	<?php $type = 'favorites'; ?>
 	<tr class='scms_pane_header'> 	
 	<td colspan=4><a name='<?=$type?>'></a><input type="checkbox" id="type_<?=$type?>" name="type[]" value="<?=$type?>" <?=(in_array($type,$types_arr)?'checked':'')?>><label for="type_<?=$type?>"><?=ucfirst($type)?></label></td>
 	</tr>
-<?
+<?php 
 # if type selected
 if(in_array($type,$types_arr)){
 
@@ -1625,11 +1625,11 @@ while ($tmp = $sth->fetch() ) {
 #################################### systemwords ######################################
 /*
 ?>
-	<? $type = 'systemwords'; ?>
+	<?php $type = 'systemwords'; ?>
 	<tr class='scms_pane_header'> 	
 	<td colspan=4><a name='<?=$type?>'></a><input type="checkbox" id="type_<?=$type?>" name="type[]" value="<?=$type?>" <?=(in_array($type,$types_arr)?'checked':'')?>><label for="type_<?=$type?>"><?=ucfirst($type)?></label></td>
 	</tr>
-<?
+<?php 
 # if type selected
 if(in_array($type,$types_arr)){
 
@@ -1701,11 +1701,11 @@ while ($tmp = $sth->fetch() ) {
 */
 #################################### files ######################################
 ?>
-	<? $type = 'files'; ?>
+	<?php $type = 'files'; ?>
 	<tr class='scms_pane_header'>
 	<td colspan=4><a name='<?=$type?>'></a><input type="checkbox" id="type_<?=$type?>" name="type[]" value="<?=$type?>" <?=(in_array($type,$types_arr)?'checked':'')?>><label for="type_<?=$type?>"><?=ucfirst($type)?></label></td>
 	</tr>
-<?
+<?php 
 # if type selected
 if(in_array($type,$types_arr)){
 
@@ -1837,11 +1837,11 @@ $sql = "SELECT objekt_id, pealkiri, keel FROM objekt WHERE tyyp_id in ('22','21'
 #################################### aliases ######################################
 {
 ?>
-	<? $type = 'aliases'; ?>
+	<?php $type = 'aliases'; ?>
 	<tr class='scms_pane_header'>
 	<td colspan=4><a name='<?=$type?>'></a><input type="checkbox" id="type_<?=$type?>" name="type[]" value="<?=$type?>" <?=(in_array($type,$types_arr)?'checked':'')?>><label for="type_<?=$type?>"><?=ucfirst($type)?></label></td>
 	</tr>
-<?
+<?php 
 	// object classes with aliases
 	$objects_with_alias_types = array(
 		'1' => 'section', // section
@@ -1924,14 +1924,14 @@ if(in_array($type,$types_arr)){
 	<td nowrap colspan="4">Found: <?=$objekti_arv?></td>
 </tr>
 </table>
-<?
+<?php 
 #$site->debug->print_msg();
 ?>
 
 </form>
 </body>
 </html>
-<?
+<?php 
 
 
 #####################

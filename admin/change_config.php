@@ -540,7 +540,7 @@ function print_config_row($tmp, $i) {
 		<td class='scms_table_row' style='width:331px' valign='top' align='left'>".$tmp['kirjeldus']."</td>
 		<td nowrap class='scms_table_row'>
 			<select name='cff_".$tmp['nimi']."' id='cff_".$tmp['nimi']."_1' class='scms_flex_input' style='width:400px'>";
-				?><option value=""><?=$site->sys_sona(array(sona => "default_timezone", tyyp=>"admin"))?></option><?
+				?><option value=""><?=$site->sys_sona(array(sona => "default_timezone", tyyp=>"admin"))?></option><?php 
 			foreach ($answers as $key => $value)
 			{
 				echo '<option value="'.$key.'"'.($tmp['sisu'] ==$key ? ' selected="selected"':'').'>'.$value.'</option>';
@@ -1061,12 +1061,12 @@ if(!$called_from_install_script) {
 
 
 
-<?
+<?php 
 #################
 # CONTENT TABLE
 ?>
 <table width="100%"  border="0" cellpadding="0" cellspacing="0" style="height:100%">
- <?
+ <?php 
  ##############
  # FUNCTION BAR
  ?>
@@ -1074,7 +1074,7 @@ if(!$called_from_install_script) {
     <td class="scms_toolbar">
       <table width="100%" border="0" cellpadding="0" cellspacing="0">
 		<tr>
-		<?############ save button ###########?>
+		<?php ############ save button ###########?>
 		<?php if($editor_mode) { ?>
 	    <td nowrap><a href="javascript:document.forms['dataform'].op.value = 'save'; document.forms['dataform'].submit();"><img alt="<?=$site->sys_sona(array('sona' => 'apply', 'tyyp' => 'editor'))?>" title="<?=$site->sys_sona(array('sona' => 'apply', 'tyyp' => 'editor'))?>" src="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/filesave.png" border="0" id="pt">&nbsp;</a></td>
 	    <td nowrap><a href="javascript:document.forms['dataform'].op.value = 'saveclose'; document.forms['dataform'].submit();"><img alt="<?=$site->sys_sona(array('sona' => 'salvesta', 'tyyp' => 'editor'))?>" title="<?=$site->sys_sona(array('sona' => 'salvesta', 'tyyp' => 'editor'))?>" src="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/saveclose.gif" border="0" id="pt"> <?=$site->sys_sona(array('sona' => 'salvesta', 'tyyp' => 'editor'))?></a></td>
@@ -1082,25 +1082,25 @@ if(!$called_from_install_script) {
 	    <td nowrap><a href="javascript:document.forms['dataform'].submit();""><img src="<?=$site->CONF[wwwroot].$site->CONF[styles_path]?>/gfx/icons/16x16/actions/filesave.png" border="0" id="pt"> <?=$site->sys_sona(array(sona => "salvesta", tyyp=>"editor"))?></a></td>
 		<?php } ?>
 
-		<?###### wide middle cell ######?>
+		<?php ###### wide middle cell ######?>
         <td width="100%"></td>
-	<?if($site->fdat['group']==1){?>
-		<?######  language ######?>
+	<?php if($site->fdat['group']==1){?>
+		<?php ######  language ######?>
 		<td style="padding-right: 10px">
-		<? print_language_selectbox(); ?>
+		<?php print_language_selectbox(); ?>
 		</td>
-		<?######  / language ######?>
-	<?}?>
+		<?php ######  / language ######?>
+	<?php }?>
 
 		</tr>
       </table>
     </td>
   </tr>
- <?
+ <?php 
  # / FUNCTION BAR
  ################
  ?>
-<?
+<?php 
 if($site->fdat['group']==1){
 ?>
 
@@ -1108,7 +1108,7 @@ if($site->fdat['group']==1){
 <tr>
   <td valign="top" height="100%">
 	<div id=listing class="scms_middle_div" style="min-height: 440px">
-	<?
+	<?php 
 	################
 	# DATA TABLE
 	?>
@@ -1120,7 +1120,7 @@ if($site->fdat['group']==1){
 		<input type="hidden" name="op" value="">
 		<input type="hidden" name="keepThis" value="true">
 	<?php } ?>
-	<?
+	<?php 
 	################
 	# Header
 	?>
@@ -1128,7 +1128,7 @@ if($site->fdat['group']==1){
 		<td><!--<img src="<?=$site->CONF[wwwroot].$site->CONF[styles_path]?>/gfx/icons/16x16/mime/metainfo.png" border="0" align=absmiddle>&nbsp; --><?=$site->sys_sona(array(sona => "Site_properties", tyyp=>"admin"))?></td>
 	</tr>
 
-	<?
+	<?php 
 	#################
 	# DATA ROWS
 	?>
@@ -1162,16 +1162,16 @@ if($site->fdat['group']==1){
 		</div>
      </td>
     </tr>
-	<?
+	<?php 
 	# / DATA ROWS
 	#################
 	?>
-	<?
+	<?php 
 	################
 	# DATA TABLE
 	?>
      <table width="100%" border="0" class="scms_table" cellspacing="10" cellpadding="0">
-	<?
+	<?php 
 	################
 	# Header
 	?>
@@ -1180,7 +1180,7 @@ if($site->fdat['group']==1){
 		<td><!--<img src="<?=$site->CONF[wwwroot].$site->CONF[styles_path]?>/gfx/icons/16x16/mime/metainfo.png" border="0" align=absmiddle>&nbsp; --><?=$site->sys_sona(array(sona => "meta-info", tyyp=>"admin"))?></td>
 	</tr>
 
-	<?
+	<?php 
 	#################
 	# DATA ROWS
 	?>
@@ -1233,17 +1233,17 @@ if($site->fdat['group']==1){
 		</div>
      </td>
     </tr>
-	<?
+	<?php 
 	# / DATA ROWS
 	#################
 	?>
 	</table>
-	<?
+	<?php 
 	################
 	# DATA TABLE
 	?>
      <table width="100%" border="0" class="scms_table" cellspacing="10" cellpadding="0">
-	<?
+	<?php 
 	################
 	# Header
 	?>
@@ -1251,7 +1251,7 @@ if($site->fdat['group']==1){
 		<td><?=$site->sys_sona(array(sona => "page_end_html", tyyp=>"admin"))?></td>
 	</tr>
 
-	<?
+	<?php 
 	#################
 	# DATA ROWS
 	?>
@@ -1270,18 +1270,18 @@ if($site->fdat['group']==1){
 		</div>
      </td>
     </tr>
-	<?
+	<?php 
 	# / DATA ROWS
 	#################
 	?>
 
 	</table>
-	<?
+	<?php 
 	################
 	# DATA TABLE
 	?>
      <table width="100%" border="0" class="scms_table" cellspacing="10" cellpadding="0">
-	<?
+	<?php 
 	################
 	# Header
 	?>
@@ -1289,7 +1289,7 @@ if($site->fdat['group']==1){
 		<td><!--<img src="<?=$site->CONF[wwwroot].$site->CONF[styles_path]?>/gfx/icons/16x16/mime/metainfo.png" border="0" align=absmiddle>&nbsp;--> <?=$site->sys_sona(array(sona => "timezone", tyyp=>"admin"))?></td>
 	</tr>
 
-	<?
+	<?php 
 	#################
 	# DATA ROWS
 		$sql = "SELECT * from ext_timezones order by UTC_dif asc";
@@ -1311,9 +1311,9 @@ if($site->fdat['group']==1){
 			<td class="scms_table_row" >
 			<select name="timezone" class="scms_flex_input" style="width:98%;">
 					<option value=""><?=$site->sys_sona(array(sona => "default_timezone", tyyp=>"admin"))?></option>
-				<?foreach($answers as $k=>$v){?>
-					<option value="<?=$k;?>" <?if($k==$g1_tz){?> selected<?}?>><?=$v;?></option>
-				<?}?>
+				<?php foreach($answers as $k=>$v){?>
+					<option value="<?=$k;?>" <?php if($k==$g1_tz){?> selected<?php }?>><?=$v;?></option>
+				<?php }?>
 			</select>
 			</td>
 			</tr>
@@ -1321,14 +1321,14 @@ if($site->fdat['group']==1){
 		</div>
      </td>
     </tr>
-	<?
+	<?php 
 	# / DATA ROWS
 	#################
 	?>
 
 	</table>
 	</form>
-	<?
+	<?php 
 	# / DATA TABLE
 	################
 	?>
@@ -1338,11 +1338,11 @@ if($site->fdat['group']==1){
 </tr>
 
 
-<?}else{?>
+<?php }else{?>
 
  <tr>
   <td width="100%" valign="top" class="scms_pane_area" height="100%">
-	<?
+	<?php 
 	################
 	# DATA TABLE
 	?>
@@ -1350,7 +1350,7 @@ if($site->fdat['group']==1){
 	<table width="100%" border="0" cellspacing="10" cellpadding="0" style="height:100%;">
 	<form action="<?=$site->self ?>" name="dataform" method=post>
 	<?php create_form_token('change-config'); ?>
-	<?
+	<?php 
 	#################
 	# DATA ROWS
 	?>
@@ -1359,7 +1359,7 @@ if($site->fdat['group']==1){
 
 			<table class="scms_table" width="100%"  border="0" cellspacing="0" cellpadding="4" id="contenttable">
 
-				<?
+				<?php 
 				print_config_table();
 				?>
 
@@ -1368,7 +1368,7 @@ if($site->fdat['group']==1){
 
 			</td>
 		</tr>
-	<?
+	<?php 
 	# / DATA ROWS
 	#################
 	?>
@@ -1378,7 +1378,7 @@ if($site->fdat['group']==1){
 	</form>
 	</table>
 	</div>
-	<?
+	<?php 
 	# / DATA TABLE
 	################
 	?>
@@ -1386,16 +1386,16 @@ if($site->fdat['group']==1){
 
 </td>
 </tr>
-<?}?>
+<?php }?>
 </table>
-<?
+<?php 
 # / CONTENT TABLE
 ################
 ?>
 	</body>
 	</html>
 
-	<?
+	<?php 
 	$site->debug->msg("SQL p�ringute arv = ".$site->db->sql_count."; aeg = ".$site->db->sql_aeg);
 	$site->debug->msg("T��AEG = ".$site->timer->get_aeg());
 	$site->debug->print_msg();

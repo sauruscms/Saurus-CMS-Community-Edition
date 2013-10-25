@@ -29,7 +29,7 @@ function edit_objekt () {
 
 	<tr>
     <td nowrap valign="top"><?=$site->sys_sona(array(sona => "Autor", tyyp=>"editor"))?>:</td>
-	<td><input type=text class="scms_flex_input" name="nimi" value="<?=$objekt->all[nimi]?>"> <? if ($objekt->objekt_id) { ?><font class="txt">IP: <?=$objekt->all[ip]?></font><? } ?>
+	<td><input type=text class="scms_flex_input" name="nimi" value="<?=$objekt->all[nimi]?>"> <?php if ($objekt->objekt_id) { ?><font class="txt">IP: <?=$objekt->all[ip]?></font><?php } ?>
 	<!--	
 	<textarea name="pastearea" rows="5" cols="30" style="width:1;height:1;visibility:hidden;"></textarea>
 		<input type="button" value="<?=$site->sys_sona(array(sona => "Salvesta", tyyp=>"editor"))?>"  name="submit2" onclick="body.style.cursor = 'wait';if(typeof url_browse == 'object'){url_browse.removeNode()};<?=($on_nupurida && !$on_textarea) ? "savedoc('$tyyp[klass]');":"frmEdit.submit();" ?>">
@@ -80,7 +80,7 @@ function edit_objekt () {
 
 
 	<input name="permanent_parent_id" type=hidden value="<?=$objekt->parent_id?>">
-<?
+<?php 
 }
 
 ##############################################################################

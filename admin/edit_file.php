@@ -127,13 +127,13 @@ function setPealkiri (strPealkiri) {
 	<input type="hidden" name="dir" value="<?= $site->fdat['dir'] ?>">
 	<input type="hidden" name="parent_id" value="<?php echo $parent_folder->objekt_id; ?>">
 	<input type="hidden" name="in_wysiwyg" value="<?php echo ($site->fdat['dir'] ? 1 : 0) ?>">
-	<input type="hidden" name="publish" value="1"> <?### Bug #2321 ?>
+	<input type="hidden" name="publish" value="1"> <?php ### Bug #2321 ?>
 
     <input type="hidden" name="sorting" value="<?=$site->fdat['sorting'];?>">
 
 	<input type="hidden" name="callback" value="<?=$site->fdat['callback'];?>">
 
-	<?################ upload file ?>
+	<?php ################ upload file ?>
 
 		<tr>
           <td width="20%" nowrap><?= $site->sys_sona(array(sona => "Upload", tyyp=>"files")) ?>:</td>
@@ -141,9 +141,9 @@ function setPealkiri (strPealkiri) {
           <td width="80%" nowrap>
             <input name="fileupload" id="fileupload" onChange="setPealkiri(this.value)" type="file" class="scms_flex_input" style="border:0;">
           </td>
-			<?#################### thumbnail?>
+			<?php #################### thumbnail?>
 			<td rowspan="2" align="center" valign="middle" style="padding-right:15px">
-				<?
+				<?php 
 				if($objekt->objekt_id && $objekt->all['relative_path'])
 				{
 					//Find the correct thumbnail
@@ -160,12 +160,12 @@ function setPealkiri (strPealkiri) {
                 <!-- Thumbnail -->
 				<a href="javascript:void(openpopup('<?= $img_href ?>', 'popup',<?= $i_width ?>, <?= $i_height ?>, 'yes'))"><IMG SRC="<?= $thumb ?>" BORDER="0" ALT=""></a>
 				<!-- // Thumbnail -->   
-				<? } ?>
+				<?php } ?>
                </td>
         </tr>
 
 
-	<?################ filename ?>
+	<?php ################ filename ?>
 	  <tr>
 			<td width="20%" nowrap valign="top"><?= $site->sys_sona(array(sona => "filename", tyyp=>"files")) ?>:</td>
 			<td width="100%" valign="top">
@@ -176,7 +176,7 @@ function setPealkiri (strPealkiri) {
 	</table>
 
     <!-- Profile fields -->
-	<?############################ PROFILE TABLES 
+	<?php ############################ PROFILE TABLES 
 
   			$sql = $site->db->prepare("SELECT profile_id AS id, source_table AS parent, name FROM object_profiles WHERE source_table=? ORDER BY name",'obj_file');
 			$sth = new SQL($sql);
@@ -205,7 +205,7 @@ function setPealkiri (strPealkiri) {
               <div class="scms_borderbox_label">
 
               <SELECT onchange="changeProfile(this)" NAME="profile_id" class="scms_flex_input" style="width:120px">
-				<?
+				<?php 
 				$all_profiles_hash = array();
 				while ($profile_data = $sth->fetch()){
 					$all_profiles_hash[] = $profile_data['id'];
@@ -214,17 +214,17 @@ function setPealkiri (strPealkiri) {
 				} ?>
 				</SELECT>
 			</div>
-	<?##### hidden field "profile_id" if selectbox is disabled OR module "Profile" is not allowed
+	<?php ##### hidden field "profile_id" if selectbox is disabled OR module "Profile" is not allowed
 	if($site->fdat['profile_locked']) {?>
 		<input type="hidden" name="profile_id" value="<?=$site->fdat['profile_id']?>">
-	<?}?>
+	<?php }?>
             </div>
           </td>
         </tr>
-	<?###### profile fields row ?>
+	<?php ###### profile fields row ?>
 		<tr>
 			<td valign=top colspan="2" style="height:130px">
-	<?
+	<?php 
 	#################
 	# Loop throug all profiles
 
@@ -235,7 +235,7 @@ function setPealkiri (strPealkiri) {
 
 		<table width="90%" border=0 cellspacing=0 cellpadding=0>
 			<tr><td colspan=2>&nbsp;</td></tr>
-		<?
+		<?php 
 		$profile_def = $site->get_profile(array("id"=>$profile_id));
 		$profile_fields = unserialize($profile_def['data']);
 
@@ -261,13 +261,13 @@ function setPealkiri (strPealkiri) {
 		?>
 		</table>
 	</div>
-	<?
+	<?php 
 		} //foreach
 	?>
 	</td>
 	</tr>
 	<!-- //Profile fields -->
-	<?
+	<?php 
 		
 	############################ / PROFILE TABLES 
 }

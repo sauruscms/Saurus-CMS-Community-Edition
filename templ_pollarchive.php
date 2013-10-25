@@ -48,14 +48,14 @@ $template->debug->msg("Rubriik: $curr_rub_id");
 <table width="<?=$template->site->dbstyle("sisu_tabeli_laius","layout")?>" height="<?=$template->site->dbstyle("sisu_tabeli_korgus","layout")?>"  border="0" cellspacing="<?=$template->site->dbstyle("sisu_tabeli_cellspacing","layout")?>" cellpadding="0">
     <tr valign="top"> 
 
-<? 
+<?php 
 
 $leht->debug->msg($leht->site->dbstyle("menyy","layout"));
 ?>
 <td width="100%">
 	<h1 class="pealkiri"><?=$template->site->sys_sona(array("sona" => $template->all["nimi"], "tyyp"=>"kujundus"))?></h1><br><hr noshade size="1" style="color:#dddddd;">
 
-<?
+<?php 
 	
 # ---------------------------
 # Gallup on siin
@@ -118,7 +118,7 @@ if ($obj->on_404) {
 			 <tr>
 				 <td valign="top"><img src="<?=$obj->site->img_path ?>/px.gif" width="300" height="3"></td>
 			 </tr>
-<?
+<?php 
 				while ($vastus = $sth->fetch()) {
 					$percent = $stat[kokku] ? sprintf('%2.0f',100*($vastus[count])/$stat[kokku]) : 0;
 ?>					
@@ -128,7 +128,7 @@ if ($obj->on_404) {
 			 <tr>
 				 <td valign="top"><b><font class="<?=($obj->site->agent ? "txt" : "txt1")?>">- <?=$percent ?>%</font></b> <img src="<?=$obj->site->img_path ?>/gallup_bar<?=(($stat[maksi]==$vastus[count] && $vastus[count])? "2":"1") ?>.gif" width="<?=0.01*250*$percent ?>" height=8 border="1"></td>
 			 </tr>
-<?
+<?php 
 				} # while vastus
 
 ?>
@@ -137,7 +137,7 @@ if ($obj->on_404) {
 			 </tr>
 		 </table>
 		 <br><br>
-<?
+<?php 
 }
 
 ########## 2. GALLUP LIST
@@ -160,7 +160,7 @@ $alamlist->debug->print_msg();
 ?>
 
 	<table>
-<?
+<?php 
 while ($obj = $alamlist->next()) {	
 ?>
 	<tr>
@@ -168,7 +168,7 @@ while ($obj = $alamlist->next()) {
 	<td><a href="?op=gallup_arhiiv&page=<?=$site->fdat['page']?>&gallup_id=<?=$obj->objekt_id?>"><?=$obj->get_edit_buttons(array("tyyp_idlist"=>6, "nupud" => array("edit","delete")))?><?=$obj->all['pealkiri']?></a></td>
 
 	</tr>
-<?
+<?php 
 }
 ?>
 	</table>
@@ -178,7 +178,7 @@ while ($obj = $alamlist->next()) {
 </td>
 </tr>
 </table>
-<?
+<?php 
 
 
 }

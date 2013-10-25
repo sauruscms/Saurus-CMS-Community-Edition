@@ -25,6 +25,5 @@ Options +SymLinksIfOwnerMatch
 	RewriteCond %{REQUEST_URI} !^shared(/.*)
 	RewriteCond %{REQUEST_URI} !^styles(/.*)
 
-	RewriteRule ^(.*)$  /map.php?mod_rewrite=/&cmd=$1 [L,QSA]
+	RewriteRule ^(.*)$  map.php?mod_rewrite=/&cmd=$1 [L,QSA]
 </IfModule>
-

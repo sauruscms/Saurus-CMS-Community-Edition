@@ -346,7 +346,7 @@ if($op2 && !$site->fdat['refresh']) {
 		window.close();
 		// -->
 		</SCRIPT>
-		<?
+		<?php 
 		exit;
 	}
 
@@ -390,7 +390,7 @@ if ($site->fdat[refresh]) {
 </head>
 
 <body class="popup_body" onLoad="this.focus()">
-<?
+<?php 
 ######################
 # DELETE CONFIRMATION WINDOW
 if($op == 'delete') {
@@ -403,7 +403,7 @@ if($op == 'delete') {
 <table border="0" cellpadding="0" cellspacing="0" style="width:100%; height:100%">
   <tr> 
 	<td valign="top" width="100%" class="scms_confirm_delete_cell" height="100%">
-<?
+<?php 
 	# check if allowed to delete
 	# 1. if subgroups exist, don't allow to delete
 	$group->subgroups_count = $group->get_subgroups_count();
@@ -431,15 +431,15 @@ if($op == 'delete') {
   </tr>
   <tr align="right"> 
     <td valign="top" colspan=2 > 
-			<?if($allow_delete){?>
+			<?php if($allow_delete){?>
             <input type="button" value="<?=$site->sys_sona(array(sona => "kustuta", tyyp=>"editor")) ?>" onclick="javascript:frmEdit.op2.value='deleteconfirmed';frmEdit.submit();">
-			<?}?>
+			<?php }?>
 			<input type="button" value="<?=$site->sys_sona(array(sona => "close", tyyp=>"editor")) ?>" onclick="javascript:window.close();"> 
     </td>
   </tr>
 </table>
 </form>
-<?
+<?php 
 }	
 # / DELETE CONFIRMATION WINDOW
 ######################
@@ -455,7 +455,7 @@ elseif($site->fdat['tab'] == 'permissions') {
 	$site->fdat['id'] = $site->fdat['group_id'];
 ?>
 <table border="0" cellpadding="0" cellspacing="0" style="width:100%; height:100%">
-<?
+<?php 
 	include_once($class_path."permissions.inc.php");
 
 	## action "Copy permissions to subtree"
@@ -490,13 +490,13 @@ elseif($site->fdat['tab'] == 'permissions') {
 else {
 ?>
 <table border="0" cellpadding="0" cellspacing="0" style="width:100%; height:100%">
-<?
+<?php 
 	########### tabs
 	print_tabs();
 
 ?>
 
-<?
+<?php 
 ######################
 # 1. CONTENT: tab GROUP
 # op = new/copy/edit/print
@@ -528,11 +528,11 @@ if($site->fdat['tab'] == 'group') {
 	<input type=hidden name=op value="<?=$site->fdat['op']?>">
 	<input type=hidden name=op2 value="">
 	<input type=hidden id=refresh name=refresh value="">
-			<?
+			<?php 
 			###################
 			# General info
 			?>		  
-			<?########### page title #########?>
+			<?php ########### page title #########?>
         <tr> 
           <td colspan="3"> 
             <div style="position:relative"> 
@@ -540,17 +540,17 @@ if($site->fdat['tab'] == 'group') {
             </div>
           </td>
         </tr>
-			<?########### name #########?>
+			<?php ########### name #########?>
             <tr>
               <td width="20%" nowrap><?=$site->sys_sona(array(sona => "nimetus", tyyp=>"editor"))?>:</td>
               <td width="100%"><input name="name" type="text" class="scms_flex_input" value="<?=($op=='copy'?'Copy of ':'').($site->fdat['refresh']?$site->fdat['name']:$group->all['name'])?>"></td>
             </tr>
-			<?########### parent group #########?>
-			 <? if(!$group->all['is_predefined']) { # dont show selectbox for everybody group ?>
+			<?php ########### parent group #########?>
+			 <?php if(!$group->all['is_predefined']) { # dont show selectbox for everybody group ?>
             <tr>
               <td width="20%" nowrap><?=$site->sys_sona(array(sona => "Parent group", tyyp=>"kasutaja"))?>:</td>
               <td width="100%">
-			<?
+			<?php 
 			$sql = "SELECT group_id AS id, parent_group_id AS parent, name FROM groups ORDER BY name";
 			$sth = new SQL($sql);
 			$site->debug->msg($sth->debug->get_msgs());	
@@ -559,7 +559,7 @@ if($site->fdat['tab'] == 'group') {
 			}
 			?>
 			<select name="parent_group_id" class="scms_flex_input">
-		<?	foreach (get_array_tree($temp_tree) as $key=>$value) {
+		<?php foreach (get_array_tree($temp_tree) as $key=>$value) {
 			$name = str_repeat("&nbsp;&nbsp;", $value['level']).$value['name'];
 
 			## dont show group itself (prevent endless loop)
@@ -575,15 +575,15 @@ if($site->fdat['tab'] == 'group') {
 		} ?>				
 			</select></td>
             </tr>
-			<? } # !is_predefined?>
-			<?########### description #########?>
+			<?php } # !is_predefined?>
+			<?php ########### description #########?>
             <tr>
               <td width="20%" nowrap><?=$site->sys_sona(array(sona => "Kirjeldus", tyyp=>"editor"))?>:</td>
               <td width="100%"><input name="description" type="text" class="scms_flex_input" value="<?=($site->fdat['refresh']?$site->fdat['description']:$group->all['description'])?>"></td>
             </tr>
 
 			<input type="hidden" name="auth_type" value="CMS">
-		<?	
+		<?php 
 		################# type (profile_id) ########
 
 		$profile_id = ($site->fdat['refresh'] ? $site->fdat['profile_id'] : $group->all['profile_id']);
@@ -596,7 +596,7 @@ if($site->fdat['tab'] == 'group') {
               <td width="20%" nowrap><?=$site->sys_sona(array(sona => "Type", tyyp=>"admin"))?>:</td>
               <td width="100%"><select name="profile_id" class="scms_flex_input" onchange="javascript:document.getElementById('refresh').value='1';document.forms['frmEdit'].submit();">
 		<option value=""></option>
-		<? while ($data = $sth->fetch()){
+		<?php while ($data = $sth->fetch()){
 			### change technical profile name to translation in current language:
 			$data['name'] = $site->sys_sona(array(sona => $data['name'], tyyp=>"custom"));
 			print "<option value='".$data['id']."' ".($data['id']==$profile_id? '  selected':'').">".$data['name']."</option>";
@@ -606,7 +606,7 @@ if($site->fdat['tab'] == 'group') {
 	</table>
       <br>
       <br>
-		<?
+		<?php 
 	###################
 	# Additional info: attributes list
 
@@ -622,13 +622,13 @@ if($site->fdat['tab'] == 'group') {
             </div>
           </td>
         </tr>
-	<?###### profile fields row ?>
+	<?php ###### profile fields row ?>
 		<tr>
           <td valign=top colspan="2"> 
 			<!-- Scrollable area -->
 			<div id=listing class="scms_scroll_div" style="height: 180">
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" class="scms_table">
-				<?
+				<?php 
 				###################
 				# print profile fields rows
 				print_profile_fields(array(
@@ -642,12 +642,12 @@ if($site->fdat['tab'] == 'group') {
 			<!-- //Scrollable area -->
           </td>
         </tr>	
-	<?###### / profile fields row ?>
+	<?php ###### / profile fields row ?>
 		</table>
 
     </td>
   </tr>
-	  <?
+	  <?php 
 		###################
 		# buttons
 		?>
@@ -660,7 +660,7 @@ if($site->fdat['tab'] == 'group') {
   </tr>
 	</form>
 
-<?
+<?php 
 }
 # / 1. CONTENT: tab GROUP
 ######################
@@ -668,19 +668,19 @@ if($site->fdat['tab'] == 'group') {
 
 </table>
 
-<?
+<?php 
 }
 # 1. tab EDIT
 ######################
 ?>
 
-<?	$site->debug->print_msg(); ?>
+<?php $site->debug->print_msg(); ?>
 </body>
 
 </html>
 
 
-<?
+<?php 
 ######################
 # FUNCTION PRINT_TABS()
 
@@ -693,7 +693,7 @@ function print_tabs() {
      <table border="0" cellspacing="0" cellpadding="0" width="100%" style="height:21px">
       <tr>
        <td class="scms_tabs_empty">&nbsp;&nbsp;&nbsp;</td>
-		<?
+		<?php 
 		# set all tabs: array[tab name] = tab translated name 
 		$tab_arr = array();
 		$tab_arr['group'] = $site->sys_sona(array(sona => "group", tyyp=>"kasutaja"));
@@ -704,8 +704,8 @@ function print_tabs() {
 		foreach ($tab_arr as $tab=>$tab_title) {
 		?>
         <td class="scms_<?=$site->fdat['tab']==$tab?'':'in'?>active_tab" nowrap>
-		<?########## tab title #######?>
-		<? 
+		<?php ########## tab title #######?>
+		<?php 
 			# if new object: disable tab
 			if ($site->fdat['op']=='new' || $site->fdat['op']=='copy' ) {
 				$tab_title = "<a href='#'>".$tab_title."</a>";	
@@ -715,14 +715,14 @@ function print_tabs() {
 			} 		
 		?>
 		<?=$tab_title?></td>
-		<? } # loop over tabs ?>
+		<?php } # loop over tabs ?>
 
           <td width="100%" class="scms_tabs_empty">&nbsp;</td>
       </tr>
     </table>
     </td>
   </tr>
-<?
+<?php 
 }
 # / FUNCTION PRINT_TABS()
 ######################

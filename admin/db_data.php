@@ -91,7 +91,7 @@ if($site->fdat['op2'] == 'save' || $site->fdat['op2'] == 'saveclose') {
 		window.close();
 	// --></SCRIPT>
 	</HTML>
-	<?
+	<?php 
 	exit;
 	}
 }
@@ -189,7 +189,7 @@ if($site->fdat['op2'] == 'deleteconfirmed' && $site->fdat['table_name']) {
 		window.close();
 	// --></SCRIPT>
 	</HTML>
-	<?
+	<?php 
 	}
 	exit;
 }
@@ -220,7 +220,7 @@ if($site->fdat['op'] == "new") {
 <tr> 
     <td valign="top" width="100%" class="scms_dialog_area_top"  height="100%">
 	  <table width="100%"   border="0" cellspacing="0" cellpadding="2">
-	  <?############ name #########?> 
+	  <?php ############ name #########?> 
 	  <tr> 
 		<td><?=$site->sys_sona(array(sona => "nimi", tyyp=>"editor"))?>: </td>
 		<td width="100%"><input type=text name=table_name value="<?= $site->fdat['op']=='new'? 'ext_':$site->fdat['table_name']?>" class="scms_flex_input" onkeyup="javascript: if(event.keyCode==13){vorm.submit();}"></td>
@@ -229,7 +229,7 @@ if($site->fdat['op'] == "new") {
 	  </table>
 	</td>
 </tr>
-	<?############ buttons #########?>
+	<?php ############ buttons #########?>
 	<tr> 
 	  <td align="right" valign="top" class="scms_dialog_area_bottom"> 
     <!--     <input type="button" value="<?=$site->sys_sona(array(sona => "Apply", tyyp=>"editor")) ?>" onclick="javascript: document.forms['vorm'].op2.value='save';this.form.submit();">
@@ -240,14 +240,14 @@ if($site->fdat['op'] == "new") {
   </tr>
 </table>
 
-<?########### hidden ########?>
+<?php ########### hidden ########?>
 <?php create_form_token(''); ?>
 <INPUT TYPE="hidden" name="op" value="<?=$site->fdat['op']?>">
 <INPUT TYPE="hidden" name="op2" value="save">
 </form>
 </body>
 </html>
-<?
+<?php 
 exit;
 }
 # / 1. NEW TABLE
@@ -277,7 +277,7 @@ if($site->fdat['op'] == 'delete' && $site->fdat['table_name']) {
 <table border="0" cellpadding="0" cellspacing="0" style="width:100%; height:100%">
   <tr> 
 	<td valign="top" width="100%" class="scms_confirm_delete_cell" height="100%">
-<?
+<?php 
 	# check if allowed to delete
 	# 1. if exists any data in that table, then don't allow to delete
 	$data_count = 0;
@@ -312,9 +312,9 @@ if($site->fdat['op'] == 'delete' && $site->fdat['table_name']) {
   </tr>
   <tr align="right"> 
     <td valign="top" colspan=2 > 
-		<?if($allow_delete){?>
+		<?php if($allow_delete){?>
             <input type="button" value="<?=$site->sys_sona(array(sona => "kustuta", tyyp=>"editor")) ?>" onclick="javascript:frmEdit.op2.value='deleteconfirmed';frmEdit.submit();">
-			<?}?>
+			<?php }?>
 			<input type="button" value="<?=$site->sys_sona(array(sona => "close", tyyp=>"editor")) ?>" onclick="javascript:window.close();"> 
     </td>
   </tr>
@@ -323,7 +323,7 @@ if($site->fdat['op'] == 'delete' && $site->fdat['table_name']) {
 </form>
 </body>
 </html>
-<?
+<?php 
 	exit;
 }	
 # / 2. DELETE CONFIRMATION WINDOW (both table and one field)
@@ -354,7 +354,7 @@ else {
 <body style="overflow-y: auto; overflow-x: auto;">
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" height="100%">
-<?
+<?php 
 ################################
 # FUNCTION BAR
 ?>
@@ -362,17 +362,17 @@ else {
 <TR>
 <TD class="scms_toolbar">
 
-	<?######### FUNCTION BAR ############?>
+	<?php ######### FUNCTION BAR ############?>
       <table border="0" cellpadding="0" cellspacing="0">
         <tr> 
-		  <?############ new button ###########?>
+		  <?php ############ new button ###########?>
             <td nowrap><a href="javascript:void(openpopup('<?=$site->self?>?op=new','table','366','150'))"><img src="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/filenew.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" id=pt></td>
 
-		  <?############ delete table button ###########?>
-			<TD><?if($site->fdat['table_name']){?><a href="javascript:void(openpopup('<?=$site->self?>?op=delete&table_name=<?= $site->fdat['table_name']?>','table','413','108'))" ><?}?><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/delete<?=($site->fdat['table_name']?'':'_inactive')?>.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" align=absmiddle><?if($site->fdat['table_name']){?></a><?}?></TD>
+		  <?php ############ delete table button ###########?>
+			<TD><?php if($site->fdat['table_name']){?><a href="javascript:void(openpopup('<?=$site->self?>?op=delete&table_name=<?= $site->fdat['table_name']?>','table','413','108'))" ><?php }?><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/delete<?=($site->fdat['table_name']?'':'_inactive')?>.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" align=absmiddle><?php if($site->fdat['table_name']){?></a><?php }?></TD>
 
 
-		<?###### wide middle cell ######?>
+		<?php ###### wide middle cell ######?>
 		<td width="100%"></td>
 		  
         </tr>
@@ -380,7 +380,7 @@ else {
 </TD>
 </TR>
 
-<?
+<?php 
 # / FUNCTION BAR
 ################################
 ?>
@@ -391,14 +391,14 @@ else {
   <tr valign="top"> 
 
 
-<?
+<?php 
 ############################
 # CONTENT TABLE
 
 ?>
 		<!-- Middle column -->
 		<TD class="scms_middle_dialogwindow">
-<?
+<?php 
 ############################
 # TABLES MENU
 ?>
@@ -413,7 +413,7 @@ else {
 					<!-- I grupp -->
 					<tr>
 						<td valign=top>
-     <?
+     <?php 
 	  #####################
 	  # TREE
 		require_once($class_path.'menu.class.php');
@@ -450,12 +450,12 @@ else {
 		</DIV>
 	</TD>	<!--cell in content table -->	
 
-<?
+<?php 
 # / db TYPES MENU
 ############################
 ?>
 
-<?
+<?php 
 ############################
 # MIDDLE LIST
 ?>
@@ -471,13 +471,13 @@ else {
 		        </tr>
 		    </table>
 
-<?#############
+<?php #############
 # if db selected
 if($site->fdat['table_name']) {
 ?>
           </td>
         </tr>
-	<?
+	<?php 
 	#################
 	# table column names
 	?>
@@ -493,7 +493,7 @@ if($site->fdat['table_name']) {
 
 		</tr></table>
 	</td></tr>
-	<?
+	<?php 
 	# / COLUMN NAMES
 	#################
 	?>
@@ -503,7 +503,7 @@ if($site->fdat['table_name']) {
 			<!-- Scrollable area -->
 			<div id=listing class="scms_middle_div">
 			  <table width="100%"  border="0" cellspacing="0" cellpadding="3">
-<?
+<?php 
 	########### SQL
 
  	$sql = "SHOW COLUMNS FROM ".$site->fdat['table_name'];
@@ -515,7 +515,7 @@ if($site->fdat['table_name']) {
 		while($row = $sth->fetch()){
 		?>
           <tr>
-			<?########## name ?>
+			<?php ########## name ?>
 			<td width="20%"><?=($row['Field'] ? $row['Field'] : '&nbsp;')?></td>
 			<td width="20%"><?=($row['Type'] ? $row['Type'] : '&nbsp;')?></td>
 			<td width="10%"><?=($row['Null'] ? $row['Null'] : '&nbsp;')?></td>
@@ -523,10 +523,10 @@ if($site->fdat['table_name']) {
 			<td width="20%"><?=($row['Default'] ? $row['Default'] : '&nbsp;')?></td>
 			<td width="20%"><?=($row['Extra'] ? $row['Extra'] : '&nbsp;')?></td>
 
-			<?##### delete ######?>
+			<?php ##### delete ######?>
 			<td width="16"><a href="javascript:void(openpopup('<?=$site->self?>?op=delete&table_name=<?=$site->fdat['table_name']?>&field_name=<?=$row['Field']?>','delete','413','108'));"><img src="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/delete.png" alt="Remove" width="16" height="16" border="0"  hspace="3"></a></td>
           </tr>
-		<?
+		<?php 
 		}
 		# / loop over obj_asset
 		#################
@@ -535,7 +535,7 @@ if($site->fdat['table_name']) {
 
     </div>
 	<!-- //Scrollable area -->
-<?
+<?php 
 }
 # /if db selected
 #############
@@ -548,7 +548,7 @@ if($site->fdat['table_name']) {
 	
 	
 	</td>
-<?
+<?php 
 # / MIDDLE LIST
 ############################
 ?>
@@ -557,7 +557,7 @@ if($site->fdat['table_name']) {
 </table>
 </body>
 </html>
-<?
+<?php 
 }
 # / 3. LIST
 #######################

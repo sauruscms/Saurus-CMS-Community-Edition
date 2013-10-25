@@ -109,12 +109,12 @@ if($site->fdat[save]) {
 </head>
 
 <body>
-<?
+<?php 
 #################
 # CONTENT TABLE
 ?>
 <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
- <?
+ <?php 
  ##############
  # FUNCTION BAR
  ?>
@@ -122,17 +122,17 @@ if($site->fdat[save]) {
    <td class="scms_toolbar"> 
       <table width="100%" border="0" cellpadding="0" cellspacing="0">
 		<tr>
-		<?############ save button ###########?>
+		<?php ############ save button ###########?>
 	    <td nowrap><a href="javascript:document.forms['vorm'].submit();"><img src="<?=$site->CONF[wwwroot].$site->CONF[styles_path]?>/gfx/icons/16x16/actions/filesave.png" border="0" id="pt"> <?=$site->sys_sona(array(sona => "salvesta", tyyp=>"editor"))?></a></td>
 
-		<?###### wide middle cell ######?>
+		<?php ###### wide middle cell ######?>
         <td width="100%"></td>
 
 		</tr>
       </table>
     </td>
   </tr>
- <?
+ <?php 
  # / FUNCTION BAR
  ################
  ?>
@@ -140,7 +140,7 @@ if($site->fdat[save]) {
  <tr>
   <td width="100%" valign="top" height="100%"> 	
 		<div id=listing class="scms_middle_div" style="min-height: 440px"> 
-		<?
+		<?php 
 			################
 			# DATA TABLE
 		?>
@@ -155,7 +155,7 @@ if($site->fdat[save]) {
 				  <td nowrap>&nbsp;</td>
 				  <td nowrap><?=$site->sys_sona(array(sona =>"Content template", tyyp=>"editor"))?></td>
 				</tr>
-		<?
+		<?php 
 			$sql = "SELECT * FROM tyyp WHERE tyyp_id in (".(join(",",$types)).") ORDER BY tyyp_id";
 			$sth = new SQL($sql);
 			$site->debug->msg($sth->debug->get_msgs());
@@ -171,14 +171,14 @@ if($site->fdat[save]) {
 				<td>
 					<select name="tyyp_id<?= $type[tyyp_id]; ?>" class='scms_flex_input' style='max-width: 334px'>
 
-					<?# print selectbox option rows and get selected template array, fn() in classes/adminpage.inc
+					<?php # print selectbox option rows and get selected template array, fn() in classes/adminpage.inc
 					$ttyyp = print_template_selectbox($type['ttyyp_id'],'object');
 					?>
 					</select>
 				  </td>
 
 				</tr>
-		<? }// while  ?>
+		<?php }// while  ?>
 			  </table>
 		</div>
 	</td>

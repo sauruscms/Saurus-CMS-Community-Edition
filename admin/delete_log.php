@@ -75,7 +75,7 @@ else {
 </head>
 
 <body class="popup_body" onLoad="this.focus()" >
-<?
+<?php 
 #############################
 # KUSTUTA 
 #############################
@@ -110,7 +110,7 @@ if ($site->fdat[kustuta]) {
 //		window.close();
 	// -->
 	</SCRIPT>
-<?
+<?php 
 	}
 }
 
@@ -118,15 +118,15 @@ if ($site->fdat[kustuta]) {
 # FORM
 #############################
 ?>
-<form action="<?$site->self?>" method="post" name="vorm">
+<form action="<?php $site->self?>" method="post" name="vorm">
 <?php create_form_token(''); ?>
-<?###### 1. Master table ?>
+<?php ###### 1. Master table ?>
 <TABLE border="0" cellpadding="0" cellspacing="0" style="width:100%; height:100%">
 <TR>
 <TD valign="top" width="100%" class="scms_dialog_area"  height="100%">
 
 
-	<?###### 2. White dialog table ?>
+	<?php ###### 2. White dialog table ?>
 	<table width="100%"  border="0" cellspacing="3" cellpadding="0" class="scms_borderbox">
 
 	<tr valign=top> 
@@ -142,10 +142,10 @@ if ($site->fdat[kustuta]) {
 	
 		<div id=listing class="scms_middle_div">
 
-		<?###### 3. Content table ?>		
+		<?php ###### 3. Content table ?>		
 		<table width="100%"  border="0" cellspacing="3" cellpadding="0" class="scms_table">
 
-<?
+<?php 
 #######################
 # list of years existing in log table
 $sql = $site->db->prepare("
@@ -166,7 +166,7 @@ $sth = new SQL($sql);
             <td align="right" width="40%"><?=$log[mcount]?></td>
           </tr>
 
-<?
+<?php 
 	}
 
 	# / ts�kkel �le kuude
@@ -175,19 +175,19 @@ $sth = new SQL($sql);
 		<input type="hidden" name="kustuta" value="1">
 		<input type="hidden" name="tbl" value="<?php echo htmlspecialchars(xss_clean($site->fdat['tbl'])); ?>">
 		</table>
-		<?###### / 3. Content table ?>		
+		<?php ###### / 3. Content table ?>		
         
 		</div>
 		<!-- //Scrollable area -->
 	</td>
 	</tr>
 	</table>
-	<?###### / 2. White dialog table ?>
+	<?php ###### / 2. White dialog table ?>
 
 
 </TD>
 </TR>
-<?############ buttons #########?>
+<?php ############ buttons #########?>
 <TR> 
 <TD align="right" valign="top" class="scms_dialog_area_bottom"> 
 		<input type=button value="<?=$site->sys_sona(array(sona => "Kustuta" , tyyp=>"Editor"))?>"  onclick="this.form.submit();">
@@ -196,9 +196,9 @@ $sth = new SQL($sql);
 </TD>
 </TR>
 </TABLE>
-<?###### / 1. Master table ?>
+<?php ###### / 1. Master table ?>
 
 </form>
-<? $site->debug->print_msg(); ?>
+<?php $site->debug->print_msg(); ?>
 </body>
 </html>

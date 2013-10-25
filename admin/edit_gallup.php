@@ -22,13 +22,13 @@ function edit_objekt () {
 	global $site;
 	global $objekt;
 ?>
-	<?######### answers ?>
+	<?php ######### answers ?>
     <tr valign=top>
       <td nowrap>
 
 	  <?=$site->sys_sona(array(sona => "Vastused", tyyp=>"editor"))?>:</td>
 	<td width="100%">
-<?
+<?php 
 	$sql = $site->db->prepare("select * from gallup_vastus where objekt_id=?", $objekt->objekt_id);
 	$sth = new SQL($sql);
 	$site->debug->msg($sth->debug->get_msgs());
@@ -47,19 +47,19 @@ function edit_objekt () {
 ?>
 	  </td>
     </tr>
-	<?######### on_avatud ?>
+	<?php ######### on_avatud ?>
 	<tr>
 	<td><input <?= ($site->fdat['avatud_disabled'] == 1 ? " disabled " : "") ?>type=checkbox name="on_avatud" id="on_avatud" value="1" <?=((!$objekt->objekt_id && $site->fdat['default_avatud_off'] != 1) || ($objekt->all[on_avatud]))?"checked":""?>> 
       <td nowrap><label for="on_avatud"><?=$site->sys_sona(array(sona => "Avatud", tyyp=>"editor"))?></label></td>
 	  </td>
     </tr>
-	<?######### is_anonymous ?>
+	<?php ######### is_anonymous ?>
 	<tr>
 	<td><input type=checkbox name="is_anonymous" id="is_anonymous" value="1" <?=(!$objekt->objekt_id || $objekt->all[is_anonymous])?"checked":""?>> 
       <td nowrap><label for="is_anonymous"><?=$site->sys_sona(array(sona => "Anonymous", tyyp=>"editor"))?></label></td>
 	  </td>
     </tr>
-	<?######### expires ?>
+	<?php ######### expires ?>
 	<tr>
       <td nowrap><?=$site->sys_sona(array(sona => "expires", tyyp=>"editor"))?>:</td>
 	  <td width="100%">
@@ -77,7 +77,7 @@ function edit_objekt () {
 
 
 
-<?
+<?php 
 }
 ###############################
 function salvesta_objekt () {

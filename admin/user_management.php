@@ -133,7 +133,7 @@ $site->user->load_favorites(true);
 <table width="100%" border="0" cellspacing="0" cellpadding="0" height="100%">
 
 <form name="selectform" action="<?=$site->self?>" method="GET">
-<?
+<?php 
 ######## gather all fdat values into hidden fields
 foreach($site->fdat as $fdat_field=>$fdat_value) {
 	$fdat_value = htmlspecialchars(xss_clean($fdat_value));
@@ -146,14 +146,14 @@ foreach($site->fdat as $fdat_field=>$fdat_value) {
 </form>
   
   <!-- Toolbar -->
-<? print_users_toolbar(); ?>
+<?php print_users_toolbar(); ?>
   <!-- //Toolbar -->
 
   <!-- Content area -->
   <tr valign="top"> 
     <td >
 
-<?
+<?php 
 ###################
 # USERS TABLE
 print_users_table(array(
@@ -169,7 +169,7 @@ print_users_table(array(
 
   <!-- // Content area -->
 </table>
-<?
+<?php 
 ############ debug
 # user debug:
 if($site->on_debug) { 

@@ -1023,7 +1023,7 @@ function hideConfirmDialog()
 					</tr>
 				</thead>
 				<tbody>
-			<? 
+			<?php 
 			
 			###########################
 			# loop over rows
@@ -1055,7 +1055,7 @@ function hideConfirmDialog()
 						<td><?php echo $mysona[nimi]?></td>
 					</tr>
 				</tbody>
-				<?
+				<?php 
 				++$i;
 				$bold=0; $bold_orig=0;
 			}
