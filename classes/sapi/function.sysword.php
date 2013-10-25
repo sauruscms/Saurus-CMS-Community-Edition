@@ -34,13 +34,13 @@ function smarty_function_sysword ($params, &$smarty) {
 	extract($params);
 
 	$original_word = $word; # remember original word for "show_missing" feature
-
+	
 	if( isset($word) && isset($type) ) { # if required param OK
+		$word = trim($word);
 		$word = preg_replace("/\s+/","_",$word);
 		$word = strtolower($word);
 		$type = preg_replace("/\s+/","_",$type);
 		$type = strtolower($type);
-
 
 		# Retrieve word from cache:
 		$cash_value = $site->cash(array(klass => "smarty_syswords", kood => $word."_".$type."_".$type_id));
@@ -133,7 +133,7 @@ function smarty_function_sysword ($params, &$smarty) {
 				$new_link_start='';$new_link_end='';
 				
 				if ($final_sys_sona){
-				
+										
 					if($site->in_editor){
 
 						######### sysword edit-link
@@ -141,33 +141,51 @@ function smarty_function_sysword ($params, &$smarty) {
                         FROM sys_sona_tyyp, sys_sonad 
                         WHERE sys_sonad.sst_id = sys_sona_tyyp.sst_id AND sys_sonad.sst_id=? AND keel=? 
                         AND UCASE(sys_sona) LIKE UCASE(?) ", $type_arr[$type], $site->keel, $final_sys_sona);
-	
+                        
                         $sysword_sth = new SQL($sysword_sql);
                         $sysword_res = $sysword_sth->fetch();
 
 						#### if translation is missing then display sysword edit-popup link
-                        if($sysword_res['sona']=='' && $sysword_res['id']){
+						
+						if($sysword_res['sys_sona'] == '' && $sysword_res['id']){
 							$sysword_href = (empty($_SERVER['HTTPS']) ? 'http://' : 'https://').$site->CONF['hostname'].$site->CONF['wwwroot'].'/admin/edit_translation.php?op=new&type=popup&sst_id='.$type_arr[$type];
+							
+							$edit_button = '<a class="syswordpopup" href="javascript:void(avapopup(\''.$sysword_href.'\',\'glossary\',\'600\',\'400\',\'no\'))">
+								<img src="http://'.$site->CONF['hostname'].$site->CONF['wwwroot'].$site->CONF['styles_path'].'/gfx/translate.png">
+							</a>';
+                        }else{
+                        	$sysword_href = (empty($_SERVER['HTTPS']) ? 'http://' : 'https://').$site->CONF['hostname'].$site->CONF['wwwroot'].'/admin/edit_translation.php?op=edit&type=popup&sst_id='.$type_arr[$type].'&word_id='.$sysword_res['id'];
 
-                            $edit_link_start  = '<a href="javascript:void(avapopup(\''.$sysword_href.'\',\'glossary\',\'600\',\'400\',\'no\'))">';
-							$edit_link_end = '</a>';
-                        }
+							if($params['hide_button'] != 1 || $params['hide_buttons'] != 1){
+								$edit_button = '<a class="syswordpopup" href="javascript:void(avapopup(\''.$sysword_href.'\',\'glossary\',\'600\',\'400\',\'no\'))">
+									<img src="http://'.$site->CONF['hostname'].$site->CONF['wwwroot'].$site->CONF['styles_path'].'/gfx/translate.png">
+								</a>';
+							}
+						}
+                        
 						######### / sysword edit-link
                     //\Changed by Alexei
                     }
-                   
-                    # Fall back to English in browse mode (show English translated word instead
-                    # of the empty one, if the translation is missing for the selected language).
-                    $sys_sona = $site->sys_sona(array('sona' => $final_sys_sona, 'tyyp'=> $type_synonim_arr[$type], 'load_all' => $load_all, 'skip_convert' => $skip_convert));
-                    if(empty($sys_sona))
-                        $sys_sona = $site->sys_sona(array('sona' => $final_sys_sona, 'tyyp'=> $type_synonim_arr[$type], 'load_all' => $load_all, 'skip_convert' => $skip_convert, 'lang_id' => 1));
- 
+                    
+                    if($site->CONF['allow_onsite_translation'] != 1) $edit_button = "";
+                    
 					if ($name) { # assign word to template variable
-						$smarty->assign(array(
-							$name => $edit_link_start.$sys_sona.$edit_link_end
-						));
+						
+						if($params['hide_button'] == 1 || $params['hide_buttons'] == 1){
+							$smarty->assign(array(
+								$name => $site->sys_sona(array('sona' => $final_sys_sona, 'tyyp'=> $type_synonim_arr[$type], 'load_all' => $load_all, 'skip_convert' => $skip_convert))
+							));
+						}else{
+							$smarty->assign(array(
+								$name => $site->sys_sona(array('sona' => $final_sys_sona, 'tyyp'=> $type_synonim_arr[$type], 'load_all' => $load_all, 'skip_convert' => $skip_convert)).$edit_button
+							));
+						}
 					} else { # echo word
-						echo $edit_link_start.$sys_sona.$edit_link_end;
+						if($params['hide_button'] == 1 || $params['hide_buttons'] == 1){
+							echo $site->sys_sona(array('sona' => $final_sys_sona, 'tyyp'=> $type_synonim_arr[$type], 'load_all' => $load_all, 'skip_convert' => $skip_convert));
+						}else{
+							echo $site->sys_sona(array('sona' => $final_sys_sona, 'tyyp'=> $type_synonim_arr[$type], 'load_all' => $load_all, 'skip_convert' => $skip_convert)).$edit_button;
+						}
 					}
 					return; //1; Bug #1921
 				} 
@@ -176,18 +194,30 @@ function smarty_function_sysword ($params, &$smarty) {
 					######### sysword new-link
 
                     # open popup admin/sys_sonad_loetelu.php?lisa=1&sst_id=121&flt_keel=1
-                    $new_link_start = '<a href="javascript:javascript:void(avapopup(\''.(empty($_SERVER['HTTPS']) ? 'http://' : 'https://').$site->CONF['hostname'].$site->CONF['wwwroot'].'/admin/edit_translation.php?op=new&type=popup&sst_id='.$type_arr[$type].'&sys_word='.($show_missing?$original_word:$word).'\',\'glossary\',\'600\',\'400\',\'no\'))">';
-					$new_link_end = '</a>';
+                    $edit_button = '<a class="syswordpopup" href="javascript:javascript:void(avapopup(\''.(empty($_SERVER['HTTPS']) ? 'http://' : 'https://').$site->CONF['hostname'].$site->CONF['wwwroot'].'/admin/edit_translation.php?op=new&type=popup&sst_id='.$type_arr[$type].'&sys_word='.($show_missing?$original_word:$word).'\',\'glossary\',\'600\',\'400\',\'no\'))">
+                    	<img src="http://'.$site->CONF['hostname'].$site->CONF['wwwroot'].$site->CONF['styles_path'].'/gfx/translate.png">
+                    </a>';
 
 					######### / sysword new-link
+                    if($site->CONF['allow_onsite_translation'] != 1) $edit_button = "";
                     
 					if ($name) { # save word to template var
-						$smarty->assign(array(
-							$name => "[".$new_link_start.($show_missing?$original_word:$word).$new_link_end."]"
-						));
+						if($params['hide_button'] == 1 || $params['hide_buttons'] == 1){
+							$smarty->assign(array(
+								$name => ($show_missing?$original_word:$word)
+							));
+						}else{
+							$smarty->assign(array(	
+								$name => "[".($show_missing?$original_word:$word)."]".$edit_button
+							));
+						}
 					} 
-					else { 
-						echo "[".$new_link_start.($show_missing?$original_word:$word).$new_link_end."]"; 
+					else {
+						if($params['hide_button'] == 1 || $params['hide_buttons'] == 1){
+							echo ($show_missing?$original_word:$word); 
+						}else{
+							echo "[".($show_missing?$original_word:$word)."]".$edit_button; 
+						}
 					}
 					return; // 1; Bug #1921
 				} 
