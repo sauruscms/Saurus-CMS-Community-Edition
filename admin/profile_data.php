@@ -522,7 +522,7 @@ if($site->fdat['profile_id']) {
 
 	########### ORDER
 	if($site->fdat['sortby']){
-		$order = " ORDER BY `".mysql_real_escape_string($site->fdat['sortby'])."` ".$site->fdat['sort'];
+		$order = " ORDER BY ".mysql_real_escape_string($site->fdat['sortby'])." ".$site->fdat['sort'];
 	}
 
 	########### SQL
