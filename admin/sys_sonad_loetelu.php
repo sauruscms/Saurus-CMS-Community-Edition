@@ -230,7 +230,7 @@ $(document).ready(function()
 {
 	make_breadcrumb('<?php echo $adminpage_names['parent_pagename'];?>', '<?php echo $adminpage_names['pagename']; ?>');
 	
-	$('tr.glossary_row').live('mouseover', function ()
+	$(document).on('mouseover', 'tr.glossary_row', function()
 	{
 		var glossary_id = $(this).attr('id').replace('glossary_row_', '');
 		
@@ -240,7 +240,7 @@ $(document).ready(function()
 		$(this).addClass('selected');
 	});
 
-	$('tr.glossary_row').live('mouseout', function ()
+	$(document).on('mouseout', 'tr.glossary_row', function()
 	{
 		$(this).children('td.glossary_delete_button_cell').addClass('invisible');
 		$(this).children('td.glossary_edit_button_cell').addClass('invisible');
@@ -248,19 +248,19 @@ $(document).ready(function()
 		$(this).removeClass('selected');
 	});
 	
-	$('tr.word_row').live('mouseover', function ()
+	$(document).on('mouseover', 'tr.word_row', function()
 	{
 		$(this).children('td.word_delete_button_cell').removeClass('invisible');
 		$(this).addClass('selected');
 	});
 
-	$('tr.word_row').live('mouseout', function ()
+	$(document).on('mouseout', 'tr.word_row', function()
 	{
 		$(this).children('td.word_delete_button_cell').addClass('invisible');
 		$(this).removeClass('selected');
 	});
-	
-	$('tr.word_row').live('click', function ()
+
+	$(document).on('click', 'tr.word_row', function()
 	{
 		var word_id = $(this).attr('id').replace('word_row_', '');
 		
@@ -269,7 +269,7 @@ $(document).ready(function()
 		window.location.replace(href);
 	});
 	
-	$('input#add_glossary_word').live('click', function ()
+	$(document).on('click', 'input#add_glossary_word', function()
 	{
 		var sst_id = $('select#glossary_word_type').attr('value');
 		
@@ -376,7 +376,7 @@ $(document).ready(function()
 		
 	});
 
-	$('img.glossary_delete_button').live('click', function ()
+	$(document).on('click', 'img.glossary_delete_button', function()
 	{
 		var glossary_id = $(this).attr('id').replace('glossary_delete_button_', '');
 		
@@ -453,7 +453,7 @@ $(document).ready(function()
 		return false;	// stop click bubbling/propagation
 	});
 	
-	$('img.word_delete_button').live('click', function ()
+	$(document).on('click', 'img.word_delete_button', function()
 	{
 		var word_id = $(this).attr('id').replace('word_delete_button_', '');
 		
@@ -501,7 +501,7 @@ $(document).ready(function()
 		return false;	// stop click bubbling/propagation
 	});
 	
-	$('img.glossary_edit_button').live('click', function ()
+	$(document).on('click', 'img.glossary_edit_button', function()
 	{
 		var glossary_id = $(this).attr('id').replace('glossary_edit_button_', '');
 		
@@ -641,7 +641,7 @@ $(document).ready(function()
 		}
 	});
 	
-	$('tr.glossary_row').live('click', function ()
+	$(document).on('click', 'tr.glossary_row', function()
 	{
 		var glossary_id = $(this).attr('id').replace('glossary_row_', '');
 		
