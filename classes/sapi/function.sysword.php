@@ -167,7 +167,8 @@ function smarty_function_sysword ($params, &$smarty) {
                     //\Changed by Alexei
                     }
                     
-                    if($site->CONF['allow_onsite_translation'] != 1) $edit_button = "";
+                    if($site->CONF['allow_onsite_translation'] != 1) $edit_button = ""; # Disable buttons in admin
+                    if($hide_buttons) $edit_button = ""; # sapi disable translation button
                     
 					if ($name) { # assign word to template variable
 						
