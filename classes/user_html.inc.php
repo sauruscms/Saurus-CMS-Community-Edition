@@ -577,7 +577,7 @@ function get_allowed_groups(){
 	# save read-allowed groups ID-s
 	$read_allowed_groups = array();
 	foreach($aclpermissions as $perm_group_id => $perm){
-		if($perm['R']){ $read_allowed_groups[] = $perm_group_id; }
+		if(is_array($perm) && $perm['R']){ $read_allowed_groups[] = $perm_group_id; }
 	}
 	#echo printr($read_allowed_groups);
 

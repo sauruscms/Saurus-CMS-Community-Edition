@@ -991,7 +991,7 @@ class Site {
 		if($newargs['key'] === null) return null;
 		
 		if ($newargs["keel"] === '') {$newargs["keel"] = $this->keel;}
-		$newargs["skip_lang"] = $args['skip_lang'];
+		if(isset($args['skip_lang'])){ $newargs["skip_lang"] = $args['skip_lang']; }	
 		if (preg_match('/^(rub_|art_)(.*?)(_id)?$/i', $newargs["key"], $matches)) {
 			$newargs["key"] = $matches[2];
 		}
