@@ -17,8 +17,8 @@ SYSTEM REQUIREMENTS
 Minimum requirements for running Saurus CMS on your server:
 
 1. Web Server Software: Apache.
-2. Program language: PHP 5 until 5.3.x.
-3. Database: MySQL 4.x until 5.0.51.
+2. Program language: PHP 5.3 until 5.6.0
+3. Database: MySQL 5.x until 5.6.2
 
 
 INSTALLATION
