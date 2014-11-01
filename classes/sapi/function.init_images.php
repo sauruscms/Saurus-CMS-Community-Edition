@@ -128,6 +128,8 @@ function smarty_function_init_images($params,&$smarty)
     
     for($i=$start_from;$i<$end_at;$i++)
     {
+        $images[$j] = new stdClass();
+        
         $images[$j]->thumb_path=$site->CONF['wwwroot'].'/'.$imgs[$i]['thumb']; # relative path
         $images[$j]->thumb_height=$imgs[$i]['thumb_height']; # in pixels
         $images[$j]->thumb_width=$imgs[$i]['thumb_width'];

@@ -53,49 +53,16 @@ $version_date = $sth->fetchsingle();
 
 </head>
 
-<body style="overflow: hidden">
-	<TABLE width=100% height=100% cellspacing=0 cellpadding=0 border=0>
-		<TR>
-			<TD valign=middle align=center>
-				<div id="aboutbox">
-					<TABLE width=100% cellspacing=0 cellpadding=0 border=0>
-					<TR>
-						<TD class="scms_ab_header" valign=middle>
-							<span class="scms_header_title"><?=$site->title?> <?=$site->cms_version?></span>
-						</TD>
-
-					</TR>
-					<TR>
-						<TD valign="top" class="scms_ab_main">
-							<TABLE width=100% cellspacing=0 cellpadding=4 border=0>
-							<TR>
-								<TD style="padding-left: 12px">Version: <?=$site->cms_version?><br>
-								Released: <?=$version_date?>
-								</TD>
-							</TR>
-							</TABLE>
-						</TD>
-					</TR>
-					<TR>
-						<TD class="scms_ab_lic">
-							<TABLE width=100% cellspacing=0 cellpadding=4 border=0>
-								<TR>
-									<TD style="padding-left: 12"><A HREF="../copyright.html" target="lic_box">Copyright</A> &nbsp;&nbsp;<A HREF="../eula_en.html" target="lic_box">End User Licence Agreement</a></TD>
-								</TR>
-								<TR>
-									<TD colspan=2>
-										<iframe name="lic_box" src="../eula_en.html" width=100% height=104 frameborder=0></iframe>
-									</TD>
-								</TR>
-							</TABLE>
-						</TD>
-					</TR>
-					</TABLE>
-				</div>
-			</TD>
-		</TR>
-	</TABLE>	
-
+<body>
+	
+	<div style="padding:15px 30px;">
+	<h2><?=$site->title?><br>
+	<?=$site->cms_version?></h2>
+	<?=$version_date?>
+	<br><br>
+	<iframe name="lic_box" src="../eula_en.html" width=100% height=604 frameborder=0></iframe>
+	
+	</div>
 </body>
 
 </html>

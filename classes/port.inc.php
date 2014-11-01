@@ -128,7 +128,7 @@ error_reporting(7);
 ini_set('display_errors', 0); // hide all errors from screen
 
 if ($debug && show_debug()){
-	ini_set('display_errors', 1);
+	ini_set('display_errors', 0);
 
 	# exception: dont show errors during full installation procedure
 	if($is_installation_script){
