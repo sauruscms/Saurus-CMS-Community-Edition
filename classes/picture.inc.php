@@ -1,22 +1,4 @@
 <?php
-/**
- * This source file is is part of Saurus CMS content management software.
- * It is licensed under MPL 1.1 (http://www.opensource.org/licenses/mozilla1.1.php).
- * Copyright (C) 2000-2010 Saurused Ltd (http://www.saurus.info/).
- * Redistribution of this file must retain the above copyright notice.
- * 
- * Please note that the original authors never thought this would turn out
- * such a great piece of software when the work started using Perl in year 2000.
- * Due to organic growth, you may find parts of the software being
- * a bit (well maybe more than a bit) old fashioned and here's where you can help.
- * Good luck and keep your open source minds open!
- * 
- * @package		SaurusCMS
- * @copyright	2000-2010 Saurused Ltd (http://www.saurus.info/)
- * @license		Mozilla Public License 1.1 (http://www.opensource.org/licenses/mozilla1.1.php)
- * 
- */
-
 
 
 //DEPRECATE!!
@@ -406,42 +388,34 @@ function get_images($path,$view_path,$get_type=null)
 	//võta folder
 	$sql = $site->db->prepare('SELECT objekt_id FROM obj_folder WHERE relative_path LIKE ?', '/'.$view_path);
     $result = new SQL($sql);
+	
 	//folderi objekti id
     $folder_objekt_id = $result->fetchsingle();
 	
-	//võta failid
-	if($get_type == 'time_first')
-	{
-		$result = new SQL('SELECT obj_file.filename 
-							FROM objekt_objekt, obj_file, objekt 
-							WHERE objekt_objekt.objekt_id = obj_file.objekt_id 
-								AND obj_file.objekt_id = objekt.objekt_id 
-								AND objekt_objekt.parent_id = '.(int)$folder_objekt_id.' 
-							ORDER BY objekt.aeg DESC');
-		$get_type = 'first';
-	}
-	else
-	{
-		$result = new SQL('SELECT obj_file.filename 
-							FROM objekt_objekt, obj_file 
-							WHERE objekt_objekt.objekt_id = obj_file.objekt_id 
-								AND objekt_objekt.parent_id = '.(int)$folder_objekt_id.' 
-							ORDER BY obj_file.filename DESC');
-	}
+	// !TODO only public images are visible to public
+
+	$sql = 'SELECT obj_file.objekt_id, obj_file.filename 
+			FROM objekt_objekt, obj_file, objekt 
+			WHERE objekt_objekt.objekt_id = obj_file.objekt_id 
+			AND objekt_objekt.objekt_id = objekt.objekt_id
+			AND objekt_objekt.parent_id = '.(int)$folder_objekt_id.' 
+			ORDER BY objekt_objekt.sorteering DESC';
+	$result = new SQL($sql);
 
     //on kataloog ja .gallery_thumbnails ja .gallery_thumbnails on olemas
     $filenames = array();
-    while($row = $result->fetch('NUM'))
-    {
-		$filenames[] = $row[0];
+    while($row = $result->fetch('ASSOC')){
+    	$objekt_id = $row['objekt_id'];
+		$filenames[$objekt_id] = $row['filename'];
 	}
 
     $images=array();
     $i=0;
     
     
-    foreach($filenames as $file)
-    {
+    
+    foreach($filenames as $file){
+    
         /* if thumbnail and picture file exists and is not 0-bytes count as an image */
     	if(file_exists($path.'/.gallery_thumbnails/'.$file) && filesize($path.'/.gallery_thumbnails/'.$file) && file_exists($path.'/.gallery_pictures/'.$file) && filesize($path.'/.gallery_pictures/'.$file))
         {

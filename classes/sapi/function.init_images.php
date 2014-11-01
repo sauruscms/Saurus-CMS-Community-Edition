@@ -17,7 +17,6 @@
  * 
  */
 
-
 #################################
 # function init_images
 #	"name" => default: images
@@ -67,55 +66,60 @@ function smarty_function_init_images($params,&$smarty)
     	$path = preg_replace('#^/#', '', $path);
 		$path = preg_replace('#/$#', '', $path);
 		
-        $sql = $site->db->prepare('select objekt_id from obj_folder where relative_path = ?', '/'.$path);
+        $sql = $site->db->prepare('SELECT objekt_id from obj_folder where relative_path = ?', '/'.$path);
         $result = new SQL($sql);
         $folder_id = $result->fetchsingle();
-        if($folder_id)
-        {
+        
+        if($folder_id){
+        	
         	$alamlistSQL = new AlamlistSQL(array(
 	    		'parent' => $folder_id,
 	    		'klass'	=> 'file',
-	    		'order' => ' filename ',
+	    		'order' => 'sorteering desc',
 	    		'where' => $where,
 	    	));
 	        $alamlistSQL->add_select(" obj_file.filename, obj_file.size, obj_file.kirjeldus ");
 		    $alamlistSQL->add_from("LEFT JOIN obj_file ON objekt.objekt_id=obj_file.objekt_id");
+	        
 	        $alamlist = new Alamlist(array(
 	        	'alamlistSQL' => $alamlistSQL,
-	        	//'start' => $start, bug #2564
-	        	//'limit' => $limit,
+	        	'start' => $start,
+	        	'limit' => $limit,
 	        ));
 	        
-	        $files=array();
+	        
+	        $files = array();
 	        
 			$new_button = $alamlist->get_edit_buttons(array(
 				'tyyp_idlist' => '21',
-				//profile_id => join(",",$profile_ids), # new nupule anda edasi kļæ½ik profiili ID-d
 				'publish' => 1, // images are always published
 			));
 			
-	        while ($obj = $alamlist->next())
-	        {
+	        while ($obj = $alamlist->next()){
 	        	$obj->buttons = $obj->get_edit_buttons(array(
 	            	'tyyp_idlist'=> 21,
-	                'nupud' => array('edit', 'delete', 'new'),
+	                'nupud' => array('edit', 'move', 'delete', 'hide', 'new'),
 	            ));
 	            $files[]=$obj;
         	}
         }
         
-    	$path=$site->absolute_path.$path;
+    	$path = $site->absolute_path.$path;
         include_once($class_path.'picture.inc.php');
-        $imgs=get_images($path, $conf->get('path'));
+        $imgs = get_images($path, $conf->get('path'));
+        
+        // !TODO only public images are visible to public
+        
+        #printr($imgs);
+        
+        #$list_files = $files;
     }
-    else
-    {
-        //veateade et path pole paika pandud or something ...
-    }
+    
+    
     $start_from=0;
     if($limit) $end_at=$limit; else $end_at=sizeof($imgs);
-    if($start)
-    {
+    
+    if($start){
         $total_pages=ceil(sizeof($imgs)/$limit);
         $start_from=$start;
         $end_at=$start_from+$limit;
@@ -126,11 +130,13 @@ function smarty_function_init_images($params,&$smarty)
     $j=0;
     $images=array();
     
-    for($i=$start_from;$i<$end_at;$i++)
-    {
-        $images[$j] = new stdClass();
-        
-        $images[$j]->thumb_path=$site->CONF['wwwroot'].'/'.$imgs[$i]['thumb']; # relative path
+    
+    
+    for($i=$start_from;$i<$end_at;$i++){
+    
+    	$images[$j] = new stdClass();
+		
+		$images[$j]->thumb_path=$site->CONF['wwwroot'].'/'.$imgs[$i]['thumb']; # relative path
         $images[$j]->thumb_height=$imgs[$i]['thumb_height']; # in pixels
         $images[$j]->thumb_width=$imgs[$i]['thumb_width'];
 
@@ -147,18 +153,21 @@ function smarty_function_init_images($params,&$smarty)
 
         $key = search_obj_array($imgs[$i]['filename'],'filename',$files);
         
-        if($key !== false)
-        {
-        	$images[$j]->id = $files[$key]->all['objekt_id'];
+        if($key !== false){
+	        
+	        $images[$j]->id = $files[$key]->all['objekt_id'];
 	        $images[$j]->title = $files[$key]->pealkiri;
 	        $images[$j]->description = $files[$key]->all['kirjeldus'];
 	        $images[$j]->size = $files[$key]->all['size']; # final display
 	        $images[$j]->buttons = $files[$key]->buttons;
+			
+        }else{
+	        unset($images[$j]); // Hide hidden images :)
         }
         
         $j++;
     }
-    //printr($images);
+
 
 	$smarty->assign(array(
 		$name => $images,
