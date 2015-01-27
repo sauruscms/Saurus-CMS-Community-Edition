@@ -139,7 +139,7 @@ class Site {
 		}
 #echo "<font color=red>test=".$this->self."</font></br>";
 		#$this->self = "/index.php";
-		$this->fullself = $this->self;
+		$this->fullself = htmlspecialchars(xss_clean($this->self));
 
 		# failinimi l�pust maha
 		if (preg_match("/^[^\?]*\//", $this->self, $matches)) {
@@ -150,7 +150,7 @@ class Site {
 		# slash l�ppu!
 		if (!preg_match("/\/$/",$path)) {$path .= "/"; }
 
-		$this->self = $path;
+		$this->self = htmlspecialchars(xss_clean($path));
 		# this->self
 		######################
 

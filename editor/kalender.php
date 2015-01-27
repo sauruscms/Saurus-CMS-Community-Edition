@@ -35,6 +35,14 @@ $site = new Site(array(
 	on_debug=>0,
 	on_admin_keel => 1
 ));
+
+$form = $site->fdat['form'] ? $site->fdat['form'] : $site->fdat['vorm'];
+$form = preg_replace('/[^A-Za-z0-9 ]/', '', $form);
+
+$form_field = $site->fdat['form_field'] ? $site->fdat['form_field'] : $site->fdat['lahter'];
+$form_field = preg_replace('/[^A-Za-z0-9 ]/', '', $form_field);
+
+
 ?>
 <html>
 <head>
@@ -51,8 +59,8 @@ $site = new Site(array(
 // Handle click of OK link 
 function handleOK(selected_date) {
 	if (opener && !opener.closed) {
-		opener.document.<?php echo htmlspecialchars(xss_clean((isset($site->fdat['form']) ? $site->fdat['form'] : $site->fdat['vorm']))) ?>.<?php echo htmlspecialchars(xss_clean((isset($site->fdat['form_field']) ? $site->fdat['form_field'] : $site->fdat['lahter']))); ?>.value=selected_date; 
-		opener.document.<?php echo htmlspecialchars(xss_clean((isset($site->fdat['form']) ? $site->fdat['form'] : $site->fdat['vorm']))) ?>.<?php echo htmlspecialchars(xss_clean((isset($site->fdat['form_field']) ? $site->fdat['form_field'] : $site->fdat['lahter']))); ?>.focus(); 
+		opener.document.<?php echo $form; ?>.<?php echo $form_field; ?>.value=selected_date; 
+		opener.document.<?php echo $form; ?>.<?php echo $form_field; ?>.focus(); 
 	} else {
 		alert('You have closed the main window.\n\nNo action will be taken on the choices in this dialog box.');
 	}
