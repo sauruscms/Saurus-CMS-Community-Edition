@@ -173,14 +173,14 @@ else { $parent_id = $site->alias("system");}
 									<TD width="24" nowrap><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/menu/search.gif" BORDER="0" ALT="">
 
 									</TD>
-									<TD><input name="data_search" type="text" class="scms_flex_input" value="<?=$site->fdat['data_search']? $site->fdat['data_search'] : $search_str.':'?>" onFocus="if(this.value=='<?=$search_str?>:') this.value='';" onBlur="if(this.value=='')this.value='<?=$search_str?>:';" style="width:140px"></TD>
+									<TD><input name="data_search" type="text" class="scms_flex_input" value="<?=$site->fdat['data_search']? htmlspecialchars(xss_clean($site->fdat['data_search'])) : $search_str.':'?>" onFocus="if(this.value=='<?=$search_str?>:') this.value='';" onBlur="if(this.value=='')this.value='<?=$search_str?>:';" style="width:140px"></TD>
 									<?###### wide middle cell ######?>
 									<td width="100%"></td>
 
 								</TR>
 		<? ######## hidden ########?>
-		<input type=hidden name=profile_search value="<?=$site->fdat['profile_search']?>">
-		<input type=hidden name=profile_id value="<?=$site->fdat['profile_id']?>">
+		<input type=hidden name=profile_search value="<?=htmlspecialchars(xss_clean($site->fdat['profile_search']))?>">
+		<input type=hidden name=profile_id value="<?=htmlspecialchars(xss_clean($site->fdat['profile_id']))?>">
 		</form>
 						</TABLE>
 			<!-- //Search -->

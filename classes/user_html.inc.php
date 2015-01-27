@@ -621,6 +621,11 @@ function print_search_box(){
 	$site->fdat['user_search'] = isset($site->fdat['user_search']) ? $site->fdat['user_search'] : "1";
 	$site->fdat['group_search'] = isset($site->fdat['group_search']) ? $site->fdat['group_search'] : "1";
 
+	$site->fdat['search_subtree'] = htmlspecialchars(xss_clean($site->fdat['search_subtree']));
+	$site->fdat['user_search'] = htmlspecialchars(xss_clean($site->fdat['user_search']));
+	$site->fdat['group_search'] = htmlspecialchars(xss_clean($site->fdat['group_search']));
+	$site->fdat['search'] = htmlspecialchars(xss_clean($site->fdat['search']));
+
 	$out = '
 			<!-- Search -->
 						<TABLE width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor=white style="padding-left:4; padding-right:4; padding-top:2">

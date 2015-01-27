@@ -103,7 +103,10 @@ $lopp_aeg = $site->fdat['lopp']? $site->fdat['lopp'] : date("d.m.Y");
 
 		<?###### search box ######?>
 		<form id="searchform" name="searchform" action="<?=$site->self?>" method="GET">
-	<? foreach($site->fdat as $fdat_field=>$fdat_value) { ?>
+	<? foreach($site->fdat as $fdat_field=>$fdat_value) {
+	$fdat_value = htmlspecialchars(xss_clean($fdat_value));
+	$fdat_field = htmlspecialchars(xss_clean($fdat_field)); 
+	?>
 		<input type=hidden name="<?=$fdat_field?>" value="<?=$fdat_value?>">
 	<? } ?>
 		<input type="hidden" name="otsi" value=1>
@@ -112,7 +115,7 @@ $lopp_aeg = $site->fdat['lopp']? $site->fdat['lopp'] : date("d.m.Y");
 		
 		<td style="padding-right: 10px">
 			<? $search_str = $site->sys_sona(array(sona => "otsi", tyyp=>"editor")); ?>
-	          <input name="filter" type="text" class="scms_flex_input" style="width:150px" value="<?=$site->fdat['filter']? $site->fdat['filter'] : $search_str.':'?>" onFocus="if(this.value=='<?=$search_str?>:') this.value='';" onBlur="if(this.value=='')this.value='<?=$search_str?>:';" onkeyup="javascript: if(event.keyCode==13){this.form.submit();}">
+	          <input name="filter" type="text" class="scms_flex_input" style="width:150px" value="<?=$site->fdat['filter']? htmlspecialchars(xss_clean($site->fdat['filter'])) : $search_str.':'?>" onFocus="if(this.value=='<?=$search_str?>:') this.value='';" onBlur="if(this.value=='')this.value='<?=$search_str?>:';" onkeyup="javascript: if(event.keyCode==13){this.form.submit();}">
 
 		</td>
 
