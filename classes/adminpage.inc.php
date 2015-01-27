@@ -302,6 +302,8 @@ function print_language_selectbox() {
     <table border="0" cellspacing="0" cellpadding="1">
 	<form name="languageform" method=get>
 	<? foreach($site->fdat as $fdat_field=>$fdat_value) {
+		$fdat_value = htmlspecialchars(xss_clean($fdat_value));
+		$fdat_field = htmlspecialchars(xss_clean($fdat_field)); 
 		if($fdat_field != 'flt_keel') {?>
 		<input type=hidden name="<?=$fdat_field?>" value="<?=$fdat_value?>">
 	<?	}
