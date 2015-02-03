@@ -30,20 +30,18 @@ FCKConfig.CleanWordKeepsStructure = true ;
 
 FCKConfig.Plugins.Add('scms_actions', 'en,et');
 
-/** flashvideo plugin**/
-
 FCKConfig.Plugins.Add('nodepath');
 
 FCKConfig.ToolbarSets["SCMS"] = [
 	['Save',  'SCMSSaveClose', '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteWord', '-', 'Undo', 'Redo', '-', 'Find', '-', 'Source', 'ShowBlocks', '-', 'FitWindow', 'SCMSSimpleToolbar'],
 	'/',
-	['Link', 'SCMSInsertSiteLink', 'Unlink', 'Anchor', '-', 'SCMSInsertImage',  'SCMSInsertNewFile', 'SCMSInsertSnippet', 'SCMSFlashVideo', '-', 'SCMSLead', 'Rule', '-', 'Table', '-',  'SCMSInsertForm', 'TextField', 'HiddenField', 'Textarea', 'Select', 'Radio', 'Checkbox', 'Button', '-',  'SpecialChar'],
+	['Link', 'SCMSInsertSiteLink', 'Unlink', 'Anchor', '-', 'SCMSInsertImage',  'SCMSInsertNewFile', 'SCMSInsertSnippet', '-', 'SCMSLead', 'Rule', '-', 'Table', '-',  'SCMSInsertForm', 'TextField', 'HiddenField', 'Textarea', 'Select', 'Radio', 'Checkbox', 'Button', '-',  'SpecialChar'],
 	'/',
 	['Style', 'Bold', 'Italic', 'Underline', 'StrikeThrough', '-', 'Subscript', 'Superscript', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyFull', '-', 'UnorderedList', 'OrderedList', 'Outdent', 'Indent', '-', 'TextColor', 'BGColor', 'RemoveFormat']
 ];
 
 FCKConfig.ToolbarSets["SCMS_simple"] = [
-	['Save', 'SCMSSaveClose', '-', 'Copy', 'PasteText','PasteWord', '-', 'Link', 'SCMSInsertSiteLink', 'SCMSInsertImage', 'SCMSInsertSnippet', 'SCMSFlashVideo', 'SCMSLead', 'Table', 'SCMSAdvancedToolbar'],
+	['Save', 'SCMSSaveClose', '-', 'Copy', 'PasteText','PasteWord', '-', 'Link', 'SCMSInsertSiteLink', 'SCMSInsertImage', 'SCMSInsertSnippet', 'SCMSLead', 'Table', 'SCMSAdvancedToolbar'],
 	'/',
 	['Style', 'Bold', 'Italic', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyFull', '-', 'UnorderedList', 'OrderedList', 'Outdent', 'Indent']
 ];

@@ -147,17 +147,6 @@ if($matches[1] == "editor" || $matches[1] == "admin") $is_admin = 1; else $is_ad
 		echo "\n\n/***********************************************************\n WYSIWYG GENERAL CSS:\n***********************************************************/\n\n";
 		echo $css['wysiwyg_css_general']."\n";
 ?>
-/* Flowplayer */
-.SCMS__FlashVideo {
-	display: block;
-	border:#a9a9a9 1px solid;
-	background-position:center center;
-	background-image:url(js/fckeditor/editor/skins/scms/images/flowplayer.png);
-	background-repeat:no-repeat;
-	width:60px;
-	height:41px;
-}
-/* / Flowplayer */
 <?php
 		echo "\n\n/***********************************************************\n WYSIWYG FONTS CSS:\n***********************************************************/\n\n";
 		echo $css['wysiwyg_css']."\n";
