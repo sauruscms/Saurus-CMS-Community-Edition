@@ -35,7 +35,7 @@ $site = &$template->site;
 ?>
 <table width="<?=$template->site->dbstyle("sisu_tabeli_laius","layout")?>" height="<?=$template->site->dbstyle("sisu_tabeli_korgus","layout")?>"  border="0" cellspacing="<?=$template->site->dbstyle("sisu_tabeli_cellspacing","layout")?>" cellpadding="0">
 <tr><td>
-<?
+<?php 
 
 $objekt = new Objekt(array(
 	objekt_id => $site->fdat[gallup_id],
@@ -130,19 +130,19 @@ if ($objekt && $objekt->all[on_avatud] && preg_match("/^\d+$/",$site->fdat[vastu
 $site->debug->print_hash($site->CONF,1,"FDAT");
 ?>
 
-<? if ($return_ok) { ?>
+<?php if ($return_ok) { ?>
 <script language="JavaScript">
 <!--
 window.location.replace('<?=$site->fdat[uri]?>');
 //-->
 </script>
-<? } else { ?>
+<?php } else { ?>
 	<p><a href="<?=$site->fdat[uri]?>"><?=$site->sys_sona(array(sona => "Tagasi", tyyp=>"kujundus"))?></a>
-<? } ?>
+<?php } ?>
 
 </td>
 </tr>
 </table>
-<?
+<?php 
 
 }

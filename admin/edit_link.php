@@ -34,7 +34,7 @@ function edit_objekt () {
 	<tr>
       <td nowrap><?=$site->sys_sona(array(sona => "URL", tyyp=>"editor"))?>:</td>
       <td nowrap width="100%">
-		<? if($on_intra ) { ?>
+		<?php if($on_intra ) { ?>
 		<div style="visibility:hidden; position: absolute">
 		<INPUT TYPE="file" name="url_browse">
 		</div>
@@ -72,9 +72,9 @@ function edit_objekt () {
 		//-->
 		</SCRIPT>
 		<input name="url" style="width:300px" class="scms_flex_input"  value="<?=$objekt->all[url]?$objekt->all[url]:"http://"?>"><input type="button" value="<?=$site->sys_sona(array(sona => "otsi", tyyp=>"editor"))?>" name="browse" class="btn2" onclick="url_browse.click();url.value=do_regexp_swap(url_browse);" >
-		<? } else { ?>
+		<?php } else { ?>
 
-		<? // 28.02.2011 Mati: added option to choose local files into link editor using filemanager ?>
+		<?php // 28.02.2011 Mati: added option to choose local files into link editor using filemanager ?>
 		<SCRIPT LANGUAGE="JavaScript">
 		<!--
 			function chooseFile()
@@ -94,7 +94,7 @@ function edit_objekt () {
 				<td><a href="javascript:chooseFile();">..</a></td>
 			</tr>
 		</table>
-		<? } ?>
+		<?php } ?>
 		</td>
     </tr>
     <tr>
@@ -103,7 +103,7 @@ function edit_objekt () {
     </tr>
 
 	<input name="permanent_parent_id" type=hidden value="<?=$objekt->parent_id?>">
-<?
+<?php 
 }
 
 function salvesta_objekt () {

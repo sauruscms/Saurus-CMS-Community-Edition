@@ -166,7 +166,7 @@ $(document).ready(function()
 {
 	make_breadcrumb('<?php echo $adminpage_names['parent_pagename']; ?>', '<?php echo $adminpage_names['pagename']; ?>');
 	
-	$('tr.site_listing_row').live('mouseover', function()
+	$(document).on('mouseover', 'tr.site_listing_row', function()
 	{
 		var site_id = $(this).attr('id').replace('site_listing_', '');
 		
@@ -175,14 +175,14 @@ $(document).ready(function()
 		if(sites[site_id].on_default == '0') $(this).children('td.site_delete_button_cell').removeClass('invisible');
 	});
 	
-	$('tr.site_listing_row').live('mouseout', function()
+	$(document).on('mouseout', 'tr.site_listing_row', function()
 	{
 		$(this).children('td.site_delete_button_cell').addClass('invisible');
 		
 		$(this).removeClass('selected');
 	});
 	
-	$('tr.site_listing_row').live('click', function ()
+	$(document).on('click', 'tr.site_listing_row', function()
 	{
 		var site_id = $(this).attr('id').replace('site_listing_', '');
 		
@@ -235,7 +235,7 @@ $(document).ready(function()
 		
 	});
 	
-	$('img.site_delete_button').live('click', function ()
+	$(document).on('click', 'img.site_delete_button', function()
 	{
 		var site_id = $(this).attr('id').replace('site_delete_button_', '');
 		

@@ -29,7 +29,7 @@ function edit_objekt () {
 	$profile_id = $objekt->objekt_id ? $objekt->all[profile_id] : $site->fdat[profile_id];
 ?>
 	<input type="hidden" name="profile_id" value="<?=$profile_id?>">
-<?	
+<?php 
 	####################
 	# Additional info: attributes list
 

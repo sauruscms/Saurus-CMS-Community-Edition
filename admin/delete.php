@@ -134,7 +134,7 @@ if (!$hidden_output){
 
 			mylocation = ''+window.opener.location+'';
 			
-			<? 				
+			<?php 				
 			$jump_array = array(1,2,12,15,16);			
 			if (in_array($objekt->all[tyyp_id],$jump_array)) { ?>
 				mylocation = replace(mylocation,'?id=','?old_id=');
@@ -145,11 +145,11 @@ if (!$hidden_output){
 				} else {
 					mylocation+='&id=<?=$objekt->parent_id ?>';
 				};
-			<? } ?>
+			<?php } ?>
 //--></script>
 </head>
 <body class="popup_body"  onLoad="this.focus();">
-<?
+<?php 
 }
 
 		$sql = $site->db->prepare("SELECT * FROM tyyp where tyyp_id=?", $objekt->all['tyyp_id']);
@@ -459,7 +459,7 @@ verify_form_token();
 			window.opener.location=mylocation;
 			window.close();
 		</script>
-<?
+<?php 
 		exit;		
 } 
 else {
@@ -492,8 +492,8 @@ else {
 <table border="0" cellpadding="0" cellspacing="0" style="width:100%;  height:100px">
   <tr> 
 	<td valign="top" width="100%" class="scms_confirm_alert_cell" height="100%">
-	<? echo $kinnitus; if ($site->on_debug) {echo " (permanent remove)";} ?>		
-<?
+	<?php echo $kinnitus; if ($site->on_debug) {echo " (permanent remove)";} ?>		
+<?php 
 	}
 
 	// what? TODO: replace getPealkiri calls with Objekt::pealkiri
@@ -572,7 +572,7 @@ if (!$hidden_output){
 	<input type=hidden name=parent_id value="<?=$site->fdat['parent_id']?>">
 	<input type=hidden name=permanent_remove value="<?=$site->fdat['permanent_remove']?>">
 	</form>	
-<?
+<?php 
 }
 } # / permanent remove kinnitus
 
@@ -580,7 +580,7 @@ if (!$hidden_output){
 } else if (!$hidden_output) { # / objekt leitud
 ?>
 Wrong ID
-<?
+<?php 
 }
 
 
@@ -600,13 +600,13 @@ else if (!$hidden_output){
 	<table border="0" cellpadding="0" cellspacing="0" style="width:100%; height:100%">
 	  <tr> 
 		<td valign="top" width="100%" class="scms_confirm_delete_cell" height="100%">
-	<?
+	<?php 
 		echo $site->sys_sona(array('sona' => 'tyyp_Rubriik' , 'tyyp'=>"system"))." <b>".$site->sys_sona(array('sona' => 'trash' , 'tyyp'=>"system"))."</b> ".$site->sys_sona(array('sona' => 'missing' , 'tyyp'=>"admin"))." <b>".$site->sys_sona(array('sona' => 'Languages' , 'tyyp'=>"admin"))." &gt; ".$site->sys_sona(array('sona' => 'System articles' , 'tyyp'=>"admin"))."</b>!";
 	?>
 		</td>
 	  </tr>
 	</table>
-	<? 
+	<?php 
 		exit;
 	}
 
@@ -643,7 +643,7 @@ else if (!$hidden_output){
 				window.opener.location=mylocation;
 				window.close();
 			</script>
-<?
+<?php 
 		exit;		
 
 ################################
@@ -656,7 +656,7 @@ else if (!$hidden_output){
 <table border="0" cellpadding="0" cellspacing="0" style="width:100%; height:100px">
   <tr> 
     <td valign="top" width="100%" class="scms_confirm_delete_cell" height="100%">
-<?
+<?php 
 ######## 1. ask confirmation:  "Do you want to delete this and that?"	
 
 $kinnitus = $site->sys_sona(array(sona => "tyyp_".$tyyp['nimi'], tyyp=>"System")). ' "<b>'.$objekt->pealkiri.'</b>": '.$site->sys_sona(array(sona => "Kas tahate kustutada", tyyp=>"editor"));
@@ -738,7 +738,7 @@ echo $kinnitus;
 	</form>	
 
 
-<?
+<?php 
 } # Ask confirmation
 
 } # if object exists

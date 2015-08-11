@@ -37,7 +37,7 @@ function edit_objekt () {
     <tr>
       <td noWrap valign="top"><?=$site->sys_sona(array(sona => "Uudiste rubriigid", tyyp=>"editor"))?>:</td>
       <td colspan="3">
-<?
+<?php 
 		$class_path = "../classes/";
 		include_once($class_path."rubloetelu.class.php");
 		$rubs = new RubLoetelu(array(
@@ -64,7 +64,7 @@ function edit_objekt () {
 			if ($key != $site->alias("rub_system_id")) {
 ?>
 				<option value="<?=$key?>" <?=($rubriigid[$key] ? "selected":"")?>><?=$topparents[$key]?></option>
-<?
+<?php 
 			}
 		} 
 ?>
@@ -72,7 +72,7 @@ function edit_objekt () {
 	  </td>
     </tr>
 	<input name="permanent_parent_id" type=hidden value="<?=$objekt->parent_id?>">
-<?
+<?php 
 }
 
 function salvesta_objekt () {

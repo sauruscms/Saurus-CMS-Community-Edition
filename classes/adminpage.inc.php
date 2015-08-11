@@ -172,14 +172,14 @@ function print_column_headers() {
 		##### href
 		$href = $sort_baselink.'sort='.($site->fdat['sortby']==$sortfield && $site->fdat['sort']=='asc'?'desc':'asc').'&sortby='.$sortfield;
 		?>
-        <td width="<?=$td_width?>" onClick="document.location='<?=$href?>'"  <?=($site->fdat['sortby']==$sortfield ? 'class="scms_tableheader_active"' : '')?> ><a href="<?=$href?>"><?=$visible_fields[$field]?><?####### arrow ?><?if($site->fdat['sortby']==$sortfield) {?><img src="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/general/sort_<?=$site->fdat['sort']=='asc'?'up':'down'?>.gif" width="20" height="9" border=0><?}?></a></td>
+        <td width="<?=$td_width?>" onClick="document.location='<?=$href?>'"  <?=($site->fdat['sortby']==$sortfield ? 'class="scms_tableheader_active"' : '')?> ><a href="<?=$href?>"><?=$visible_fields[$field]?><?php ####### arrow ?><?php if($site->fdat['sortby']==$sortfield) {?><img src="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/general/sort_<?=$site->fdat['sort']=='asc'?'up':'down'?>.gif" width="20" height="9" border=0><?php }?></a></td>
 
-	<? } # foreach
+	<?php } # foreach
 	########## open preferences popup
 	?>
 
 	</tr></table>
-	<?
+	<?php 
 }
 # / function print_column_headers()
 ######################
@@ -249,10 +249,10 @@ function print_pagenumbers() {
 			<?=$hidden_parameters?>
 
 
-<? if (count($rows_count_arr)>0) { ?>
+<?php if (count($rows_count_arr)>0) { ?>
 			<td>
 				<select name="rows_count" class="scms_flex_input" style="width:44px" onChange="document.forms['pageform'].page.value=1; this.form.submit();">
-<?
+<?php 
 foreach ($rows_count_arr as $cnt){
 	echo '<option value="'.$cnt.'"  '.($site->fdat['rows_count']==$cnt ? 'selected':'').'>'.$cnt.'</option>\n';
 }
@@ -261,18 +261,18 @@ foreach ($rows_count_arr as $cnt){
 			</td>
 
 			<TD><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/general/s_toolbar_divider.gif" WIDTH="14" HEIGHT="20" BORDER="0" ALT="" align=absmiddle></TD>
-<? } ?>
+<?php } ?>
 
 
 
-            <td align="right" valign="middle"><?if($pagenumbers['previous']){ echo $pagenumbers['previous']; } else {?><img src="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/left.png" alt="Previous" width="16" height="16" border="0"><?}?></td>
+            <td align="right" valign="middle"><?php if($pagenumbers['previous']){ echo $pagenumbers['previous']; } else {?><img src="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/left.png" alt="Previous" width="16" height="16" border="0"><?php }?></td>
 			<td align="right" valign="top" nowrap><input name="page" id="page" type="text" class="scms_flex_input" value="<?=$site->fdat['page']?>" size="2" style="width:24px"></td>
 			<td align="left" valign="middle" nowrap> &nbsp; / <?=$pagenumbers['pagenumbers_count'] ?></td>
-            <td align="left" valign="middle" style="padding-right:4px"><?if($pagenumbers['next']){ echo $pagenumbers['next']; } else {?><img src="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/right.png" alt="Next" width="16" height="16" border="0"><?}?></td>
+            <td align="left" valign="middle" style="padding-right:4px"><?php if($pagenumbers['next']){ echo $pagenumbers['next']; } else {?><img src="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/right.png" alt="Next" width="16" height="16" border="0"><?php }?></td>
 	</form>
 	</tr>
 	</table>
-	<?
+	<?php 
 
 	}
 	return $pagenumbers;
@@ -301,22 +301,22 @@ function print_language_selectbox() {
 	?>
     <table border="0" cellspacing="0" cellpadding="1">
 	<form name="languageform" method=get>
-	<? foreach($site->fdat as $fdat_field=>$fdat_value) {
+	<?php foreach($site->fdat as $fdat_field=>$fdat_value) {
 		$fdat_value = htmlspecialchars(xss_clean($fdat_value));
 		$fdat_field = htmlspecialchars(xss_clean($fdat_field)); 
 		if($fdat_field != 'flt_keel') {?>
 		<input type=hidden name="<?=$fdat_field?>" value="<?=$fdat_value?>">
-	<?	}
+	<?php }
 	}?>
 	<?php if($sth->rows > 1) { ?>
         <tr>
           <td nowrap align="right"><?=$site->sys_sona(array(sona => "keel", tyyp=>"editor"))?>:</td>
           <td>
-	<?if(!isset($site->fdat['lang_swiched'])) {?>
+	<?php if(!isset($site->fdat['lang_swiched'])) {?>
 		<input type=hidden name=lang_swiched value=0>
-	<?}?>
+	<?php }?>
 	<select name="flt_keel" onChange="document.forms['languageform'].lang_swiched.value='1';document.forms['languageform'].submit();">
-	<?
+	<?php 
 			while ($keel = $sth->fetch()) {
 				if($keel['keel_id'] == $site->fdat['flt_keel']) {
 					$selected='selected';
@@ -335,7 +335,7 @@ function print_language_selectbox() {
 	<?php } ?>
 	</form>
 	</table>
-<?
+<?php 
 }
 # / function print_language_selectbox
 #################
@@ -360,20 +360,20 @@ function print_glossary_selectbox() {
 	?>
     <table border="0" cellspacing="0" cellpadding="1">
 	<form name="languageform" method=get>
-	<? foreach($site->fdat as $fdat_field=>$fdat_value) {
+	<?php foreach($site->fdat as $fdat_field=>$fdat_value) {
 		if($fdat_field != 'flt_keel') {?>
 		<input type=hidden name="<?=$fdat_field?>" value="<?=$fdat_value?>">
-	<?	}
+	<?php }
 	}?>
 	<?php if($sth->rows > 1) { ?>
         <tr>
           <td nowrap align="right"><?=$site->sys_sona(array('sona' => 'translations', 'tyyp' =>'admin'))?>:</td>
           <td>
-	<?if(!isset($site->fdat['lang_swiched'])) {?>
+	<?php if(!isset($site->fdat['lang_swiched'])) {?>
 		<input type=hidden name=lang_swiched value=0>
-	<?}?>
+	<?php }?>
 	<select name="flt_keel" onChange="document.forms['languageform'].lang_swiched.value='1';document.forms['languageform'].submit();">
-	<?
+	<?php 
 			while ($keel = $sth->fetch()) {
 				if($keel['glossary_id'] == $site->fdat['flt_keel']) {
 					$selected='selected';
@@ -392,7 +392,7 @@ function print_glossary_selectbox() {
 	<?php } ?>
 	</form>
 	</table>
-<?
+<?php 
 }
 # / function print_glossary_selectbox
 #################
@@ -1105,7 +1105,7 @@ function print_error_html(){
 
 </body>
 </html>
-	<?
+	<?php 
 }
 # / FUNCTION print_error_html
 ################################
@@ -3499,8 +3499,8 @@ function print_editor_toolbar()
 				{
 					$class = 'dont_boxit';
 				}
-				?><li><a href="<?php echo $sub_menu['fail'];?>" class="<?php echo $class?>" title="<?php echo $sub_menu['translated_name'];?>"<?php echo ($site->in_admin ? ' target="admin_page_container"' : ''); ?>><?php echo $sub_menu['translated_name'];?></a></li><?
-			} ?></ul></li><?
+				?><li><a href="<?php echo $sub_menu['fail'];?>" class="<?php echo $class?>" title="<?php echo $sub_menu['translated_name'];?>"<?php echo ($site->in_admin ? ' target="admin_page_container"' : ''); ?>><?php echo $sub_menu['translated_name'];?></a></li><?php 
+			} ?></ul></li><?php 
 		} ?></ul>
 	<ul id="toolbar_tools">
 		<li id="toolbar_tools_username"><?php echo $site->user->all['firstname']; ?></li>

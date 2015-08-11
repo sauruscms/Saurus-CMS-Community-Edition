@@ -354,7 +354,7 @@ if($site->fdat['op2'] && !$site->fdat['refresh']) {
 		window.close();
 	// -->
 	</SCRIPT>
-<?
+<?php 
 	}
 	exit;
 } 
@@ -382,7 +382,7 @@ if($site->fdat['op2'] && !$site->fdat['refresh']) {
 </head>
 
 <body class="popup_body" onLoad="this.focus()" >
-<?
+<?php 
 
 #############################
 # DELETE
@@ -416,7 +416,7 @@ if ($site->fdat['op'] == "delete_confirmed") {
 			window.close();
 		// -->
 		</SCRIPT>
-		<?
+		<?php 
 	}
 	########################
 	# kirjuta toimetajate logi
@@ -451,7 +451,7 @@ if ($site->fdat['op'] == "delete_confirmed") {
 </head>
 
 <body class="popup_body" onLoad="this.focus()" >
-<?
+<?php 
 
 #############################
 # Popup aken
@@ -466,15 +466,15 @@ if ($site->fdat[id]) {
 	$site->debug->print_hash($ttyyp,"1","ttyyp");
 }
 ?>
-<form action="<?$site->self?>" method="post" name="vorm" enctype="multipart/form-data">
+<form action="<?php $site->self?>" method="post" name="vorm" enctype="multipart/form-data">
 
-<?###### 1. Master table ?>
+<?php ###### 1. Master table ?>
 <TABLE border="0" cellpadding="0" cellspacing="0" style="width:100%; height:100%">
 <TR>
 <TD valign="top" width="100%" class="scms_dialog_area"  height="100%">
 
 
-	<?###### 2. White dialog table ?>
+	<?php ###### 2. White dialog table ?>
 	<table width="100%"  height="100%" border="0" cellspacing="3" cellpadding="0" class="scms_borderbox">
 
 	<tr valign=top> 
@@ -488,24 +488,24 @@ if ($site->fdat[id]) {
 	<tr valign=top>
 	<td>
 
-		<?###### 3. Content table ?>		
+		<?php ###### 3. Content table ?>		
 		<table width="100%"  border="0" cellspacing="3" cellpadding="0" class="scms_table">
-<?
+<?php 
 #######################
 # name
 ?>
 <tr> 
             <td><?=$site->sys_sona(array(sona => "Nimetus", tyyp=>"editor"))?>:</td>
             <td style="width:40%" align="left">
-			<?if($myttyyp['is_readonly']){?>
+			<?php if($myttyyp['is_readonly']){?>
 				<?=$myttyyp['nimi']?>
 				<input type=hidden name="nimi" value="<?=$myttyyp['nimi']?>" class="scms_flex_input">
-			<?}else{?>
+			<?php }else{?>
 				<input type=text name="nimi" value="<?=$myttyyp['nimi']?>" class="scms_flex_input">
-			<?}?>
+			<?php }?>
 			</td>
 
-			<?
+			<?php 
 			#######################
 			# templ_fail
 			?>
@@ -515,7 +515,7 @@ if ($site->fdat[id]) {
 			</td>			
 </tr>
 
-<?
+<?php 
 #######################
 # is active + is autoavanev + op
 $myttyyp['op'] = ($myttyyp['op']=='kaart' ? 'sitemap' : $myttyyp['op']);
@@ -533,32 +533,32 @@ $myttyyp['op'] = ($myttyyp['op']=='gallup_arhiiv' ? 'poll_archive' : $myttyyp['o
 	<input type=checkbox id="on_auto_avanev" name="on_auto_avanev" value="1" <?=($myttyyp[on_auto_avanev] ||  $site->fdat['op'] == "new"?" checked":"")?>>
 	<label for="on_auto_avanev"><?=$site->sys_sona(array(sona => "auto-jump", tyyp=>"admin"))?></label>
 	&nbsp;&nbsp;&nbsp;
-<?if($type != 'page'){ # dont show op for page templates (bug #1964)?>
+<?php if($type != 'page'){ # dont show op for page templates (bug #1964)?>
 	<label>op: <input type="text" name="op_value" value="<?=$myttyyp['op']?>" class="scms_flex_input" style="width: 80px;" /></label>
-<?}
+<?php }
 else { # Bug #2371?>
 	<input type="hidden" name="op_value" value="<?=$myttyyp['op']?>"  />
-<?}?>
+<?php }?>
 	</td>
     </tr>
 
-<?
+<?php 
 #######################
 # edit area
 ?>
           <TR valign="top"> 
-			<?if($myttyyp['is_readonly']){?>
+			<?php if($myttyyp['is_readonly']){?>
 				<TD align=left colspan="3"> 
 				<div style="overflow:auto;height:450px;border: 1px solid black;padding:5px" >
 				<?=nl2br(htmlspecialchars($templ_content))?>
 				</div>
 	            <input type=hidden name="templ_content" value="<?=htmlspecialchars($templ_content)?>">	
 				</TD>
-			<?}else{?>
+			<?php }else{?>
             <TD align=right colspan="3"> 
               <textarea name="templ_content" style="width:100%"  rows=34><?=htmlspecialchars($templ_content)?></textarea>
 			  </TD>
-			<?}?>
+			<?php }?>
           </TR>
 
 	<input type="hidden" name="id" value="<?=$id?>">
@@ -568,19 +568,19 @@ else { # Bug #2371?>
 	<input type="hidden" name="lisa" value="<?=$site->fdat['lisa']?>">
     <input type=hidden name="on_page_templ" value="<?=($type=='page'?"1":"0")?>">
 	</table>
-		<?###### / 3. Content table ?>		
+		<?php ###### / 3. Content table ?>		
         
 
 
 	</td>
 	</tr>
 	</table>
-	<?###### / 2. White dialog table ?>
+	<?php ###### / 2. White dialog table ?>
 
 
 </TD>
 </TR>
-<?############ buttons #########?>
+<?php ############ buttons #########?>
 <TR> 
 <TD align="right" valign="top" class="scms_dialog_area_bottom"> 
 	  <input type="button" value="<?=$site->sys_sona(array(sona => "Apply", tyyp=>"editor")) ?>" onclick="javascript:document.getElementById('op2').value='save'; body.style.cursor = 'wait';if(typeof url_browse == 'object'){url_browse.removeNode()}; this.form.submit();">
@@ -591,13 +591,13 @@ else { # Bug #2371?>
 </TD>
 </TR>
 </TABLE>
-<?###### / 1. Master table ?>
+<?php ###### / 1. Master table ?>
 
 
 
 </body>
 </html>
-<? 
+<?php 
 }
 # / Popup aken
 #############################
@@ -628,7 +628,7 @@ else { # mallide list
 
 ?>
 <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
- <?
+ <?php 
  ##############
  # FUNCTION BAR
  ?>
@@ -636,14 +636,14 @@ else { # mallide list
     <td class="scms_toolbar"> 
       <table border="0" cellpadding="0" cellspacing="0">
 		<tr>
-		<?############ new button ###########?>
+		<?php ############ new button ###########?>
 	    <td nowrap><a href="javascript:void(openpopup('<?=$site->self?>?op=new','xml','670','620'))"><img src="<?=$site->CONF[wwwroot].$site->CONF[styles_path]?>/gfx/icons/16x16/actions/filenew.png" border="0" id="pt">&nbsp; <?=$site->sys_sona(array(sona => "new", tyyp=>"editor"))?></a></td>
 
-		<?############ clear cache button ###########?>
+		<?php ############ clear cache button ###########?>
 	    <td nowrap><a href="javascript:void(openpopup('clear_templ_cache.php','cache','366','450'))"><img src="<?=$site->CONF[wwwroot].$site->CONF[styles_path]?>/gfx/icons/16x16/actions/delete.png" border="0" id="pt">&nbsp;<?=$site->sys_sona(array(sona => "Clear cache", tyyp=>"sapi"))?></a></td>
 
 
-		<?###### wide middle cell ######?>
+		<?php ###### wide middle cell ######?>
         <td width=100%></td>
        
         <form id="filterForm" method="GET" name="filterForm" onsubmit="this.page.value = 1; return true;">
@@ -672,9 +672,9 @@ else { # mallide list
 
         </form>
 
-		<?######  pagenumbers ######?>
+		<?php ######  pagenumbers ######?>
 	   <td class="scms_small_toolbar">
-		<?
+		<?php 
 		# get records total count
 		$sql = "SELECT COUNT(*) ".$from_sql.$where;
 		$sth = new SQL($sql);
@@ -687,24 +687,24 @@ else { # mallide list
 		));
 		?>
 		</td>
-		<?######  / pagenumbers ######?>	
+		<?php ######  / pagenumbers ######?>	
 		</tr>
       </table>
     </td>
   </tr>
- <?
+ <?php 
  # / FUNCTION BAR
  ################
  ?>
 
  <tr>
   <td width="100%" valign="top" class="scms_pane_area" height="100%"> 
-	<?
+	<?php 
 	################
 	# DATA TABLE
 	?>    
      <table width="100%" border="0" cellspacing="0" cellpadding="0" style="height:100%">
-	<?
+	<?php 
 	#################
 	# COLUMN NAMES
 
@@ -715,18 +715,18 @@ else { # mallide list
 				<col width="50">
 				<col width=25%>
 				<col width=25%>
-			<?if($type != 'page'){ # dont show op for page templates (bug #1964)?>
+			<?php if($type != 'page'){ # dont show op for page templates (bug #1964)?>
 				<col width=25%>
-			<?}?>
+			<?php }?>
 				<col width=25%>
 				<col width=16>
 				<tr class="scms_tableheader"> 
 					  <td>ID&nbsp;&nbsp;&nbsp;&nbsp;</td>
 					  <td nowrap class="scms_tableheader"><?=$site->sys_sona(array(sona => "name", tyyp=>"admin"))?></td>
 					  <td><?=$site->sys_sona(array(sona => "Filename", tyyp=>"editor"))?></td>
-				<?if($type != 'page'){ # dont show op for page templates (bug #1964)?>
+				<?php if($type != 'page'){ # dont show op for page templates (bug #1964)?>
 					  <td>op</td>
-				<?}?>
+				<?php }?>
 					  <td><?=$site->sys_sona(array(sona => "Active", tyyp=>"admin"))?></td>
 <!--					  <td nowrap><?=$site->sys_sona(array(sona => "Extensions", tyyp=>"admin"))?></td>-->
 					  <td></td>
@@ -735,12 +735,12 @@ else { # mallide list
 				</table>
 		</td>
 	</tr>
-	<?
+	<?php 
 	# / COLUMN NAMES
 	#################
 	?>
 
-	<?
+	<?php 
 	#################
 	# DATA ROWS
 	?>	  
@@ -753,7 +753,7 @@ else { # mallide list
 				<col width=25%>
 				<col width=25%>
 				<col width=25%>
-<? 
+<?php 
 	########### ORDER
 	$order = " ORDER BY nimi";
 
@@ -780,25 +780,25 @@ else { # mallide list
           <td class="r<?= $i%2+1 ?>"><?=$myttyyp['ttyyp_id'];?></td>
           <td class="r<?= $i%2+1 ?>" nowrap><a href="javascript:void(avaaken('<?=$site->self?>?op=edit&id=<?=$myttyyp[ttyyp_id]?>','670','620','template'))"><?=$myttyyp[nimi]?></a></td>
           <td class="r<?= $i%2+1 ?>" ><?=$myttyyp[templ_fail]?></td>
-		<?if($type != 'page'){ # dont show op for page templates (bug #1964)?>
+		<?php if($type != 'page'){ # dont show op for page templates (bug #1964)?>
           <td class="r<?= $i%2+1 ?>" ><?=translate_en($myttyyp['op']);?></td>
-		<?}?>
+		<?php }?>
           <td class="r<?= $i%2+1 ?>" ><?=$myttyyp[on_nahtav]?"Y":"N"?></td>
 <!--          <td class="r<?= $i%2+1 ?>" ><?=$myttyyp[extension]?></td>-->
           <td class="r<?= $i%2+1 ?>" align="right">
-		<? 
+		<?php 
 		# if default template, dont show edit & delete buttons 
 		if($myttyyp[ttyyp_id] < 2000) { ?>
 			<a href="javascript:void(avaaken('<?=$site->self?>?op=edit&id=<?=$myttyyp[ttyyp_id]?>','670','620','template'))"><img src="<?=$site->CONF[wwwroot].$site->CONF[styles_path]?>/gfx/icons/16x16/actions/edit.png" border="0" id="pt"></a
 		
 		  ><a href='javascript: if (confirm("<?=$site->sys_sona(array(sona => "Kas tahate kustutada", tyyp=>"editor"))?>")) {void(avapopup("<?=$site->self?>?op=delete_confirmed&id=<?=$myttyyp[ttyyp_id] ?>","template","400","400","no"))}'><img src="<?=$site->CONF[wwwroot].$site->CONF[styles_path]?>/gfx/icons/16x16/actions/delete.png" border="0" id="pt"></a
-			><? 
+			><?php 
 		} 
 		 else {
 			 print "default";
 		 } #if default templ ?></td>
         </tr>
-	<?
+	<?php 
 		++$i;
 		}
 		# / loop over rows
@@ -809,13 +809,13 @@ else { # mallide list
 	  </div>
      </td>
     </tr>
-	<?
+	<?php 
 	# / DATA ROWS
 	#################
 	?>	  
 
     </table>
-	<?
+	<?php 
 	# / DATA TABLE
 	################
 	?>    
@@ -824,7 +824,7 @@ else { # mallide list
 </td>
 </tr>
 </table>
-<?
+<?php 
 # / CONTENT TABLE
 ################
 }

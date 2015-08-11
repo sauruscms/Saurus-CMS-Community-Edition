@@ -417,9 +417,9 @@ function edit_objekt()
 	
 	<body>
 		
-		<? if ($site->fdat['op']=='edit') {?>
+		<?php if ($site->fdat['op']=='edit') {?>
 			<iframe src="checkin.php?objekt_id=<?=$objekt->objekt_id ?>" style="width: 0; height: 0; display: none; visibility: hidden;"></iframe>
-		<? } ?>
+		<?php } ?>
 		
 		<form action="edit.php" name="editForm" id="editForm" method="POST"  enctype="multipart/form-data">
 		
@@ -573,23 +573,23 @@ function edit_objekt()
 						</tr>
 					</table>
 					
-					<?########### ONLY FOR SAURUS 3 BUILT-IN TEMPLATES: subarticles +  Add print icon  ########?>
-					<?if(($objekt || $site->fdat['refresh']) && $ttyyp['ttyyp_id'] > 0 && $ttyyp['ttyyp_id'] < 1000) { # if ver3 content template?>
+					<?php ########### ONLY FOR SAURUS 3 BUILT-IN TEMPLATES: subarticles +  Add print icon  ########?>
+					<?php if(($objekt || $site->fdat['refresh']) && $ttyyp['ttyyp_id'] > 0 && $ttyyp['ttyyp_id'] < 1000) { # if ver3 content template?>
 					<table cellpadding="0" cellspacing="0" class="form_row">
 			              <tr> 
 							<td class="label">&nbsp;</td>
 			
-							<?########### subarticles  ########?>
+							<?php ########### subarticles  ########?>
 			                <td><input type="checkbox" id="on_alamartiklid" name="on_alamartiklid"<?=($objekt->all['on_alamartiklid'] ? ' checked="checked"' : '');?> /></td>
 			                <td width="145"><label for="on_alamartiklid"><?=$site->sys_sona(array('sona' => 'Naita alamartiklid', 'tyyp' => 'editor')); ?></label></td>
 			
-							<?########### Add print icon  ########?>
+							<?php ########### Add print icon  ########?>
 			                <td><input type="checkbox" id="on_printlink" name="on_printlink"  value="1" <?=$objekt->all['on_printlink'] ? ' checked="checked"' : '' ?> /></td>
 			                <td><label for="on_printlink"><?=$site->sys_sona(array('sona' => 'Naita prindi ikoon', 'tyyp' => 'editor'));?></label></td>
 			
 						  </tr>
 					</table>
-					<?} # if ver3 content template?>
+					<?php } # if ver3 content template?>
 					<?php if($template_variable_html) { ?>
 					<table cellpadding="0" cellspacing="0" class="form_row">
 						<?=$template_variable_html; ?>

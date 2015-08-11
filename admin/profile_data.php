@@ -107,7 +107,7 @@ else { $parent_id = $site->alias("system");}
 <body style="overflow-y: auto; overflow-x: auto;">
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" height="100%">
-<?
+<?php 
 ################################
 # FUNCTION BAR
 ?>
@@ -115,11 +115,11 @@ else { $parent_id = $site->alias("system");}
 <TR>
 <TD class="scms_toolbar">
 
-	<?######### PROFILE FUNCTION BAR ############?>
+	<?php ######### PROFILE FUNCTION BAR ############?>
       <table border="0" cellpadding="0" cellspacing="0">
         <tr> 
-		  <?############ new profile instance button ###########?>
-			<?
+		  <?php ############ new profile instance button ###########?>
+			<?php 
 			if( $profile_def['source_table'] == 'obj_asset'){ # ASSET
 				$href = $site->CONF['wwwroot'].$site->CONF['adm_path']."/edit.php?op=new&keel=".$site->keel."&parent_id=".$parent_id."&tyyp_idlist=20&profile_id=".$site->fdat['profile_id'];
 			}
@@ -128,9 +128,9 @@ else { $parent_id = $site->alias("system");}
 			
 			}	
 			?>
-            <td nowrap><?if($site->fdat['profile_id']){?><a href="javascript:avaaken('<?=$href?>', 450, 430);"><?}?><img src="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/filenew<?=(!$site->fdat['profile_id'] ? '_inactive' : '')?>.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" id=pt></td>
+            <td nowrap><?php if($site->fdat['profile_id']){?><a href="javascript:avaaken('<?=$href?>', 450, 430);"><?php }?><img src="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/filenew<?=(!$site->fdat['profile_id'] ? '_inactive' : '')?>.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" id=pt></td>
 
-		<?###### wide middle cell ######?>
+		<?php ###### wide middle cell ######?>
 		<td width="100%"></td>
 		  
         </tr>
@@ -138,7 +138,7 @@ else { $parent_id = $site->alias("system");}
 </TD>
 </TR>
 
-<?
+<?php 
 # / FUNCTION BAR
 ################################
 ?>
@@ -146,7 +146,7 @@ else { $parent_id = $site->alias("system");}
   <!-- Content area -->
 
   <tr valign="top"> 
-<?
+<?php 
 ############################
 # PROFILE TYPES MENU
 ?>
@@ -162,11 +162,11 @@ else { $parent_id = $site->alias("system");}
 			<!-- Search -->
 					<tr>
 						<td valign=top>
-			<?
+			<?php 
 			#################
 			# SEARCH BOX
 			?>
-			<? $search_str = $site->sys_sona(array(sona => "otsi", tyyp=>"editor")); ?>
+			<?php $search_str = $site->sys_sona(array(sona => "otsi", tyyp=>"editor")); ?>
 						<TABLE width="20%" border="0" cellpadding="0" cellspacing="0" bgcolor=white style="padding-left:4; padding-right:4; padding-top:2">
 	  <form name="datasearchform" action="<?=$site->self?>" method="GET">
 								<TR>
@@ -174,11 +174,11 @@ else { $parent_id = $site->alias("system");}
 
 									</TD>
 									<TD><input name="data_search" type="text" class="scms_flex_input" value="<?=$site->fdat['data_search']? htmlspecialchars(xss_clean($site->fdat['data_search'])) : $search_str.':'?>" onFocus="if(this.value=='<?=$search_str?>:') this.value='';" onBlur="if(this.value=='')this.value='<?=$search_str?>:';" style="width:140px"></TD>
-									<?###### wide middle cell ######?>
+									<?php ###### wide middle cell ######?>
 									<td width="100%"></td>
 
 								</TR>
-		<? ######## hidden ########?>
+		<?php ######## hidden ########?>
 		<input type=hidden name=profile_search value="<?=htmlspecialchars(xss_clean($site->fdat['profile_search']))?>">
 		<input type=hidden name=profile_id value="<?=htmlspecialchars(xss_clean($site->fdat['profile_id']))?>">
 		</form>
@@ -193,7 +193,7 @@ else { $parent_id = $site->alias("system");}
 					<!-- I grupp -->
 					<tr>
 						<td valign=top>
-	<?
+	<?php 
 	  #####################
 	  # TREE
 		require_once($class_path.'menu.class.php');
@@ -235,7 +235,7 @@ else { $parent_id = $site->alias("system");}
 					<!-- IV grupp -->
 					<tr>
 						<td valign=top>
-<?
+<?php 
 
 		######## FILEMANAGER TREE
   		$sql = $site->db->prepare("SELECT profile_id AS id, source_table AS parent, name FROM object_profiles WHERE source_table=? ORDER BY name",
@@ -275,7 +275,7 @@ else { $parent_id = $site->alias("system");}
 					<tr height=100%>
 						<td valign=top>
 
-<?
+<?php 
 		########### EXTERNAL TABLES TREES
 		$sql = $site->db->prepare("show tables");
 		$sth = new SQL($sql);
@@ -337,12 +337,12 @@ else { $parent_id = $site->alias("system");}
 </DIV>
 </TD>
 
-<?
+<?php 
 # / PROFILE TYPES MENU
 ############################
 ?>
 
-<?
+<?php 
 ############################
 # MIDDLE LIST
 
@@ -368,14 +368,14 @@ if($site->fdat['profile_id']) {
 		<!-- Middle column -->
 		<TD class="scms_middle_dialogwindow">
 
-<?######  pages table ######?>
+<?php ######  pages table ######?>
 
 				<table width="100%" border="0" cellspacing="0" cellpadding="0">
                     <tr class="scms_pane_header"> 
                      <td nowrap>			
 					  <IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/mime/files.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" align="absmiddle">&nbsp; <?=$site->sys_sona(array(sona => "profile_data", tyyp=>"admin"))?>
 					  </td>
-	<?
+	<?php 
 	#################
 	# WHERE
 
@@ -415,21 +415,21 @@ if($site->fdat['profile_id']) {
 	$total_count = $sth->fetchsingle();
 	?>
 	<td>
-	<?	######### print pagenumbers table
+	<?php ######### print pagenumbers table
 	$pagenumbers = print_pagenumbers(array(
 		"total_count" => $total_count,
 		"rows_count" => 20,
 	));
 	?>
 	</td>
-	<?
+	<?php 
 	# / pagenumbers 
 	#################
 	?>		
 					
 					</tr>
                  </table>
-<?######  // pages table ######?>
+<?php ######  // pages table ######?>
 		
 			<table style="width:100%;height:100%" border="0" cellspacing="0" cellpadding="0">
 		   <!-- Table header -->	
@@ -438,7 +438,7 @@ if($site->fdat['profile_id']) {
 
 
 
-	<?
+	<?php 
 	#################
 	# table column names
 
@@ -470,15 +470,15 @@ if($site->fdat['profile_id']) {
 		<table width="100%"  border="0" cellspacing="0" cellpadding="3">
 		   <tr id="headerrow">
 
-			<?########## asset name ?>
-			<?if( $profile_def['source_table'] == 'obj_asset'){ ?>
-			<? $field= "pealkiri"; 
+			<?php ########## asset name ?>
+			<?php if( $profile_def['source_table'] == 'obj_asset'){ ?>
+			<?php $field= "pealkiri"; 
 			$href = $sort_baselink.'sort='.($site->fdat['sortby']==$field && $site->fdat['sort']=='asc'?'desc':'asc').'&sortby='.$field;
 			?>
 			<td  width="<?=$td_width?>" nowrap  onClick="document.location='<?=$href?>'" <?=($site->fdat['sortby']==$field ? 'class="scms_tableheader_active"' : '')?>><a href="<?=$href?>"><?=$site->sys_sona(array(sona => "name", tyyp=> "admin"))?></a></td>
-			<?} # asset 'pealkiri' cell?>
+			<?php } # asset 'pealkiri' cell?>
 
-			<?
+			<?php 
 			if (is_array($profile_data)) { # if is array
 
 			#########################
@@ -490,7 +490,7 @@ if($site->fdat['profile_id']) {
 					
 			?>
 				<td width="<?=$td_width?>" onClick="document.location='<?=$href?>'" <?=($site->fdat['sortby']==$field ? 'class="scms_tableheader_active"' : '')?>><a href="<?=$href?>"><?=$site->sys_sona(array(sona => $value['name'], tyyp=> "custom"))?></a></td>
-			<? 
+			<?php 
 				} # if field is active
 			} # foreach 
 			# / loop over asset fields
@@ -505,7 +505,7 @@ if($site->fdat['profile_id']) {
 			</tr>
 			<!-- // Table header -->
 
-	<?
+	<?php 
 	# / COLUMN NAMES
 	#################
 	?>
@@ -516,13 +516,13 @@ if($site->fdat['profile_id']) {
 
 				<table width="100%" border="0" cellspacing="0" cellpadding="0" class="scms_table">
 
-<?
+<?php 
 	#################
 	# LIST
 
 	########### ORDER
 	if($site->fdat['sortby']){
-		$order = " ORDER BY `".mysql_real_escape_string($site->fdat['sortby'])."` ".$site->fdat['sort'];
+		$order = " ORDER BY ".mysql_real_escape_string($site->fdat['sortby'])." ".$site->fdat['sort'];
 	}
 
 	########### SQL
@@ -573,11 +573,11 @@ if($site->fdat['profile_id']) {
 			}
 		?>
           <tr <?=($is_active ? ' class="scms_activerow"' : '')?>>
-			<?########## asset name ?>
-			<?if( $profile_def['source_table'] == 'obj_asset'){ ?>
+			<?php ########## asset name ?>
+			<?php if( $profile_def['source_table'] == 'obj_asset'){ ?>
 			<td  width="<?=$td_width?>" class="scms_table_row" nowrap><a href="<?=$href?>"><?=($asset['pealkiri'] ? $asset['pealkiri'] : '&nbsp;')?><?=$buttons?></a></td>
-			<?} # asset 'pealkiri' cell?>
-			<?
+			<?php } # asset 'pealkiri' cell?>
+			<?php 
 			if (is_array($profile_data)) { # if is array
 
 			######### get field values in right format
@@ -600,18 +600,18 @@ if($site->fdat['profile_id']) {
 				# Bug #2567: FILE v�li ajab html-i katki
 			?>
 				<td  width="<?=$td_width?>" class="scms_table_row"><a href="<?=$href?>"><?=( $field_value ? htmlspecialchars($field_value) : '&nbsp;') ?></a></td>
-			<? 
+			<?php 
 				} # field active
 			} # foreach 
 			}  # if is array
 			?>
 
-			<?##### delete (dont show for assets, they have action-button already)######?>
-			<?if( $profile_def['source_table'] != 'obj_asset'){ ?>
+			<?php ##### delete (dont show for assets, they have action-button already)######?>
+			<?php if( $profile_def['source_table'] != 'obj_asset'){ ?>
 			<td  width="16" align="right"><a href="javascript:void(openpopup('<?=$delete_href?>','delete','413','108'));"><img src="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/delete.png" width="16" height="16"  border=0></a></td>
-			<?}?>
+			<?php }?>
           </tr>
-		<?
+		<?php 
 		}
 		# / loop over obj_asset
 		#################
@@ -628,14 +628,14 @@ if($site->fdat['profile_id']) {
 	
 	
 </TD>
-<?
+<?php 
 }
 # /if profile selected
 #############
 ?>
 
 
-<?
+<?php 
 # / MIDDLE LIST
 ############################
 ?>

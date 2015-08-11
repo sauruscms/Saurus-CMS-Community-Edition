@@ -41,7 +41,7 @@ function print_users_table(){
 ?>
 
 
-<?
+<?php 
 ############################
 # CONTENT TABLE
 ?>
@@ -53,7 +53,7 @@ function print_users_table(){
 			<!-- Search -->
 			<TR>
 				<TD id="search">
-					<?
+					<?php 
 					#################
 					# SEARCH BOX
 					print_search_box(array(
@@ -67,7 +67,7 @@ function print_users_table(){
 				<TD valign=top>
 					<div id=navigation class="scms_left_div">
 					<TABLE width="100%" border="0" cellpadding="0" cellspacing="0">
-					<?
+					<?php 
 						/*
 						 * Get favorites 
 						*/
@@ -86,7 +86,7 @@ function print_users_table(){
 						<TR>
 							<TD>
 								<table border=0>
-								<?
+								<?php 
 									/*
 									* Display favorites
 									*/
@@ -97,20 +97,20 @@ function print_users_table(){
 										<td style="padding-right:4px;padding-left:16px"><img src="<?=$site->CONF['wwwroot'].$site->CONF[styles_path]?>/gfx/icons/16x16/users/<?= (strlen($favorite_data['group_id'])>0?'group':($favorite_data['is_superuser']?'superuser':'user')) ?>.png" width="16" height="16"></td>
 										<td><a href="javascript:<?= strlen($favorite_data['group_id'])>0?"select_group('".$favorite_data['group_id']."')":"document.getElementById('selectform_user_id').value='".$favorite_data['user_id']."';document.getElementById('selectform_group_id').value='".$favorite_data['user_group_id']."';document.forms['selectform'].submit();"; ?>"><?= strlen($favorite_data['group_id'])>0?$favorite_data['name']:$favorite_data['firstname'].' '.$favorite_data['lastname'] ?></a></td>
 									</tr>
-								<?
+								<?php 
 									} //foreach
 								?>
 								</table>
 							</TD>
 						</TR>
 						<!-- //Favorites -->
-						<?
+						<?php 
 							} //if favorites
 						?>
 						<!-- Menu tree -->
 						<TR>
 							<TD>
-								<?
+								<?php 
 								#################
 								# GROUPS TREE: 2 views - tree & search result list
 
@@ -136,9 +136,9 @@ function print_users_table(){
 								}
 								?>
 								
-								<?echo $tree_html; ?>          
+								<?php echo $tree_html; ?>          
 								
-								<?
+								<?php 
 								# / GROUPS TREE
 								#################
 								?>
@@ -152,12 +152,12 @@ function print_users_table(){
 			</TABLE>
 		<!-- // Left column -->
 		</TD>
-	<?
+	<?php 
 	# / LEFT COLUMN
 	##################
 ?>
 
-<?
+<?php 
 
 # if not browse window
 if($args['is_browse']) { $site->fdat['view']='overview_false'; }
@@ -230,7 +230,7 @@ if($args['is_browse']) { $site->fdat['view']='overview_false'; }
 		<TR height=25>
 		<TD>
 
-			<?######### grey title header ########?>
+			<?php ######### grey title header ########?>
 
 				<table width="100%" border="0" cellspacing="0" cellpadding="0">
                     <tr class="scms_pane_header"> 
@@ -241,7 +241,7 @@ if($args['is_browse']) { $site->fdat['view']='overview_false'; }
 					 </td>
 					 <td style="width:120px">
 						<!-- Paging -->
-						<?
+						<?php 
 						#################
 						# pagenumbers table
 						$sql = "SELECT COUNT(*) FROM users ".$join.$where;
@@ -259,7 +259,7 @@ if($args['is_browse']) { $site->fdat['view']='overview_false'; }
 					 </td>
                     </tr>
                  </table>
-			<?######### / grey title header ########?>
+			<?php ######### / grey title header ########?>
 
 
 		</TD>
@@ -267,7 +267,7 @@ if($args['is_browse']) { $site->fdat['view']='overview_false'; }
 	<!-- // Table title -->
 
 		 
- <?
+ <?php 
 	#################
 	# table column names
 	?>
@@ -275,7 +275,7 @@ if($args['is_browse']) { $site->fdat['view']='overview_false'; }
 	<TR height=25>
 	<TD class="scms_tableheader">
 
-	<?
+	<?php 
 	####### get assoc.array of visible fieldnames and translations
 	$visible_fields = get_visible_fields(array(
 		"prefpage_name" => ($args['is_browse'] ?'select_group':'user_management_fields'),
@@ -295,7 +295,7 @@ if($args['is_browse']) { $site->fdat['view']='overview_false'; }
 	</TR>
 	<!-- //Table heading -->
 
-	<?
+	<?php 
 	# / COLUMN NAMES
 	#################
 	?>
@@ -305,7 +305,7 @@ if($args['is_browse']) { $site->fdat['view']='overview_false'; }
 					<!-- Scrollable area -->
 					<div id=listing class="scms_middle_div">
 						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="scms_table">
-<?
+<?php 
 	#################
 	# users list
 
@@ -345,21 +345,21 @@ $href = "javascript:document.getElementById('selectform_user_id').value='".$list
 			else { $icongif = "user.png"; }
 		?>
           <tr id="<?=$listuser[user_id]?>" <?=($site->fdat['user_id'] == $listuser[user_id] ? ' class="scms_activerow"' : '')?>>
-			<?##### icon ######?>
+			<?php ##### icon ######?>
 			<td width="20"><img src="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/users/<?=$icongif?>" width="16" height="16"></td>
 
-			<?# loop over visible fields
+			<?php # loop over visible fields
 			foreach(array_keys($visible_fields) as $key=>$field){ 
 				if($field=='fullname'){ $listuser[$field] = $listuser['firstname'].' '.$listuser['lastname']; }
 
 				?>
 				<td width="<?=$td_width?>" ondblclick="javascript:void(openpopup('<?=$site->CONF['wwwroot'].$site->CONF['adm_path']?>/edit_user.php?user_id=<?=$listuser[user_id]?>&tab=user&op=edit','user','366','450'))"><a href="<?=$href?>"><?=($listuser[$field] ? $listuser[$field] : '&nbsp;')?></a></td>
-			<? } # foreach ?>
-			<?##### delete ######?>
+			<?php } # foreach ?>
+			<?php ##### delete ######?>
 <!--			<td width="16" align="right">&nbsp;</td>-->
 		
 			</tr>
-		<?
+		<?php 
 			$i++;
 		}
 		# / loop over users
@@ -374,7 +374,7 @@ $href = "javascript:document.getElementById('selectform_user_id').value='".$list
 
             </TABLE>
 		</TD>
-<?
+<?php 
 # / MIDDLE LIST
 ############################
 ?>
@@ -383,7 +383,7 @@ $href = "javascript:document.getElementById('selectform_user_id').value='".$list
 
 		</TD>
   </TR>
-		<?
+		<?php 
 		###################
 		# select buttons
 		if($args['is_browse']){
@@ -391,18 +391,18 @@ $href = "javascript:document.getElementById('selectform_user_id').value='".$list
         <tr align="right" height=30> 
           <td valign="top" colspan="2" style="padding-top: 10px; padding-right:10px" > 
 
-<? if ($args['show_checkboxes']){ ?>
+<?php if ($args['show_checkboxes']){ ?>
 			<input type="button" value="<?=$site->sys_sona(array(sona => "vali", tyyp=>"admin")) ?>" onclick="javascript:selectform.op2.value='selectclose'; send_box_values();" style="width: 60px">
-<? } else { ?>
+<?php } else { ?>
             <input type="button" value="<?=$site->sys_sona(array(sona => "vali", tyyp=>"admin")) ?>" onclick="javascript:selectform.op2.value='selectclose';selectform.submit();" style="width: 60px">
-<? } ?>
+<?php } ?>
 			<input type="button" value="<?=$site->sys_sona(array(sona => "close", tyyp=>"editor")) ?>" onclick="javascript:window.close();" style="width: 60px"> 
           </td>
         </tr>
-		<?}?>
+		<?php }?>
 </TABLE>
 
-<?
+<?php 
 }
 # / FUNCTION print_users_table
 ##############################
@@ -422,12 +422,12 @@ function print_users_toolbar(){
   <!-- Toolbar -->
   <tr>
 	<td class="scms_toolbar">
-	<?
+	<?php 
 	################################
 	# FUNCTION BAR TABLE
 	?>
 	<TABLE cellpadding=0 cellspacing=0 border=0>
-	  <?
+	  <?php 
 		############# detail buttons activity
 		# when no group is selected then buttons are in inactive mode (non-clickable)
 			if(!$site->fdat['group_id'] && !$site->fdat['user_id']) {
@@ -459,39 +459,39 @@ function print_users_toolbar(){
 	  ############# / detail buttons activity
 	  ?>
         <TR> 
-			<?############ new buttons ###########?>
+			<?php ############ new buttons ###########?>
 
 				<TD nowrap><a href="javascript:void(openpopup('<?=$site->CONF['wwwroot'].$site->CONF['adm_path']?>/edit_user.php?tab=user&op=new&group_id=<?=$site->fdat['group_id']?>','user','366','450'))" ><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/users/user.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" id="pt">&nbsp;<?=$site->sys_sona(array(sona => "user", tyyp=>"kasutaja"))?></A></TD>
 				<TD  nowrap><a href="javascript:void(openpopup('<?=$site->CONF['wwwroot'].$site->CONF['adm_path']?>/edit_group.php?tab=group&op=new&group_id=<?=$site->fdat['group_id']?>','group','366','450'))"><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/users/group.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" id="pt"><?=$site->sys_sona(array(sona => "group", tyyp=>"kasutaja"))?></A></TD>
-			<?############ edit button ###########?>
+			<?php ############ edit button ###########?>
 
-				<TD nowrap><?if(!$in_active){?><a href="javascript:void(openpopup('<?=$popup_href?>&op=edit','<?=$popup_name?>','366','450'))"><?}?><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/edit.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" id="pt"> <?=$site->sys_sona(array(sona => "muuda", tyyp=>"editor"))?><?if(!$in_active){?></a><?}?></TD>
+				<TD nowrap><?php if(!$in_active){?><a href="javascript:void(openpopup('<?=$popup_href?>&op=edit','<?=$popup_name?>','366','450'))"><?php }?><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/edit.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" id="pt"> <?=$site->sys_sona(array(sona => "muuda", tyyp=>"editor"))?><?php if(!$in_active){?></a><?php }?></TD>
 
-			<?############ delete button (inactive for Everybody group)###########?>
-				<TD><?if(!$in_active && !$everybody_group)	{?><a href="javascript:void(openpopup('<?=$popup_href?>&op=delete','<?=$popup_name?>','413','108'))"><?} else{?>&nbsp;<?}?><img src="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/delete<?=($in_active || $everybody_group ? '_inactive' : '')?>.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" id="po"><?if(!$in_active && !$everybody_group){?></a><?}?></TD>
+			<?php ############ delete button (inactive for Everybody group)###########?>
+				<TD><?php if(!$in_active && !$everybody_group)	{?><a href="javascript:void(openpopup('<?=$popup_href?>&op=delete','<?=$popup_name?>','413','108'))"><?php } else{?>&nbsp;<?php }?><img src="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/delete<?=($in_active || $everybody_group ? '_inactive' : '')?>.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" id="po"><?php if(!$in_active && !$everybody_group){?></a><?php }?></TD>
 
-			<?############ duplicate button : inactive for everybody group ###########?>
-				<TD><?if(!$in_active && !$everybody_group){?><a href="javascript:void(openpopup('<?=$popup_href?>&op=copy','<?=$popup_name?>','413','108'))"><?} else{?>&nbsp;<?}?><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/editcopy<?=($in_active || $everybody_group ? '_inactive' : '')?>.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" id="po"><?if(!$in_active && !$everybody_group){?></a><?}?></TD>
+			<?php ############ duplicate button : inactive for everybody group ###########?>
+				<TD><?php if(!$in_active && !$everybody_group){?><a href="javascript:void(openpopup('<?=$popup_href?>&op=copy','<?=$popup_name?>','413','108'))"><?php } else{?>&nbsp;<?php }?><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/editcopy<?=($in_active || $everybody_group ? '_inactive' : '')?>.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" id="po"><?php if(!$in_active && !$everybody_group){?></a><?php }?></TD>
 
 				<TD><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/general/s_toolbar_divider.gif" WIDTH="14" HEIGHT="20" BORDER="0" ALT="" id="po"></TD>
 
-			<?############ save as CSV button ###########?>
+			<?php ############ save as CSV button ###########?>
 				<TD nowrap><a href="export2csv.php?op=users"><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/filesave.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" id="pt"> <?=$site->sys_sona(array(sona => "salvesta", tyyp=>"editor"))?> CSV</a></TD>
 				<TD><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/general/s_toolbar_divider.gif" WIDTH="14" HEIGHT="20" BORDER="0" ALT="" id="po"></TD>
 				
-			<?############ print button ###########?>
+			<?php ############ print button ###########?>
 			<!--
 				<TD><a href="#"><IMG 
 				SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/fileprint.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" id="po"></a></TD>
 			-->
 
-			<?############ lock button : only for users ###########?>
+			<?php ############ lock button : only for users ###########?>
 
-			<TD><?if(!$in_active && $site->fdat['user_id']){?><a href="javascript:void(openpopup('<?=$site->CONF['wwwroot'].$site->CONF['adm_path']?>/edit_user.php?user_id=<?=$site->fdat['user_id']?>&op=lock','lock','413','108'))"><?}?><img src="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/<?=(!$site->fdat['user_id'] || $user->all['is_locked']?'lock':'unlock')?><?=($in_active || !$site->fdat['user_id'] ? "_inactive" :'')?>.png" alt="<?=($user->all['is_locked']?'Unlock':'Lock')?>" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" id="po"><?if(!$in_active && $site->fdat['user_id']){?></a><?}?></TD>
+			<TD><?php if(!$in_active && $site->fdat['user_id']){?><a href="javascript:void(openpopup('<?=$site->CONF['wwwroot'].$site->CONF['adm_path']?>/edit_user.php?user_id=<?=$site->fdat['user_id']?>&op=lock','lock','413','108'))"><?php }?><img src="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/<?=(!$site->fdat['user_id'] || $user->all['is_locked']?'lock':'unlock')?><?=($in_active || !$site->fdat['user_id'] ? "_inactive" :'')?>.png" alt="<?=($user->all['is_locked']?'Unlock':'Lock')?>" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" id="po"><?php if(!$in_active && $site->fdat['user_id']){?></a><?php }?></TD>
 
-			<?############ view ###########?>
+			<?php ############ view ###########?>
 
-				<?
+				<?php 
 					/*
 					 * Check if is favorite 
 					*/
@@ -510,15 +510,15 @@ function print_users_toolbar(){
 				<td><?=$site->sys_sona(array(sona=>'Role', tyyp=>'kasutaja'))?>:&nbsp;</td>
 				<td style="padding-right: 10px;">
 						<!-- Role filter -->
-						<?############### ROLE selectbox 
+						<?php ############### ROLE selectbox 
 						$sqltmp = $site->db->prepare("SELECT * FROM roles ORDER BY name");
 						$sthtmp = new SQL($sqltmp);				
 						?>
 						<SELECT NAME="tmp_flt_role" class="scms_flex_input" style="width:160px" onchange="javascript:document.getElementById('searchbox').value='';document.getElementById('searchform_flt_role').value=this.options[this.selectedIndex].value;document.searchform.submit();">
 						<option value=""> -- <?=$site->sys_sona(array(sona => "vali", tyyp=>"admin"))?> -- </option>
-						<?	while($role = $sthtmp->fetch() ){ ?>
+						<?php while($role = $sthtmp->fetch() ){ ?>
 							<option value="<?=$role['role_id']?>" <?=($site->fdat['flt_role']==$role['role_id']?' selected':'')?>><?=$role['name']?></option>
-						<?} ?>
+						<?php } ?>
 
 						</SELECT>
 						<!-- //Role filter -->
@@ -526,14 +526,14 @@ function print_users_toolbar(){
 			</TR>
             </TR>
           </TABLE>
-	<?
+	<?php 
 	# / FUNCTION BAR TABLE
 	################################
 	?>	  
 		  </td>
       </tr>
   <!-- //Toolbar -->
-<?
+<?php 
 }
 # / FUNCTION print_users_toolbar
 ##############################
@@ -577,7 +577,7 @@ function get_allowed_groups(){
 	# save read-allowed groups ID-s
 	$read_allowed_groups = array();
 	foreach($aclpermissions as $perm_group_id => $perm){
-		if($perm['R']){ $read_allowed_groups[] = $perm_group_id; }
+		if(is_array($perm) && $perm['R']){ $read_allowed_groups[] = $perm_group_id; }
 	}
 	#echo printr($read_allowed_groups);
 

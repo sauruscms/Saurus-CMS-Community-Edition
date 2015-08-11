@@ -48,7 +48,7 @@ if (!$site->CONF['users_can_delete_comment']) {
 		window.opener.location = window.opener.location;
 		window.close();
 //--></SCRIPT>
-<?
+<?php 
 }
 
 if ($site->fdat['op2'] == 'deleteconfirmed') {
@@ -156,7 +156,7 @@ if ($site->fdat['op2'] == 'deleteconfirmed') {
 		window.opener.location = window.opener.location;
 		window.close();
 //--></SCRIPT>
-<?
+<?php 
 	}
 } 
 ######################
@@ -179,7 +179,7 @@ else {
 <table border="0" cellpadding="0" cellspacing="0" style="width:100%; height:100%">
   <tr> 
 	<td valign="top" width="100%" class="scms_confirm_delete_cell" height="100%">
-<?
+<?php 
 	$objekt->load_sisu();
 	echo $site->sys_sona(array(sona => "kustuta", tyyp=>"editor"))." \"<b>".substr($objekt->all['text'],0,20).(strlen($objekt->all['text'])>20?'...':'')."</b>\"? ";
 	echo $site->sys_sona(array(sona => "are you sure?", tyyp=>"admin"));

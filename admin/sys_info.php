@@ -123,7 +123,7 @@ $site->debug->msg($sth->debug->get_msgs());
 
 <body>
 <table width="100%" border="0" cellspacing="0" cellpadding="0" height="100%">
-<?
+<?php 
 ################################
 # FUNCTION BAR
 ?>
@@ -131,14 +131,14 @@ $site->debug->msg($sth->debug->get_msgs());
 <TR>
 <TD class="scms_toolbar">
 
-	<?######### FUNCTION BAR ############?>
+	<?php ######### FUNCTION BAR ############?>
       <table width="100%" border="0" cellpadding="0" cellspacing="0">
         <tr> 
-		  <?############ optimize database  ###########?>
-				<TD nowrap><?if($need_optimize && !$site->fdat['optimize']){?><a href="?optimize=1"><?}?><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/exec.png" WIDTH="16" HEIGHT="16" BORDER="0" align=absmiddle><?if($need_optimize && !$site->fdat['optimize']){ echo  '&nbsp;'.$site->sys_sona(array(sona => 'optimize database' , tyyp=>'powertools'))?></a><?} else { echo '&nbsp;'.$site->sys_sona(array(sona => 'Database optimized' , tyyp=>'powertools')); }?></TD>
+		  <?php ############ optimize database  ###########?>
+				<TD nowrap><?php if($need_optimize && !$site->fdat['optimize']){?><a href="?optimize=1"><?php }?><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/exec.png" WIDTH="16" HEIGHT="16" BORDER="0" align=absmiddle><?php if($need_optimize && !$site->fdat['optimize']){ echo  '&nbsp;'.$site->sys_sona(array(sona => 'optimize database' , tyyp=>'powertools'))?></a><?php } else { echo '&nbsp;'.$site->sys_sona(array(sona => 'Database optimized' , tyyp=>'powertools')); }?></TD>
 
 		
-		<?###### wide middle cell ######?>
+		<?php ###### wide middle cell ######?>
 		<td width="100%"></td>
 
 		</tr>
@@ -147,7 +147,7 @@ $site->debug->msg($sth->debug->get_msgs());
 </TD>
 </TR>
 
-<?
+<?php 
 # / FUNCTION BAR
 ################################
 ?>
@@ -157,7 +157,7 @@ $site->debug->msg($sth->debug->get_msgs());
   <tr valign="top"> 
 
 
-<?
+<?php 
 ############################
 # CONTENT TABLE
 ?>
@@ -165,7 +165,7 @@ $site->debug->msg($sth->debug->get_msgs());
 		<TD class="scms_middle_dialogwindow">
 				<table width="100%" border="0" cellspacing="0" cellpadding="0">
                     <tr class="scms_pane_header"> 
-					<?###### icon + headline ######?>
+					<?php ###### icon + headline ######?>
 					<td nowrap>
 					<IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/mime/metainfo.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" align=absmiddle>
 					&nbsp;
@@ -184,14 +184,14 @@ $site->debug->msg($sth->debug->get_msgs());
 					<div id=listing class="scms_middle_div">
 
 
-<?
+<?php 
 
 
 ###########################
 #  print REQUIREMENTS TABLE
 ?>
 
-<?
+<?php 
 $called_from_another_script = 1;
 $path = "../";
 include_once("check_requirements.php");
@@ -213,7 +213,7 @@ unset($path);
 	</TABLE>
 	<!-- content table -->	
 
-<?
+<?php 
 if($site->user) { $site->user->debug->print_msg(); }
 $site->debug->print_msg();
 ?>
@@ -224,7 +224,7 @@ $site->debug->print_msg();
 
 </body>
 </html>
-<?
+<?php 
 ################################
 # function Calculate Files size
 function calc_size($adr,&$total,&$dir,&$size){            

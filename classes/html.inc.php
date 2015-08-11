@@ -155,7 +155,7 @@ function print_kastid () {
 		));
 
 		if ($aken_alamlist->size || $leht->site->admin) {
-			if ($args[on_td]) { ?><td width="<?=$leht->site->dbstyle("menyy_laius","layout")?>" align="center" class=box><? }
+			if ($args[on_td]) { ?><td width="<?=$leht->site->dbstyle("menyy_laius","layout")?>" align="center" class=box><?php }
 
 			# added 12.12.2003 by Dima Bug #744
 			$sql = "SELECT COUNT(*) FROM obj_gallup WHERE on_avatud = '0'";
@@ -175,7 +175,7 @@ function print_kastid () {
 			}
 
 		}
-		if ($args[on_td]) {?></td><?}
+		if ($args[on_td]) {?></td><?php }
 		if($is_custom) {
 			return $custom_objs;
 		} else {

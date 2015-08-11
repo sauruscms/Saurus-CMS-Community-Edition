@@ -73,6 +73,7 @@ function smarty_function_init_page(&$smarty, $params)
 	else $in_editor = 0;
 	
 	// create template object to be passed as global variable
+	$template_obj = new stdClass();
 	$template_obj->all = $template->all;
 	$template_obj->title = $template->all['nimi'];
 	$template_obj->name = $template->all['nimi'];

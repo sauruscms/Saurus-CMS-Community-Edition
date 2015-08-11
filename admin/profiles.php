@@ -229,7 +229,7 @@ if($profile_def['name']){
 <body style="overflow-y: auto; overflow-x: auto;">
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" height="100%">
-<?
+<?php 
 ################################
 # FUNCTION BAR
 ?>
@@ -237,27 +237,27 @@ if($profile_def['name']){
 <TR>
 <TD class="scms_toolbar">
 
-	<?######### PROFILE FUNCTION BAR ############?>
+	<?php ######### PROFILE FUNCTION BAR ############?>
       <table border="0" cellpadding="0" cellspacing="0">
         <tr> 
-			<?############ new dropdown ###########?>
+			<?php ############ new dropdown ###########?>
 				<TD nowrap><a href="javascript:void(0)" id="top4" onclick="show_menu('sub4')"><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/filenew.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" id=pt> <?=$site->sys_sona(array(sona => "new", tyyp=>"editor"))?><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/dropmenu.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" align="absmiddle"></a>
 					<!-- Dropdown -->
 						<div id="sub4" class="scms_dropdown_div" style="padding-left:0;">
 							<TABLE cellpadding=0 cellspacing=0 border=0 width="100%" class="scms_dropdown">
-							<?######## new field?>
+							<?php ######## new field?>
 							<TR>
 								<TD class="scms_dropdown_item"><a href="javascript:void(openpopup('edit_profile.php?op=newdef&pid=<?= $site->fdat['profile_id'] ?>','profile','366','450'))" ><?=$site->sys_sona(array(sona => "vali", tyyp=>"editor"))?></A></TD>
 							</TR>
-							<?######## new profile?>
+							<?php ######## new profile?>
 							<TR>
 								<TD class="scms_dropdown_item"><a href="javascript:void(openpopup('edit_profile.php?op=new&pid=<?= $site->fdat['profile_id']?>&source_table=<?= $site->fdat['source_table']?>','profile','366','450'))" ><?=$site->sys_sona(array(sona => "profile", tyyp=>"editor"))?></A></TD>
 							</TR>
-							<?######## new custom asset?>
+							<?php ######## new custom asset?>
 							<TR>
 								<TD class="scms_dropdown_item"><a href="javascript:void(openpopup('edit_profile.php?op=new','profile','366','450'))" ><?=$site->sys_sona(array(sona => "asset", tyyp=>"editor"))?></A></TD>
 							</TR>
-							<?######## new external table?>
+							<?php ######## new external table?>
 							<TR>
 								<TD class="scms_dropdown_item"><a href="javascript:void(openpopup('db_data.php?op=new','profile','366','150'))" ><?=$site->sys_sona(array(sona => "tabel", tyyp=>"editor"))?></A></TD>
 							</TR>
@@ -265,16 +265,16 @@ if($profile_def['name']){
 						</div>
 					<!-- Dropdown -->
 				</TD>
-		  <?############ edit profile button ###########?>
-				<TD nowrap><?if($site->fdat['profile_id']){?><a href="javascript:void(openpopup('edit_profile.php?op=edit&pid=<?= $site->fdat['profile_id']?>&did=<?= $site->fdat['did']?>','profile','366','450'))"><?}?><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/edit<?=(!$site->fdat['profile_id'] ? '_inactive' : '')?>.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" align=absmiddle> <?=$site->sys_sona(array(sona => "muuda", tyyp=>"editor"))?><?if($site->fdat['profile_id']){?></a><?}?></TD>
+		  <?php ############ edit profile button ###########?>
+				<TD nowrap><?php if($site->fdat['profile_id']){?><a href="javascript:void(openpopup('edit_profile.php?op=edit&pid=<?= $site->fdat['profile_id']?>&did=<?= $site->fdat['did']?>','profile','366','450'))"><?php }?><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/edit<?=(!$site->fdat['profile_id'] ? '_inactive' : '')?>.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" align=absmiddle> <?=$site->sys_sona(array(sona => "muuda", tyyp=>"editor"))?><?php if($site->fdat['profile_id']){?></a><?php }?></TD>
 
-		  <?############ delete profile button ###########?>
-				<TD><?if($site->fdat['profile_id']){?><a href="javascript:void(openpopup('edit_profile.php?op=delete&pid=<?= $site->fdat['profile_id']?>','profile','413','108'))"><?}?><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/delete<?=(!$site->fdat['profile_id'] ? '_inactive' : '')?>.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" align=absmiddle><?if($site->fdat['profile_id']){?></a><?}?></TD>
+		  <?php ############ delete profile button ###########?>
+				<TD><?php if($site->fdat['profile_id']){?><a href="javascript:void(openpopup('edit_profile.php?op=delete&pid=<?= $site->fdat['profile_id']?>','profile','413','108'))"><?php }?><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/delete<?=(!$site->fdat['profile_id'] ? '_inactive' : '')?>.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" align=absmiddle><?php if($site->fdat['profile_id']){?></a><?php }?></TD>
 
-		  <?############ duplicate profile/field button ###########?>
-				<TD><?if($site->fdat['profile_id']){?><a href="javascript:void(openpopup('edit_profile.php?op=duplicate&pid=<?= $site->fdat['profile_id']?>&did=<?=$site->fdat['did']?>','profile','366','450'))"><?}?><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/editcopy<?=(!$site->fdat['profile_id'] ? '_inactive' : '')?>.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" align=absmiddle><?if($site->fdat['profile_id']){?></a><?}?></TD>
+		  <?php ############ duplicate profile/field button ###########?>
+				<TD><?php if($site->fdat['profile_id']){?><a href="javascript:void(openpopup('edit_profile.php?op=duplicate&pid=<?= $site->fdat['profile_id']?>&did=<?=$site->fdat['did']?>','profile','366','450'))"><?php }?><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/editcopy<?=(!$site->fdat['profile_id'] ? '_inactive' : '')?>.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" align=absmiddle><?php if($site->fdat['profile_id']){?></a><?php }?></TD>
 
-				<? /*********************
+				<?php /*********************
 					*  SYNC BUTTON
 					*********************/?>
 				<TD><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/general/s_toolbar_divider.gif" WIDTH="14" HEIGHT="20" BORDER="0" ALT="" align=absmiddle></TD>
@@ -286,7 +286,7 @@ if($profile_def['name']){
 </TD>
 </TR>
 
-<?
+<?php 
 # / FUNCTION BAR
 ################################
 ?>
@@ -294,7 +294,7 @@ if($profile_def['name']){
   <!-- Content area -->
 
   <tr valign="top"> 
-<?
+<?php 
 ############################
 # PROFILE TYPES MENUTREE
 ?>
@@ -310,7 +310,7 @@ if($profile_def['name']){
 					<!-- I grupp -->
 					<tr>
 						<td valign=top>
-     <?
+     <?php 
 	  #####################
 	  # TREE
 		require_once($class_path.'menu.class.php');
@@ -355,7 +355,7 @@ if($profile_def['name']){
 					<tr>
 						<td valign=top>
 
-<?		######## GROUP TREE
+<?php 	######## GROUP TREE
   		$sql = $site->db->prepare("SELECT profile_id AS id, source_table AS parent, name FROM object_profiles WHERE source_table=? ORDER BY name",
 		'groups');
 		$sth = new SQL($sql);
@@ -395,7 +395,7 @@ if($profile_def['name']){
 					<!-- article -->
 					<tr>
 						<td valign=top>
-<?
+<?php 
 
 		######## ARTICLE TREE
   		$sql = $site->db->prepare("SELECT profile_id AS id, source_table AS parent, name FROM object_profiles WHERE source_table=? ORDER BY name",
@@ -438,7 +438,7 @@ if($profile_def['name']){
 					<tr>
 						<td valign=top>
 
-<?
+<?php 
 		######## FILEMANAGER TREE
   		$sql = $site->db->prepare("SELECT profile_id AS id, source_table AS parent, name FROM object_profiles WHERE source_table=? ORDER BY name",
 		'obj_file');
@@ -478,7 +478,7 @@ if($profile_def['name']){
 <!--						<tr>
 						<td valign=top>
 -->
-<?
+<?php 
 		######## DOCUMENT TREE
 
 		/** COMMENT OUT FOR NOW
@@ -525,7 +525,7 @@ COMMENT OUT FOR NOW **/
 					<tr>
 						<td valign=top>
 
-<?
+<?php 
 
 		######## CUSTOM ASSET TREE
   		$sql = $site->db->prepare("SELECT profile_id AS id, source_table AS parent, name FROM object_profiles WHERE source_table=? ORDER BY name",
@@ -568,7 +568,7 @@ COMMENT OUT FOR NOW **/
 					<tr>
 						<td valign=top>
 
-<?
+<?php 
 
 		######## FORMS TREE
   		$sql = $site->db->prepare("SELECT profile_id AS id, source_table AS parent, name FROM object_profiles WHERE source_table LIKE ? ORDER BY name",
@@ -612,7 +612,7 @@ COMMENT OUT FOR NOW **/
 					<tr height=100%>
 						<td valign=top>
 
-<?		########### EXTERNAL TABLES TREES
+<?php 	########### EXTERNAL TABLES TREES
 
 		$sql = $site->db->prepare("show tables");
 		$sth = new SQL($sql);
@@ -676,12 +676,12 @@ COMMENT OUT FOR NOW **/
 </DIV>
 </TD>
 
-<?
+<?php 
 # / PROFILE TYPES MENUTREE
 ############################
 ?>
 
-<?
+<?php 
 ############################
 # MIDDLE LIST
 ?>
@@ -705,7 +705,7 @@ COMMENT OUT FOR NOW **/
 		   <!-- Table header -->	
 			  <tr height=10> 
                 <td valign="top" class="scms_tableheader">
-	<?
+	<?php 
 	####### get assoc.array of visible fieldnames and translations
 #	$visible_fields = get_visible_fields(array(
 #		"prefpage_name" => 'profiles',
@@ -749,7 +749,7 @@ COMMENT OUT FOR NOW **/
 
 				<table width="100%" border="0" cellspacing="0" cellpadding="0" class="scms_table">
 
-				<?
+				<?php 
 # sanity check: kui ei leitud sellise nimega profiili, anda toimetajale veateade ja v�ljuda:
 if(!$profile_def['profile_id']) {
 	if($site->in_admin && $site->fdat['profile_id']) {
@@ -790,25 +790,25 @@ foreach($profile_fields as $key => $value) {
 
 ?>
 				<tr <?=($site->fdat['did'] == $key ? ' class="scms_activerow"' : '')?>> 
-				<?############# active (visible) ?>
-				<td width="20"><img src="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/mime/<?if($value[is_active]){?>visible<?}else{?>hidden<?}?>.png" width="16" height="16" alt="">
+				<?php ############# active (visible) ?>
+				<td width="20"><img src="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/mime/<?php if($value[is_active]){?>visible<?php }else{?>hidden<?php }?>.png" width="16" height="16" alt="">
 
-				<?############# name ?>
+				<?php ############# name ?>
                   <td width="25%" nowrap><a href="<?=$href?>" ondblclick="<?=$dblclick?>"><?= $value[name] ?></a></td>
-				<?############# label ?>
+				<?php ############# label ?>
 				  <td width="25%" nowrap><a href="<?=$href?>" ondblclick="<?=$dblclick?>"><?=$label?></a></td>
-				<?############# data-type ?>
+				<?php ############# data-type ?>
 				  <td width="25%" nowrap><a href="<?=$href?>" ondblclick="<?=$dblclick?>"><?= $value['type'] ?></a></td>
-				<?############# mandatory ?>
-				  <td width="25%" ><?if($value[is_required]){?><img src="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/check.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="Yes"><?}else{?>&nbsp;<?}?></td>
-				<?############# up + down  ?>
+				<?php ############# mandatory ?>
+				  <td width="25%" ><?php if($value[is_required]){?><img src="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/check.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="Yes"><?php }else{?>&nbsp;<?php }?></td>
+				<?php ############# up + down  ?>
 
 				  <td  width="16" align="right"><a href="<?= $site->self ?>?op=up&did=<?= $key ?>&profile_id=<?= $site->fdat['profile_id'] ?>"><img src="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/up_arrow.png" width="16" height="16" border="0" alt="Up"></a></td>
                   <td  width="16" align="right"><a href="<?= $site->self ?>?op=down&did=<?= $key ?>&profile_id=<?= $site->fdat['profile_id'] ?>"><img src="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/down_arrow.png" width="16" height="16" border="0" alt="Down"></a></td>
-				<?############# delete  ?>
+				<?php ############# delete  ?>
 				  <td width="16" align="right"><a href="javascript:void(openpopup('edit_profile.php?op=delete&did=<?= $key ?>&profile_id=<?= $site->fdat['profile_id'] ?>','profile','413','108'))"><img alt="" src="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/delete.png" width="16" height="16"  border=0></a></td>
                 </tr>
-<?
+<?php 
 } # if array
 }
 # / loop over fields

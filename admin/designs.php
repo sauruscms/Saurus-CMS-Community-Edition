@@ -267,12 +267,12 @@ if($site->fdat['op'] == "upload"){
 		<link rel="stylesheet" href="<?=$site->CONF['wwwroot'].$site->CONF['styles_path'];?>/default_admin_page.css" media="screen" />
 		<script type="text/javascript" src="<?=$site->CONF['wwwroot'].$site->CONF['js_path'];?>/yld.js"></script>
 		<script type="text/javascript" src="<?=$site->CONF['wwwroot'].$site->CONF['js_path'];?>/ie_position_fix.js"></script>
-<?if($synced == 1){?>
+<?php if($synced == 1){?>
 	<script type="text/javascript">
 		window.opener.location.href = window.opener.location='designs.php';
 		window.close();
 	</script>
-<?}?>
+<?php }?>
 		<script type="text/javascript">
 			window.onload = function()
 			{
@@ -302,7 +302,7 @@ if($site->fdat['op'] == "upload"){
 							<table cellspacing="0" cellpadding="10" width="100%">
 								<tr>
 									<td>
-<?
+<?php 
 if($ext->error()){
 	echo "<strong><span style='color:red'>".$site->sys_sona(array('sona' => "extension_upload_error", 'tyyp' => 'admin'))."</span></strong>";
 }
@@ -314,7 +314,7 @@ if($ext->error()){
 									<input type="hidden" name="op" value="upload">
 									<input type="file" name="extension" style="width:250px"><br>
 									<input type="checkbox" name="overwrite" id="overwrite" value="yes" 
-									<?
+									<?php 
 	if($site->fdat['upload']){
 		if($site->fdat['overwrite']){
 		echo "checked";
@@ -343,7 +343,7 @@ if($ext->error()){
 </html>
 
 
-<?} else {
+<?php } else {
 
 // single extension popup
 if($site->fdat['extension'])

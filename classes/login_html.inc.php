@@ -114,15 +114,13 @@ function admin_login_form() {
 </head>
 
 <body style="overflow-y: auto; overflow-x: auto;" onLoad="document.forms['loginform'].user.focus()">
-	<?########### FORM ?>
-	  <form method="post" name="loginform" action="<?=$site->wwwroot?><?if($site->in_admin){echo "/admin";}if($site->in_editor){echo "/editor";}?>/index.php">
-	<?
-	foreach ($site->fdat as $key=>$value) {
+	<?php ########### FORM ?>
+	  <form method="post" name="loginform" action="<?=$site->wwwroot?><?php if($site->in_admin){echo "/admin";}if($site->in_editor){echo "/editor";}?>/index.php">
+	<?php 	foreach ($site->fdat as $key=>$value) {
 		if (!is_array($value) && $key!='user' && $key!='pass' && $key != 'Submit' && $key != 'keel' && $key != 'url' && $key != 'op' && !($key == 'op' && $value == 'logout')) {
 	?>
 		<input type="hidden" name="<?php echo htmlspecialchars(xss_clean($key)); ?>" value="<?php echo htmlspecialchars(xss_clean($value)); ?>">
-	<?
-		}
+	<?php 		}
 	}
 	?>
 	<input type=hidden name="op" value="login">
@@ -144,17 +142,17 @@ function admin_login_form() {
 									<a href="<?=$site->wwwroot?>" title="<?=$meta_title?>"><?=strlen($meta_title)>50?substr($meta_title,0,50).'..':$meta_title?></a>
 								</div>
 								<div id="loginmain">
-								<?######## error #######?>
-									<? if ($auth_error == 1) { ?>
+								<?php ######## error #######?>
+									<?php if ($auth_error == 1) { ?>
 										<div class="errormessage"><?=$site->sys_sona(array(sona => "Unauthorized access", tyyp=>"Admin")) ?></div>
-									<? } elseif ($auth_error == 2) { ?>
+									<?php } elseif ($auth_error == 2) { ?>
 										<div class="errormessage"><?=str_replace("[minutes]",$site->CONF['login_locked_time'], $site->sys_sona(array(sona => "Maximum logins error", tyyp=>"Admin"))) ?></div>
 
-									<? } ?>
-								<?### / error ####?>
-									<div></div> <?## IE7 bug - needs this to show errormessage, otherwise it will dissapera#?>
+									<?php } ?>
+								<?php ### / error ####?>
+									<div></div> <?php ## IE7 bug - needs this to show errormessage, otherwise it will dissapera#?>
 									<table>
-								<?######## username #######?>
+								<?php ######## username #######?>
 									<?php
 										$username = '';
 									?>
@@ -162,24 +160,24 @@ function admin_login_form() {
 											<td class="label"><?=$site->sys_sona(array(sona => "Username", tyyp=>"Admin")) ?>:</td>
 											<td><input type="text" name="user" value="<?=xss_clean($username);?>"></td>
 										</tr>
-							<?######## password #######?>
+							<?php ######## password #######?>
 										<tr>
 											<td class="label"><?=$site->sys_sona(array(sona => "Password", tyyp=>"Admin")) ?>:</td>
 											<td><input type="password" name="pass"></td>
 										</tr>
-							<?######## language selectbox:  #######?>
-							<? # show only if more than one language found
+							<?php ######## language selectbox:  #######?>
+							<?php # show only if more than one language found
 								if($lang_count > 1) {
 										?>
 										<tr>
 											<td class="label"><?=$site->sys_sona(array(sona => "translations", tyyp=>"Admin")) ?>:</td>
 											<td><select name="keel"><?=$output?></select></td>
 										</tr>
-									<? }
+									<?php }
 								# otherwise display hidden field with default lang ID value (Bug #2460)		
 								else {	?>
 										<input type="hidden" name="keel" value="<?=$default_admin_lang?>">
-							<?} ?>
+							<?php } ?>
 										<tr>
 											<td colspan="2"><div class="separator"></div></td>
 										</tr>
@@ -187,9 +185,9 @@ function admin_login_form() {
 											<td></td>
 											<td>
 												<input id="loginbutton" type="submit" name="Submit" value="<?=$site->sys_sona(array(sona => "Login", tyyp=>"Admin")) ?>">
-												<? if($site->CONF['allow_forgot_password']){ ?>
+												<?php if($site->CONF['allow_forgot_password']){ ?>
 													<a href="?op=remindpass"><?=$site->sys_sona(array(sona => "Unustasid parooli", tyyp=>"kasutaja"))?></a>
-												<?}?>
+												<?php }?>
 											</td>
 										</tr>
 									</table>
@@ -207,12 +205,11 @@ function admin_login_form() {
 	</table>	
 
 	</form>
-	<?########### / FORM ?>
+	<?php ########### / FORM ?>
 
 	</body>
 	</html>
-	<?
-if($site->user) { $site->user->debug->print_msg(); }
+	<?php if($site->user) { $site->user->debug->print_msg(); }
 # guest debug: 
 if($site->guest) { 	$site->guest->debug->print_msg(); }
 
@@ -279,18 +276,16 @@ header("Content-type: text/html;charset=".$site->encoding);
 	<link rel="stylesheet" type="text/css" href="<?=$site->CONF['wwwroot'].$site->CONF['styles_path'] ?>/loginscreen.css">
 </head>
 
-<body style="overflow-y: auto; overflow-x: auto;" <?if(!$pass_is_sent){?>onLoad="document.forms['loginform'].email.focus()"<?}?>>
+<body style="overflow-y: auto; overflow-x: auto;" <?php if(!$pass_is_sent){?>onLoad="document.forms['loginform'].email.focus()"<?php }?>>
 
-	<?########### FORM ?>
-	  <form method="POST" name="loginform" action="<?=$site->wwwroot?><?if($site->in_admin){echo "/admin";}if($site->in_editor){echo "/editor";}?>/index.php">
-	<?
-	#added by Dima 05.05.2003
+	<?php ########### FORM ?>
+	  <form method="POST" name="loginform" action="<?=$site->wwwroot?><?php if($site->in_admin){echo "/admin";}if($site->in_editor){echo "/editor";}?>/index.php">
+	<?php 	#added by Dima 05.05.2003
 	foreach ($site->fdat as $key=>$value) {
 		if (!is_array($value) && $key!="email" && $key!="op2") {
 	?>
 		<input type="hidden" name="<?php echo htmlspecialchars(xss_clean($key)); ?>" value="<?php echo htmlspecialchars(xss_clean($value)); ?>">
-	<?
-		}
+	<?php 		}
 	}
 	?>
 	<input type=hidden name=op2 value="send">
@@ -311,37 +306,37 @@ header("Content-type: text/html;charset=".$site->encoding);
 									<a href="<?=$site->wwwroot?>" title="<?=$meta_title?>"><?=strlen($meta_title)>50?substr($meta_title,0,50).'..':$meta_title?></a>
 								</div>
 								<div id="loginmain">
-									<?######## error OR ok message #######?>
-									<? if ($site->fdat['form_error']['email'] || $pass_is_sent) { ?>
+									<?php ######## error OR ok message #######?>
+									<?php if ($site->fdat['form_error']['email'] || $pass_is_sent) { ?>
 			
-										<?if($site->fdat['form_error']['email']){?>
+										<?php if($site->fdat['form_error']['email']){?>
 											<div class="errormessage"><?=$site->fdat['form_error']['email']?></div>
-										<?}elseif($pass_is_sent){?>
+										<?php }elseif($pass_is_sent){?>
 											<div class="okmessage"><?=$site->sys_sona(array(sona => "unustatud_parool_saadetud", tyyp=>"system"))?></div>
-										<?}?>
-									<? } ?>						
-									<div></div> <?## IE7 bug - needs this to show errormessage, otherwise it will dissapera#?>
+										<?php }?>
+									<?php } ?>						
+									<div></div> <?php ## IE7 bug - needs this to show errormessage, otherwise it will dissapera#?>
 									<table cellspacing="0" cellpadding="0" border="0">
-								<?if(!$pass_is_sent){?>
+								<?php if(!$pass_is_sent){?>
 											<tr><td colspan=2 class="label"><?=$site->sys_sona(array(sona => "Unustatud parooli saatmine", tyyp=>"kujundus"))?></td></tr>
-										<?}?>
+										<?php }?>
 									
-								<?if(!$pass_is_sent){?>
-								<?######## e-mail #######?>
+								<?php if(!$pass_is_sent){?>
+								<?php ######## e-mail #######?>
 										<tr>
 											<td class="label"><?=$site->sys_sona(array(sona => "Email", tyyp=>"kasutaja"))?>:</td>
 											<td><input type="text" name="email"></td>
 										</tr>
-								<?}?>
+								<?php }?>
 										<tr>
 											<td colspan="2"><div class="separator"></div></td>
 										</tr>					
 										<tr id="bottomrow">
 											<td></td>
 											<td>
-												<?if(!$pass_is_sent){?>
+												<?php if(!$pass_is_sent){?>
 													<input id="loginbutton" type="submit" name="Submit" value="<?=$site->sys_sona(array(sona => "Saada", tyyp=>"kasutaja")) ?>">
-												<?}?>
+												<?php }?>
 												<a href="index.php?id=<?=$site->fdat['id']?>"><?=$site->sys_sona(array(sona => "tagasi", tyyp=>"editor"))?></a>
 											</td>
 										</tr>
@@ -362,12 +357,11 @@ header("Content-type: text/html;charset=".$site->encoding);
 	</table>	
 
 	</form>
-	<?########### / FORM ?>
+	<?php ########### / FORM ?>
 
 	</body>
 	</html>
-<?
-if($site->user) { $site->user->debug->print_msg(); }
+<?php if($site->user) { $site->user->debug->print_msg(); }
 # guest debug: 
 if($site->guest) { 	$site->guest->debug->print_msg(); }
 

@@ -1,5 +1,4 @@
-<?
-# This is a sample admin-page file for the extension "sample" that ships with Saurus CMS installation.
+<?php # This is a sample admin-page file for the extension "sample" that ships with Saurus CMS installation.
 
 
 # Set relative path to the website root (depending on where your admin-page script is located)

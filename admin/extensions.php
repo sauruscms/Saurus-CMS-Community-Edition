@@ -102,17 +102,17 @@ if($site->fdat['op'] == "upload"){
    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 	<head> 	
-		<title>Extension upload<?//=$site->sys_sona(array('sona' => 'images configuration', 'tyyp' => 'Admin'));?></title>
+		<title>Extension upload<?php //=$site->sys_sona(array('sona' => 'images configuration', 'tyyp' => 'Admin'));?></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=<?=$site->encoding;?>">
 		<link rel="stylesheet" href="<?=$site->CONF['wwwroot'].$site->CONF['styles_path'];?>/default_admin_page.css" media="screen" />
 		<script type="text/javascript" src="<?=$site->CONF['wwwroot'].$site->CONF['js_path'];?>/yld.js"></script>
 		<script type="text/javascript" src="<?=$site->CONF['wwwroot'].$site->CONF['js_path'];?>/ie_position_fix.js"></script>
-<?if($synced == 1){?>
+<?php if($synced == 1){?>
 	<script type="text/javascript">
 		window.opener.location.href = window.opener.location='extensions.php';
 		window.close();
 	</script>
-<?}?>
+<?php }?>
 		<script type="text/javascript">
 			window.onload = function()
 			{
@@ -142,7 +142,7 @@ if($site->fdat['op'] == "upload"){
 							<table cellspacing="0" cellpadding="10" width="100%">
 								<tr>
 									<td>
-<?
+<?php 
 if($ext->error()){
 	echo "<strong><span style='color:red'>".$site->sys_sona(array(sona => "extension_upload_error", tyyp=>"admin"))."</span></strong>";
 }
@@ -154,7 +154,7 @@ if($ext->error()){
 									<input type="hidden" name="op" value="upload">
 									<input type="file" name="extension" style="width:250px"><br>
 									<input type="checkbox" name="overwrite" id="overwrite" value="yes" 
-									<?
+									<?php 
 	if($site->fdat['upload']){
 		if($site->fdat['overwrite']){
 		echo "checked";
@@ -183,7 +183,7 @@ if($ext->error()){
 </html>
 
 
-<?}else{?>
+<?php }else{?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 
@@ -197,9 +197,9 @@ if($ext->error()){
 <!--
 	make_breadcrumb('<?= $parent_pagename ?>','<?= $pagename ?>' <?=$breadcrumb_focus_str?>);
 
-	<?if($site->fdat['download'] && $dlzip->error()){?>
+	<?php if($site->fdat['download'] && $dlzip->error()){?>
 		alert('<?=$site->sys_sona(array(sona => "extension_dl_error", tyyp=>"admin"))?>');
-	<?}?>
+	<?php }?>
 //-->
 </SCRIPT>
 </head>
@@ -207,7 +207,7 @@ if($ext->error()){
 <body style="overflow-y: auto; overflow-x: auto;">
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" height="100%">
-<?
+<?php 
 ################################
 # FUNCTION BAR
 ?>
@@ -215,13 +215,13 @@ if($ext->error()){
 <TR>
 <TD class="scms_toolbar">
 
-	<?######### extension FUNCTION BAR ############?>
+	<?php ######### extension FUNCTION BAR ############?>
       <table border="0" cellpadding="0" cellspacing="0">
         <tr> 
 
-		  <?############ SYNC button ###########?>
+		  <?php ############ SYNC button ###########?>
 				<TD><a href="<?= $site->self ?>?op=sync" class="scms_button_img"><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/refresh.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" align=absmiddle>&nbsp;<?=$site->sys_sona(array('sona' => 'Refresh', 'tyyp' => 'admin'))?></a></TD>
-		  <?############ Upload button ###########?>
+		  <?php ############ Upload button ###########?>
 
 				<TD><a href="#" onclick="openpopup('extensions.php?op=upload', 'extension_upload', '350','200');" class="scms_button_img"><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/up.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" align=absmiddle>&nbsp;<?=$site->sys_sona(array('sona' => 'Upload', 'tyyp' => 'admin'))?></a></TD>
 
@@ -231,7 +231,7 @@ if($ext->error()){
 </TD>
 </TR>
 
-<?
+<?php 
 # / FUNCTION BAR
 ################################
 ?>
@@ -239,7 +239,7 @@ if($ext->error()){
   <!-- Content area -->
 
   <tr valign="top"> 
-<?
+<?php 
 ############################
 # extension TYPES MENUTREE
 ?>
@@ -249,7 +249,7 @@ if($ext->error()){
 	<TR>
 
 
-<?
+<?php 
 ############################
 # MIDDLE LIST
 ?>
@@ -257,7 +257,7 @@ if($ext->error()){
 		<TD class="scms_middle_dialogwindow">
 				<table width="100%" border="0" cellspacing="0" cellpadding="0">
                     <tr class="scms_pane_header"> 
-						<?###### icon + headline ######?>
+						<?php ###### icon + headline ######?>
 					<td nowrap>
 					<IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path'].'/gfx/icons/16x16/mime/extension.png'?>" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" align=absmiddle>
 					&nbsp;
@@ -289,7 +289,7 @@ if($ext->error()){
 						}
 					</style>
 
-<? 
+<?php 
 	########## FROM
 	$from_sql = "FROM extensions ";
 
@@ -310,20 +310,20 @@ if($ext->error()){
 ?>
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="scms_table">
 		<tr>
-			<?############# active (visible) ?>
+			<?php ############# active (visible) ?>
 
-			<td><input type="checkbox" disabled="disabled" <?if($ext[is_active]){?>checked="checked"<?}?>></td>
+			<td><input type="checkbox" disabled="disabled" <?php if($ext[is_active]){?>checked="checked"<?php }?>></td>
 
-			<?############# icon ?>
+			<?php ############# icon ?>
 
-			<td width="32"><?if($ext['icon_path']){?><img src="<?=$site->CONF['wwwroot'].'/'.$ext['path'].$ext['icon_path']?>" height="32" width="32" alt=""><?}else{?><img src="<?=$site->CONF['wwwroot'].$site->CONF['img_path']?>/px.gif" height="32" width="32" alt=""><?}?></td>
+			<td width="32"><?php if($ext['icon_path']){?><img src="<?=$site->CONF['wwwroot'].'/'.$ext['path'].$ext['icon_path']?>" height="32" width="32" alt=""><?php }else{?><img src="<?=$site->CONF['wwwroot'].$site->CONF['img_path']?>/px.gif" height="32" width="32" alt=""><?php }?></td>
 			<td width="90%">
 				<table width="100%" border="0" cellspacing="5" cellpadding="0">
-					<?############# name + version + date ?>
+					<?php ############# name + version + date ?>
 					<tr>
 						<td><strong><?= $ext['title'] ?></strong> (<?= $ext['name'] ?>) <?= $ext['version'] ?> <?= ($ext['version_date']>0 ? $ext['fversion_date'] : '')?></td>
 					</tr>
-					<?############# description ?>
+					<?php ############# description ?>
 					<tr>
 						<td><?= $ext['description'] ?></td>
 					</tr>
@@ -334,12 +334,12 @@ if($ext->error()){
 			</td>
 
 			<td width="50"><ul class="scms_button_row" style="float: right;">
-			<?if($ext['is_downloadable']=='1'){?><li><a href="extensions.php?download=<?=$ext['extension_id'];?>" class="button_download"></a></li><?}?>
+			<?php if($ext['is_downloadable']=='1'){?><li><a href="extensions.php?download=<?=$ext['extension_id'];?>" class="button_download"></a></li><?php }?>
 			<li><a href="javascript:void(openpopup('edit_extension.php?op=uninstall&name=<?= $ext['name'] ?>','extension','413','208'))" class="button_delete"></a></li></ul>
 				<img src="<?=$site->CONF['wwwroot'].$site->CONF['img_path']?>/px.gif" height="32" width="32" alt=""></td>
 		</tr>
 	</table>
-<?
+<?php 
 }
 # / loop over records
 ##################
@@ -366,4 +366,4 @@ if($ext->error()){
 </body>
 
 </html>
-<?}
+<?php }

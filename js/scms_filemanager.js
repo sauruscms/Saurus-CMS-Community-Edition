@@ -835,7 +835,7 @@ function folderUpdated(folder)
 function liveActions()
 {
 	// file and thumbnail selections
-	$('input.file_selector').live('click', function ()
+	$(document).on('click', 'input.file_selector', function ()
 	{
 		if(this.checked)
 		{
@@ -848,19 +848,19 @@ function liveActions()
 	});
 	
 	// thumbnail hover in
-	$('.thumbnail_cell').live('mouseover',	function()
+	$(document).on('click', '.thumbnail_cell', function()
 	{
 		$(this).children('div.thumbnail_links').removeClass('hidden');
 	});
 	
 	// thumbnail hover out
-	$('.thumbnail_cell').live('mouseout',	function()
+	$(document).on('click', '.thumbnail_cell', function()
 	{
 		$(this).children('div.thumbnail_links').addClass('hidden');
 	});
 	
 	//thumbnail edit single
-	$('a.single_file_edit').live('click', function ()
+	$(document).on('click', 'a.single_file_edit', function()
 	{
 		var file_id = $(this).attr('id').replace('file_edit_', '');
 		openpopup('edit.php?op=edit&id=' + file_id + '&callback=window.opener.fileUpdated', 'editfile', 450 , 430);
@@ -869,7 +869,7 @@ function liveActions()
 	//thumbnail edit single
 	if(settings.callback && settings.select_mode == 1)
 	{
-		$('a.single_file_custom_action').live('click', function ()
+		$(document).on('click', 'a.single_file_custom_action', function()
 		{
 			var file_id = $(this).attr('id').replace('file_single_file_custom_action_', '');
 			selectFileById(file_id);
@@ -878,14 +878,14 @@ function liveActions()
 	}
 
 	//thumbnail view link
-	$('a.single_file_view').live('click', function ()
+	$(document).on('click', 'a.single_file_view', function()
 	{
 		var file_id = $(this).attr('id').replace('file_view_', '');
 		openpopup(site_url + '/file.php?' + file_id, 'popup', 10, 10, 'yes');
 	});
 
 	//thumbnail move single
-	$('a.single_file_move').live('click', function ()
+	$(document).on('click', 'a.single_file_move', function()
 	{
 		var file_id = $(this).attr('id').replace('file_move_', '');
 		
@@ -893,7 +893,7 @@ function liveActions()
 	});
 
 	//delete single
-	$('a.single_file_delete').live('click', function ()
+	$(document).on('click', 'a.single_file_delete', function()
 	{
 		var file_id = $(this).attr('id').replace('file_delete_', '');
 		
@@ -901,7 +901,7 @@ function liveActions()
 	});
 
 	//file add favorite
-	$('a.single_file_favorite').live('click', function ()
+	$(document).on('click', 'a.single_file_favorite', function()
 	{
 		var file_id = $(this).attr('id').replace('file_favorite_', '');
 		
@@ -910,7 +910,7 @@ function liveActions()
 
 	var delay; // hover thumbnails delay function
 	
-	$('td.filename_cell').live('mouseover', function ()
+	$(document).on('click', 'td.filename_cell', function()
 	{
 		$('div.preview_thumbnail').addClass('hidden');
 		
@@ -933,7 +933,7 @@ function liveActions()
         }, 750);
 	});
 	
-	$('td.filename_cell').live('mouseout', function ()
+	$(document).on('click', 'td.filename_cell', function()
 	{
         clearTimeout(delay);
         
@@ -943,13 +943,13 @@ function liveActions()
 	});
 	
 	// file list thumbnail hide
-	$('div.preview_thumbnail').live('mouseover', function ()
+	$(document).on('click', 'div.preview_thumbnail', function()
 	{
 			$(this).addClass('hidden');
 	});
 	
 	// favorite folder go to
-	$('a.favorite_link').live('click', function()
+	$(document).on('click', 'a.favorite_link', function()
 	{
 		var objekt_id = $(this).attr('id').replace('favorite_', '');
 		
@@ -1023,13 +1023,14 @@ function liveActions()
 	});
 	
 	// favorite delete
-	$('img.context_button_delete').live('click', deleteFavorite);
+	$(document).on('click', 'img.context_button_delete', deleteFavorite)
 	
 	// sorting actions
-	$('a.sort_by_filename').live('click', function () { toggleSorting('filename')});
-	$('a.sort_by_date').live('click', function () { toggleSorting('date')});
-	$('a.sort_by_size').live('click', function () { toggleSorting('size')});
-	$('a.sort_by_folder').live('click', function () { toggleSorting('folder')});
+	$(document).on('click', 'a.sort_by_filename', function() { toggleSorting('filename')});
+	$(document).on('click', 'a.sort_by_date', function() { toggleSorting('date')});
+	$(document).on('click', 'a.sort_by_size', function() { toggleSorting('size')});
+	$(document).on('click', 'a.sort_by_folder', function() { toggleSorting('folder')});
+	
 }
 
 function showThumbnails(folder)

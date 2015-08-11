@@ -30,7 +30,7 @@ function edit_tyyp_params (){
 	$args[predefined] = $conf->get("predefined");
 	$args[height] = $conf->get("height");
 		?>
-<?
+<?php 
 	# ----------------------- 
 	# valmis mall
 	# ----------------------- 
@@ -45,7 +45,7 @@ function edit_tyyp_params (){
 			</select>
 		  </td>
 		</tr>
-<?
+<?php 
 	# ----------------------- 
 	# Source file
 	# ----------------------- 
@@ -57,7 +57,7 @@ function edit_tyyp_params (){
 		</tr>
 
 
-<?
+<?php 
 	# ----------------------- 
 	# height
 	# ----------------------- 
@@ -68,7 +68,7 @@ function edit_tyyp_params (){
 		  </td>
 		</tr>
 
-<?
+<?php 
 }
 
 
@@ -133,7 +133,7 @@ function salvesta_objekt () {
 				variableFromEditRubriik_id='<?=$objekt->objekt_id ?>';
 			//-->
 			</script>
-<?		
+<?php 	
 		}
 
 

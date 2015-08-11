@@ -219,7 +219,7 @@ function checkIt(string)
 
 <body style="overflow-y: auto; overflow-x: auto;">
 
-<?############ FORM #########?>
+<?php ############ FORM #########?>
 <form name="selectform" action="<?=$site->self?>" method="POST">
 
 <?php create_form_token('edit-permissions'); ?>
@@ -238,16 +238,16 @@ function checkIt(string)
 	
 			<TABLE cellpadding=0 cellspacing=0 border=0>
 			<TR>
-			<?######### SAVE button?>
+			<?php ######### SAVE button?>
 				<TD nowrap><a href="javascript:document.getElementById('selectform_op').value='save';document.forms['selectform'].submit();"><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/filesave.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" id="pt"> <?=$site->sys_sona(array(sona => "salvesta", tyyp=>"editor"))?></a></TD>
-			<?######### NEW role button?>
+			<?php ######### NEW role button?>
 				<TD nowrap><a href="javascript:void(openpopup('edit_role.php?op=new','role','366','150'))"><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/filenew.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" id="pt"> <?=$site->sys_sona(array(sona => "new", tyyp=>"editor"))?></a></TD>
 
-		  <?############ edit role button ###########?>
-				<TD nowrap><?if($site->fdat['role_id']){?><a href="javascript:void(openpopup('edit_role.php?op=edit&role_id=<?= $site->fdat['role_id']?>','role','366','150'))"><?}?><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/edit<?=(!$site->fdat['role_id'] ? '_inactive' : '')?>.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" align=absmiddle> <?=$site->sys_sona(array(sona => "muuda", tyyp=>"editor"))?><?if($site->fdat['role_id']){?></a><?}?></TD>
+		  <?php ############ edit role button ###########?>
+				<TD nowrap><?php if($site->fdat['role_id']){?><a href="javascript:void(openpopup('edit_role.php?op=edit&role_id=<?= $site->fdat['role_id']?>','role','366','150'))"><?php }?><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/edit<?=(!$site->fdat['role_id'] ? '_inactive' : '')?>.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" align=absmiddle> <?=$site->sys_sona(array(sona => "muuda", tyyp=>"editor"))?><?php if($site->fdat['role_id']){?></a><?php }?></TD>
 
-		  <?############ delete role button ###########?>
-				<TD><?if($site->fdat['role_id']){?><a href="javascript:void(openpopup('edit_role.php?op=delete&role_id=<?= $site->fdat['role_id']?>','role','413','108'))"><?}?><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/delete<?=(!$site->fdat['role_id'] ? '_inactive' : '')?>.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" align=absmiddle><?if($site->fdat['role_id']){?></a><?}?></TD>
+		  <?php ############ delete role button ###########?>
+				<TD><?php if($site->fdat['role_id']){?><a href="javascript:void(openpopup('edit_role.php?op=delete&role_id=<?= $site->fdat['role_id']?>','role','413','108'))"><?php }?><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/delete<?=(!$site->fdat['role_id'] ? '_inactive' : '')?>.png" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" align=absmiddle><?php if($site->fdat['role_id']){?></a><?php }?></TD>
 
 			</TR>
 			</TABLE>
@@ -282,7 +282,7 @@ function checkIt(string)
 				<!-- Table data -->
 				<TR height=100%>
 					<TD valign=top>
-<?
+<?php 
 #####################
 # CONTENT
 ?>
@@ -293,19 +293,19 @@ function checkIt(string)
 
 								<!-- Permissions table -->
 								<TD valign=top>
-<?
+<?php 
 ###################
 # PERMISSIONS TABLE
 ?>
 							<TABLE cellpadding=0 cellspacing=0 border=0 class="scms_permissions_table">
-	<?
+	<?php 
 	##################
 	# GROUP ROW
 	?>
 										<TR>
 											<td>&nbsp;</td>
 											<!-- Group selectors -->
-				<?	
+				<?php 
 				####################
 				# GROUP SELECTBOXES
 					# ALL 
@@ -327,17 +327,17 @@ function checkIt(string)
 				?>
 											<!-- //Group selectors -->
 										</TR>
-	<?
+	<?php 
 	# / GROUP ROW
 	##################
 	?>
 
-<?############# idx - unique counter over all rows
+<?php ############# idx - unique counter over all rows
 $idx = 0;
 ?>
 
 	<!-- Division header -->
-	<?
+	<?php 
 	##################
 	# 1. OBJECT 
 	
@@ -348,7 +348,7 @@ $idx = 0;
 	?>
 		<!-- //Division header -->
 		
-<?
+<?php 
 	############ get ACTIVE LANGUAGES
 	$sql = $site->db->prepare("SELECT * FROM keel WHERE keel.on_kasutusel='1'");
 	$sth = new SQL($sql);
@@ -409,7 +409,7 @@ $idx = 0;
 
 ?>	
 		<!-- 1st level -->
-		<?
+		<?php 
 		##################
 		# data row
 		$current_level = 1;
@@ -433,7 +433,7 @@ $idx = 0;
 	?>
 
 	<!-- Division header -->
-	<?
+	<?php 
 	##################
 	# 2. ADMIN
 
@@ -449,7 +449,7 @@ $idx = 0;
 	
 	?>
 		<!-- //Division header -->
-	<?
+	<?php 
 	list($peaosad,$alamlipikud_joined) = get_adminpages_arr();	
 #printr($peaosad);
 	######## loop over MAIN PAGES
@@ -464,7 +464,7 @@ $idx = 0;
 			<td id="section">
 			<IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/general/arrow_closed.gif" WIDTH="16" HEIGHT="16" BORDER="0" alt="expand" id="image<?=$idx?>" style="cursor:hand" onclick="ExpandDetail(<?=$idx?>)" onkeypress="ExpandDetail(<?=$idx?>)" align=absmiddle><a href="#" onclick="ExpandDetail(<?=$idx?>)"><?= $site->sys_sona(array(sona => $pea_name , tyyp=>"admin")) ?></a>
 			</td>
-		<?	#### emtpy cells
+		<?php #### emtpy cells
 		$level=1;
 		foreach($selected_parents as $group) {
 			echo '<td><div id="add_row_div"><INPUT TYPE="checkbox" NAME="tmp_" style="border: 1px solid #f4f4f4" disabled></div></td>';
@@ -472,7 +472,7 @@ $idx = 0;
 		echo '<td><div id="add_row_div"><INPUT TYPE="checkbox" NAME="tmp_" style="border: 1px solid #f4f4f4" disabled></div></td>';
 		?>
 		</TR>
-		<?######## loop over SUBPAGES 
+		<?php ######## loop over SUBPAGES 
 			if($alam_rows) { 
 			 while ($alamlp = $sth->fetch()) {
 			?>
@@ -484,7 +484,7 @@ $idx = 0;
 							<ul>
 						<ul>
 					</td>
-				<?	
+				<?php 
 				#### permission cell 
 				$level=1;
 				foreach($selected_parents as $group) {
@@ -527,17 +527,17 @@ $idx = 0;
 				</TR>
 
 
-			<?
+			<?php 
 			 } # while
 			}	
 			######## / loop over SUBPAGES ?>
-	<?
+	<?php 
 	} 	######## / loop over main pages 
 	# / 2. ADMIN
 	######################
 	?>
 
-	<?
+	<?php 
 	##################
 	# 3. ACL
 	
@@ -552,7 +552,7 @@ $idx = 0;
 	
 	?>
 		<!-- //Division header -->
-	<?
+	<?php 
 	####### get groups
 	if($site->user->is_superuser) { $group_where_str = " 1=1 ";  }
 	else {  $group_where_str = $site->db->prepare(" group_id IN('".join("','",$read_allowed_groups)."')"); }
@@ -581,18 +581,18 @@ $idx = 0;
 	#echo '<br>'.$group_level.". ".$group_name;
 	?>
 		<!-- 1st level -->
-		<TR style="display: <?if($group_level>0) { ?>none<?}?>" id="overview<?=$value['parent'].'_'.$idx?>ACL">
-			<td id="section"><?echo str_repeat('&nbsp;&nbsp;',$group_level);?>
-			<? #### if subtree exists
+		<TR style="display: <?php if($group_level>0) { ?>none<?php }?>" id="overview<?=$value['parent'].'_'.$idx?>ACL">
+			<td id="section"><?php echo str_repeat('&nbsp;&nbsp;',$group_level);?>
+			<?php #### if subtree exists
 			if(is_array(get_array_leafs($temp_tree, $value['id'])) ) {  ?>
 			<IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/general/arrow_closed.gif" WIDTH="16" HEIGHT="16" BORDER="0" alt="expand" id="image<?=$value['id']?>" style="cursor:hand" onclick="ExpandDetail(<?=$value['id']?>)" onkeypress="ExpandDetail(<?=$value['id']?>)" align=absmiddle><a href="#" onclick="ExpandDetail(<?=$value['id']?>)"><?=$group_name?></a>
-			<? } 
+			<?php } 
 			#### if no subtree, show inactive arrow and no link
 			else { ?>
 				<IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/general/arrow_inactive.gif" WIDTH="16" HEIGHT="16" BORDER="0" align=absmiddle><?=$group_name?>
-			<?} # if subtree ?>
+			<?php } # if subtree ?>
 			</td>
-			<?	#### permission cell 
+			<?php #### permission cell 
 			$level=1;
 			foreach($selected_parents as $group) {
 				# if role is selected in the first selectbox, get role permissions
@@ -633,7 +633,7 @@ $idx = 0;
 
 			?>
 		</TR>
-	<?
+	<?php 
 	}
 	} # is_array sorted_tree
 	} # sizeof temp_tree
@@ -644,7 +644,7 @@ $idx = 0;
 	?>
 
 
-		<?
+		<?php 
 	##################
 	# 4. EXTENSIONS
 	
@@ -659,7 +659,7 @@ $idx = 0;
 	
 	?>
 	<!-- //Division header -->
-	<?
+	<?php 
 	####### get extensions
 	if($site->user->is_superuser) { $extension_where_str = " 1=1 ";  }
 	elseif(	sizeof($read_allowed_extensions)>0 ) {  $extension_where_str = $site->db->prepare(" extension_id IN('".join("','",$read_allowed_extensions)."')"); }
@@ -687,18 +687,18 @@ $idx = 0;
 	#echo '<br>'.$extension_level.". ".$extension_name;
 	?>
 		<!-- 1st level -->
-		<TR style="display: <?if($extension_level>0) { ?>none<?}?>" id="overview<?=$value['parent'].'_'.$idx?>EXT">
-			<td id="section"><?echo str_repeat('&nbsp;&nbsp;',$extension_level);?>
-			<? #### if subtree exists
+		<TR style="display: <?php if($extension_level>0) { ?>none<?php }?>" id="overview<?=$value['parent'].'_'.$idx?>EXT">
+			<td id="section"><?php echo str_repeat('&nbsp;&nbsp;',$extension_level);?>
+			<?php #### if subtree exists
 			if(is_array(get_array_leafs($temp_tree, $value['id'])) ) {  ?>
 			<IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/general/arrow_closed.gif" WIDTH="16" HEIGHT="16" BORDER="0" alt="expand" id="image<?=$value['id']?>" style="cursor:hand" onclick="ExpandDetail(<?=$value['id']?>)" onkeypress="ExpandDetail(<?=$value['id']?>)" align=absmiddle><a href="#" onclick="ExpandDetail(<?=$value['id']?>)"><?=$extension_name?></a>
-			<? } 
+			<?php } 
 			#### if no subtree, show inactive arrow and no link
 			else { ?>
 				<IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/general/arrow_inactive.gif" WIDTH="16" HEIGHT="16" BORDER="0" align=absmiddle><?=$extension_name?>
-			<?} # if subtree ?>
+			<?php } # if subtree ?>
 			</td>
-			<?	#### permission cell 
+			<?php #### permission cell 
 			$level=1;
 				foreach($selected_parents as $group) {
 					# if role is selected in the first selectbox, get role permissions
@@ -738,7 +738,7 @@ $idx = 0;
 				}
 			?>
 		</TR>
-	<?
+	<?php 
 	}
 	} # is array
 	########## / loop over extensions
@@ -749,7 +749,7 @@ $idx = 0;
 
 
 	</TABLE>
-<?
+<?php 
 # / PERMISSIONS TABLE
 ###################
 ?>
@@ -759,7 +759,7 @@ $idx = 0;
 							</TR>
 							</TABLE>		
 						</div>
-<?
+<?php 
 # / CONTENT
 #####################
 ?>
@@ -781,14 +781,14 @@ $idx = 0;
 
 
 </form>
-<?############ / FORM #########?>
+<?php ############ / FORM #########?>
 
 </table>
 </body>
 </html>
 
 
-<?
+<?php 
 #################################
 # FUNCTION print_group_selectbox
 /**
@@ -854,28 +854,28 @@ if($options_html || sizeof($members)>0) {
 <TD>
 
 <SELECT NAME="tmp_<?=$group_id?>" class="scms_flex_input" style="width:160px" onchange="javascript:select_acl(this.options[this.selectedIndex].value)">
-	<? # print empty select (not for everybody)
+	<?php # print empty select (not for everybody)
 	########### CHOOSE
 	if($level!='1') { ?>
 		<option value="">--- <?=$site->sys_sona(array(sona => "vali", tyyp=>"admin"))?> ---</option>
-	<?}
+	<?php }
 	########### 1) ROLES: print roles only in the first selectbox (everybody)
 	if($level=='1') { 
 		$sqltmp = $site->db->prepare("SELECT * FROM roles ORDER BY name");
 		$sthtmp = new SQL($sqltmp);
 	?>
 		<optgroup label="<?=$site->sys_sona(array(sona => "roles", tyyp=>"kasutaja"))?>">
-		<? 
+		<?php 
 		while($role = $sthtmp->fetch() ){ ?>
 		<option value="role_id:<?=$role['role_id']?>" <?=($site->fdat['role_id']==$role['role_id']?' selected':'')?>><?=$role['name']?></option>
 
-<?		}
+<?php 	}
 		echo '</optgroup>';
 	}
 	########### 2) GROUPS
 	?>
 	<optgroup label="<?=$site->sys_sona(array(sona => "groups", tyyp=>"kasutaja"))?>">
-	<? echo $options_html; 
+	<?php echo $options_html; 
 	echo '</optgroup>';
 
 	########### 3) MEMBERS: print if previous selectbox group ID found and not everybody
@@ -883,18 +883,18 @@ if($options_html || sizeof($members)>0) {
 ?>
 
 	<optgroup label="<?=$site->sys_sona(array(sona => "users", tyyp=>"admin"))?>">
-<?
+<?php 
 		foreach($members as $member){
 	?>
 		<option value="user_id:<?=$member['user_id']?>" <?=($site->fdat['user_id']==$member['user_id']?' selected':'')?>><?=$member['firstname']?> <?=$member['lastname']?></option>
-		<? } # while
+		<?php } # while
 		echo '</optgroup>';
 	} # /if previous selectbox group ID found
 ?>
 </SELECT>
-<?} # print cell if found something ?>
+<?php } # print cell if found something ?>
 </TD>
-<?
+<?php 
 	} # show group selectbox if READ is allowed OR is superuser
 }
 # / FUNCTION print_group_selectbox
@@ -948,16 +948,16 @@ function print_header_row(){
 	<td class="scms_groupheader"><IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/<?=$gif?>" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" align=absmiddle> 
 	<?=$title?>
 	</td>
-	<? for ($i=1;$i<=$column_count;$i++) {?>
+	<?php for ($i=1;$i<=$column_count;$i++) {?>
 	<td nowrap>
 		<div id="pm_hd1">&nbsp;</div>
-		<?foreach($crud as $char){ ?>
+		<?php foreach($crud as $char){ ?>
 			<div id="pm_hd" title="<?=$crudnames[$char]?>"><?=$char?> </div>
-		<?}?>
+		<?php }?>
 	</td>
-	<? } ?>
+	<?php } ?>
 </TR>
-<?
+<?php 
 }
 # / FUNCTION print_header_row
 #################################
@@ -1005,23 +1005,23 @@ function print_permission(){
 
 ?>
 <TD>
-<?######## CONTROL checkbox?>
+<?php ######## CONTROL checkbox?>
 <div id="add_row_div">
 	<INPUT TYPE="checkbox" NAME="tmpcontrol" title="Add permissions" onclick="javascript:if(this.checked){document.getElementById('<?=$prefix?>').style.display='block';document.getElementById('<?=$prefix?>control').value='1';}else{document.getElementById('<?=$prefix?>').style.display='none';document.getElementById('<?=$prefix?>control').value='0';};" style="border: 1px solid #f4f4f4" <?=$found?'checked':''?> value="1" <?=$u_permission[U]?'':'disabled'?>>
 </div>
 
-<?######## hidden "control" bit: 1/0, if permission row exists in database or not ?>
+<?php ######## hidden "control" bit: 1/0, if permission row exists in database or not ?>
 
 <INPUT TYPE="hidden" NAME="<?=$prefix?>control" id="<?=$prefix?>control" value="<?=$found?'1':'0'?>">
 
-<?######## CRUD checkboxes?>
+<?php ######## CRUD checkboxes?>
 <div id="<?=$prefix?>" name="<?=$prefix?>" style="display: <?=$found?'block':'none'?>">
-<?foreach($crud as $char){ ?>
+<?php foreach($crud as $char){ ?>
 	<INPUT TYPE="checkbox" NAME="<?=$prefix.$char?>" id="<?=$prefix.$char?>" <?=($perm[$char]?' checked':'')?> value="1" <?=$u_permission[U]?'':'disabled'?>>
-<?}?>
+<?php }?>
 </div>
 </TD>
-<?
+<?php 
 }
 # / FUNCTION print_permission
 #################################
@@ -1372,18 +1372,18 @@ function print_obj_row(){
 	$level = $obj['level'];
 
 		?>
-		<TR  style="display: <?if($level>1) { ?>none<?}?>" id="overview<?=$parent.'_'.$idx?>OBJ">
-			<td id="section"><?echo str_repeat('&nbsp;&nbsp;',$level);?>
-			<? #### if subtree exists
+		<TR  style="display: <?php if($level>1) { ?>none<?php }?>" id="overview<?=$parent.'_'.$idx?>OBJ">
+			<td id="section"><?php echo str_repeat('&nbsp;&nbsp;',$level);?>
+			<?php #### if subtree exists
 			if($leafs_found) {  ?>
 			<IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/general/arrow_closed.gif" WIDTH="16" HEIGHT="16" BORDER="0" alt="expand" id="image<?=$tmp_id?>" style="cursor:hand" onclick="ExpandDetail(<?=$tmp_id?>)" onkeypress="ExpandDetail(<?=$tmp_id?>)" align=absmiddle><a href="#" onclick="ExpandDetail(<?=$tmp_id?>)"><?=$obj['name']?></a>
-			<? } 
+			<?php } 
 			#### if no subtree, show inactive arrow and no link
 			else { ?>
 				<IMG SRC="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/general/arrow_inactive.gif" WIDTH="16" HEIGHT="16" BORDER="0" align=absmiddle><?=$obj['name']?>
-			<?} # if subtree ?>
+			<?php } # if subtree ?>
 			</td>
-	<?	######### permission cell 
+	<?php ######### permission cell 
 	$level=1;
 	foreach($selected_parents as $group) {
 		# if role is selected in the first selectbox, get role permissions
@@ -1423,7 +1423,7 @@ function print_obj_row(){
 	}
 	?>
 	</TR>
-<? 
+<?php 
 }
 # / FUNCTION print_obj_row
 #################################

@@ -48,7 +48,7 @@ function smarty_function_init_sites($params,&$smarty) {
 	while ($result = $sth->fetch()) {
 		
 		unset($subsite);
-
+		$subsite = new stdClass();
 		$subsite->id = $result["id"];
 		$subsite->name = $result["name"];
 		$subsite->extension = $result["extension"];

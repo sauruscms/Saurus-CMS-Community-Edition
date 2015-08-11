@@ -1051,7 +1051,7 @@ function xss_clean($str)
 	 * But it doesn't seem to pose a problem.
 	 *
 	 */		
-	$str = str_replace(array('<?php', '<?PHP', '<?', '?>'),  array('&lt;?php', '&lt;?PHP', '&lt;?', '?&gt;'), $str);
+	$str = str_replace(array('<?php', '<?PHP', '<?php ', '?>'),  array('&lt;?php', '&lt;?PHP', '&lt;?', '?&gt;'), $str);
 
 	/*
 	 * Compact any exploded words

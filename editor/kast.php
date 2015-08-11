@@ -43,7 +43,7 @@ if (get_class($kast)=="Objekt" || is_subclass_of($kast,"Objekt")) {
 				<table width="<?=$kast->site->dbstyle("menyy_laius","layout")?>" border="0" cellspacing="0" cellpadding="1">
 				  <tr> 
 					<td width="<?=$kast->site->dbstyle("menyy_laius","layout")?>" class="boxhead" height="24">
-					&nbsp;&nbsp;<?=$kast->pealkiri() ?><? $kast->edit_buttons(array(
+					&nbsp;&nbsp;<?=$kast->pealkiri() ?><?php $kast->edit_buttons(array(
 						tyyp_idlist => "8,2,6,9,13,17",
 					)); ?></td>
 				  </tr>
@@ -55,7 +55,7 @@ if (get_class($kast)=="Objekt" || is_subclass_of($kast,"Objekt")) {
 						  <td><img src="<?=$kast->site->img_path ?>/px.gif" width="<?=$kast->site->dbstyle("menyy_laius","layout")-42?>" height="10"></td>
 						  <td><img src="<?=$kast->site->img_path ?>/px.gif" width="20" height="10"></td>
 						</tr>
-<?
+<?php 
 		} else {
 		//Custom print out
 			
@@ -109,7 +109,7 @@ if (get_class($kast)=="Objekt" || is_subclass_of($kast,"Objekt")) {
 								  <td background="<?=$kast->site->img_path ?>/stripe1.gif"><img src="<?=$kast->site->img_path ?>/px.gif" width="1" height="10"></td>
 								  <td><img src="<?=$kast->site->img_path ?>/px.gif" width="20" height="10"></td>
 								</tr>
-<?
+<?php 
 							}
 							if ($obj->site->in_editor) {
 ?>								
@@ -118,18 +118,18 @@ if (get_class($kast)=="Objekt" || is_subclass_of($kast,"Objekt")) {
 									
 									</td>
 								</tr-->
-<?
+<?php 
 							} # if in_editor
 ?>
 								<tr valign="top"> 
 								  <td align="right" valign="top"><img src="<?=$kast->site->img_path ?>/nupp1.gif" width="10" height="10" align="texttop"></td>
-								  <td><a href="<?=$kast->site->self?>?id=<?=$obj->objekt_id?>" class="navi2_on"><?=$obj->pealkiri()?></a><?=$kast->all[on_kp_nahtav] ? "<br><font class=txt><font class=date>".$obj->aeg()."</font></font>" : ""?><? $obj->edit_buttons(array(
+								  <td><a href="<?=$kast->site->self?>?id=<?=$obj->objekt_id?>" class="navi2_on"><?=$obj->pealkiri()?></a><?=$kast->all[on_kp_nahtav] ? "<br><font class=txt><font class=date>".$obj->aeg()."</font></font>" : ""?><?php $obj->edit_buttons(array(
 										tyyp_idlist	=> 3,
 										only_edit	=> 1,
 									)); ?></td>
 								  <td><img src="<?=$kast->site->img_path ?>/px.gif" width="20" height="10"></td>
 								</tr>
-<?							
+<?php 						
 							$esimene = 0;
 						} else {
 						//Custom print out
@@ -162,7 +162,7 @@ if (get_class($kast)=="Objekt" || is_subclass_of($kast,"Objekt")) {
 				  </tr>
 				</table>
 							  <br>
-<?			
+<?php 		
 			} else {
 				$custom_contents .= "</ul>";
 			}//if is_custom
@@ -177,7 +177,7 @@ if (get_class($kast)=="Objekt" || is_subclass_of($kast,"Objekt")) {
         <table width="<?=$kast->site->dbstyle("menyy_laius","layout")?>" border="0" cellspacing="0" cellpadding="1">
           <tr> 
             <td width="100%" class="boxhead" height="24">
-		&nbsp;&nbsp;<?=$kast->pealkiri() ?><? $kast->edit_buttons(array(
+		&nbsp;&nbsp;<?=$kast->pealkiri() ?><?php $kast->edit_buttons(array(
 			tyyp_idlist => "8,2,6,9,13,17",
 			
 		)); ?></td>
@@ -191,7 +191,7 @@ if (get_class($kast)=="Objekt" || is_subclass_of($kast,"Objekt")) {
 
                   <td><img src="<?=$kast->site->img_path ?>/px.gif" width="20" height="10"></td>
                 </tr>
-<?	
+<?php 
 	
 	} else {
 	//Custom print out
@@ -225,7 +225,7 @@ if (get_class($kast)=="Objekt" || is_subclass_of($kast,"Objekt")) {
                   <td background="<?=$kast->site->img_path ?>/stripe1.gif"><img src="<?=$kast->site->img_path ?>/px.gif" width="1" height="10"></td>
                   <td><img src="<?=$kast->site->img_path ?>/px.gif" width="20" height="10"></td>
                 </tr>
-<?
+<?php 
 					} # if !esimene
 
 					$viit->load_sisu();
@@ -237,17 +237,17 @@ if (get_class($kast)=="Objekt" || is_subclass_of($kast,"Objekt")) {
 
 					</td>
                 </tr-->
-<?
+<?php 
 				  } # if in_editor
 ?>
                 <tr valign="top"> 
                   <td align="right" valign="top"><img src="<?=$kast->site->img_path ?>/nupp1.gif" width="10" height="10" align="texttop"></td>
-                  <td><a href="<?=$viit->all[url] ?>" target="<?=$viit->all[on_uusaken] ? "_blank" : "_self" ?>" class="navi2_on"><?=$viit->pealkiri()?></a><? $viit->edit_buttons(array(
+                  <td><a href="<?=$viit->all[url] ?>" target="<?=$viit->all[on_uusaken] ? "_blank" : "_self" ?>" class="navi2_on"><?=$viit->pealkiri()?></a><?php $viit->edit_buttons(array(
 						tyyp_idlist	=> 3
 					)); ?></td>
                   <td><img src="<?=$kast->site->img_path ?>/px.gif" width="20" height="10"></td>
                 </tr>
-<?     
+<?php     
 				 $esimene=0;
 				} else {
 				//Custom print out
@@ -270,11 +270,11 @@ if (get_class($kast)=="Objekt" || is_subclass_of($kast,"Objekt")) {
 ?>
 				<tr> 
                   <td colspan="3">
-					<? $lingi_alamlist->edit_buttons(array(
+					<?php $lingi_alamlist->edit_buttons(array(
 						tyyp_idlist	=> 3
 					)); ?></td>
                 </tr>
-<?
+<?php 
 				}
 ?>
 
@@ -286,7 +286,7 @@ if (get_class($kast)=="Objekt" || is_subclass_of($kast,"Objekt")) {
           </tr>
         </table>
 					<br>
-<? 	
+<?php 	
 			} else {
 				//Custom print out
 					if ($lingi_alamlist->size==0) {
@@ -309,7 +309,7 @@ if (get_class($kast)=="Objekt" || is_subclass_of($kast,"Objekt")) {
 		<table width="<?=$kast->site->dbstyle("menyy_laius","layout")?>" border="0" cellspacing="0" cellpadding="1">
 			<form action="<?=$kast->site->self?>" method=post>
 			<tr>
-				<td width="<?=$kast->site->dbstyle("menyy_laius","layout")?>" class="boxhead" height="24">&nbsp;&nbsp;<?=$kast->site->user->user_id ? $kast->site->sys_sona(array(sona => "tere", tyyp=>"kasutaja"))." ".$kast->site->user->all['username'] : $kast->pealkiri() ?><? 
+				<td width="<?=$kast->site->dbstyle("menyy_laius","layout")?>" class="boxhead" height="24">&nbsp;&nbsp;<?=$kast->site->user->user_id ? $kast->site->sys_sona(array(sona => "tere", tyyp=>"kasutaja"))." ".$kast->site->user->all['username'] : $kast->pealkiri() ?><?php 
 				$kast->edit_buttons(array(
 					tyyp_idlist => "8,2,6,9,13,17",
 				)); ?></td>
@@ -319,7 +319,7 @@ if (get_class($kast)=="Objekt" || is_subclass_of($kast,"Objekt")) {
 					<table width="100%" border="0" cellspacing="0" cellpadding="11" bgcolor="<?=$kast->site->dbstyle("menyy_taust","color")? $kast->site->dbstyle("menyy_taust","color") :"#FAFAFA" ?>">
 					<tr>
 						<td width="<?=$kast->site->dbstyle("menyy_laius","layout")?>">
-<?
+<?php 
 			} else {
 			//Custom print out
 
@@ -342,7 +342,7 @@ if (get_class($kast)=="Objekt" || is_subclass_of($kast,"Objekt")) {
 
 ?>
 				<font class=<?=($kast->site->agent ? "txt" : "txt1")?>>
-<?
+<?php 
 					# kasutaja login form
 					# vüi tema andmed ja lingid
 					if ($kast->site->user->user_id) {
@@ -357,7 +357,7 @@ if (get_class($kast)=="Objekt" || is_subclass_of($kast,"Objekt")) {
 									<td colspan=2><a href="<?=$kast->site->self?>?id=<?=$kast->objekt_id?>&op=logout&url=<?=$kast->site->safeURI?>" class="navi2_on"><?=$kast->site->sys_sona(array(sona => "Logi valja", tyyp=>"kasutaja"))?></a></td>
 								</tr>
 								</table>
-<?
+<?php 
 					} else {
 						# ----------------
 						# login kast
@@ -389,26 +389,26 @@ if (get_class($kast)=="Objekt" || is_subclass_of($kast,"Objekt")) {
 										<INPUT class=searchbtn type=submit value="<?=$kast->site->sys_sona(array(sona => "nupp login", tyyp=>"kasutaja"))?>">
 									</td>
 								</tr>
-							<? if ($kast->site->CONF['allow_forgot_password']) { ?>
+							<?php if ($kast->site->CONF['allow_forgot_password']) { ?>
 								<tr valign="top"> 
 									<td align="right"><img src="<?=$kast->site->img_path ?>/nupp1.gif" width="10" height="10" align="texttop"></td>
 									<td colspan=2><a href="<?=$kast->site->self?>?id=<?=$kast->objekt_id?>&op=remindpass" class="navi2_on"><?=$kast->site->sys_sona(array(sona => "Unustasid parooli", tyyp=>"kasutaja"))?></a></td>
 								</tr>
-							<? } ?>
-<? if ($kast->site->CONF[users_can_register]==1) { ?>
+							<?php } ?>
+<?php if ($kast->site->CONF[users_can_register]==1) { ?>
 								<tr valign="top"> 
 									<td align="right"><img src="<?=$kast->site->img_path ?>/nupp1.gif" width="10" height="10" align="texttop"></td>
 									<td colspan=2><a href="<?=$kast->site->self?>?id=<?=$kast->objekt_id?>&op=register" class="navi2_on"><?=$kast->site->sys_sona(array(sona => "Registeeru", tyyp=>"kasutaja"))?></a></td>
 								</tr>
-<? } ?>
+<?php } ?>
 								</table>
 								</form>
-<?
+<?php 
 					}
 #					$kast->print_text(); 
 ?>
 							</font>
-<?
+<?php 
 		if($is_custom) {
 			$custom_contents .= ob_get_contents();
 			ob_end_clean();
@@ -427,7 +427,7 @@ if (get_class($kast)=="Objekt" || is_subclass_of($kast,"Objekt")) {
 			</form>
 		</table>
 	<br>
-<?
+<?php 
 		}//if is_custom
 		 } else {
 			if(!$is_custom) {
@@ -443,7 +443,7 @@ if (get_class($kast)=="Objekt" || is_subclass_of($kast,"Objekt")) {
 ?>
 		<table width="<?=$kast->site->dbstyle("menyy_laius","layout")?>" border="0" cellspacing="0" cellpadding="1">
 			<tr>
-				<td width="<?=$kast->site->dbstyle("menyy_laius","layout")?>" class="boxhead" height="24">&nbsp;&nbsp;<?=$kast->pealkiri() ?><? 
+				<td width="<?=$kast->site->dbstyle("menyy_laius","layout")?>" class="boxhead" height="24">&nbsp;&nbsp;<?=$kast->pealkiri() ?><?php 
 				$kast->edit_buttons(array(
 					tyyp_idlist => "8,2,6,9,13,17",
 				)); ?></td>
@@ -453,7 +453,7 @@ if (get_class($kast)=="Objekt" || is_subclass_of($kast,"Objekt")) {
 				 <table width="100%" border="0" cellspacing="0" cellpadding="11" bgcolor="<?=$kast->site->dbstyle("menyy_taust","color")? $kast->site->dbstyle("menyy_taust","color") :"#FAFAFA" ?>">                
 				 <tr>                   
 					 <td width="<?=$kast->site->dbstyle("menyy_laius","layout")?>">
-<?
+<?php 
 			} else {
 			//Custom print out
 
@@ -472,9 +472,9 @@ if (get_class($kast)=="Objekt" || is_subclass_of($kast,"Objekt")) {
 		if(!$is_custom) {
 ?>
 					<font class=<?=($kast->site->agent ? "txt" : "txt1")?>>
-					<? $kast->print_text(); ?>
+					<?php $kast->print_text(); ?>
 					</font>
-<?
+<?php 
 		if ($kast->all[on_pealkiri] || $kast->site->in_editor) {
 ?>
 					</td>
@@ -484,7 +484,7 @@ if (get_class($kast)=="Objekt" || is_subclass_of($kast,"Objekt")) {
 		 </tr>        
 		 </table>
 	<br>
-<?
+<?php 
 		 } else {
 		    echo "<br>";
 		 }
@@ -512,7 +512,7 @@ if (get_class($kast)=="Objekt" || is_subclass_of($kast,"Objekt")) {
 		<table width="<?=$kast->site->dbstyle("menyy_laius","layout")?>" border="0" cellspacing="0" cellpadding="1">
 		<tr>             
 		 <td width="<?=$kast->site->dbstyle("menyy_laius","layout")?>" class="boxhead" height="24">
-			&nbsp;&nbsp;<?=$kast->site->sys_sona(array(sona => 'Gallup', tyyp => "kujundus")) ?><? $kast->edit_buttons(array(
+			&nbsp;&nbsp;<?=$kast->site->sys_sona(array(sona => 'Gallup', tyyp => "kujundus")) ?><?php $kast->edit_buttons(array(
 					tyyp_idlist => "8,2,6,9,13,17",
 				));
 			?></td>
@@ -527,7 +527,7 @@ if (get_class($kast)=="Objekt" || is_subclass_of($kast,"Objekt")) {
 		 <tr>
 		 <td valign="top" colspan="2"><img src="<?=$kast->site->img_path ?>/px.gif" width="1" height="3"></td>
 		 </tr>
-<?
+<?php 
 		} 
 		###### 2) custom html		 
 		else {
@@ -598,7 +598,7 @@ if (get_class($kast)=="Objekt" || is_subclass_of($kast,"Objekt")) {
 			<input type=hidden name="gallup_id" value="<?=$kast->objekt_id ?>">
 			<input type=hidden name="op" value="vote">
 
-<?			####### loop over VASTUS (votes sum)
+<?php 		####### loop over VASTUS (votes sum)
 			while ($vastus = $sth->fetch()) { ?>
 				 <tr>
 				 <td valign="top" width="15">
@@ -606,16 +606,16 @@ if (get_class($kast)=="Objekt" || is_subclass_of($kast,"Objekt")) {
 				 </td>
 				 <td valign="top" class="<?=($kast->site->agent ? "txt" : "txt1") ?>"><label for="vastus_<?=$vastus[gv_id]?>"><?=$vastus[vastus] ?></label></td>
 				 </tr>
-<?			} # while vastus ?> 
+<?php 		} # while vastus ?> 
 
-				<?######## submit-button ?>
+				<?php ######## submit-button ?>
 				<tr align="right">
 					<input type="hidden" name="java_check" value="0">
 					<td valign="top" colspan="2"><input type="submit" name="haaleta" value="<?=$kast->site->sys_sona(array(sona => 'haaleta', tyyp => "kujundus")) ?>" onclick="javascript:return do_it(this.form);" class="searchbtn"></td>
 				</tr>
 			  </form>
 			 </table>
-<?				
+<?php 			
 			$kast->debug->msg($sth->debug->get_msgs());
 		} 
 		#################### / 1. SHOW FORM & radio buttons
@@ -637,7 +637,7 @@ if (get_class($kast)=="Objekt" || is_subclass_of($kast,"Objekt")) {
 			 <tr>
 			 <td valign="top"><img src="<?=$kast->site->img_path ?>/px.gif" width="1" height="3"></td>
 		 </tr>
-<?		###### one colored row
+<?php 	###### one colored row
 		while ($vastus = $sth->fetch()) {
 			$percent = $stat[kokku] ? sprintf('%2.0f',100*($vastus[count])/$stat[kokku]) : 0;
 ?>				
@@ -647,7 +647,7 @@ if (get_class($kast)=="Objekt" || is_subclass_of($kast,"Objekt")) {
 		 <tr>
 			 <td valign="top"><b><font class="<?=($kast->site->agent ? "txt" : "txt1")?>">- <?=$percent ?>%</font></b> <img src="<?=$kast->site->img_path ?>/gallup_bar<?=(($stat[maksi]==$vastus[count] && $vastus[count])? "2":"1") ?>.gif" width="<?= 110 * ($percent/100) ?>" height=8 border="1"></td>
 		 </tr>
-<?
+<?php 
 			} # while vastus
 		
 			############## archive link     # added 12.12.2003 by Dima Bug #744
@@ -658,9 +658,9 @@ if (get_class($kast)=="Objekt" || is_subclass_of($kast,"Objekt")) {
 				 <tr align="right">
 				 <td valign="top"><a href="<?=$kast->site->self ?>?op=gallup_arhiiv" class="navi2_on"><?=$kast->site->sys_sona(array(sona => 'Arhiiv', tyyp => "kujundus")) ?></a></td>
 			 </tr>
-			<?}?>
+			<?php }?>
 			 </table>
-<?		}
+<?php 	}
 		#################### / 2. SHOW RESULTS
 
 		##### 1) default html
@@ -672,7 +672,7 @@ if (get_class($kast)=="Objekt" || is_subclass_of($kast,"Objekt")) {
 		 </tr>        
 		 </table>
 		<br>
-<?		}//if is_custom
+<?php 	}//if is_custom
 
 		##### 2) custom html			
 		if($is_custom) {
@@ -704,7 +704,7 @@ if (get_class($kast)=="Objekt" || is_subclass_of($kast,"Objekt")) {
   <tr> 
                   
   <td class="boxhead" height="24">
-	  &nbsp;&nbsp;<?=$kast->pealkiri() ?><? $kast->edit_buttons(array(
+	  &nbsp;&nbsp;<?=$kast->pealkiri() ?><?php $kast->edit_buttons(array(
 					tyyp_idlist => "8,2,6,9,13,17",
 				));
 	?></td>
@@ -712,7 +712,7 @@ if (get_class($kast)=="Objekt" || is_subclass_of($kast,"Objekt")) {
                 
   <tr valign="top"> 
                   
-  <td class=box><? if(strlen(trim($src_file))>0) {?><iframe name="iifreim" src="<?=$src_file?>" width="<?= ($is_custom)?"100%":$kast->site->dbstyle("menyy_laius","layout");?>" frameborder=0 height="<?=$height?>" ></iframe><?}?></td>
+  <td class=box><?php if(strlen(trim($src_file))>0) {?><iframe name="iifreim" src="<?=$src_file?>" width="<?= ($is_custom)?"100%":$kast->site->dbstyle("menyy_laius","layout");?>" frameborder=0 height="<?=$height?>" ></iframe><?php }?></td>
   </tr>
   
               
@@ -720,7 +720,7 @@ if (get_class($kast)=="Objekt" || is_subclass_of($kast,"Objekt")) {
 	  <br>
 
 
-<?
+<?php 
 	} else {
 	//Custom print out
 
@@ -776,7 +776,7 @@ if (get_class($kast)=="Objekt" || is_subclass_of($kast,"Objekt")) {
  </tr>        
  </table>
 	 <br>
-<?
+<?php 
 			} else {
 			//Custom print out
 				ob_start();

@@ -780,8 +780,7 @@ if(!$template->on_page_templ && $site->master_tpl['ttyyp_id']) {
 			  <meta name="description" content="<?=$leht->meta[description] ?>">
 			  <link rel="stylesheet" href="<?=$leht->site->CONF[wwwroot] ?>/styles.php">
 
-		<?
-		}
+		<?php 		}
 
 		# / kui sisumall on ..
 		#######################

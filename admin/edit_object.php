@@ -227,7 +227,7 @@ function edit_general_object () {
 
 	<!-- Scrollable area -->
 	<div id=listing class="scms_middle_div">
-<?
+<?php 
 #####################
 # pearubriigi leidmine
 
@@ -246,14 +246,14 @@ $pearubriik = $par_obj->all[sys_alias]=="home" ? 1 : 0;
 	<input type=hidden name="controll_form_was_opened" value="">
 	<input type=hidden name="button_checkform_was_pressed" value="">
 
-<? if ($op=='edit') {?>
+<?php if ($op=='edit') {?>
 	<iframe src="checkin.php?objekt_id=<?=$objekt->objekt_id ?>" style="width:1;height:1;visibility:hidden;"></iframe>
-<? } ?>
+<?php } ?>
 
 	</td>
 </tr></form>
 
-<? /* Paneme selle tag siia, et ei olnud liiga suur tyhi rida */ ?>
+<?php /* Paneme selle tag siia, et ei olnud liiga suur tyhi rida */ ?>
 <form action="edit.php" method=post name=frmEdit id=frmEdit  enctype="multipart/form-data">
 </table>
 
@@ -281,7 +281,7 @@ $pearubriik = $par_obj->all[sys_alias]=="home" ? 1 : 0;
 	<script>
 		document.frmEdit.opener_location.value = window.opener.location;
 	</script>
-<?
+<?php 
 	###################
 	# special case: if object is  picture
 
@@ -296,14 +296,14 @@ $pearubriik = $par_obj->all[sys_alias]=="home" ? 1 : 0;
 	# usual case: if object is not picture
 	else {
 ?>
-<?################# CONTENT - SURROUNDING SCROLL TABLE ################?>
+<?php ################# CONTENT - SURROUNDING SCROLL TABLE ################?>
 
 <table width="100%"  border="0" cellspacing="3" cellpadding="0" class="scms_table">
 <tr>
 <td>
 
 <br>
-<?######################### MAIN TABLE ##########################?>
+<?php ######################### MAIN TABLE ##########################?>
 <!--<fieldset class="scms_borderbox">
 <legend><?=$site->sys_sona(array(sona => "Main info", tyyp=>"kasutaja"))?></legend>
 -->
@@ -317,7 +317,7 @@ $pearubriik = $par_obj->all[sys_alias]=="home" ? 1 : 0;
             </div>
           </td>
         </tr>
-<?
+<?php 
 	###################
 	# pealkiri
 
@@ -341,7 +341,7 @@ $pearubriik = $par_obj->all[sys_alias]=="home" ? 1 : 0;
 			<textarea name="pastearea" rows="5" cols="30" style="width:1;height:1;visibility:hidden;"></textarea>
           </td>
         </tr>
-<?	# / pealkiri
+<?php # / pealkiri
 	###################
 
 	###################
@@ -355,9 +355,9 @@ $pearubriik = $par_obj->all[sys_alias]=="home" ? 1 : 0;
 	<input type=checkbox name="on_foorum" value="1" <?=($objekt->all[on_foorum] || ($op=="new" && $site->CONF[default_comments]) ? "checked" : "")?>>
             </td>
         </tr>
-<? } else { ?>
+<?php } else { ?>
 		<input type="hidden" name="on_pealkiri" value=1>
-<? }
+<?php }
 	# / checkbox "pealkiri on n�htav" + "foorum lubatud"
 	###################
 
@@ -372,9 +372,9 @@ $pearubriik = $par_obj->all[sys_alias]=="home" ? 1 : 0;
 </table>
 <!--</fieldset>-->
 
-<?######################### / MAIN TABLE ##########################?>
+<?php ######################### / MAIN TABLE ##########################?>
 <br><br>
-<?###################### ADVANCED TABLE #################?>
+<?php ###################### ADVANCED TABLE #################?>
 
 	  <table width="100%"  border="0" cellspacing="3" cellpadding="0" class="scms_borderbox">
         <tr>
@@ -384,7 +384,7 @@ $pearubriik = $par_obj->all[sys_alias]=="home" ? 1 : 0;
             </div>
           </td>
         </tr>
-<?
+<?php 
 if($tyyp['klass'] == 'file') {
 	print_parent_selectbox();
 }
@@ -419,14 +419,14 @@ if($tyyp['klass'] != 'file' && $tyyp['klass'] != 'folder') {
 ?>
 
 </table>
-<?###################### / ADVANCED TABLE #################?>
-<?  if($tyyp['klass'] != 'file' || $site->CONF['allow_change_position']) { # show advanced table?>
+<?php ###################### / ADVANCED TABLE #################?>
+<?php  if($tyyp['klass'] != 'file' || $site->CONF['allow_change_position']) { # show advanced table?>
 <br>
 <br>
      <table width="100%"  border="0" cellspacing="3" cellpadding="0" class="scms_borderbox">
 
-<?###################### PUBLISHING & LOCATION TABLE #################?>
-<?
+<?php ###################### PUBLISHING & LOCATION TABLE #################?>
+<?php 
 	### dont show publish information for files and folders
 	if($tyyp['klass'] != 'file' && $tyyp['klass'] != 'folder') {
 
@@ -467,7 +467,7 @@ if($tyyp['klass'] != 'file' && $tyyp['klass'] != 'folder') {
             </table>
           </td>
         </tr>
-<?
+<?php 
 	} # not "file"
 
 	############################
@@ -484,27 +484,27 @@ if($tyyp['klass'] != 'file' && $tyyp['klass'] != 'folder') {
 		<input name="kesk" size="2" class="scms_flex_input" style="width:40px" value="<?=($op=='edit'? $objekt->all[kesk] : $site->fdat[kesk]) ?>">
 		</td>
 	</tr>
-<?	}
+<?php }
 	# muidu n�idata hidden value-t
 	else { ?>
 		<input type="hidden" name="kesk" value="<?=($op=='edit'? $objekt->all[kesk] : $site->fdat[kesk]) ?>">
-<?	}
+<?php }
 	# / position
 	############################
 ?>
       </table>
-<?}# show advanced table?>
-<?###################### / PUBLISHING & LOCATION TABLE #################?>
+<?php }# show advanced table?>
+<?php ###################### / PUBLISHING & LOCATION TABLE #################?>
 </td>
 </tr>
 </table>
-<?################# / CONTENT - SURROUNDING SCROLL TABLE ################?>
+<?php ################# / CONTENT - SURROUNDING SCROLL TABLE ################?>
 	</div>
 	<!-- //Scrollable area -->
 
     </td>
   </tr>
-	<?#################### BUTTONS ###########?>
+	<?php #################### BUTTONS ###########?>
 	  <tr>
 	  <td align="right" valign="top" class="scms_dialog_area_bottom">
 	  <?php if ($tyyp['klass'] == 'asset') { ?>
@@ -514,12 +514,12 @@ if($tyyp['klass'] != 'file' && $tyyp['klass'] != 'folder') {
 	  			<td align="right">
 	  <?php } ?>
 
-	<? # dont show "Apply" button for new file if opened from WYSIWYG editor ?>
-	<?if( ! ($site->fdat['op'] == 'new' && $tyyp[klass] == 'file' && $site->fdat['in_wysiwyg']) ){?>
+	<?php # dont show "Apply" button for new file if opened from WYSIWYG editor ?>
+	<?php if( ! ($site->fdat['op'] == 'new' && $tyyp[klass] == 'file' && $site->fdat['in_wysiwyg']) ){?>
 
 		<input type="button" value="<?=$site->sys_sona(array(sona => "Apply", tyyp=>"editor")) ?>" onclick="javascript:frmEdit.op2.value='save'; body.style.cursor = 'wait';if(typeof url_browse == 'object'){url_browse.removeNode()}; frmEdit.submit();">
 
-	<?}?>
+	<?php }?>
 	   <input type="button" value="<?=$site->sys_sona(array(sona => "Salvesta", tyyp=>"editor")) ?>" onclick="javascript:frmEdit.op2.value='saveclose'; body.style.cursor = 'wait';if(typeof url_browse == 'object'){url_browse.removeNode()}; frmEdit.submit();">
 
 	   <input type="button" value="<?=$site->sys_sona(array(sona => "Close", tyyp=>"editor")) ?>" onclick="javascript:window.close();">
@@ -533,16 +533,16 @@ if($tyyp['klass'] != 'file' && $tyyp['klass'] != 'folder') {
 
 </table>
 
-<?
+<?php 
 }
 # / if object is not picture
 ###################
 ?>
 
 </form>
-<? $site->debug->msg("EDIT: Objekti loomine, vormi kuvamine");?>
+<?php $site->debug->msg("EDIT: Objekti loomine, vormi kuvamine");?>
 
-<?
+<?php 
 }
 # / FUNCTION EDIT_object
 #################
@@ -1260,7 +1260,7 @@ else {
 		<br>
 		<a href="javascript:history.back();"><?=$site->sys_sona(array(sona => "Tagasi", tyyp=>"editor")) ?></a>
 	</font></center>
-<?
+<?php 
 	}
 	# / print errors
 	###################
@@ -1644,7 +1644,7 @@ function print_parent_selectbox() {
 			}
 
 		  </script>
-<?
+<?php 
 if(is_array($rubriigid)){
 foreach($topparents as $k=>$v){
 	if(key ($rubriigid) == $k){
@@ -1655,7 +1655,7 @@ foreach($topparents as $k=>$v){
 		  <table cellpadding="0" cellspacing="0" class="cf_container">
 			<tr>
 				<th>
-				<input type="hidden" name="rubriik[]" id="rubriik" value="<?echo key ($rubriigid);?>">
+				<input type="hidden" name="rubriik[]" id="rubriik" value="<?php echo key ($rubriigid);?>">
 				<span id="section_name"><a href="javascript:chooseSection();"><?=($section_name ? $section_name : $site->sys_sona(array('sona' => 'choose_section', 'tyyp' => $EXTENSION['name'])));?></a></span></th>
 				<td ><a href="javascript:chooseSection();">..</a></td>
 			</tr>
@@ -1664,7 +1664,7 @@ foreach($topparents as $k=>$v){
 
 		  </td>
 		</tr>
-	<?
+	<?php 
 	} # rubriike, mis on sys_alias, ei tohi �mber t�sta
 	} # if lubatud klass, kellele n�idata rubriigi selectboxi
 
@@ -1676,14 +1676,14 @@ foreach($topparents as $k=>$v){
 		  <tr>
 		  <td nowrap><?=$site->sys_sona(array(sona => "Rubriigid", tyyp=>"editor"))?>:</td>
 		  <td width="100%">
-			<? # print parent names
+			<?php # print parent names
 			if(sizeof($parent_name_arr)>0)	{
 				echo join("<br>",$parent_name_arr);
 			}
 		?>
 		  </td>
 		</tr>
-	<?
+	<?php 
 	} # dont show selectbox
 
 }

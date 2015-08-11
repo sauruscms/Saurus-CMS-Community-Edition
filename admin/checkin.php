@@ -115,6 +115,6 @@ nocache=<?=time() ?>
 </body>
 </html>
 
-<? 
+<?php 
 } // if !unlock	
 } // if fdat[objekt_id] 

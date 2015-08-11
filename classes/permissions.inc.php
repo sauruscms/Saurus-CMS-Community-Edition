@@ -114,7 +114,7 @@ function get_copypermissions_url(acl,id){
 }
 -->
 </script>
-<?
+<?php 
 	######## gather all fdat values into url string
 	foreach($site->fdat as $fdat_field=>$fdat_value) { 
 		if($fdat_field != 'id'){
@@ -297,11 +297,11 @@ function get_copypermissions_url(acl,id){
             <tr> 
               <td colspan="2" align="right" class="scms_scrolltable_header2" style="padding-right:30px"> 
                 <table  border="0" cellspacing="0" cellpadding="3" class="scms_scrolltable_header2" >
-				<?############## C R U P D S ###########?>
+				<?php ############## C R U P D S ###########?>
                   <tr> 
-				  <? foreach($crud as $char) {?>
-                    <td width="24" align="center"><?if($char!='S'){?><a href="#" title="<?=$crudnames[$char]?>"><?=$char?></a><?}?></td>
-				  <?}?>
+				  <?php foreach($crud as $char) {?>
+                    <td width="24" align="center"><?php if($char!='S'){?><a href="#" title="<?=$crudnames[$char]?>"><?=$char?></a><?php }?></td>
+				  <?php }?>
                   </tr>
                 </table>
               </td>
@@ -310,7 +310,7 @@ function get_copypermissions_url(acl,id){
         </div>
         <div id="scrolltableDiv" class="scms_scrolltable" style="height:290px"> 
           <table width="100%"  border="0" cellspacing="0" cellpadding="3">
-<?	
+<?php 
 ####################
 # 1. OBJECT PERMISSIONS saved into database (if found any)
 #printr($db_permissions);
@@ -386,7 +386,7 @@ if(!$saved_permissions_found && ($args['type']=='OBJ' || $args['type']=='ACL') )
   </tr>
 
 </form>
-<?
+<?php 
 	}  # if permission type provided
 }
 # / FUNCTION EDIT_PERMISSIONS
@@ -441,16 +441,16 @@ function print_permission_row($args){
 		$acl = $perm['is_role'] ? 'role': ($perm['is_group']?'group': 'user');
 	?>
 
-		<?######### name ########?>
+		<?php ######### name ########?>
 			<tr> 
               <td nowrap  width="16"><img alt="" src="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/users/<?=$perm['is_role'] ? 'contacts': ($perm['is_group']?'group':'user')?>.png" width="16" height="16"></td>
 			  <td nowrap><a href="#" title="<?=$href_title?>"><?=$perm['name']?></a>
 
-		<?######### hidden ID (eg permission_user_11, permission_group_1) ########?>
+		<?php ######### hidden ID (eg permission_user_11, permission_group_1) ########?>
 			 <input type=hidden name=permission_<?=$acl?>_<?=$id?> value="<?=$id?>">
 			 </td>
-		  <? foreach($crud as $char) {?>
-			<?if($char == 'S') { ########## subtree copy button 
+		  <?php foreach($crud as $char) {?>
+			<?php if($char == 'S') { ########## subtree copy button 
 
 			$copy_href .= '&perm_user_id='.$perm['user_id'];
 			$copy_href .= '&perm_group_id='.$perm['group_id'];
@@ -463,29 +463,29 @@ function print_permission_row($args){
 				<input id="<?=$acl?>_<?=$char?>_<?=$id?>" name="<?=$acl?>_<?=$char?>_<?=$id?>" type="checkbox" value="1">
 old checkbox-->
               </td>
-			<?} else { ############ C/R/U/P/D ?>
+			<?php } else { ############ C/R/U/P/D ?>
 			 <td align="center" width="24">
 				
-				<?
+				<?php 
 				### exception for public folder: Read is already ON and disabled (Bug #2216)
 				if($char == 'R' && $is_public_folder) {  ?>
 					<input type="hidden" name="<?=$acl?>_<?=$char?>_<?=$id?>" value="1">
 					<input name="tmp" type="checkbox" value="1" checked disabled> 
-				<?}
+				<?php }
 				### usual case
 				else{?>
 	                <input id="<?=$acl?>_<?=$char?>_<?=$id?>" name="<?=$acl?>_<?=$char?>_<?=$id?>" type="checkbox" value="1" <?=($perm[$char]?' checked':'')?> onclick="sanity_check(this,'<?=$acl?>','<?=$char?>','<?=$id?>');">
-				<?}?>
+				<?php }?>
               </td>
-			<?}?>
-		  <? } ?>
-			<?	######## delete button: OBJ ONLY:dont allow to delete everybody row ?>
-              <td align="center" width="24"><ul class="scms_button_row"><li><?if(!($args['type']=='OBJ' && $perm['predefined_group'])){?><a href="<?=$remove_href?>" class="button_delete" title="<?=$site->sys_sona(array(sona => "Kustuta", tyyp=>"editor"))?>"></a><?} else { ?><img src="<?=$site->CONF['wwwroot'].$site->CONF['img_path']?>/px.gif"  width="11" height="12" border="0"><?}?></li></ul></td>
+			<?php }?>
+		  <?php } ?>
+			<?php ######## delete button: OBJ ONLY:dont allow to delete everybody row ?>
+              <td align="center" width="24"><ul class="scms_button_row"><li><?php if(!($args['type']=='OBJ' && $perm['predefined_group'])){?><a href="<?=$remove_href?>" class="button_delete" title="<?=$site->sys_sona(array(sona => "Kustuta", tyyp=>"editor"))?>"></a><?php } else { ?><img src="<?=$site->CONF['wwwroot'].$site->CONF['img_path']?>/px.gif"  width="11" height="12" border="0"><?php }?></li></ul></td>
 
-<!--old              <td align="center" width="24"><?if(!($args['type']=='OBJ' && $perm['predefined_group'])){?><a href="<?=$remove_href?>"><img src="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/delete.png" alt="Remove" width="16" height="16" border="0"></a><?} else { ?><img src="<?=$site->CONF['wwwroot'].$site->CONF['img_path']?>/px.gif"  width="11" height="12" border="0"><?}?></td>
+<!--old              <td align="center" width="24"><?php if(!($args['type']=='OBJ' && $perm['predefined_group'])){?><a href="<?=$remove_href?>"><img src="<?=$site->CONF['wwwroot'].$site->CONF['styles_path']?>/gfx/icons/16x16/actions/delete.png" alt="Remove" width="16" height="16" border="0"></a><?php } else { ?><img src="<?=$site->CONF['wwwroot'].$site->CONF['img_path']?>/px.gif"  width="11" height="12" border="0"><?php }?></td>
 -->
             </tr>
-<?
+<?php 
 }
 # / FUNCTION PRINT_PERMISSION_ROW
 #################
@@ -654,7 +654,7 @@ function copy_permissions ($args) {
 	?>
 	<tr>
 	<td valign="top" class="scms_confirm_alert_cell" height="100%">
-	<?
+	<?php 
 	#echo "ID:". $source_id.' / CRUD: '.$crud;
 
 	if($args['type']) {
@@ -810,13 +810,13 @@ function copy_permissions ($args) {
 	?>
     </td>
   </tr>
-	<?#################### BUTTONS ###########?>
+	<?php #################### BUTTONS ###########?>
 	  <tr> 
 	  <td align="right" valign="top" class="scms_dialog_area_bottom"> 
 	   <input type="button" value="<?=$site->sys_sona(array(sona => "Close", tyyp=>"editor")) ?>" onclick="javascript:window.close();">
     </td>
   </tr>
-<?
+<?php 
 }
 # / FUNCTION COPY_PERMISSIONS
 #################

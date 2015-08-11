@@ -51,20 +51,19 @@ function edit_objekt () {
 		}
 	}
 	</script>
-	 <?########### fail ?>
+	 <?php ########### fail ?>
 		<tr>
 		  <td nowrap><?=$site->sys_sona(array(sona => "filename", tyyp=>"editor"))?>:</td>
 		  <td><input type="file" name=file onChange="setPealkiri(file.value)" class="scms_flex_input" style="width:100%"></td>
 		</tr>
-	 <?########### kirjeldus ?>
+	 <?php ########### kirjeldus ?>
 		<tr>
 		  <td nowrap><?=$site->sys_sona(array(sona => "Kirjeldus", tyyp=>"editor"))?>:</td>
 		  <td><textarea name="kirjeldus" rows=5  style="width:100%"><?=htmlspecialchars(stripslashes($objekt->all[kirjeldus]))?></textarea></td> 
 		</tr>
-	 <?########### autor ?>
+	 <?php ########### autor ?>
 
-	<?
-	$sql = "select distinct autor from obj_dokument where autor not like '' order by autor";
+	<?php 	$sql = "select distinct autor from obj_dokument where autor not like '' order by autor";
 	$sth = new SQL($sql);
 	$site->debug->msg($sth->debug->get_msgs());
 	?>
@@ -73,8 +72,7 @@ function edit_objekt () {
 		  <td><input type="text" class="scms_flex_input" style="width:80px" name=autor value="<?=htmlspecialchars($objekt->all[autor])?>">
 		  <select name=autor_select onChange="frmEdit.autor.value = frmEdit.autor_select[frmEdit.autor_select.selectedIndex].value">
 			<option>vali</option>
-<?
-	while ($autor=$sth->fetchsingle()) {
+<?php 	while ($autor=$sth->fetchsingle()) {
 			print "<option value=\"$autor\">$autor</option>";
 	}
 ?>
@@ -82,13 +80,12 @@ function edit_objekt () {
 		  </td>
 		</tr>
 
-	 <?########### aeg ?>
+	 <?php ########### aeg ?>
 		<tr>
 		  <td nowrap><?=$site->sys_sona(array(sona => "Aeg", tyyp=>"editor"))?>:</td>
 		  <td><input type="text" class="scms_flex_input" style="width:80px"  name=aeg value="<?=htmlspecialchars($aeg)?>"></td>
 		</tr>
-<?
-	####################
+<?php 	####################
 	# Additional info: attributes list
 
 		# get profile
@@ -153,8 +150,7 @@ function salvesta_objekt () {
 				alert('<?=$site->sys_sona(array(sona => "big_file", tyyp=>"editor"))?>');
 			//-->
 			</SCRIPT>
-		<?
-		}
+		<?php 		}
 
 		if (file_exists($file[tmp_name])) {
 			$fd = fopen($file[tmp_name], "rb"); # Bug #2154
@@ -347,8 +343,7 @@ function salvesta_objekt () {
 								alert('<?=$site->sys_sona(array(sona => "ERROR: File upload error", tyyp=>"admin"))?>');
 							//-->
 							</SCRIPT>
-						<?
-						$site->debug->msg("Warning! Can't move uploaded file: <b>'".$file['name']."'</b> into document directory: <b>'".$site->absolute_path.$site->CONF["documents_directory"]."/'</b>. Permission denied.");
+						<?php 						$site->debug->msg("Warning! Can't move uploaded file: <b>'".$file['name']."'</b> into document directory: <b>'".$site->absolute_path.$site->CONF["documents_directory"]."/'</b>. Permission denied.");
 					}
 				} else {
 					$sql = $site->db->prepare("

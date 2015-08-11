@@ -83,8 +83,8 @@ function print_requirements_table() {
 	$CONF = read_conf(); # db connect data from config.php
 
 	/*Assign required settings and their values*/
-	$php_required_settings_to_check = array("register_globals","file_uploads","safe_mode","short_open_tag");
-	$php_setting_values_required = array(0,1,0,1);
+	$php_required_settings_to_check = array("register_globals","file_uploads","safe_mode");
+	$php_setting_values_required = array(0,1,0);
 
 	/*Assign recommended settings and their values*/
 	$php_recommended_settings_to_check = array("post_max_size","upload_max_filesize","memory_limit");
@@ -172,11 +172,11 @@ function print_requirements_table() {
 	<?php############ / styles?>
 
 	<?php##################### HTML START #################?>
-	<? if(!$called_from_another_script) {?>
+	<?php if(!$called_from_another_script) {?>
 	<font class="plk">Server requirements</font>
 	<br>
 	<br>
-	<?}?>
+	<?php }?>
 
 	<table border="0" cellspacing="0" cellpadding="3" width="<?=($called_from_another_script?'580':'100%')?>">
 	<tr class="scms_tableheader"> 
@@ -200,7 +200,7 @@ function print_requirements_table() {
 
 	####### MYSQL version: 4.x - 5.1.35
 
-	if(!$mysql_version || version_compare($mysql_version, "4.0") < 0  || version_compare($mysql_version, "5.1.35") > 0) {
+	if(!$mysql_version || version_compare($mysql_version, "4.0") < 0  || version_compare($mysql_version, "5.6.20") > 0) {
 		$color = "color='red'";
 	}
 	else {
@@ -239,11 +239,11 @@ function print_requirements_table() {
 		<td nowrap colspan="4">Required PHP Settings</td>
 	</tr>
 	<?php
-	####### PHP version: 5.0.0 - 5.2.11
-	if(version_compare(phpversion(), "5.0.0") < 0 || version_compare(phpversion(), "5.2.11") > 0) {
+	####### PHP version: 5.0.0 - 5.6.3
+	if(version_compare(phpversion(), "5.3.0") < 0 || version_compare(phpversion(), "5.6.2") > 0) {
 		$color = "color='red'";
 	}
-	echo "<tr><td><font ".$color.">PHP version</font></td><td><font ".$color.">5.0.0 - 5.2.11</font></td><td><font ".$color.">".phpversion()."</font></td></tr>";
+	echo "<tr><td><font ".$color.">PHP version</font></td><td><font ".$color.">5.3.0 - 5.6.2</font></td><td><font ".$color.">".phpversion()."</font></td></tr>";
 	$color = "color='black'";	//restore default color
 
 	####### mysql support in php

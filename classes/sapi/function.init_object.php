@@ -233,6 +233,8 @@ function smarty_function_init_object ($params,&$smarty) {
 		$obj->answers_count = 0;
 		while ($vastus = $sth->fetch()) {
 			unset($tmp);
+			
+			$tmp = new stdClass();
 			$tmp->id = $vastus[gv_id];
 			$tmp->answer = $vastus[vastus];
 			$tmp->title = $vastus[vastus];

@@ -405,7 +405,7 @@ function modifySection(node,section_id)
 
 // /function modifySection
 </script>
-<?
+<?php 
 // setup for new section selection
 $_SESSION['article_parent_selection']['callback'] = 'window.opener.addNewSection';
 $_SESSION['article_parent_selection']['selectable'] = 2;
@@ -446,7 +446,7 @@ $_SESSION['current_article_parent_selection']['display_fields'] = array('select_
 			<script type="text/javascript">
 				all_sections[all_sections.length] = <?=$section_id?>;
 			</script>
-<?if($i==0){$first_section=$section_id;}?>
+<?php if($i==0){$first_section=$section_id;}?>
 			<li id="section_<?=$section_id;?>">
 				<input type="hidden" name="rubriik[]" value="<?=$section_id;?>">
 				<div id="button_<?=$section_id;?>"><a href="javascript:deleteSection('<?=$section_id;?>');"><img src="<?=$site->CONF['wwwroot'].$site->CONF['styles_path'];?>/gfx/editor/delete.gif"></a></div>
@@ -463,7 +463,7 @@ $_SESSION['current_article_parent_selection']['display_fields'] = array('select_
 			<script type="text/javascript">
 					document.getElementById('button_<?=$first_section;?>').style.visibility = 'hidden';
 			</script>
-		<?}?>
+		<?php }?>
 
 	  <!-- /rubriigid -->
 	  <?php
@@ -893,9 +893,9 @@ $_SESSION['current_article_parent_selection']['display_fields'] = array('select_
 
 
 	</form>
-	<? if ($site->fdat['op']=='edit') {?>
+	<?php if ($site->fdat['op']=='edit') {?>
 		<iframe src="checkin.php?objekt_id=<?=$objekt->objekt_id ?>" style="width: 0; height: 0; display: none; visibility: hidden;"></iframe>
-	<? } ?>
+	<?php } ?>
 
 </body>
 

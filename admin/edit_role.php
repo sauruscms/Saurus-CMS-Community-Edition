@@ -109,7 +109,7 @@ if($site->fdat['op2'] == 'save_role' || $site->fdat['op2'] == 'saveclose_role') 
 		window.close();
 	// --></SCRIPT>
 	</HTML>
-	<?
+	<?php 
 	exit;
 	}
 } # op2=save_role
@@ -150,7 +150,7 @@ if($op2 == 'deleteconfirmed' && is_numeric($site->fdat['role_id']) ) {
 		window.close();
 	// --></SCRIPT>
 	</HTML>
-	<?
+	<?php 
 	}
 	exit;
 }
@@ -183,7 +183,7 @@ if($op == 'delete' && $site->fdat['role_id']) {
 <table border="0" cellpadding="0" cellspacing="0" style="width:100%; height:100%">
   <tr> 
 	<td valign="top" width="100%" class="scms_confirm_delete_cell" height="100%">
-<?
+<?php 
 	# check warnings
 	# 1. if exist any user with that role, then give a warning
 	$data_count = 0;
@@ -207,9 +207,9 @@ if($op == 'delete' && $site->fdat['role_id']) {
   </tr>
   <tr align="right"> 
     <td valign="top" colspan=2 > 
-		<?if($allow_delete){?>
+		<?php if($allow_delete){?>
             <input type="button" value="<?=$site->sys_sona(array(sona => "kustuta", tyyp=>"editor")) ?>" onclick="javascript:frmEdit.op2.value='deleteconfirmed';frmEdit.submit();">
-			<?}?>
+			<?php }?>
 			<input type="button" value="<?=$site->sys_sona(array(sona => "close", tyyp=>"editor")) ?>" onclick="javascript:window.close();"> 
     </td>
   </tr>
@@ -218,7 +218,7 @@ if($op == 'delete' && $site->fdat['role_id']) {
 </form>
 </body>
 </html>
-<?
+<?php 
 	############ debug
 	# user debug:
 	if($site->user) { $site->user->debug->print_msg(); }
@@ -261,7 +261,7 @@ if($site->fdat['role_id']) {
 <tr> 
     <td valign="top" width="100%" class="scms_dialog_area_top"  height="100%">
 	  <table width="100%"   border="0" cellspacing="0" cellpadding="2">
-	  <?############ name #########?> 
+	  <?php ############ name #########?> 
 	  <tr> 
 		<td><?=$site->sys_sona(array(sona => "nimi", tyyp=>"editor"))?>: </td>
 		<td width="100%"><input type=text name=role_name value="<?= ($site->fdat['op']=="new" ? '' : $role['name']) ?>" class="scms_flex_input" onkeyup="javascript: if(event.keyCode==13){vorm.submit();}"></td>
@@ -270,7 +270,7 @@ if($site->fdat['role_id']) {
 	  </table>
 	</td>
 </tr>
-	<?############ buttons #########?>
+	<?php ############ buttons #########?>
 	<tr> 
 	  <td align="right" valign="top" class="scms_dialog_area_bottom"> 
          <input type="button" value="<?=$site->sys_sona(array(sona => "Salvesta", tyyp=>"editor")) ?>" onclick="javascript:this.form.submit();">
@@ -279,14 +279,14 @@ if($site->fdat['role_id']) {
   </tr>
 </table>
 
-<?########### hidden ########?>
+<?php ########### hidden ########?>
 <INPUT TYPE="hidden" name="role_id" value="<?= $site->fdat['role_id'] ?>">
 <INPUT TYPE="hidden" name="op" value="<?=$site->fdat['op']?>">
 <INPUT TYPE="hidden" name="op2" value="saveclose_role">
 </form>
 </body>
 </html>
-<?
+<?php 
 ############ debug
 # user debug:
 if($site->user) { $site->user->debug->print_msg(); }
@@ -301,7 +301,7 @@ exit;
 ?>
 
 
-<? 
+<?php 
 ############ debug
 # user debug:
 if($site->user) { $site->user->debug->print_msg(); }

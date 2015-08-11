@@ -637,7 +637,7 @@ function modify_file($src, $reg_src, $reg_rep)
     if(sizeof($buffers) < 2)
     {
     	$buffers = array(
-			'<? /*'."\n",
+			'<?php /*'."\n",
 			"\n",
 			'########################'."\n",
 			'# database connect'."\n",

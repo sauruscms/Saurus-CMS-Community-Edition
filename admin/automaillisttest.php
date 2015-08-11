@@ -63,7 +63,7 @@ if($site->fdat['test']) {
 			window.close();
 		//-->
 		</script>
-		<?
+		<?php 
 		flush();
 	}
 	auto_maillist(1,0);

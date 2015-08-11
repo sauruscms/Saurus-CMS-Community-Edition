@@ -46,7 +46,7 @@ function edit_objekt_metadata () {
 			</div>
 			<div id="scrolltableDiv" class="scms_scrolltable" style="height:290px"> 
 				<table width="100%"  border="0" cellspacing="0" cellpadding="3">
-<?
+<?php 
 		//peaks siis otsima millisel esivanemal on SEO meta't
 		function getSeoData($id,$clear=false)
 		{
@@ -115,7 +115,7 @@ function edit_objekt_metadata () {
 				<textarea name="meta_keywords" id="meta_keywords" rows="5" style="width: 100%; padding: 2px; font-family: Tahoma, Verdana; font-size: 11px; color: #000;" value="<?=htmlspecialchars($seo_meta['meta_keywords'])?>"<?=(empty($objekt->all['meta_keywords'])?' disabled="disabled"':' ')?>><?=htmlspecialchars($seo_meta['meta_keywords'])?></textarea> 
 			</td>
 		</tr>	
-		<?
+		<?php 
 	# SEO
 	####################################
 ?>
@@ -134,7 +134,7 @@ function edit_objekt_metadata () {
 
 </form>
 
-<?
+<?php 
 
 }
 

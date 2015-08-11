@@ -103,7 +103,7 @@ $pagename = $adminpage_names['pagename'];
 </head>
 
 <body>
-<?
+<?php 
 #################
 # IMPORT FORM
 
@@ -136,7 +136,7 @@ if($site->fdat['op'] == 'import' || $site->fdat['op'] == 'import_cvs') { ?>
 			</tr>
 			<tr> 
 			  <td colspan=2 class="scms_table">
-	<?
+	<?php 
 	########################
 	# STEP 2: SAVE IMPORT
 	if($site->fdat['op2'] == 'salvesta') {
@@ -147,7 +147,7 @@ if($site->fdat['op'] == 'import' || $site->fdat['op'] == 'import_cvs') { ?>
 	# STEP 1: FORM
 	else { ?>
 
-		<?
+		<?php 
 		########################
 		# import_type
 		?>
@@ -180,7 +180,7 @@ if($site->fdat['op'] == 'import' || $site->fdat['op'] == 'import_cvs') { ?>
 		
 		</table>
 
-	<?} # form?>
+	<?php } # form?>
 
 
 				</td>
@@ -196,15 +196,15 @@ if($site->fdat['op'] == 'import' || $site->fdat['op'] == 'import_cvs') { ?>
 	<!-- / Scrollable area -->
 </td>
 </tr>
-<?#################### BUTTONS ###########?>
+<?php #################### BUTTONS ###########?>
 <tr> 
 	<td align="right" valign="top" class="scms_dialog_area_bottom"> 
 		<input type=hidden name=op value="import">
 		<input type=hidden name=op2 value="salvesta">
 		<input type=hidden name=keel_id value="<?=$keel_id ?>">
-	<?if(!$site->fdat['op2']) {?>
+	<?php if(!$site->fdat['op2']) {?>
 		<input type="submit" value=" <?=$site->sys_sona(array(sona => "salvesta", tyyp=>"editor"))?> ">
-	<?}?>
+	<?php }?>
 	<input type="button" value="<?=$site->sys_sona(array(sona => "Close", tyyp=>"editor")) ?>" onclick="javascript:window.opener.location.href = window.opener.location.href; window.close();">
 	</td>
 </tr>
@@ -227,7 +227,7 @@ if($site->fdat['op'] == 'import' || $site->fdat['op'] == 'import_cvs') { ?>
 </tr>
 </table>
 
-<?
+<?php 
 }
 # / IMPORT FORM
 ################
@@ -263,7 +263,7 @@ elseif($site->fdat['op'] == 'export') { ?>
 			</tr>
 			<tr> 
 			  <td colspan=2 class="scms_table">
-	<?
+	<?php 
 	########################
 	# STEP 1: FORM
 	?>
@@ -278,7 +278,7 @@ elseif($site->fdat['op'] == 'export') { ?>
 			  <select name="sst_id" class="scms_flex_input">
 				  <option value="default">--- <?=$site->sys_sona(array(sona => "default", tyyp=>"admin"))?> ---
 				  <option value="">--- <?=$site->sys_sona(array(sona => "koik", tyyp=>"editor"))?> ---
-		<?			
+		<?php 		
 					$sql = $site->db->prepare("SELECT sys_sona_tyyp.sst_id, sys_sona_tyyp.nimi 
 						FROM sys_sona_tyyp
 						ORDER BY sys_sona_tyyp.nimi"
@@ -309,15 +309,15 @@ elseif($site->fdat['op'] == 'export') { ?>
 	<!-- / Scrollable area -->
 </td>
 </tr>
-<?#################### BUTTONS ###########?>
+<?php #################### BUTTONS ###########?>
 <tr> 
 	<td align="right" valign="top" class="scms_dialog_area_bottom"> 
 		<input type=hidden name=op value="export">
 		<input type=hidden name=op2 value="salvesta">
 		<input type=hidden name=keel_id value="<?=$keel_id ?>">
-	<?if(!$site->fdat['op2']) {?>
+	<?php if(!$site->fdat['op2']) {?>
 		<input type="submit" value=" <?=$site->sys_sona(array(sona => "Salvesta", tyyp=>"editor"))?> ">
-	<?}?>
+	<?php }?>
 	<input type="button" value="<?=$site->sys_sona(array(sona => "Close", tyyp=>"editor")) ?>" onclick="javascript:window.close();">
 	</td>
 </tr>
@@ -326,7 +326,7 @@ elseif($site->fdat['op'] == 'export') { ?>
 
 </FORM>
 
-<?
+<?php 
 }
 # / EXPORT FORM
 ################
@@ -347,7 +347,7 @@ $site->debug->print_msg();
 </html>
 
 
-<?
+<?php 
 
 
 

@@ -56,7 +56,7 @@ function new_objekt () {
 
 
 <input type="hidden" name="salvesta" value="1">
-<?
+<?php 
 	/*-------------------------------
 	# Kui album on kommenteeritav siis
 	# lisada vaikimisi piltidele
@@ -72,7 +72,7 @@ function new_objekt () {
 	if ( $on_foorum ) {
 ?>
 	<input type="hidden" name="on_foorum" value="1">
-<? } ?>
+<?php } ?>
 <table width="100%"  border="0" cellspacing="3" cellpadding="0">
 <tr>
     <td><?=$site->sys_sona(array(sona => "filename", tyyp=>"editor"))?>:</td>
@@ -115,7 +115,7 @@ function new_objekt () {
     <td width="100%" class="scms_row_btm"><input type="text" name="pealkiri" class="scms_flex_input"></td>    
 </tr>
 </table>
-	<?#################### BUTTONS ###########?>
+	<?php #################### BUTTONS ###########?>
   </TR>
   <tr> 
     <td align="right" valign="top" class="scms_dialog_area_bottom"> 
@@ -127,7 +127,7 @@ function new_objekt () {
   </TBODY> 
 </TABLE>
 
-<?
+<?php 
 
 }
 
@@ -175,7 +175,7 @@ function edit_objekt () {
 		  <td class="txt" nowrap valign="top" align=right><?=$site->sys_sona(array(sona => "Aeg", tyyp=>"editor"))?>:</td>
 		  <td><input type="text" name=aeg class="scms_flex_input" style="width:100px" value="<?=htmlspecialchars($aeg)?>"></td>
 		</tr>
-<?
+<?php 
 
 }
 
@@ -475,7 +475,7 @@ function save_objekts () {
 	window.opener.location.href=<?=($opener_location && $objekt->all[klass]=="rubriik" && !$objekt->all[on_kast] ? "'$opener_location'" : "window.opener.location.href") ?>;
 	window.close();
 </script>
-	<?
+	<?php 
 		}	
 exit;
 
